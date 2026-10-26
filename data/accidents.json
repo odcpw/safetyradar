@@ -1,1380 +1,1788 @@
 [
-  {
-    "id": "2026-10-22-gl-muehlehorn-walze",
-    "date": "2026-10-22",
-    "dateType": "event",
-    "canton": "GL",
-    "place": "Mühlehorn",
-    "industry": "construction",
-    "hazard": "machinery",
-    "outcome": "injured",
-    "source": {
-      "name": "polizeinews.ch",
-      "url": "https://www.polizeinews.ch/2026/10/22/baumaschine-stuerzt-steiles-bord-hinunter-und-touchiert-gestuerzten-lenker-rega-im-einsatz/",
-      "lang": "de"
-    },
-    "title": {
-      "de": "Walzenfahrer stürzt mit Maschine eine Böschung hinunter",
-      "fr": "Un conducteur de rouleau chute dans un talus avec sa machine",
-      "it": "Conducente di un rullo precipita con la macchina lungo una scarpata",
-      "en": "Roller driver falls down an embankment with his machine"
-    },
-    "facts": {
-      "activity": {
-        "de": "Fahren einer Kombiwalze auf einem steilen Baustellenweg",
-        "fr": "Conduite d’un rouleau combiné sur une piste de chantier en pente",
-        "it": "Guida di un rullo combinato su una pista di cantiere ripida",
-        "en": "Driving a combination roller on a steep site road"
-      },
-      "what": {
-        "de": "Beim Ausweichen vor einem entgegenkommenden Dumper geriet die Walze über den Wegrand. Maschine und Fahrer stürzten getrennt die steile Böschung hinab. Die Walze traf den am Boden liegenden Fahrer und kam weiter unten zum Stillstand.",
-        "fr": "En évitant un dumper qui montait, le rouleau a quitté la piste. La machine et le conducteur ont dévalé séparément le talus raide. Le rouleau a heurté le conducteur à terre avant de s’immobiliser plus bas.",
-        "it": "Schivando un dumper in salita, il rullo è uscito dalla pista. Macchina e conducente sono scivolati separatamente lungo la scarpata. Il rullo ha urtato il conducente a terra fermandosi più in basso.",
-        "en": "While avoiding an oncoming dumper, the roller left the track. Machine and driver went down the steep slope separately. The roller struck the driver lying on the ground and stopped further down."
-      },
-      "equipment": {
-        "de": "Kombiwalze, Dumper",
-        "fr": "Rouleau combiné, dumper",
-        "it": "Rullo combinato, dumper",
-        "en": "Combination roller, dumper"
-      },
-      "injuries": {
-        "de": "Verletzt, Schwere unbekannt",
-        "fr": "Blessé, gravité inconnue",
-        "it": "Ferito, gravità non nota",
-        "en": "Injured, severity unknown"
-      },
-      "emergency": {
-        "de": "Rega-Flug ins Spital; Bergung der Walze mit Kranwagen",
-        "fr": "Transport à l’hôpital par la Rega; rouleau récupéré par camion-grue",
-        "it": "Trasporto in ospedale con la Rega; rullo recuperato con autogru",
-        "en": "Rega airlift to hospital; roller recovered by crane truck"
-      },
-      "investigation": {
-        "de": "Kantonspolizei GL klärt den Hergang ab.",
-        "fr": "La police cantonale (GL) enquête sur les circonstances.",
-        "it": "La polizia cantonale (GL) indaga sulla dinamica.",
-        "en": "Cantonal police (GL) investigating."
-      }
-    },
-    "lesson": {
-      "de": "Auf schmalen Baustellenwegen braucht es Ausweichstellen und klare Vortrittsregeln für Baumaschinen. Überrollschutz und Sicherheitsgurt verhindern, dass der Fahrer aus der Kabine geschleudert wird.",
-      "fr": "Sur les pistes étroites, prévoir des zones d’évitement et des règles de priorité claires entre engins. Arceau de sécurité et ceinture empêchent le conducteur d’être éjecté.",
-      "it": "Sulle piste strette servono piazzole di scambio e regole di precedenza chiare tra macchine. Telaio di protezione e cintura evitano che il conducente venga sbalzato fuori.",
-      "en": "Narrow site roads need passing places and clear right-of-way rules between machines. A rollover protective structure and seatbelt keep the driver from being thrown out."
-    },
-    "caseId": "case-2026-10-22-gl-muehlehorn-walze"
+ {
+  "id": "2026-10-22-gl-muehlehorn-walze",
+  "date": "2026-10-22",
+  "dateType": "event",
+  "canton": "GL",
+  "place": "Mühlehorn",
+  "industry": "construction",
+  "hazard": "machinery",
+  "outcome": "injured",
+  "source": {
+   "name": "polizeinews.ch",
+   "url": "https://www.polizeinews.ch/2026/10/22/baumaschine-stuerzt-steiles-bord-hinunter-und-touchiert-gestuerzten-lenker-rega-im-einsatz/",
+   "lang": "de"
   },
-  {
-    "id": "2026-10-21-sg-diepoldsau-plattform",
-    "date": "2026-10-21",
-    "dateType": "event",
-    "canton": "SG",
-    "place": "Diepoldsau",
-    "industry": "construction",
-    "hazard": "fall",
-    "outcome": "life_threatening",
-    "source": {
-      "name": "polizeinews.ch",
-      "url": "https://www.polizeinews.ch/2026/10/21/arbeiter-57-stuerzt-drei-meter-von-arbeitsplattform-rega-fliegt-ihn-ins-spital/",
-      "lang": "de"
-    },
-    "title": {
-      "de": "Sturz aus drei Metern von einer Staplerplattform",
-      "fr": "Chute de trois mètres depuis une plateforme sur chariot élévateur",
-      "it": "Caduta da tre metri da una piattaforma su carrello elevatore",
-      "en": "Three-metre fall from a forklift-mounted platform"
-    },
-    "facts": {
-      "activity": {
-        "de": "Arbeiten von einer Arbeitsplattform aus, die von einem Gabelstapler angehoben war",
-        "fr": "Travaux depuis une plateforme levée par un chariot élévateur",
-        "it": "Lavori da una piattaforma sollevata da un carrello elevatore",
-        "en": "Work from a platform lifted by a forklift"
-      },
-      "what": {
-        "de": "Ein 57-jähriger Mann arbeitete auf einer Plattform, die ein Gabelstapler hochhob. Er stürzte rund drei Meter zu Boden.",
-        "fr": "Un homme de 57 ans travaillait sur une plateforme levée par un chariot élévateur. Il a chuté d’environ trois mètres.",
-        "it": "Un uomo di 57 anni lavorava su una piattaforma sollevata da un carrello elevatore. È caduto da circa tre metri.",
-        "en": "A 57-year-old man was working on a platform raised by a forklift. He fell about three metres to the ground."
-      },
-      "equipment": {
-        "de": "Gabelstapler mit Arbeitsplattform",
-        "fr": "Chariot élévateur avec plateforme de travail",
-        "it": "Carrello elevatore con piattaforma di lavoro",
-        "en": "Forklift with work platform"
-      },
-      "injuries": {
-        "de": "Lebensbedrohlich verletzt",
-        "fr": "Blessé, pronostic vital engagé",
-        "it": "Ferito in pericolo di vita",
-        "en": "Life-threatening injuries"
-      },
-      "emergency": {
-        "de": "Rettungsdienst vor Ort, Rega-Flug ins Spital",
-        "fr": "Ambulance sur place, transport par la Rega",
-        "it": "Ambulanza sul posto, trasporto con la Rega",
-        "en": "Ambulance on site, Rega airlift"
-      },
-      "investigation": {
-        "de": "Kantonspolizei SG klärt den Hergang ab.",
-        "fr": "La police cantonale (SG) enquête sur les circonstances.",
-        "it": "La polizia cantonale (SG) indaga sulla dinamica.",
-        "en": "Cantonal police (SG) investigating."
-      }
-    },
-    "lesson": {
-      "de": "Staplerplattformen sind nur zulässig, wenn sie dafür gebaut, gesichert und mit Seitenschutz versehen sind. Für Arbeiten in der Höhe ist eine Hubarbeitsbühne meist die sichere Wahl.",
-      "fr": "Une plateforme sur chariot n’est admise que si elle est conçue à cet effet, verrouillée et munie de garde-corps. Pour travailler en hauteur, une nacelle élévatrice est en général le bon choix.",
-      "it": "Le piattaforme su carrello sono ammesse solo se concepite allo scopo, bloccate e con parapetto. Per lavori in quota una piattaforma aerea è di norma la scelta sicura.",
-      "en": "Forklift platforms are only acceptable if purpose-built, locked on and fitted with guardrails. For work at height a mobile elevating work platform is usually the safe choice."
-    },
-    "caseId": "case-2026-10-21-sg-diepoldsau-plattform"
+  "title": {
+   "de": "Walzenfahrer stürzt mit Maschine eine Böschung hinunter",
+   "fr": "Un conducteur de rouleau chute dans un talus avec sa machine",
+   "it": "Conducente di un rullo precipita con la macchina lungo una scarpata",
+   "en": "Roller driver falls down an embankment with his machine"
   },
-  {
-    "id": "2026-10-10-vs-mund-holzerei",
-    "date": "2026-10-10",
-    "dateType": "event",
-    "canton": "VS",
-    "place": "Mund",
-    "industry": "forestry",
-    "hazard": "struck",
-    "outcome": "fatal",
-    "source": {
-      "name": "Police cantonale valaisanne",
-      "url": "https://www.policevalais.ch/communiques-pour-les-medias/mund-accident-mortel-de-travail/",
-      "lang": "fr"
-    },
-    "title": {
-      "de": "Tödlicher Unfall bei Holzerarbeiten",
-      "fr": "Accident mortel lors de travaux d’abattage",
-      "it": "Infortunio mortale durante lavori di abbattimento",
-      "en": "Fatal accident while felling trees"
-    },
-    "facts": {
-      "activity": {
-        "de": "Fällen von Bäumen in einem Waldstück, allein",
-        "fr": "Abattage d’arbres dans une zone boisée, seul",
-        "it": "Abbattimento di alberi in un bosco, da solo",
-        "en": "Felling trees in a wooded area, alone"
-      },
-      "what": {
-        "de": "Ein 67-jähriger Rentner ging allein zu Fällarbeiten in ein Waldstück. Angehörige fanden ihn später unter einem Baumstamm eingeklemmt.",
-        "fr": "Un retraité de 67 ans s’est rendu seul dans une zone boisée pour abattre des arbres. Des proches l’ont retrouvé plus tard coincé sous un tronc.",
-        "it": "Un pensionato di 67 anni si è recato da solo in un bosco per abbattere alberi. Più tardi i familiari lo hanno trovato bloccato sotto un tronco.",
-        "en": "A 67-year-old retiree went alone to fell trees in a wooded area. Relatives later found him pinned under a trunk."
-      },
-      "equipment": {
-        "de": "Baumstamm",
-        "fr": "Tronc d’arbre",
-        "it": "Tronco d’albero",
-        "en": "Tree trunk"
-      },
-      "injuries": {
-        "de": "Tödlich",
-        "fr": "Mortel",
-        "it": "Mortale",
-        "en": "Fatal"
-      },
-      "emergency": {
-        "de": "Air Zermatt mit Notarzt, Rettungsdienst, Feuerwehr",
-        "fr": "Air Zermatt avec médecin, secouristes, pompiers",
-        "it": "Air Zermatt con medico, soccorritori, pompieri",
-        "en": "Air Zermatt with doctor, paramedics, fire brigade"
-      },
-      "investigation": {
-        "de": "Staatsanwaltschaft hat eine Untersuchung eröffnet",
-        "fr": "Le Ministère public a ouvert une instruction",
-        "it": "Il Ministero pubblico ha aperto un’inchiesta",
-        "en": "Public prosecutor has opened an investigation"
-      }
-    },
-    "lesson": {
-      "de": "Holzerei nie allein: Wer allein arbeitet, wird im Notfall zu spät gefunden. Mindestens Ruf- oder Sichtverbindung, Notfallplan und ein Alarmgerät (Totmannmelder) gehören dazu.",
-      "fr": "Ne jamais abattre seul: en cas d’accident, on est retrouvé trop tard. Contact visuel ou vocal, plan d’urgence et appareil d’alarme pour travailleur isolé sont indispensables.",
-      "it": "Mai abbattere alberi da soli: in caso d’incidente si viene trovati troppo tardi. Servono contatto visivo o vocale, piano d’emergenza e un dispositivo d’allarme uomo a terra.",
-      "en": "Never fell trees alone: if something goes wrong, help comes too late. Keep visual or voice contact, have an emergency plan and use a lone-worker alarm."
-    },
-    "caseId": "case-2026-10-10-vs-mund-holzerei"
+  "facts": {
+   "activity": {
+    "de": "Fahren einer Kombiwalze auf einem steilen Baustellenweg",
+    "fr": "Conduite d’un rouleau combiné sur une piste de chantier en pente",
+    "it": "Guida di un rullo combinato su una pista di cantiere ripida",
+    "en": "Driving a combination roller on a steep site road"
+   },
+   "what": {
+    "de": "Beim Ausweichen vor einem entgegenkommenden Dumper geriet die Walze über den Wegrand. Maschine und Fahrer stürzten getrennt die steile Böschung hinab. Die Walze traf den am Boden liegenden Fahrer und kam weiter unten zum Stillstand.",
+    "fr": "En évitant un dumper qui montait, le rouleau a quitté la piste. La machine et le conducteur ont dévalé séparément le talus raide. Le rouleau a heurté le conducteur à terre avant de s’immobiliser plus bas.",
+    "it": "Schivando un dumper in salita, il rullo è uscito dalla pista. Macchina e conducente sono scivolati separatamente lungo la scarpata. Il rullo ha urtato il conducente a terra fermandosi più in basso.",
+    "en": "While avoiding an oncoming dumper, the roller left the track. Machine and driver went down the steep slope separately. The roller struck the driver lying on the ground and stopped further down."
+   },
+   "equipment": {
+    "de": "Kombiwalze, Dumper",
+    "fr": "Rouleau combiné, dumper",
+    "it": "Rullo combinato, dumper",
+    "en": "Combination roller, dumper"
+   },
+   "injuries": {
+    "de": "Verletzt, Schwere unbekannt",
+    "fr": "Blessé, gravité inconnue",
+    "it": "Ferito, gravità non nota",
+    "en": "Injured, severity unknown"
+   },
+   "emergency": {
+    "de": "Rega-Flug ins Spital; Bergung der Walze mit Kranwagen",
+    "fr": "Transport à l’hôpital par la Rega; rouleau récupéré par camion-grue",
+    "it": "Trasporto in ospedale con la Rega; rullo recuperato con autogru",
+    "en": "Rega airlift to hospital; roller recovered by crane truck"
+   },
+   "investigation": {
+    "de": "Kantonspolizei GL klärt den Hergang ab.",
+    "fr": "La police cantonale (GL) enquête sur les circonstances.",
+    "it": "La polizia cantonale (GL) indaga sulla dinamica.",
+    "en": "Cantonal police (GL) investigating."
+   }
   },
-  {
-    "id": "2026-10-06-be-ipsach-kran",
-    "date": "2026-10-06",
-    "dateType": "event",
-    "canton": "BE",
-    "place": "Ipsach",
-    "industry": "construction",
-    "hazard": "crane",
-    "outcome": "property",
-    "source": {
-      "name": "polizeinews.ch",
-      "url": "https://www.polizeinews.ch/2026/10/06/schwerer-unfall-auf-baustelle-arbeitskran-knickt-ein-und-stuerzt-auf-gebaeude-und-bahnlinie/",
-      "lang": "de"
-    },
-    "title": {
-      "de": "Baukran knickt ein und fällt auf Haus, Bahn und Strasse",
-      "fr": "Une grue de chantier plie et tombe sur une maison, une voie ferrée et une route",
-      "it": "Una gru di cantiere si piega e cade su un edificio, una ferrovia e una strada",
-      "en": "Site crane buckles and falls onto building, railway and road"
-    },
-    "facts": {
-      "activity": null,
-      "what": {
-        "de": "Auf einer Baustelle knickte ein Kran aus ungeklärten Gründen ein. Er fiel auf ein Nachbargebäude, eine Bahnlinie und die Hauptstrasse. Bahn und Strasse wurden gesperrt.",
-        "fr": "Sur un chantier, une grue a plié pour une raison inconnue. Elle est tombée sur un bâtiment voisin, une voie ferrée et la route principale, qui ont été fermées.",
-        "it": "In un cantiere una gru si è piegata per motivi ignoti, cadendo su un edificio vicino, una linea ferroviaria e la strada principale, poi chiuse.",
-        "en": "A crane on a building site buckled for unknown reasons and fell onto a neighbouring building, a railway line and the main road, which were closed."
-      },
-      "equipment": {
-        "de": "Baukran",
-        "fr": "Grue de chantier",
-        "it": "Gru di cantiere",
-        "en": "Construction crane"
-      },
-      "injuries": {
-        "de": "Gemäss Polizei keine Verletzten; Sachschaden",
-        "fr": "Aucun blessé selon la police; dégâts matériels",
-        "it": "Nessun ferito secondo la polizia; danni materiali",
-        "en": "No injuries according to police; property damage"
-      },
-      "emergency": null,
-      "investigation": {
-        "de": "Kantonspolizei BE klärt den Hergang ab.",
-        "fr": "La police cantonale (BE) enquête sur les circonstances.",
-        "it": "La polizia cantonale (BE) indaga sulla dinamica.",
-        "en": "Cantonal police (BE) investigating."
-      }
-    },
-    "lesson": {
-      "de": "Ein Kranunfall ohne Verletzte ist ein Beinahe-Unfall mit grossem Lernpotenzial. Standsicherheit, Untergrund, Montage und Windgrenzen gehören vor jedem Einsatz geprüft und dokumentiert.",
-      "fr": "Une chute de grue sans blessé est un quasi-accident riche d’enseignements. Stabilité, sol, montage et limites de vent doivent être vérifiés et documentés avant chaque utilisation.",
-      "it": "Il crollo di una gru senza feriti è un quasi-incidente da cui imparare molto. Stabilità, terreno, montaggio e limiti di vento vanno verificati e documentati prima dell’uso.",
-      "en": "A crane collapse without injuries is a near miss with a lot to learn from. Stability, ground, erection and wind limits must be checked and documented before use."
-    },
-    "caseId": "case-2026-10-06-be-ipsach-kran"
+  "lesson": {
+   "de": "Auf schmalen Baustellenwegen braucht es Ausweichstellen und klare Vortrittsregeln für Baumaschinen. Überrollschutz und Sicherheitsgurt verhindern, dass der Fahrer aus der Kabine geschleudert wird.",
+   "fr": "Sur les pistes étroites, prévoir des zones d’évitement et des règles de priorité claires entre engins. Arceau de sécurité et ceinture empêchent le conducteur d’être éjecté.",
+   "it": "Sulle piste strette servono piazzole di scambio e regole di precedenza chiare tra macchine. Telaio di protezione e cintura evitano che il conducente venga sbalzato fuori.",
+   "en": "Narrow site roads need passing places and clear right-of-way rules between machines. A rollover protective structure and seatbelt keep the driver from being thrown out."
   },
-  {
-    "id": "2026-10-01-gr-chur-schalung",
-    "date": "2026-10-01",
-    "dateType": "event",
-    "canton": "GR",
-    "place": "Chur",
-    "industry": "construction",
-    "hazard": "struck",
-    "outcome": "injured",
-    "source": {
-      "name": "polizeinews.ch",
-      "url": "https://www.polizeinews.ch/2026/10/02/100-kilo-schweres-schalungselement-kippt-um-arbeiter-wird-auf-baustelle-eingeklemmt/",
-      "lang": "de"
-    },
-    "title": {
-      "de": "Schalungselement kippt mit Kranführer um",
-      "fr": "Un élément de coffrage bascule avec le grutier",
-      "it": "Un elemento di cassaforma si ribalta con il gruista",
-      "en": "Formwork panel tips over with crane operator"
-    },
-    "facts": {
-      "activity": {
-        "de": "Ausschalen einer Fundamentmauer; Anschlagen eines Eckschalungselements von einer Leiter aus",
-        "fr": "Décoffrage d’un mur de fondation; élingage d’un élément d’angle depuis une échelle",
-        "it": "Disarmo di un muro di fondazione; imbracatura di un elemento d’angolo da una scala",
-        "en": "Stripping formwork from a foundation wall; slinging a corner panel from a ladder"
-      },
-      "what": {
-        "de": "Der Kranführer wollte ein über 100 kg schweres Eckschalungselement von einer Leiter aus anschlagen. Das Element kippte mitsamt dem Mann um. Er wurde zwischen Element und Böschung eingeklemmt.",
-        "fr": "Le grutier voulait élinguer depuis une échelle un élément d’angle de plus de 100 kg. L’élément a basculé avec lui et l’a coincé contre un talus.",
-        "it": "Il gruista voleva imbracare da una scala un elemento d’angolo di oltre 100 kg. L’elemento si è ribaltato con lui, schiacciandolo contro una scarpata.",
-        "en": "The crane operator tried to sling a corner panel of over 100 kg while standing on a ladder. The panel tipped over with him and pinned him against an embankment."
-      },
-      "equipment": {
-        "de": "Schalungselement (>100 kg), Leiter, Kran",
-        "fr": "Élément de coffrage (>100 kg), échelle, grue",
-        "it": "Elemento di cassaforma (>100 kg), scala, gru",
-        "en": "Formwork panel (>100 kg), ladder, crane"
-      },
-      "injuries": {
-        "de": "Verletzungen im Beckenbereich",
-        "fr": "Blessures au bassin",
-        "it": "Ferite al bacino",
-        "en": "Pelvic injuries"
-      },
-      "emergency": {
-        "de": "Rettung Chur, Kantonsspital Graubünden",
-        "fr": "Sauvetage de Coire, hôpital cantonal des Grisons",
-        "it": "Soccorso di Coira, ospedale cantonale dei Grigioni",
-        "en": "Chur rescue service, cantonal hospital"
-      },
-      "investigation": {
-        "de": "Kantonspolizei GR klärt den Hergang ab.",
-        "fr": "La police cantonale (GR) enquête sur les circonstances.",
-        "it": "La polizia cantonale (GR) indaga sulla dinamica.",
-        "en": "Cantonal police (GR) investigating."
-      }
-    },
-    "lesson": {
-      "de": "Schalungselemente erst lösen, wenn sie am Kran hängen oder gegen Kippen abgestützt sind. Anschlagen von einer Leiter aus ist heikel – besser eine Arbeitsbühne oder Anschlagpunkte, die vom Boden erreichbar sind.",
-      "fr": "Ne détacher un élément de coffrage que s’il est accroché à la grue ou étayé contre le basculement. Élinguer depuis une échelle est risqué: préférer une plateforme ou des points d’accroche accessibles du sol.",
-      "it": "Sganciare gli elementi di cassaforma solo se appesi alla gru o puntellati contro il ribaltamento. Imbracare da una scala è rischioso: meglio una piattaforma o punti d’aggancio raggiungibili da terra.",
-      "en": "Only release formwork panels once they hang on the crane or are propped against tipping. Slinging from a ladder is risky; use a platform or lifting points reachable from the ground."
-    },
-    "caseId": "case-2026-10-01-gr-chur-schalung"
+  "caseId": "case-2026-10-22-gl-muehlehorn-walze"
+ },
+ {
+  "id": "2026-10-22-ti-paradiso-ponteggio",
+  "date": "2026-10-22",
+  "dateType": "event",
+  "canton": "TI",
+  "place": "Paradiso",
+  "industry": "construction",
+  "hazard": "fall",
+  "outcome": "fatal",
+  "source": {
+   "name": "RSI",
+   "url": "https://www.rsi.ch/info/ticino-grigioni-e-insubria/Paradiso-%C3%A8-morto-l%E2%80%99uomo-precipitato-da-un%E2%80%99impalcatura--4185560.html",
+   "lang": "it"
   },
-  {
-    "id": "2026-09-28-tg-eschlikon-dach",
-    "date": "2026-09-28",
-    "dateType": "event",
-    "canton": "TG",
-    "place": "Eschlikon",
-    "industry": "construction",
-    "hazard": "fall",
-    "outcome": "serious",
-    "source": {
-      "name": "polizeinews.ch",
-      "url": "https://www.polizeinews.ch/2026/09/28/schwerer-arbeitsunfall-auf-dach-36-jaehriger-stuerzt-zu-boden-und-wird-mit-rega-ausgeflogen/",
-      "lang": "de"
-    },
-    "title": {
-      "de": "Arbeiter bricht durch ein Dach",
-      "fr": "Un ouvrier passe à travers un toit",
-      "it": "Un operaio sfonda un tetto",
-      "en": "Worker falls through a roof"
-    },
-    "facts": {
-      "activity": {
-        "de": "Bauarbeiten auf dem Dach einer Gewerbeliegenschaft (drei Arbeiter)",
-        "fr": "Travaux sur le toit d’un bâtiment commercial (trois ouvriers)",
-        "it": "Lavori sul tetto di un edificio commerciale (tre operai)",
-        "en": "Construction work on a commercial building roof (three workers)"
-      },
-      "what": {
-        "de": "Drei Männer arbeiteten auf einem Gewerbedach. Ein 36-Jähriger stürzte durch das Dach hindurch zu Boden.",
-        "fr": "Trois hommes travaillaient sur le toit d’un bâtiment commercial. L’un d’eux, 36 ans, a traversé la toiture et chuté au sol.",
-        "it": "Tre uomini lavoravano sul tetto di un edificio commerciale. Uno di loro, 36 anni, ha sfondato la copertura ed è caduto a terra.",
-        "en": "Three men were working on a commercial roof. One, aged 36, fell through the roof to the ground."
-      },
-      "equipment": {
-        "de": "Dachfläche (Durchsturz)",
-        "fr": "Toiture (chute à travers)",
-        "it": "Copertura (sfondamento)",
-        "en": "Roof surface (fall-through)"
-      },
-      "injuries": {
-        "de": "Schwer verletzt",
-        "fr": "Grièvement blessé",
-        "it": "Ferito gravemente",
-        "en": "Seriously injured"
-      },
-      "emergency": {
-        "de": "Rettungsdienst, Rega-Flug ins Spital",
-        "fr": "Ambulance, transport par la Rega",
-        "it": "Ambulanza, trasporto con la Rega",
-        "en": "Ambulance, Rega airlift"
-      },
-      "investigation": {
-        "de": "Kantonspolizei TG klärt den Hergang ab.",
-        "fr": "La police cantonale (TG) enquête sur les circonstances.",
-        "it": "La polizia cantonale (TG) indaga sulla dinamica.",
-        "en": "Cantonal police (TG) investigating."
-      }
-    },
-    "lesson": {
-      "de": "Nicht jedes Dach ist begehbar: Lichtbänder, Faserzementplatten und alte Eindeckungen brechen ohne Vorwarnung. Vor Arbeitsbeginn Durchsturzstellen abdecken oder Auffangnetze montieren.",
-      "fr": "Tous les toits ne sont pas praticables: bandes lumineuses, plaques en fibrociment et anciennes couvertures cèdent sans prévenir. Couvrir les zones fragiles ou poser des filets avant de commencer.",
-      "it": "Non tutti i tetti sono calpestabili: lucernari, lastre in fibrocemento e coperture vecchie cedono senza preavviso. Coprire i punti fragili o montare reti prima di iniziare.",
-      "en": "Not every roof can bear a person: skylights, fibre-cement sheets and old coverings give way without warning. Cover fragile areas or install safety nets before work starts."
-    },
-    "caseId": "case-2026-09-28-tg-eschlikon-dach"
+  "title": {
+   "de": "Architekt stürzt tödlich von Baugerüst",
+   "fr": "Un architecte fait une chute mortelle d’un échafaudage",
+   "it": "Architetto muore cadendo da un ponteggio",
+   "en": "Architect killed in fall from scaffolding"
   },
-  {
-    "id": "2026-09-28-sg-pfaefers-abladen",
-    "date": "2026-09-28",
-    "dateType": "event",
-    "canton": "SG",
-    "place": "Pfäfers",
-    "industry": "construction",
-    "hazard": "crane",
-    "outcome": "fatal",
-    "source": {
-      "name": "polizeinews.ch",
-      "url": "https://www.polizeinews.ch/2026/09/28/tragischer-baustellenunfall-29-jaehriger-stirbt-bei-abladearbeiten/",
-      "lang": "de"
-    },
-    "title": {
-      "de": "Tödlicher Unfall beim Abladen von Stahlteilen mit Bagger",
-      "fr": "Accident mortel lors du déchargement de pièces d’acier avec une pelle",
-      "it": "Infortunio mortale scaricando pezzi d’acciaio con un escavatore",
-      "en": "Fatal accident unloading steel parts with an excavator"
-    },
-    "facts": {
-      "activity": {
-        "de": "Gartenbauarbeiten; Abladen von rund 6 m langen Flachstahlteilen mit einem Bagger von einem Anhänger",
-        "fr": "Aménagement paysager; déchargement à la pelle de pièces d’acier plat d’environ 6 m depuis une remorque",
-        "it": "Lavori di giardinaggio; scarico con escavatore di barre d’acciaio piatte di circa 6 m da un rimorchio",
-        "en": "Landscaping; unloading flat steel parts about 6 m long from a trailer with an excavator"
-      },
-      "what": {
-        "de": "Zwei Mitarbeiter einer Baufirma luden mit einem Bagger lange Flachstahlteile ab. Einer bediente den Bagger, der 29-jährige Kollege stand beim Anhänger. Dabei wurde der 29-Jährige tödlich verletzt.",
-        "fr": "Deux employés d’une entreprise de construction déchargeaient de longues pièces d’acier à la pelle mécanique. L’un conduisait l’engin, son collègue de 29 ans se trouvait près de la remorque et a été mortellement blessé.",
-        "it": "Due dipendenti di un’impresa edile scaricavano lunghi pezzi d’acciaio con un escavatore. Uno lo manovrava, il collega di 29 anni si trovava vicino al rimorchio ed è rimasto ucciso.",
-        "en": "Two construction workers were unloading long steel parts with an excavator. One operated the machine; his 29-year-old colleague stood by the trailer and was fatally injured."
-      },
-      "equipment": {
-        "de": "Bagger, Flachstahlteile, Anhänger",
-        "fr": "Pelle mécanique, pièces d’acier plat, remorque",
-        "it": "Escavatore, barre d’acciaio, rimorchio",
-        "en": "Excavator, flat steel parts, trailer"
-      },
-      "injuries": {
-        "de": "Tödlich",
-        "fr": "Mortel",
-        "it": "Mortale",
-        "en": "Fatal"
-      },
-      "emergency": {
-        "de": "Reanimation vor Ort erfolglos",
-        "fr": "Réanimation sur place sans succès",
-        "it": "Rianimazione sul posto senza esito",
-        "en": "Resuscitation on site unsuccessful"
-      },
-      "investigation": {
-        "de": "Kantonspolizei SG klärt den Hergang ab.",
-        "fr": "La police cantonale (SG) enquête sur les circonstances.",
-        "it": "La polizia cantonale (SG) indaga sulla dinamica.",
-        "en": "Cantonal police (SG) investigating."
-      }
-    },
-    "lesson": {
-      "de": "Wer anschlägt oder einweist, steht nie im Schwenk- oder Fallbereich der Last. Bagger als Hebegerät nur mit Lasthaken, Zulassung und Sichtkontakt zwischen Fahrer und Einweiser einsetzen.",
-      "fr": "Celui qui élingue ou guide ne se tient jamais dans la zone de rotation ou de chute de la charge. Une pelle ne sert d’engin de levage qu’avec crochet, autorisation et contact visuel avec le guide.",
-      "it": "Chi imbraca o guida non sta mai nella zona di rotazione o caduta del carico. L’escavatore va usato per sollevare solo con gancio, omologazione e contatto visivo con chi guida.",
-      "en": "Whoever slings or signals never stands in the swing or drop zone of the load. Use an excavator for lifting only with a load hook, approval and eye contact between operator and signaller."
-    },
-    "caseId": "case-2026-09-28-sg-pfaefers-abladen"
+  "facts": {
+   "activity": {
+    "de": "Aufenthalt auf dem Gerüst einer Umbaustelle",
+    "fr": "Présence sur l’échafaudage d’un chantier de rénovation",
+    "it": "Presenza sul ponteggio di un cantiere di ristrutturazione",
+    "en": "On the scaffolding of a renovation site"
+   },
+   "what": {
+    "de": "Ein 52-jähriger Architekt stürzte auf einer Umbaustelle mehrere Meter von einem Gerüst. Die Ursache ist noch unklar.",
+    "fr": "Un architecte de 52 ans a chuté de plusieurs mètres d’un échafaudage sur un chantier de rénovation. La cause n’est pas encore connue.",
+    "it": "Un architetto di 52 anni è caduto per diversi metri da un ponteggio in un cantiere di ristrutturazione. La causa non è ancora nota.",
+    "en": "A 52-year-old architect fell several metres from scaffolding on a renovation site. The cause is not yet known."
+   },
+   "equipment": {
+    "de": "Baugerüst",
+    "fr": "Échafaudage",
+    "it": "Ponteggio",
+    "en": "Scaffolding"
+   },
+   "injuries": {
+    "de": "Tödlich",
+    "fr": "Mortel",
+    "it": "Mortale",
+    "en": "Fatal"
+   },
+   "emergency": {
+    "de": "Croce Verde Lugano, Reanimation erfolglos; Kantons- und Gemeindepolizei",
+    "fr": "Croce Verde Lugano, réanimation sans succès; police cantonale et communale",
+    "it": "Croce Verde Lugano, rianimazione senza esito; polizia cantonale e comunale",
+    "en": "Croce Verde Lugano, resuscitation failed; cantonal and municipal police"
+   },
+   "investigation": {
+    "de": "Ursache wird abgeklärt",
+    "fr": "Cause en cours d’investigation",
+    "it": "Causa in fase di accertamento",
+    "en": "Cause under investigation"
+   }
   },
-  {
-    "id": "2026-09-24-bl-reinach-labor",
-    "date": "2026-09-24",
-    "dateType": "event",
-    "canton": "BL",
-    "place": "Reinach",
-    "industry": "chemicals",
-    "hazard": "hazmat",
-    "outcome": "injured",
-    "source": {
-      "name": "polizeinews.ch",
-      "url": "https://www.polizeinews.ch/2026/09/25/zwischenfall-bei-probenentnahme-im-labor-drei-verletzte/",
-      "lang": "de"
-    },
-    "title": {
-      "de": "Kontamination bei Probenahme im Labor",
-      "fr": "Contamination lors d’un prélèvement en laboratoire",
-      "it": "Contaminazione durante un prelievo in laboratorio",
-      "en": "Contamination during sampling in a laboratory"
-    },
-    "facts": {
-      "activity": {
-        "de": "Probenahme in einer Kapelle (Abzug) im Labor",
-        "fr": "Prélèvement sous une hotte de laboratoire",
-        "it": "Prelievo sotto una cappa di laboratorio",
-        "en": "Sampling in a fume cupboard"
-      },
-      "what": {
-        "de": "Bei einer Probenahme in einer Laborkapelle kam es zu einer noch ungeklärten Kontamination der anwesenden Personen. Messungen der Chemiewehr fanden danach keine gefährlichen Stoffe.",
-        "fr": "Lors d’un prélèvement sous une hotte, les personnes présentes ont été contaminées pour une raison encore inconnue. Les mesures des pompiers chimiques n’ont ensuite détecté aucune substance dangereuse.",
-        "it": "Durante un prelievo sotto una cappa, le persone presenti sono state contaminate per motivi ancora ignoti. Le misurazioni dei pompieri chimici non hanno poi rilevato sostanze pericolose.",
-        "en": "During sampling in a fume cupboard the people present were contaminated for reasons still unknown. Chemical response team measurements afterwards found no hazardous substances."
-      },
-      "equipment": {
-        "de": "Laborkapelle, unbekannter Stoff",
-        "fr": "Hotte de laboratoire, substance inconnue",
-        "it": "Cappa di laboratorio, sostanza ignota",
-        "en": "Fume cupboard, unknown substance"
-      },
-      "injuries": {
-        "de": "Drei Verletzte, eine weitere Person zur Abklärung im Spital",
-        "fr": "Trois blessés, une autre personne examinée à l’hôpital",
-        "it": "Tre feriti, un’altra persona controllata in ospedale",
-        "en": "Three injured, one more person checked at hospital"
-      },
-      "emergency": {
-        "de": "Feuerwehr, Chemiewehr, Rettungsdienst",
-        "fr": "Pompiers, défense chimique, ambulances",
-        "it": "Pompieri, difesa chimica, ambulanze",
-        "en": "Fire brigade, chemical response, ambulances"
-      },
-      "investigation": {
-        "de": "Ursache wird abgeklärt",
-        "fr": "Cause en cours d’investigation",
-        "it": "Causa in fase di accertamento",
-        "en": "Cause under investigation"
-      }
-    },
-    "lesson": {
-      "de": "Auch Routinetätigkeiten wie Probenahmen brauchen eine Gefährdungsbeurteilung, geeignete PSA und eingeübte Notfallabläufe. Ein funktionierender Abzug ist kein Ersatz für das Wissen, was im Gefäss ist.",
-      "fr": "Même un geste routinier comme un prélèvement exige une analyse des risques, des EPI adaptés et des procédures d’urgence exercées. Une hotte ne remplace pas la connaissance du contenu.",
-      "it": "Anche un prelievo di routine richiede valutazione dei rischi, DPI adeguati e procedure d’emergenza esercitate. Una cappa non sostituisce la conoscenza del contenuto.",
-      "en": "Even routine sampling needs a risk assessment, suitable PPE and practised emergency procedures. A fume cupboard is no substitute for knowing what is in the container."
-    },
-    "caseId": "case-2026-09-24-bl-reinach-labor"
+  "lesson": {
+   "de": "Gerüste schützen nur, wenn sie vollständig sind: Seitenschutz, Beläge und Zugänge täglich prüfen. Auch Planer und Bauleitung gehören bei Begehungen zum geschützten Personenkreis.",
+   "fr": "Un échafaudage ne protège que s’il est complet: contrôler chaque jour garde-corps, planchers et accès. Architectes et direction des travaux doivent aussi être protégés lors des visites.",
+   "it": "Un ponteggio protegge solo se completo: controllare ogni giorno parapetti, impalcati e accessi. Anche progettisti e direzione lavori vanno protetti durante i sopralluoghi.",
+   "en": "Scaffolding only protects when complete: check guardrails, decking and access daily. Designers and site managers on inspections need the same protection."
   },
-  {
-    "id": "2026-09-21-tg-buhwil-stapler",
-    "date": "2026-09-21",
-    "dateType": "event",
-    "canton": "TG",
-    "place": "Buhwil",
-    "industry": "logistics",
-    "hazard": "vehicle",
-    "outcome": "fatal",
-    "source": {
-      "name": "polizeinews.ch",
-      "url": "https://www.polizeinews.ch/2026/09/22/unter-gabelstapler-eingeklemmt-38-jaehriger-stirbt-noch-auf-der-unfallstelle/",
-      "lang": "de"
-    },
-    "title": {
-      "de": "Gabelstapler kippt Wiesenbord hinunter – Fahrer tot",
-      "fr": "Un chariot élévateur bascule dans un talus – conducteur tué",
-      "it": "Carrello elevatore si ribalta lungo una scarpata – conducente morto",
-      "en": "Forklift tips down a grass bank – driver killed"
-    },
-    "facts": {
-      "activity": {
-        "de": "Fahrt mit Gabelstapler auf Firmengelände",
-        "fr": "Circulation en chariot élévateur sur le site d’une entreprise",
-        "it": "Guida di un carrello elevatore sul piazzale di un’azienda",
-        "en": "Driving a forklift on company premises"
-      },
-      "what": {
-        "de": "Ein 38-jähriger Arbeiter fuhr frühmorgens mit dem Stapler über ein Firmengelände. Das Fahrzeug kippte eine Wiesenböschung hinunter und begrub den Fahrer unter sich.",
-        "fr": "Tôt le matin, un ouvrier de 38 ans circulait en chariot élévateur sur le site d’une entreprise. L’engin a basculé dans un talus herbeux et l’a coincé dessous.",
-        "it": "Di primo mattino un operaio di 38 anni guidava un carrello elevatore sul piazzale di un’azienda. Il mezzo si è ribaltato lungo una scarpata erbosa schiacciandolo.",
-        "en": "Early in the morning a 38-year-old worker was driving a forklift on company premises. It tipped down a grassy bank and pinned him underneath."
-      },
-      "equipment": {
-        "de": "Gabelstapler",
-        "fr": "Chariot élévateur",
-        "it": "Carrello elevatore",
-        "en": "Forklift"
-      },
-      "injuries": {
-        "de": "Tödlich",
-        "fr": "Mortel",
-        "it": "Mortale",
-        "en": "Fatal"
-      },
-      "emergency": {
-        "de": "Kriminaltechnischer Dienst aufgeboten",
-        "fr": "Service forensique mobilisé",
-        "it": "Servizio scientifico mobilitato",
-        "en": "Forensic unit deployed"
-      },
-      "investigation": {
-        "de": "Kantonspolizei TG mit Staatsanwaltschaft Bischofszell",
-        "fr": "Police cantonale TG avec le Ministère public de Bischofszell",
-        "it": "Polizia cantonale TG con il Ministero pubblico di Bischofszell",
-        "en": "Cantonal police TG with Bischofszell prosecutor"
-      }
-    },
-    "lesson": {
-      "de": "Kippende Stapler töten meist Fahrer, die nicht angegurtet sind und abspringen wollen. Rückhaltesystem benutzen, im Fahrzeug bleiben, Fahrwege mit Abstand zu Böschungen markieren.",
-      "fr": "Les chariots qui basculent tuent surtout des conducteurs non attachés qui tentent de sauter. Utiliser le système de retenue, rester dans la cabine et tracer les voies loin des talus.",
-      "it": "I carrelli che si ribaltano uccidono soprattutto conducenti senza cintura che cercano di saltare. Usare il sistema di ritenuta, restare a bordo e tracciare i percorsi lontano dalle scarpate.",
-      "en": "Tipping forklifts mostly kill unbelted drivers who try to jump clear. Use the restraint, stay in the cab and mark routes well away from banks."
-    },
-    "caseId": "case-2026-09-21-tg-buhwil-stapler"
+  "caseId": "case-2026-10-22-ti-paradiso-ponteggio"
+ },
+ {
+  "id": "2026-10-21-sg-diepoldsau-plattform",
+  "date": "2026-10-21",
+  "dateType": "event",
+  "canton": "SG",
+  "place": "Diepoldsau",
+  "industry": "construction",
+  "hazard": "fall",
+  "outcome": "life_threatening",
+  "source": {
+   "name": "polizeinews.ch",
+   "url": "https://www.polizeinews.ch/2026/10/21/arbeiter-57-stuerzt-drei-meter-von-arbeitsplattform-rega-fliegt-ihn-ins-spital/",
+   "lang": "de"
   },
-  {
-    "id": "2026-09-16-zh-zuerich-bauaufzug",
-    "date": "2026-09-16",
-    "dateType": "event",
-    "canton": "ZH",
-    "place": "Zürich (Kreis 5)",
-    "industry": "construction",
-    "hazard": "fall",
-    "outcome": "fatal",
-    "source": {
-      "name": "polizeinews.ch",
-      "url": "https://www.polizeinews.ch/2026/09/17/toedlicher-bauunfall-fordert-zweites-opfer-schwer-verletzter-arbeiter-stirbt-im-spital/",
-      "lang": "de"
-    },
-    "title": {
-      "de": "Bauunfall an Fassade fordert zwei Tote",
-      "fr": "Accident sur une façade en rénovation: deux morts",
-      "it": "Incidente su una facciata in ristrutturazione: due morti",
-      "en": "Accident on a facade under renovation kills two"
-    },
-    "facts": {
-      "activity": {
-        "de": "Fassadenarbeiten an einem Gebäude in Renovation",
-        "fr": "Travaux de façade sur un immeuble en rénovation",
-        "it": "Lavori di facciata su uno stabile in ristrutturazione",
-        "en": "Facade work on a building under renovation"
-      },
-      "what": {
-        "de": "Gemäss Medienberichten gab ein am Gerüst montierter Bauaufzug nach, während zwei Arbeiter in der Kabine standen. Ein Arbeiter starb vor Ort, der zweite am Abend im Spital.",
-        "fr": "Selon les médias, un monte-charge fixé à l’échafaudage a cédé alors que deux ouvriers se trouvaient dans la nacelle. L’un est mort sur place, l’autre le soir à l’hôpital.",
-        "it": "Secondo i media, un montacarichi fissato al ponteggio ha ceduto mentre due operai erano nella cabina. Uno è morto sul posto, l’altro la sera in ospedale.",
-        "en": "According to media reports, a hoist attached to the scaffold gave way while two workers were in the car. One died on site, the other in hospital that evening."
-      },
-      "equipment": {
-        "de": "Bauaufzug am Gerüst (gemäss Medien)",
-        "fr": "Monte-charge sur échafaudage (selon les médias)",
-        "it": "Montacarichi su ponteggio (secondo i media)",
-        "en": "Scaffold-mounted hoist (per media)"
-      },
-      "injuries": {
-        "de": "Zwei Tote (57 und 54 Jahre)",
-        "fr": "Deux morts (57 et 54 ans)",
-        "it": "Due morti (57 e 54 anni)",
-        "en": "Two dead (aged 57 and 54)"
-      },
-      "emergency": {
-        "de": "Reanimation vor Ort; ein Verletzter ins Spital",
-        "fr": "Réanimation sur place; un blessé hospitalisé",
-        "it": "Rianimazione sul posto; un ferito in ospedale",
-        "en": "Resuscitation on site; one casualty to hospital"
-      },
-      "investigation": {
-        "de": "Stadtpolizei Zürich mit Staatsanwaltschaft",
-        "fr": "Police municipale de Zurich avec le Ministère public",
-        "it": "Polizia della città di Zurigo con il Ministero pubblico",
-        "en": "Zurich city police with prosecutor"
-      }
-    },
-    "lesson": {
-      "de": "Bauaufzüge sind Maschinen mit Prüfpflicht: Verankerung am Gerüst, Montage nach Herstellerangaben und Abnahme durch eine befähigte Person sind Pflicht – auch bei Umbau und Versetzen.",
-      "fr": "Les monte-charges sont des machines soumises à contrôle: ancrage à l’échafaudage, montage selon le fabricant et réception par une personne compétente, aussi après chaque modification.",
-      "it": "I montacarichi sono macchine soggette a verifica: ancoraggio al ponteggio, montaggio secondo il fabbricante e collaudo da parte di una persona competente, anche dopo ogni modifica.",
-      "en": "Construction hoists are machines subject to inspection: anchorage to the scaffold, installation per the manufacturer and sign-off by a competent person – also after every change."
-    },
-    "extraSources": [
-      {
-        "name": "20 minutes",
-        "url": "https://www.20min.ch/fr/story/zurich-deux-morts-apres-l-effondrement-d-un-monte-charge-de-chantier-103634927",
-        "lang": "fr"
-      }
-    ],
-    "caseId": "case-2026-09-16-zh-zuerich-bauaufzug"
+  "title": {
+   "de": "Sturz aus drei Metern von einer Staplerplattform",
+   "fr": "Chute de trois mètres depuis une plateforme sur chariot élévateur",
+   "it": "Caduta da tre metri da una piattaforma su carrello elevatore",
+   "en": "Three-metre fall from a forklift-mounted platform"
   },
-  {
-    "id": "2026-09-10-sg-widnau-dach",
-    "date": "2026-09-10",
-    "dateType": "event",
-    "canton": "SG",
-    "place": "Widnau",
-    "industry": "cleaning",
-    "hazard": "fall",
-    "outcome": "serious",
-    "source": {
-      "name": "polizeinews.ch",
-      "url": "https://www.polizeinews.ch/2026/09/11/widnau-sg-schwerer-arbeitsunfall-17-jaehriger-stuerzt-rund-fuenf-meter-vom-dach/",
-      "lang": "de"
-    },
-    "title": {
-      "de": "17-Jähriger stürzt bei Reinigungsarbeiten vom Dach",
-      "fr": "Un jeune de 17 ans chute d’un toit en nettoyant",
-      "it": "Un 17enne cade da un tetto durante lavori di pulizia",
-      "en": "17-year-old falls from roof while cleaning"
-    },
-    "facts": {
-      "activity": {
-        "de": "Reinigungsarbeiten auf einem Dach",
-        "fr": "Travaux de nettoyage sur un toit",
-        "it": "Lavori di pulizia su un tetto",
-        "en": "Cleaning work on a roof"
-      },
-      "what": {
-        "de": "Ein 17-Jähriger reinigte ein Dach und stürzte rund fünf Meter in die Tiefe.",
-        "fr": "Un jeune de 17 ans nettoyait un toit et a chuté d’environ cinq mètres.",
-        "it": "Un ragazzo di 17 anni puliva un tetto ed è caduto da circa cinque metri.",
-        "en": "A 17-year-old was cleaning a roof and fell about five metres."
-      },
-      "equipment": null,
-      "injuries": {
-        "de": "Schwer verletzt",
-        "fr": "Grièvement blessé",
-        "it": "Ferito gravemente",
-        "en": "Seriously injured"
-      },
-      "emergency": {
-        "de": "Rettungsdienst, Transport ins Spital",
-        "fr": "Ambulance, transport à l’hôpital",
-        "it": "Ambulanza, trasporto in ospedale",
-        "en": "Ambulance to hospital"
-      },
-      "investigation": {
-        "de": "Kantonspolizei SG im Auftrag der Staatsanwaltschaft",
-        "fr": "Police cantonale SG sur mandat du Ministère public",
-        "it": "Polizia cantonale SG su incarico del Ministero pubblico",
-        "en": "Cantonal police SG on behalf of prosecutor"
-      }
-    },
-    "lesson": {
-      "de": "Jugendliche dürfen gefährliche Arbeiten nur gemäss Bildungsplan und unter Aufsicht ausführen. Dacharbeiten ohne kollektiven Absturzschutz sind für sie tabu.",
-      "fr": "Les jeunes ne peuvent effectuer des travaux dangereux que selon leur plan de formation et sous surveillance. Travailler sur un toit sans protection collective leur est interdit.",
-      "it": "I giovani possono svolgere lavori pericolosi solo secondo il piano di formazione e sotto sorveglianza. Lavorare su un tetto senza protezione collettiva è per loro escluso.",
-      "en": "Young workers may only do hazardous work under their training plan and supervision. Roof work without collective fall protection is off-limits for them."
-    },
-    "caseId": "case-2026-09-10-sg-widnau-dach"
+  "facts": {
+   "activity": {
+    "de": "Arbeiten von einer Arbeitsplattform aus, die von einem Gabelstapler angehoben war",
+    "fr": "Travaux depuis une plateforme levée par un chariot élévateur",
+    "it": "Lavori da una piattaforma sollevata da un carrello elevatore",
+    "en": "Work from a platform lifted by a forklift"
+   },
+   "what": {
+    "de": "Ein 57-jähriger Mann arbeitete auf einer Plattform, die ein Gabelstapler hochhob. Er stürzte rund drei Meter zu Boden.",
+    "fr": "Un homme de 57 ans travaillait sur une plateforme levée par un chariot élévateur. Il a chuté d’environ trois mètres.",
+    "it": "Un uomo di 57 anni lavorava su una piattaforma sollevata da un carrello elevatore. È caduto da circa tre metri.",
+    "en": "A 57-year-old man was working on a platform raised by a forklift. He fell about three metres to the ground."
+   },
+   "equipment": {
+    "de": "Gabelstapler mit Arbeitsplattform",
+    "fr": "Chariot élévateur avec plateforme de travail",
+    "it": "Carrello elevatore con piattaforma di lavoro",
+    "en": "Forklift with work platform"
+   },
+   "injuries": {
+    "de": "Lebensbedrohlich verletzt",
+    "fr": "Blessé, pronostic vital engagé",
+    "it": "Ferito in pericolo di vita",
+    "en": "Life-threatening injuries"
+   },
+   "emergency": {
+    "de": "Rettungsdienst vor Ort, Rega-Flug ins Spital",
+    "fr": "Ambulance sur place, transport par la Rega",
+    "it": "Ambulanza sul posto, trasporto con la Rega",
+    "en": "Ambulance on site, Rega airlift"
+   },
+   "investigation": {
+    "de": "Kantonspolizei SG klärt den Hergang ab.",
+    "fr": "La police cantonale (SG) enquête sur les circonstances.",
+    "it": "La polizia cantonale (SG) indaga sulla dinamica.",
+    "en": "Cantonal police (SG) investigating."
+   }
   },
-  {
-    "id": "2026-09-09-ti-piotta-ritom",
-    "date": "2026-09-09",
-    "dateType": "event",
-    "canton": "TI",
-    "place": "Piotta (Quinto)",
-    "industry": "energy",
-    "hazard": "explosion",
-    "outcome": "fatal",
-    "source": {
-      "name": "polizeinews.ch",
-      "url": "https://www.polizeinews.ch/2026/09/09/piotta-ti-explosion-in-alter-ritom-zentrale-zwei-arbeiter-sterben-bei-arbeitsunfall/",
-      "lang": "de"
-    },
-    "title": {
-      "de": "Explosion im alten Kraftwerk Ritom – zwei Arbeiter tot",
-      "fr": "Explosion dans l’ancienne centrale du Ritom – deux ouvriers tués",
-      "it": "Esplosione nella vecchia centrale del Ritom – due operai morti",
-      "en": "Explosion at old Ritom power station kills two workers"
-    },
-    "facts": {
-      "activity": {
-        "de": "Arbeiten von zwei Mitarbeitern in der alten Wasserkraftzentrale",
-        "fr": "Travaux de deux employés dans l’ancienne centrale hydroélectrique",
-        "it": "Lavori di due dipendenti nella vecchia centrale idroelettrica",
-        "en": "Two employees working inside the old hydro power station"
-      },
-      "what": {
-        "de": "Gemeldet wurde ein Brand im Innern des Gebäudes. Nach ersten Erkenntnissen kam es zu einer Explosion, von der beide anwesenden Arbeiter betroffen waren. Beide starben.",
-        "fr": "Un incendie à l’intérieur du bâtiment a été signalé. Selon les premiers éléments, une explosion a touché les deux ouvriers présents, qui sont décédés.",
-        "it": "È stato segnalato un incendio all’interno dell’edificio. Secondo una prima ricostruzione, un’esplosione ha coinvolto i due operai presenti, entrambi deceduti.",
-        "en": "A fire inside the building was reported. Initial findings point to an explosion that hit both workers present; both died."
-      },
-      "equipment": {
-        "de": "Anlage der alten Zentrale (Ursache offen)",
-        "fr": "Installation de l’ancienne centrale (cause inconnue)",
-        "it": "Impianto della vecchia centrale (causa ignota)",
-        "en": "Old power station installation (cause unknown)"
-      },
-      "injuries": {
-        "de": "Zwei Tote",
-        "fr": "Deux morts",
-        "it": "Due morti",
-        "en": "Two dead"
-      },
-      "emergency": {
-        "de": "Feuerwehren Biasca, Alta Leventina, Bellinzona; Tre Valli Soccorso; Rega",
-        "fr": "Pompiers de Biasca, Haute-Léventine, Bellinzone; Tre Valli Soccorso; Rega",
-        "it": "Pompieri di Biasca, Alta Leventina, Bellinzona; Tre Valli Soccorso; Rega",
-        "en": "Fire brigades Biasca, Alta Leventina, Bellinzona; Tre Valli Soccorso; Rega"
-      },
-      "investigation": {
-        "de": "Ermittlungen laufen",
-        "fr": "Enquête en cours",
-        "it": "Inchiesta in corso",
-        "en": "Investigation ongoing"
-      }
-    },
-    "lesson": {
-      "de": "Arbeiten in alten oder stillgelegten Anlagen bergen unbekannte Restenergien, Gase und Stoffe. Vor Beginn: Gefährdungsermittlung, Freischalten, Freimessen und eine schriftliche Arbeitsfreigabe.",
-      "fr": "Les installations anciennes ou désaffectées cachent énergies résiduelles, gaz et substances inconnus. Avant de commencer: analyse des dangers, consignation, mesures d’atmosphère et permis de travail écrit.",
-      "it": "Gli impianti vecchi o dismessi nascondono energie residue, gas e sostanze ignote. Prima di iniziare: analisi dei pericoli, messa in sicurezza, misurazioni e permesso di lavoro scritto.",
-      "en": "Old or decommissioned plants hide residual energy, gases and unknown substances. Before work: hazard analysis, isolation, gas testing and a written permit to work."
-    },
-    "caseId": "case-2026-09-09-ti-piotta-ritom"
+  "lesson": {
+   "de": "Staplerplattformen sind nur zulässig, wenn sie dafür gebaut, gesichert und mit Seitenschutz versehen sind. Für Arbeiten in der Höhe ist eine Hubarbeitsbühne meist die sichere Wahl.",
+   "fr": "Une plateforme sur chariot n’est admise que si elle est conçue à cet effet, verrouillée et munie de garde-corps. Pour travailler en hauteur, une nacelle élévatrice est en général le bon choix.",
+   "it": "Le piattaforme su carrello sono ammesse solo se concepite allo scopo, bloccate e con parapetto. Per lavori in quota una piattaforma aerea è di norma la scelta sicura.",
+   "en": "Forklift platforms are only acceptable if purpose-built, locked on and fitted with guardrails. For work at height a mobile elevating work platform is usually the safe choice."
   },
-  {
-    "id": "2026-09-08-gr-pragg-jenaz-kran",
-    "date": "2026-09-08",
-    "dateType": "event",
-    "canton": "GR",
-    "place": "Pragg-Jenaz",
-    "industry": "agriculture",
-    "hazard": "crane",
-    "outcome": "serious",
-    "source": {
-      "name": "polizeinews.ch",
-      "url": "https://www.polizeinews.ch/2026/09/09/pragg-jenaz-gr-arbeiter-36-klemmt-hand-bei-kranarbeiten-ein-und-wird-schwer-verletzt/",
-      "lang": "de"
-    },
-    "title": {
-      "de": "Hand in Greifzange eines Ladekrans eingeklemmt",
-      "fr": "Main coincée dans la pince d’une grue de chargement",
-      "it": "Mano schiacciata nella pinza di una gru di carico",
-      "en": "Hand trapped in loader crane grab"
-    },
-    "facts": {
-      "activity": {
-        "de": "Abladen von Siloballen mit Ladekran von einer Lastwagenbrücke",
-        "fr": "Déchargement de balles d’ensilage d’un camion avec une grue de chargement",
-        "it": "Scarico di balle di insilato da un camion con gru di carico",
-        "en": "Unloading silage bales from a truck bed with a loader crane"
-      },
-      "what": {
-        "de": "Ein 36-jähriger Mann lud mit einem Kran Siloballen von einem Lastwagen ab. Dabei geriet seine Hand in den Bereich der Greifzange. Er konnte selbst Hilfe rufen.",
-        "fr": "Un homme de 36 ans déchargeait des balles d’ensilage avec une grue. Sa main s’est retrouvée prise dans la pince. Il a pu alerter lui-même les secours.",
-        "it": "Un uomo di 36 anni scaricava balle di insilato con una gru. La sua mano è rimasta presa nella pinza. Ha potuto chiamare i soccorsi da solo.",
-        "en": "A 36-year-old man was unloading silage bales from a truck with a crane. His hand got caught in the grab. He was able to call for help himself."
-      },
-      "equipment": {
-        "de": "Ladekran mit Greifzange",
-        "fr": "Grue de chargement avec pince",
-        "it": "Gru di carico con pinza",
-        "en": "Loader crane with grab"
-      },
-      "injuries": {
-        "de": "Schwer verletzt (Hand)",
-        "fr": "Grièvement blessé (main)",
-        "it": "Ferito gravemente (mano)",
-        "en": "Seriously injured (hand)"
-      },
-      "emergency": {
-        "de": "Rettungsdienst Schiers, Rega-Flug ins Spital",
-        "fr": "Ambulance de Schiers, transport par la Rega",
-        "it": "Ambulanza di Schiers, trasporto con la Rega",
-        "en": "Schiers ambulance, Rega airlift"
-      },
-      "investigation": {
-        "de": "Kantonspolizei GR klärt den Hergang ab.",
-        "fr": "La police cantonale (GR) enquête sur les circonstances.",
-        "it": "La polizia cantonale (GR) indaga sulla dinamica.",
-        "en": "Cantonal police (GR) investigating."
-      }
-    },
-    "lesson": {
-      "de": "Greifer nie von Hand führen oder richten, solange der Kran bewegt werden kann. Wer allein arbeitet, braucht ein Notfallkonzept – hier konnte der Verletzte zum Glück selbst alarmieren.",
-      "fr": "Ne jamais guider ou ajuster une pince à la main tant que la grue peut bouger. Le travail isolé exige un concept d’urgence – ici, le blessé a heureusement pu alerter lui-même.",
-      "it": "Mai guidare o sistemare la pinza a mano finché la gru può muoversi. Chi lavora da solo ha bisogno di un piano d’emergenza – qui per fortuna il ferito ha potuto dare l’allarme.",
-      "en": "Never guide or adjust a grab by hand while the crane can move. Lone work needs an emergency plan – luckily here the injured man could raise the alarm himself."
-    },
-    "caseId": "case-2026-09-08-gr-pragg-jenaz-kran"
+  "caseId": "case-2026-10-21-sg-diepoldsau-plattform"
+ },
+ {
+  "id": "2026-10-10-vs-mund-holzerei",
+  "date": "2026-10-10",
+  "dateType": "event",
+  "canton": "VS",
+  "place": "Mund",
+  "industry": "forestry",
+  "hazard": "struck",
+  "outcome": "fatal",
+  "source": {
+   "name": "Police cantonale valaisanne",
+   "url": "https://www.policevalais.ch/communiques-pour-les-medias/mund-accident-mortel-de-travail/",
+   "lang": "fr"
   },
-  {
-    "id": "2026-09-02-vs-le-chable-grue",
-    "date": "2026-09-02",
-    "dateType": "event",
-    "canton": "VS",
-    "place": "Le Châble (Val de Bagnes)",
-    "industry": "transport",
-    "hazard": "crane",
-    "outcome": "fatal",
-    "source": {
-      "name": "Police cantonale valaisanne",
-      "url": "https://www.policevalais.ch/communiques-pour-les-medias/le-chable-accident-mortel-de-travail/",
-      "lang": "fr"
-    },
-    "title": {
-      "de": "Ladekran kippt beim Montieren auf Lastwagenfahrer",
-      "fr": "Une grue bascule sur un chauffeur lors de son installation",
-      "it": "Una gru si ribalta sull’autista durante il montaggio",
-      "en": "Loader crane tips onto truck driver during installation"
-    },
-    "facts": {
-      "activity": {
-        "de": "Montage eines Krans am Heck eines Lastwagens im Firmendepot",
-        "fr": "Installation d’une grue à l’arrière d’un camion au dépôt de l’entreprise",
-        "it": "Montaggio di una gru sul retro di un camion nel deposito aziendale",
-        "en": "Fitting a crane to the rear of a truck at the company depot"
-      },
-      "what": {
-        "de": "Ein 53-jähriger Lastwagenchauffeur montierte im Depot einen Kran am Fahrzeugheck. Der Kran kippte aus ungeklärten Gründen und klemmte ihn gegen eine am Boden stehende Baggerschaufel.",
-        "fr": "Un chauffeur de 53 ans installait une grue à l’arrière de son camion au dépôt. La grue a basculé pour une raison indéterminée et l’a coincé contre un godet posé au sol.",
-        "it": "Un autista di 53 anni montava una gru sul retro del camion nel deposito. La gru si è ribaltata per motivi ignoti, schiacciandolo contro una benna appoggiata a terra.",
-        "en": "A 53-year-old truck driver was fitting a crane to the rear of his truck at the depot. The crane tipped for unknown reasons and pinned him against a bucket on the ground."
-      },
-      "equipment": {
-        "de": "Lastwagen-Ladekran, Baggerschaufel",
-        "fr": "Grue de camion, godet",
-        "it": "Gru da camion, benna",
-        "en": "Truck crane, excavator bucket"
-      },
-      "injuries": {
-        "de": "Tödlich",
-        "fr": "Mortel",
-        "it": "Mortale",
-        "en": "Fatal"
-      },
-      "emergency": {
-        "de": "Erste Hilfe durch Zeugen; OCVS 144, Air-Glaciers mit Arzt, Feuerwehr",
-        "fr": "Premiers secours par des témoins; OCVS 144, Air-Glaciers avec médecin, pompiers",
-        "it": "Primo soccorso dei testimoni; OCVS 144, Air-Glaciers con medico, pompieri",
-        "en": "First aid by witnesses; OCVS 144, Air-Glaciers with doctor, fire brigade"
-      },
-      "investigation": {
-        "de": "Staatsanwaltschaft hat eine Untersuchung eröffnet",
-        "fr": "Le Ministère public a ouvert une instruction",
-        "it": "Il Ministero pubblico ha aperto un’inchiesta",
-        "en": "Public prosecutor has opened an investigation"
-      }
-    },
-    "lesson": {
-      "de": "Montage und Demontage von Anbaugeräten sind Sonderarbeiten: Herstellerangaben befolgen, Teile vor dem Lösen abstützen und den Gefahrenbereich unter schweren Bauteilen nie betreten.",
-      "fr": "Monter ou démonter un équipement est un travail particulier: suivre le fabricant, étayer les pièces avant de les libérer et ne jamais se placer sous une charge lourde.",
-      "it": "Montare o smontare un’attrezzatura è un lavoro speciale: seguire il fabbricante, puntellare i pezzi prima di sganciarli e non sostare mai sotto parti pesanti.",
-      "en": "Fitting and removing attachments is non-routine work: follow the manufacturer, prop parts before releasing them and never stand beneath heavy components."
-    },
-    "caseId": "case-2026-09-02-vs-le-chable-grue"
+  "title": {
+   "de": "Tödlicher Unfall bei Holzerarbeiten",
+   "fr": "Accident mortel lors de travaux d’abattage",
+   "it": "Infortunio mortale durante lavori di abbattimento",
+   "en": "Fatal accident while felling trees"
   },
-  {
-    "id": "2026-08-08-fr-belfaux-engin",
-    "date": "2026-08-08",
-    "dateType": "event",
-    "canton": "FR",
-    "place": "Belfaux",
-    "industry": "agriculture",
-    "hazard": "machinery",
-    "outcome": "injured",
-    "source": {
-      "name": "Police cantonale Fribourg",
-      "url": "https://www.fr.ch/dsjs/pol/actualites/accident-de-travail-avec-une-personne-blessee-a-belfaux",
-      "lang": "fr"
-    },
-    "title": {
-      "de": "Baumaschine überschlägt sich beim Planieren eines Felds",
-      "fr": "Un engin de chantier fait deux tonneaux en aplanissant un champ",
-      "it": "Una macchina edile si ribalta due volte livellando un campo",
-      "en": "Earthmoving machine rolls twice while levelling a field"
-    },
-    "facts": {
-      "activity": {
-        "de": "Planieren einer landwirtschaftlichen Parzelle mit Baumaschine",
-        "fr": "Aplanissement d’une parcelle agricole avec un engin de chantier",
-        "it": "Livellamento di un terreno agricolo con una macchina edile",
-        "en": "Levelling farmland with an earthmoving machine"
-      },
-      "what": {
-        "de": "Beim Rückwärtsmanöver am Parzellenrand verlor der 32-jährige Fahrer die Kontrolle. Die Maschine rutschte rund 15 m eine Böschung hinunter, überschlug sich zweimal und landete in einem Bach.",
-        "fr": "Lors d’une marche arrière en bordure de parcelle, le conducteur de 32 ans a perdu la maîtrise. L’engin a dévalé un talus sur une quinzaine de mètres, fait deux tonneaux et fini dans un ruisseau.",
-        "it": "Durante una retromarcia al bordo del terreno, il conducente di 32 anni ha perso il controllo. La macchina è scivolata per circa 15 m lungo una scarpata, si è ribaltata due volte ed è finita in un ruscello.",
-        "en": "Reversing at the edge of the plot, the 32-year-old driver lost control. The machine slid about 15 m down a bank, rolled twice and ended up in a stream."
-      },
-      "equipment": {
-        "de": "Baumaschine (Typ nicht angegeben)",
-        "fr": "Engin de chantier (type non précisé)",
-        "it": "Macchina edile (tipo non indicato)",
-        "en": "Earthmoving machine (type not stated)"
-      },
-      "injuries": {
-        "de": "Verletzt, musste befreit werden",
-        "fr": "Blessé, désincarcéré",
-        "it": "Ferito, estratto dai soccorritori",
-        "en": "Injured, had to be cut free"
-      },
-      "emergency": {
-        "de": "Rettungskolonne, Feuerwehr, Ambulanz; Bahnverkehr ca. 1 h unterbrochen",
-        "fr": "Colonne de secours, pompiers, ambulance; trafic ferroviaire interrompu env. 1 h",
-        "it": "Colonna di soccorso, pompieri, ambulanza; traffico ferroviario interrotto ca. 1 h",
-        "en": "Rescue team, fire brigade, ambulance; rail traffic halted about 1 h"
-      },
-      "investigation": {
-        "de": "Untersuchung läuft",
-        "fr": "Enquête en cours",
-        "it": "Inchiesta in corso",
-        "en": "Investigation ongoing"
-      }
-    },
-    "lesson": {
-      "de": "Rückwärtsfahren an Geländekanten ist eine der häufigsten Ursachen für Überschläge. Abstand zur Kante markieren, Einweiser einsetzen und immer angegurtet fahren.",
-      "fr": "La marche arrière près d’un bord est une cause fréquente de renversement. Marquer une distance de sécurité, utiliser un guide et toujours boucler la ceinture.",
-      "it": "La retromarcia vicino a un bordo è una causa frequente di ribaltamento. Segnare una distanza di sicurezza, usare un moviere e allacciare sempre la cintura.",
-      "en": "Reversing near an edge is one of the commonest causes of rollovers. Mark a safe distance, use a banksman and always wear the seatbelt."
-    },
-    "caseId": "case-2026-08-08-fr-belfaux-engin"
+  "facts": {
+   "activity": {
+    "de": "Fällen von Bäumen in einem Waldstück, allein",
+    "fr": "Abattage d’arbres dans une zone boisée, seul",
+    "it": "Abbattimento di alberi in un bosco, da solo",
+    "en": "Felling trees in a wooded area, alone"
+   },
+   "what": {
+    "de": "Ein 67-jähriger Rentner ging allein zu Fällarbeiten in ein Waldstück. Angehörige fanden ihn später unter einem Baumstamm eingeklemmt.",
+    "fr": "Un retraité de 67 ans s’est rendu seul dans une zone boisée pour abattre des arbres. Des proches l’ont retrouvé plus tard coincé sous un tronc.",
+    "it": "Un pensionato di 67 anni si è recato da solo in un bosco per abbattere alberi. Più tardi i familiari lo hanno trovato bloccato sotto un tronco.",
+    "en": "A 67-year-old retiree went alone to fell trees in a wooded area. Relatives later found him pinned under a trunk."
+   },
+   "equipment": {
+    "de": "Baumstamm",
+    "fr": "Tronc d’arbre",
+    "it": "Tronco d’albero",
+    "en": "Tree trunk"
+   },
+   "injuries": {
+    "de": "Tödlich",
+    "fr": "Mortel",
+    "it": "Mortale",
+    "en": "Fatal"
+   },
+   "emergency": {
+    "de": "Air Zermatt mit Notarzt, Rettungsdienst, Feuerwehr",
+    "fr": "Air Zermatt avec médecin, secouristes, pompiers",
+    "it": "Air Zermatt con medico, soccorritori, pompieri",
+    "en": "Air Zermatt with doctor, paramedics, fire brigade"
+   },
+   "investigation": {
+    "de": "Staatsanwaltschaft hat eine Untersuchung eröffnet",
+    "fr": "Le Ministère public a ouvert une instruction",
+    "it": "Il Ministero pubblico ha aperto un’inchiesta",
+    "en": "Public prosecutor has opened an investigation"
+   }
   },
-  {
-    "id": "2026-07-23-vd-diablerets-toit",
-    "date": "2026-07-23",
-    "dateType": "event",
-    "canton": "VD",
-    "place": "Les Diablerets",
-    "industry": "construction",
-    "hazard": "fall",
-    "outcome": "fatal",
-    "source": {
-      "name": "20 minutes",
-      "url": "https://www.20min.ch/fr/story/canton-de-vaud-un-ouvrier-decede-apres-une-chute-sur-un-chantier-aux-diablerets-103608228",
-      "lang": "fr"
-    },
-    "title": {
-      "de": "Dachdecker stürzt tödlich von Chaletdach",
-      "fr": "Un couvreur fait une chute mortelle depuis le toit d’un chalet",
-      "it": "Un copritetto cade mortalmente dal tetto di uno chalet",
-      "en": "Roofer killed in fall from chalet roof"
-    },
-    "facts": {
-      "activity": {
-        "de": "Dachdeckerarbeiten an einem Chalet",
-        "fr": "Travaux de couverture sur un chalet",
-        "it": "Lavori di copertura su uno chalet",
-        "en": "Roofing work on a chalet"
-      },
-      "what": {
-        "de": "Ein 39-jähriger Dachdecker stürzte aus ungeklärten Gründen mehrere Meter vom unteren Teil des Daches. Kollegen alarmierten die Rettung.",
-        "fr": "Un couvreur de 39 ans a chuté de plusieurs mètres depuis le bas de la toiture, pour une raison encore inconnue. Ses collègues ont alerté les secours.",
-        "it": "Un copritetto di 39 anni è caduto per diversi metri dalla parte bassa del tetto, per motivi ancora da chiarire. I colleghi hanno dato l’allarme.",
-        "en": "A 39-year-old roofer fell several metres from the lower part of the roof for reasons not yet known. Colleagues raised the alarm."
-      },
-      "equipment": {
-        "de": "Dach (Absturzhöhe mehrere Meter)",
-        "fr": "Toit (chute de plusieurs mètres)",
-        "it": "Tetto (caduta di diversi metri)",
-        "en": "Roof (fall of several metres)"
-      },
-      "injuries": {
-        "de": "Tödlich",
-        "fr": "Mortel",
-        "it": "Mortale",
-        "en": "Fatal"
-      },
-      "emergency": {
-        "de": "Reanimation vor Ort, Rega, Gendarmerie",
-        "fr": "Réanimation sur place, Rega, gendarmerie",
-        "it": "Rianimazione sul posto, Rega, gendarmeria",
-        "en": "Resuscitation on site, Rega, gendarmerie"
-      },
-      "investigation": {
-        "de": "Strafuntersuchung der Staatsanwaltschaft VD",
-        "fr": "Instruction pénale du Ministère public vaudois",
-        "it": "Inchiesta penale del Ministero pubblico vodese",
-        "en": "Criminal investigation by Vaud prosecutor"
-      }
-    },
-    "lesson": {
-      "de": "Auch die Traufkante ist eine Absturzkante: Ab 3 m Absturzhöhe auf Dächern braucht es Seitenschutz oder Gerüst mit Dachfangwand – vom ersten bis zum letzten Arbeitstag.",
-      "fr": "Le bord de l’avant-toit est aussi un bord de chute: dès 3 m sur les toits, il faut garde-corps ou échafaudage avec paroi de protection – du premier au dernier jour.",
-      "it": "Anche la gronda è un bordo di caduta: sui tetti da 3 m servono parapetto o ponteggio con parete di protezione – dal primo all’ultimo giorno.",
-      "en": "The eaves are a fall edge too: from 3 m on roofs you need edge protection or scaffolding with a catch barrier – from the first to the last day."
-    },
-    "caseId": "case-2026-07-23-vd-diablerets-toit"
+  "lesson": {
+   "de": "Holzerei nie allein: Wer allein arbeitet, wird im Notfall zu spät gefunden. Mindestens Ruf- oder Sichtverbindung, Notfallplan und ein Alarmgerät (Totmannmelder) gehören dazu.",
+   "fr": "Ne jamais abattre seul: en cas d’accident, on est retrouvé trop tard. Contact visuel ou vocal, plan d’urgence et appareil d’alarme pour travailleur isolé sont indispensables.",
+   "it": "Mai abbattere alberi da soli: in caso d’incidente si viene trovati troppo tardi. Servono contatto visivo o vocale, piano d’emergenza e un dispositivo d’allarme uomo a terra.",
+   "en": "Never fell trees alone: if something goes wrong, help comes too late. Keep visual or voice contact, have an emergency plan and use a lone-worker alarm."
   },
-  {
-    "id": "2026-06-15-vd-chavannes-chantier",
-    "date": "2026-06-15",
-    "dateType": "event",
-    "canton": "VD",
-    "place": "Chavannes-près-Renens",
-    "industry": "construction",
-    "hazard": "fall",
-    "outcome": "fatal",
-    "source": {
-      "name": "État de Vaud (Ministère public)",
-      "url": "https://www.vd.ch/actualites/actualite/news/26389-accident-de-travail-mortel-a-chavannes-pres-renens",
-      "lang": "fr"
-    },
-    "title": {
-      "de": "Arbeiter stürzt 9 m in einen Technikschacht",
-      "fr": "Un ouvrier chute de 9 m dans un vide technique",
-      "it": "Un operaio cade per 9 m in un vano tecnico",
-      "en": "Worker falls 9 m into a service void"
-    },
-    "facts": {
-      "activity": {
-        "de": "Reinigungsarbeiten im 1. Stock eines Neubaus",
-        "fr": "Nettoyage au 1er étage d’un bâtiment en construction",
-        "it": "Pulizie al 1° piano di un edificio in costruzione",
-        "en": "Cleaning on the 1st floor of a building under construction"
-      },
-      "what": {
-        "de": "Bei Reinigungsarbeiten in einem Rohbau stürzte ein 50-jähriger Arbeiter rund 9 m tief bis ins Untergeschoss, in den sogenannten Technikschacht.",
-        "fr": "En effectuant des nettoyages dans un bâtiment en construction, un ouvrier de 50 ans a chuté de 9 m jusqu’au sous-sol, dans le vide technique.",
-        "it": "Durante pulizie in un edificio in costruzione, un operaio di 50 anni è caduto per 9 m fino al piano interrato, nel vano tecnico.",
-        "en": "While cleaning in a building under construction, a 50-year-old worker fell about 9 m down to the basement service void."
-      },
-      "equipment": {
-        "de": "Bodenöffnung / Schacht",
-        "fr": "Ouverture dans le sol / vide technique",
-        "it": "Apertura nel pavimento / vano tecnico",
-        "en": "Floor opening / service void"
-      },
-      "injuries": {
-        "de": "Tödlich",
-        "fr": "Mortel",
-        "it": "Mortale",
-        "en": "Fatal"
-      },
-      "emergency": {
-        "de": "Gendarmerie, Polizei, Suva, Ambulanz, SMUR, GRIMP, Care-Team",
-        "fr": "Gendarmerie, police, Suva, ambulance, SMUR, GRIMP, soutien psychologique",
-        "it": "Gendarmeria, polizia, Suva, ambulanza, SMUR, GRIMP, supporto psicologico",
-        "en": "Gendarmerie, police, Suva, ambulance, SMUR, rope rescue, crisis support"
-      },
-      "investigation": {
-        "de": "Strafuntersuchung der Staatsanwaltschaft VD",
-        "fr": "Instruction pénale du Ministère public vaudois",
-        "it": "Inchiesta penale del Ministero pubblico vodese",
-        "en": "Criminal investigation by Vaud prosecutor"
-      }
-    },
-    "lesson": {
-      "de": "Boden- und Schachtöffnungen sind durchbruchsicher abzudecken und zu befestigen oder mit Seitenschutz zu sichern – besonders für Nachfolgegewerke wie Reinigung, die den Bau weniger gut kennen.",
-      "fr": "Les ouvertures dans les sols doivent être couvertes et fixées de façon résistante ou protégées par un garde-corps – surtout pour les corps de métier suivants, comme le nettoyage.",
-      "it": "Le aperture nei pavimenti vanno coperte in modo resistente e fissate o protette con parapetti – soprattutto per le ditte che arrivano dopo, come le pulizie.",
-      "en": "Floor and shaft openings must be covered with secured, load-bearing covers or guarded – especially for later trades such as cleaners who know the site less well."
-    },
-    "caseId": "case-2026-06-15-vd-chavannes-chantier"
+  "caseId": "case-2026-10-10-vs-mund-holzerei"
+ },
+ {
+  "id": "2026-10-06-be-ipsach-kran",
+  "date": "2026-10-06",
+  "dateType": "event",
+  "canton": "BE",
+  "place": "Ipsach",
+  "industry": "construction",
+  "hazard": "crane",
+  "outcome": "property",
+  "source": {
+   "name": "polizeinews.ch",
+   "url": "https://www.polizeinews.ch/2026/10/06/schwerer-unfall-auf-baustelle-arbeitskran-knickt-ein-und-stuerzt-auf-gebaeude-und-bahnlinie/",
+   "lang": "de"
   },
-  {
-    "id": "2026-10-22-ti-paradiso-ponteggio",
-    "date": "2026-10-22",
-    "dateType": "event",
-    "canton": "TI",
-    "place": "Paradiso",
-    "industry": "construction",
-    "hazard": "fall",
-    "outcome": "fatal",
-    "source": {
-      "name": "RSI",
-      "url": "https://www.rsi.ch/info/ticino-grigioni-e-insubria/Paradiso-%C3%A8-morto-l%E2%80%99uomo-precipitato-da-un%E2%80%99impalcatura--4185560.html",
-      "lang": "it"
-    },
-    "title": {
-      "de": "Architekt stürzt tödlich von Baugerüst",
-      "fr": "Un architecte fait une chute mortelle d’un échafaudage",
-      "it": "Architetto muore cadendo da un ponteggio",
-      "en": "Architect killed in fall from scaffolding"
-    },
-    "facts": {
-      "activity": {
-        "de": "Aufenthalt auf dem Gerüst einer Umbaustelle",
-        "fr": "Présence sur l’échafaudage d’un chantier de rénovation",
-        "it": "Presenza sul ponteggio di un cantiere di ristrutturazione",
-        "en": "On the scaffolding of a renovation site"
-      },
-      "what": {
-        "de": "Ein 52-jähriger Architekt stürzte auf einer Umbaustelle mehrere Meter von einem Gerüst. Die Ursache ist noch unklar.",
-        "fr": "Un architecte de 52 ans a chuté de plusieurs mètres d’un échafaudage sur un chantier de rénovation. La cause n’est pas encore connue.",
-        "it": "Un architetto di 52 anni è caduto per diversi metri da un ponteggio in un cantiere di ristrutturazione. La causa non è ancora nota.",
-        "en": "A 52-year-old architect fell several metres from scaffolding on a renovation site. The cause is not yet known."
-      },
-      "equipment": {
-        "de": "Baugerüst",
-        "fr": "Échafaudage",
-        "it": "Ponteggio",
-        "en": "Scaffolding"
-      },
-      "injuries": {
-        "de": "Tödlich",
-        "fr": "Mortel",
-        "it": "Mortale",
-        "en": "Fatal"
-      },
-      "emergency": {
-        "de": "Croce Verde Lugano, Reanimation erfolglos; Kantons- und Gemeindepolizei",
-        "fr": "Croce Verde Lugano, réanimation sans succès; police cantonale et communale",
-        "it": "Croce Verde Lugano, rianimazione senza esito; polizia cantonale e comunale",
-        "en": "Croce Verde Lugano, resuscitation failed; cantonal and municipal police"
-      },
-      "investigation": {
-        "de": "Ursache wird abgeklärt",
-        "fr": "Cause en cours d’investigation",
-        "it": "Causa in fase di accertamento",
-        "en": "Cause under investigation"
-      }
-    },
-    "lesson": {
-      "de": "Gerüste schützen nur, wenn sie vollständig sind: Seitenschutz, Beläge und Zugänge täglich prüfen. Auch Planer und Bauleitung gehören bei Begehungen zum geschützten Personenkreis.",
-      "fr": "Un échafaudage ne protège que s’il est complet: contrôler chaque jour garde-corps, planchers et accès. Architectes et direction des travaux doivent aussi être protégés lors des visites.",
-      "it": "Un ponteggio protegge solo se completo: controllare ogni giorno parapetti, impalcati e accessi. Anche progettisti e direzione lavori vanno protetti durante i sopralluoghi.",
-      "en": "Scaffolding only protects when complete: check guardrails, decking and access daily. Designers and site managers on inspections need the same protection."
-    },
-    "caseId": "case-2026-10-22-ti-paradiso-ponteggio"
+  "title": {
+   "de": "Baukran knickt ein und fällt auf Haus, Bahn und Strasse",
+   "fr": "Une grue de chantier plie et tombe sur une maison, une voie ferrée et une route",
+   "it": "Una gru di cantiere si piega e cade su un edificio, una ferrovia e una strada",
+   "en": "Site crane buckles and falls onto building, railway and road"
   },
-  {
-    "id": "2026-06-26-vs-champery-gaz",
-    "date": "2026-06-26",
-    "dateType": "event",
-    "canton": "VS",
-    "place": "Champéry",
-    "industry": "industry",
-    "hazard": "hazmat",
-    "outcome": "fatal",
-    "source": {
-      "name": "Police cantonale valaisanne",
-      "url": "https://www.policevalais.ch/communiques-pour-les-medias/champery-un-accident-de-travail-fait-une-victime/",
-      "lang": "fr"
-    },
-    "title": {
-      "de": "Glockenguss: Gase beim Metallschmelzen – ein Toter",
-      "fr": "Fonte d’une cloche: gaz lors de la fusion du métal – un mort",
-      "it": "Fusione di una campana: gas durante la fusione del metallo – un morto",
-      "en": "Bell casting: fumes from molten metal – one dead"
-    },
-    "facts": {
-      "activity": {
-        "de": "Handwerkliche Herstellung einer Glocke in einer Werkstatt",
-        "fr": "Fabrication artisanale d’une cloche dans un atelier",
-        "it": "Fabbricazione artigianale di una campana in un laboratorio",
-        "en": "Hand-casting a bell in a workshop"
-      },
-      "what": {
-        "de": "Zwei Männer wurden beim Schmelzen des Metalls aus noch ungeklärtem Grund Gasen ausgesetzt. Sie verliessen die Werkstatt selbst und alarmierten die Rettung; einer brach danach zusammen und starb vor Ort.",
-        "fr": "Deux hommes ont été exposés à des gaz lors de la fusion du métal, pour une raison encore inconnue. Ils sont sortis seuls de l’atelier et ont alerté les secours; l’un a ensuite fait un malaise et est décédé sur place.",
-        "it": "Due uomini sono stati esposti a gas durante la fusione del metallo, per motivi ancora ignoti. Sono usciti da soli dal laboratorio e hanno dato l’allarme; uno ha poi avuto un malore ed è morto sul posto.",
-        "en": "Two men were exposed to fumes while melting metal, for reasons not yet known. They left the workshop on their own and called for help; one then collapsed and died at the scene."
-      },
-      "equipment": {
-        "de": "Metallschmelze (Gase)",
-        "fr": "Fusion de métal (gaz)",
-        "it": "Fusione di metallo (gas)",
-        "en": "Molten metal (fumes)"
-      },
-      "injuries": {
-        "de": "1 Toter (63), 1 Verletzter (64)",
-        "fr": "1 mort (63 ans), 1 blessé (64 ans)",
-        "it": "1 morto (63 anni), 1 ferito (64 anni)",
-        "en": "1 dead (63), 1 injured (64)"
-      },
-      "emergency": {
-        "de": "Reanimation erfolglos; Verletzter per Helikopter ins Universitätsspital Genf",
-        "fr": "Réanimation sans succès; blessé héliporté aux HUG",
-        "it": "Rianimazione senza successo; ferito elitrasportato agli HUG",
-        "en": "Resuscitation failed; injured man flown to Geneva University Hospitals"
-      },
-      "investigation": {
-        "de": "Strafuntersuchung der Staatsanwaltschaft eröffnet",
-        "fr": "Instruction ouverte par le Ministère public",
-        "it": "Istruzione aperta dal Ministero pubblico",
-        "en": "Criminal investigation opened by the prosecutor"
-      }
-    },
-    "lesson": {
-      "de": "Beim Schmelzen von Metall entstehen giftige Dämpfe: nur mit wirksamer Absaugung oder im Freien, Gaswarner und zweiter Fluchtweg.",
-      "fr": "La fusion de métal dégage des fumées toxiques: aspiration efficace ou plein air, détecteur de gaz et seconde issue.",
-      "it": "La fusione di metallo produce fumi tossici: aspirazione efficace o all’aperto, rilevatore di gas e seconda via di fuga.",
-      "en": "Melting metal gives off toxic fumes: use effective extraction or work outdoors, a gas detector and a second exit."
-    },
-    "caseId": "case-2026-06-26-vs-champery-gaz"
+  "facts": {
+   "activity": null,
+   "what": {
+    "de": "Auf einer Baustelle knickte ein Kran aus ungeklärten Gründen ein. Er fiel auf ein Nachbargebäude, eine Bahnlinie und die Hauptstrasse. Bahn und Strasse wurden gesperrt.",
+    "fr": "Sur un chantier, une grue a plié pour une raison inconnue. Elle est tombée sur un bâtiment voisin, une voie ferrée et la route principale, qui ont été fermées.",
+    "it": "In un cantiere una gru si è piegata per motivi ignoti, cadendo su un edificio vicino, una linea ferroviaria e la strada principale, poi chiuse.",
+    "en": "A crane on a building site buckled for unknown reasons and fell onto a neighbouring building, a railway line and the main road, which were closed."
+   },
+   "equipment": {
+    "de": "Baukran",
+    "fr": "Grue de chantier",
+    "it": "Gru di cantiere",
+    "en": "Construction crane"
+   },
+   "injuries": {
+    "de": "Gemäss Polizei keine Verletzten; Sachschaden",
+    "fr": "Aucun blessé selon la police; dégâts matériels",
+    "it": "Nessun ferito secondo la polizia; danni materiali",
+    "en": "No injuries according to police; property damage"
+   },
+   "emergency": null,
+   "investigation": {
+    "de": "Kantonspolizei BE klärt den Hergang ab.",
+    "fr": "La police cantonale (BE) enquête sur les circonstances.",
+    "it": "La polizia cantonale (BE) indaga sulla dinamica.",
+    "en": "Cantonal police (BE) investigating."
+   }
   },
-  {
-    "id": "2025-02-04-vd-blonay-foreuse",
-    "date": "2025-02-04",
-    "dateType": "event",
-    "canton": "VD",
-    "place": "Blonay",
-    "industry": "construction",
-    "hazard": "machinery",
-    "outcome": "fatal",
-    "source": {
-      "name": "20 minutes",
-      "url": "https://www.20min.ch/fr/story/vaud-heurte-par-une-foreuse-un-ouvrier-decede-a-blonay-103274385",
-      "lang": "fr"
-    },
-    "title": {
-      "de": "Bohrgerät kippt am Hang: Arbeiter (26) tödlich getroffen",
-      "fr": "Une foreuse bascule dans une pente: ouvrier de 26 ans tué",
-      "it": "Una trivella si ribalta in pendio: operaio di 26 anni ucciso",
-      "en": "Drilling rig tips on slope: worker (26) killed"
-    },
-    "facts": {
-      "activity": {
-        "de": "Arbeit mit einem Raupen-Bohrgerät auf einer Baustelle",
-        "fr": "Travail avec une foreuse sur chenilles sur un chantier",
-        "it": "Lavoro con una trivella cingolata in cantiere",
-        "en": "Working with a tracked drilling rig on a site"
-      },
-      "what": {
-        "de": "Ein Bohrgerät auf Raupen kippte aus ungeklärten Gründen am Hang. Der Mast traf einen Arbeiter.",
-        "fr": "Une foreuse sur chenilles a basculé dans une pente pour des raisons indéterminées. Son mât a heurté un ouvrier.",
-        "it": "Una trivella cingolata si è ribaltata in pendio per motivi non chiariti. Il montante ha colpito un operaio.",
-        "en": "A tracked drilling rig tipped over on a slope for unknown reasons. Its mast struck a worker."
-      },
-      "equipment": {
-        "de": "Raupen-Bohrgerät (Mast)",
-        "fr": "Foreuse sur chenilles (mât)",
-        "it": "Trivella cingolata (montante)",
-        "en": "Tracked drilling rig (mast)"
-      },
-      "injuries": {
-        "de": "Tödlich",
-        "fr": "Mortel",
-        "it": "Mortale",
-        "en": "Fatal"
-      },
-      "emergency": {
-        "de": "Gendarmerie, Ambulanz, Feuerwehr, Suva und Care-Team vor Ort",
-        "fr": "Gendarmerie, ambulance, pompiers, Suva et équipe de soutien d’urgence",
-        "it": "Gendarmeria, ambulanza, pompieri, Suva e team di sostegno",
-        "en": "Police, ambulance, fire service, Suva and support team on site"
-      },
-      "investigation": {
-        "de": "Strafuntersuchung der Staatsanwaltschaft eröffnet",
-        "fr": "Instruction ouverte par le Ministère public",
-        "it": "Istruzione aperta dal Ministero pubblico",
-        "en": "Criminal investigation opened by the prosecutor"
-      }
-    },
-    "lesson": {
-      "de": "Bohrgeräte am Hang: Standsicherheit vorab prüfen, Mast nur auf tragfähigem, ebenem Grund aufstellen – und niemand im Kippbereich.",
-      "fr": "Foreuse en pente: vérifier la stabilité avant, mât levé seulement sur sol porteur et plan – personne dans la zone de basculement.",
-      "it": "Trivelle in pendio: verificare prima la stabilità, montante alzato solo su terreno portante e piano – nessuno nella zona di ribaltamento.",
-      "en": "Rigs on slopes: check stability first, raise the mast only on firm level ground – nobody in the tip-over zone."
-    },
-    "caseId": "case-2025-02-04-vd-blonay-foreuse"
+  "lesson": {
+   "de": "Ein Kranunfall ohne Verletzte ist ein Beinahe-Unfall mit grossem Lernpotenzial. Standsicherheit, Untergrund, Montage und Windgrenzen gehören vor jedem Einsatz geprüft und dokumentiert.",
+   "fr": "Une chute de grue sans blessé est un quasi-accident riche d’enseignements. Stabilité, sol, montage et limites de vent doivent être vérifiés et documentés avant chaque utilisation.",
+   "it": "Il crollo di una gru senza feriti è un quasi-incidente da cui imparare molto. Stabilità, terreno, montaggio e limiti di vento vanno verificati e documentati prima dell’uso.",
+   "en": "A crane collapse without injuries is a near miss with a lot to learn from. Stability, ground, erection and wind limits must be checked and documented before use."
   },
-  {
-    "id": "2026-03-16-fr-le-mouret-poteau",
-    "date": "2026-03-16",
-    "dateType": "event",
-    "canton": "FR",
-    "place": "Le Mouret",
-    "industry": "energy",
-    "hazard": "crane",
-    "outcome": "injured",
-    "source": {
-      "name": "Police cantonale Fribourg",
-      "url": "https://www.fr.ch/dsjs/pol/actualites/accident-de-travail-avec-une-personne-blessee-a-le-mouret",
-      "lang": "fr"
-    },
-    "title": {
-      "de": "Strommast fällt auf Kran: Arbeiter erleidet Stromschlag",
-      "fr": "Un poteau électrique tombe sur une grue: ouvrier électrocuté",
-      "it": "Un palo elettrico cade su una gru: operaio folgorato",
-      "en": "Power pole falls on crane: worker electrocuted"
-    },
-    "facts": {
-      "activity": {
-        "de": "Unterhaltsarbeiten an einer Stromleitung in einem Feld",
-        "fr": "Travaux d’entretien sur une ligne électrique dans un champ",
-        "it": "Lavori di manutenzione su una linea elettrica in un campo",
-        "en": "Maintenance on a power line in a field"
-      },
-      "what": {
-        "de": "Aus ungeklärtem Grund fiel ein Strommast auf einen Kran, den ein 49-jähriger Arbeiter bediente. Er erlitt einen Stromschlag.",
-        "fr": "Pour une raison inconnue, un poteau électrique est tombé sur une grue manœuvrée par un ouvrier de 49 ans, qui a été électrocuté.",
-        "it": "Per motivi ignoti un palo elettrico è caduto su una gru manovrata da un operaio di 49 anni, rimasto folgorato.",
-        "en": "For unknown reasons a power pole fell onto a crane operated by a 49-year-old worker, who was electrocuted."
-      },
-      "equipment": {
-        "de": "Kran, Strommast / Stromleitung",
-        "fr": "Grue, poteau / ligne électrique",
-        "it": "Gru, palo / linea elettrica",
-        "en": "Crane, power pole / line"
-      },
-      "injuries": {
-        "de": "Verletzt, mit Helikopter ins Spital (Schwere nicht berichtet)",
-        "fr": "Blessé, héliporté (gravité non rapportée)",
-        "it": "Ferito, elitrasportato (gravità non riportata)",
-        "en": "Injured, airlifted (severity not reported)"
-      },
-      "emergency": {
-        "de": "Rega; Care-Team für Mitarbeitende",
-        "fr": "Rega; équipe psychosociale (EMUPS) pour les collègues",
-        "it": "Rega; team psicosociale per i colleghi",
-        "en": "Rega air rescue; psychosocial team for co-workers"
-      },
-      "investigation": {
-        "de": "Strafuntersuchung der Staatsanwaltschaft eröffnet",
-        "fr": "Instruction ouverte par le Ministère public",
-        "it": "Istruzione aperta dal Ministero pubblico",
-        "en": "Criminal investigation opened by the prosecutor"
-      }
-    },
-    "lesson": {
-      "de": "Vor Arbeiten an Freileitungen: freischalten, erden, Masten gegen Umfallen sichern – und Kranausleger aus dem Fallbereich.",
-      "fr": "Avant de travailler sur une ligne: mise hors tension, mise à terre, poteau assuré contre la chute – flèche de grue hors de la zone de chute.",
-      "it": "Prima di lavorare su una linea: disinserire, mettere a terra, assicurare il palo – braccio della gru fuori dalla zona di caduta.",
-      "en": "Before line work: de-energise, earth, secure poles against falling – keep crane booms out of the fall zone."
-    },
-    "caseId": "case-2026-03-16-fr-le-mouret-poteau"
+  "caseId": "case-2026-10-06-be-ipsach-kran"
+ },
+ {
+  "id": "2026-10-01-gr-chur-schalung",
+  "date": "2026-10-01",
+  "dateType": "event",
+  "canton": "GR",
+  "place": "Chur",
+  "industry": "construction",
+  "hazard": "struck",
+  "outcome": "injured",
+  "source": {
+   "name": "polizeinews.ch",
+   "url": "https://www.polizeinews.ch/2026/10/02/100-kilo-schweres-schalungselement-kippt-um-arbeiter-wird-auf-baustelle-eingeklemmt/",
+   "lang": "de"
+  },
+  "title": {
+   "de": "Schalungselement kippt mit Kranführer um",
+   "fr": "Un élément de coffrage bascule avec le grutier",
+   "it": "Un elemento di cassaforma si ribalta con il gruista",
+   "en": "Formwork panel tips over with crane operator"
+  },
+  "facts": {
+   "activity": {
+    "de": "Ausschalen einer Fundamentmauer; Anschlagen eines Eckschalungselements von einer Leiter aus",
+    "fr": "Décoffrage d’un mur de fondation; élingage d’un élément d’angle depuis une échelle",
+    "it": "Disarmo di un muro di fondazione; imbracatura di un elemento d’angolo da una scala",
+    "en": "Stripping formwork from a foundation wall; slinging a corner panel from a ladder"
+   },
+   "what": {
+    "de": "Der Kranführer wollte ein über 100 kg schweres Eckschalungselement von einer Leiter aus anschlagen. Das Element kippte mitsamt dem Mann um. Er wurde zwischen Element und Böschung eingeklemmt.",
+    "fr": "Le grutier voulait élinguer depuis une échelle un élément d’angle de plus de 100 kg. L’élément a basculé avec lui et l’a coincé contre un talus.",
+    "it": "Il gruista voleva imbracare da una scala un elemento d’angolo di oltre 100 kg. L’elemento si è ribaltato con lui, schiacciandolo contro una scarpata.",
+    "en": "The crane operator tried to sling a corner panel of over 100 kg while standing on a ladder. The panel tipped over with him and pinned him against an embankment."
+   },
+   "equipment": {
+    "de": "Schalungselement (>100 kg), Leiter, Kran",
+    "fr": "Élément de coffrage (>100 kg), échelle, grue",
+    "it": "Elemento di cassaforma (>100 kg), scala, gru",
+    "en": "Formwork panel (>100 kg), ladder, crane"
+   },
+   "injuries": {
+    "de": "Verletzungen im Beckenbereich",
+    "fr": "Blessures au bassin",
+    "it": "Ferite al bacino",
+    "en": "Pelvic injuries"
+   },
+   "emergency": {
+    "de": "Rettung Chur, Kantonsspital Graubünden",
+    "fr": "Sauvetage de Coire, hôpital cantonal des Grisons",
+    "it": "Soccorso di Coira, ospedale cantonale dei Grigioni",
+    "en": "Chur rescue service, cantonal hospital"
+   },
+   "investigation": {
+    "de": "Kantonspolizei GR klärt den Hergang ab.",
+    "fr": "La police cantonale (GR) enquête sur les circonstances.",
+    "it": "La polizia cantonale (GR) indaga sulla dinamica.",
+    "en": "Cantonal police (GR) investigating."
+   }
+  },
+  "lesson": {
+   "de": "Schalungselemente erst lösen, wenn sie am Kran hängen oder gegen Kippen abgestützt sind. Anschlagen von einer Leiter aus ist heikel – besser eine Arbeitsbühne oder Anschlagpunkte, die vom Boden erreichbar sind.",
+   "fr": "Ne détacher un élément de coffrage que s’il est accroché à la grue ou étayé contre le basculement. Élinguer depuis une échelle est risqué: préférer une plateforme ou des points d’accroche accessibles du sol.",
+   "it": "Sganciare gli elementi di cassaforma solo se appesi alla gru o puntellati contro il ribaltamento. Imbracare da una scala è rischioso: meglio una piattaforma o punti d’aggancio raggiungibili da terra.",
+   "en": "Only release formwork panels once they hang on the crane or are propped against tipping. Slinging from a ladder is risky; use a platform or lifting points reachable from the ground."
+  },
+  "caseId": "case-2026-10-01-gr-chur-schalung"
+ },
+ {
+  "id": "2026-09-28-tg-eschlikon-dach",
+  "date": "2026-09-28",
+  "dateType": "event",
+  "canton": "TG",
+  "place": "Eschlikon",
+  "industry": "construction",
+  "hazard": "fall",
+  "outcome": "serious",
+  "source": {
+   "name": "polizeinews.ch",
+   "url": "https://www.polizeinews.ch/2026/09/28/schwerer-arbeitsunfall-auf-dach-36-jaehriger-stuerzt-zu-boden-und-wird-mit-rega-ausgeflogen/",
+   "lang": "de"
+  },
+  "title": {
+   "de": "Arbeiter bricht durch ein Dach",
+   "fr": "Un ouvrier passe à travers un toit",
+   "it": "Un operaio sfonda un tetto",
+   "en": "Worker falls through a roof"
+  },
+  "facts": {
+   "activity": {
+    "de": "Bauarbeiten auf dem Dach einer Gewerbeliegenschaft (drei Arbeiter)",
+    "fr": "Travaux sur le toit d’un bâtiment commercial (trois ouvriers)",
+    "it": "Lavori sul tetto di un edificio commerciale (tre operai)",
+    "en": "Construction work on a commercial building roof (three workers)"
+   },
+   "what": {
+    "de": "Drei Männer arbeiteten auf einem Gewerbedach. Ein 36-Jähriger stürzte durch das Dach hindurch zu Boden.",
+    "fr": "Trois hommes travaillaient sur le toit d’un bâtiment commercial. L’un d’eux, 36 ans, a traversé la toiture et chuté au sol.",
+    "it": "Tre uomini lavoravano sul tetto di un edificio commerciale. Uno di loro, 36 anni, ha sfondato la copertura ed è caduto a terra.",
+    "en": "Three men were working on a commercial roof. One, aged 36, fell through the roof to the ground."
+   },
+   "equipment": {
+    "de": "Dachfläche (Durchsturz)",
+    "fr": "Toiture (chute à travers)",
+    "it": "Copertura (sfondamento)",
+    "en": "Roof surface (fall-through)"
+   },
+   "injuries": {
+    "de": "Schwer verletzt",
+    "fr": "Grièvement blessé",
+    "it": "Ferito gravemente",
+    "en": "Seriously injured"
+   },
+   "emergency": {
+    "de": "Rettungsdienst, Rega-Flug ins Spital",
+    "fr": "Ambulance, transport par la Rega",
+    "it": "Ambulanza, trasporto con la Rega",
+    "en": "Ambulance, Rega airlift"
+   },
+   "investigation": {
+    "de": "Kantonspolizei TG klärt den Hergang ab.",
+    "fr": "La police cantonale (TG) enquête sur les circonstances.",
+    "it": "La polizia cantonale (TG) indaga sulla dinamica.",
+    "en": "Cantonal police (TG) investigating."
+   }
+  },
+  "lesson": {
+   "de": "Nicht jedes Dach ist begehbar: Lichtbänder, Faserzementplatten und alte Eindeckungen brechen ohne Vorwarnung. Vor Arbeitsbeginn Durchsturzstellen abdecken oder Auffangnetze montieren.",
+   "fr": "Tous les toits ne sont pas praticables: bandes lumineuses, plaques en fibrociment et anciennes couvertures cèdent sans prévenir. Couvrir les zones fragiles ou poser des filets avant de commencer.",
+   "it": "Non tutti i tetti sono calpestabili: lucernari, lastre in fibrocemento e coperture vecchie cedono senza preavviso. Coprire i punti fragili o montare reti prima di iniziare.",
+   "en": "Not every roof can bear a person: skylights, fibre-cement sheets and old coverings give way without warning. Cover fragile areas or install safety nets before work starts."
+  },
+  "caseId": "case-2026-09-28-tg-eschlikon-dach"
+ },
+ {
+  "id": "2026-09-28-sg-pfaefers-abladen",
+  "date": "2026-09-28",
+  "dateType": "event",
+  "canton": "SG",
+  "place": "Pfäfers",
+  "industry": "construction",
+  "hazard": "crane",
+  "outcome": "fatal",
+  "source": {
+   "name": "polizeinews.ch",
+   "url": "https://www.polizeinews.ch/2026/09/28/tragischer-baustellenunfall-29-jaehriger-stirbt-bei-abladearbeiten/",
+   "lang": "de"
+  },
+  "title": {
+   "de": "Tödlicher Unfall beim Abladen von Stahlteilen mit Bagger",
+   "fr": "Accident mortel lors du déchargement de pièces d’acier avec une pelle",
+   "it": "Infortunio mortale scaricando pezzi d’acciaio con un escavatore",
+   "en": "Fatal accident unloading steel parts with an excavator"
+  },
+  "facts": {
+   "activity": {
+    "de": "Gartenbauarbeiten; Abladen von rund 6 m langen Flachstahlteilen mit einem Bagger von einem Anhänger",
+    "fr": "Aménagement paysager; déchargement à la pelle de pièces d’acier plat d’environ 6 m depuis une remorque",
+    "it": "Lavori di giardinaggio; scarico con escavatore di barre d’acciaio piatte di circa 6 m da un rimorchio",
+    "en": "Landscaping; unloading flat steel parts about 6 m long from a trailer with an excavator"
+   },
+   "what": {
+    "de": "Zwei Mitarbeiter einer Baufirma luden mit einem Bagger lange Flachstahlteile ab. Einer bediente den Bagger, der 29-jährige Kollege stand beim Anhänger. Dabei wurde der 29-Jährige tödlich verletzt.",
+    "fr": "Deux employés d’une entreprise de construction déchargeaient de longues pièces d’acier à la pelle mécanique. L’un conduisait l’engin, son collègue de 29 ans se trouvait près de la remorque et a été mortellement blessé.",
+    "it": "Due dipendenti di un’impresa edile scaricavano lunghi pezzi d’acciaio con un escavatore. Uno lo manovrava, il collega di 29 anni si trovava vicino al rimorchio ed è rimasto ucciso.",
+    "en": "Two construction workers were unloading long steel parts with an excavator. One operated the machine; his 29-year-old colleague stood by the trailer and was fatally injured."
+   },
+   "equipment": {
+    "de": "Bagger, Flachstahlteile, Anhänger",
+    "fr": "Pelle mécanique, pièces d’acier plat, remorque",
+    "it": "Escavatore, barre d’acciaio, rimorchio",
+    "en": "Excavator, flat steel parts, trailer"
+   },
+   "injuries": {
+    "de": "Tödlich",
+    "fr": "Mortel",
+    "it": "Mortale",
+    "en": "Fatal"
+   },
+   "emergency": {
+    "de": "Reanimation vor Ort erfolglos",
+    "fr": "Réanimation sur place sans succès",
+    "it": "Rianimazione sul posto senza esito",
+    "en": "Resuscitation on site unsuccessful"
+   },
+   "investigation": {
+    "de": "Kantonspolizei SG klärt den Hergang ab.",
+    "fr": "La police cantonale (SG) enquête sur les circonstances.",
+    "it": "La polizia cantonale (SG) indaga sulla dinamica.",
+    "en": "Cantonal police (SG) investigating."
+   }
+  },
+  "lesson": {
+   "de": "Wer anschlägt oder einweist, steht nie im Schwenk- oder Fallbereich der Last. Bagger als Hebegerät nur mit Lasthaken, Zulassung und Sichtkontakt zwischen Fahrer und Einweiser einsetzen.",
+   "fr": "Celui qui élingue ou guide ne se tient jamais dans la zone de rotation ou de chute de la charge. Une pelle ne sert d’engin de levage qu’avec crochet, autorisation et contact visuel avec le guide.",
+   "it": "Chi imbraca o guida non sta mai nella zona di rotazione o caduta del carico. L’escavatore va usato per sollevare solo con gancio, omologazione e contatto visivo con chi guida.",
+   "en": "Whoever slings or signals never stands in the swing or drop zone of the load. Use an excavator for lifting only with a load hook, approval and eye contact between operator and signaller."
+  },
+  "caseId": "case-2026-09-28-sg-pfaefers-abladen"
+ },
+ {
+  "id": "2026-09-24-bl-reinach-labor",
+  "date": "2026-09-24",
+  "dateType": "event",
+  "canton": "BL",
+  "place": "Reinach",
+  "industry": "chemicals",
+  "hazard": "hazmat",
+  "outcome": "injured",
+  "source": {
+   "name": "polizeinews.ch",
+   "url": "https://www.polizeinews.ch/2026/09/25/zwischenfall-bei-probenentnahme-im-labor-drei-verletzte/",
+   "lang": "de"
+  },
+  "title": {
+   "de": "Kontamination bei Probenahme im Labor",
+   "fr": "Contamination lors d’un prélèvement en laboratoire",
+   "it": "Contaminazione durante un prelievo in laboratorio",
+   "en": "Contamination during sampling in a laboratory"
+  },
+  "facts": {
+   "activity": {
+    "de": "Probenahme in einer Kapelle (Abzug) im Labor",
+    "fr": "Prélèvement sous une hotte de laboratoire",
+    "it": "Prelievo sotto una cappa di laboratorio",
+    "en": "Sampling in a fume cupboard"
+   },
+   "what": {
+    "de": "Bei einer Probenahme in einer Laborkapelle kam es zu einer noch ungeklärten Kontamination der anwesenden Personen. Messungen der Chemiewehr fanden danach keine gefährlichen Stoffe.",
+    "fr": "Lors d’un prélèvement sous une hotte, les personnes présentes ont été contaminées pour une raison encore inconnue. Les mesures des pompiers chimiques n’ont ensuite détecté aucune substance dangereuse.",
+    "it": "Durante un prelievo sotto una cappa, le persone presenti sono state contaminate per motivi ancora ignoti. Le misurazioni dei pompieri chimici non hanno poi rilevato sostanze pericolose.",
+    "en": "During sampling in a fume cupboard the people present were contaminated for reasons still unknown. Chemical response team measurements afterwards found no hazardous substances."
+   },
+   "equipment": {
+    "de": "Laborkapelle, unbekannter Stoff",
+    "fr": "Hotte de laboratoire, substance inconnue",
+    "it": "Cappa di laboratorio, sostanza ignota",
+    "en": "Fume cupboard, unknown substance"
+   },
+   "injuries": {
+    "de": "Drei Verletzte, eine weitere Person zur Abklärung im Spital",
+    "fr": "Trois blessés, une autre personne examinée à l’hôpital",
+    "it": "Tre feriti, un’altra persona controllata in ospedale",
+    "en": "Three injured, one more person checked at hospital"
+   },
+   "emergency": {
+    "de": "Feuerwehr, Chemiewehr, Rettungsdienst",
+    "fr": "Pompiers, défense chimique, ambulances",
+    "it": "Pompieri, difesa chimica, ambulanze",
+    "en": "Fire brigade, chemical response, ambulances"
+   },
+   "investigation": {
+    "de": "Ursache wird abgeklärt",
+    "fr": "Cause en cours d’investigation",
+    "it": "Causa in fase di accertamento",
+    "en": "Cause under investigation"
+   }
+  },
+  "lesson": {
+   "de": "Auch Routinetätigkeiten wie Probenahmen brauchen eine Gefährdungsbeurteilung, geeignete PSA und eingeübte Notfallabläufe. Ein funktionierender Abzug ist kein Ersatz für das Wissen, was im Gefäss ist.",
+   "fr": "Même un geste routinier comme un prélèvement exige une analyse des risques, des EPI adaptés et des procédures d’urgence exercées. Une hotte ne remplace pas la connaissance du contenu.",
+   "it": "Anche un prelievo di routine richiede valutazione dei rischi, DPI adeguati e procedure d’emergenza esercitate. Una cappa non sostituisce la conoscenza del contenuto.",
+   "en": "Even routine sampling needs a risk assessment, suitable PPE and practised emergency procedures. A fume cupboard is no substitute for knowing what is in the container."
+  },
+  "caseId": "case-2026-09-24-bl-reinach-labor"
+ },
+ {
+  "id": "2026-09-21-tg-buhwil-stapler",
+  "date": "2026-09-21",
+  "dateType": "event",
+  "canton": "TG",
+  "place": "Buhwil",
+  "industry": "logistics",
+  "hazard": "vehicle",
+  "outcome": "fatal",
+  "source": {
+   "name": "polizeinews.ch",
+   "url": "https://www.polizeinews.ch/2026/09/22/unter-gabelstapler-eingeklemmt-38-jaehriger-stirbt-noch-auf-der-unfallstelle/",
+   "lang": "de"
+  },
+  "title": {
+   "de": "Gabelstapler kippt Wiesenbord hinunter – Fahrer tot",
+   "fr": "Un chariot élévateur bascule dans un talus – conducteur tué",
+   "it": "Carrello elevatore si ribalta lungo una scarpata – conducente morto",
+   "en": "Forklift tips down a grass bank – driver killed"
+  },
+  "facts": {
+   "activity": {
+    "de": "Fahrt mit Gabelstapler auf Firmengelände",
+    "fr": "Circulation en chariot élévateur sur le site d’une entreprise",
+    "it": "Guida di un carrello elevatore sul piazzale di un’azienda",
+    "en": "Driving a forklift on company premises"
+   },
+   "what": {
+    "de": "Ein 38-jähriger Arbeiter fuhr frühmorgens mit dem Stapler über ein Firmengelände. Das Fahrzeug kippte eine Wiesenböschung hinunter und begrub den Fahrer unter sich.",
+    "fr": "Tôt le matin, un ouvrier de 38 ans circulait en chariot élévateur sur le site d’une entreprise. L’engin a basculé dans un talus herbeux et l’a coincé dessous.",
+    "it": "Di primo mattino un operaio di 38 anni guidava un carrello elevatore sul piazzale di un’azienda. Il mezzo si è ribaltato lungo una scarpata erbosa schiacciandolo.",
+    "en": "Early in the morning a 38-year-old worker was driving a forklift on company premises. It tipped down a grassy bank and pinned him underneath."
+   },
+   "equipment": {
+    "de": "Gabelstapler",
+    "fr": "Chariot élévateur",
+    "it": "Carrello elevatore",
+    "en": "Forklift"
+   },
+   "injuries": {
+    "de": "Tödlich",
+    "fr": "Mortel",
+    "it": "Mortale",
+    "en": "Fatal"
+   },
+   "emergency": {
+    "de": "Kriminaltechnischer Dienst aufgeboten",
+    "fr": "Service forensique mobilisé",
+    "it": "Servizio scientifico mobilitato",
+    "en": "Forensic unit deployed"
+   },
+   "investigation": {
+    "de": "Kantonspolizei TG mit Staatsanwaltschaft Bischofszell",
+    "fr": "Police cantonale TG avec le Ministère public de Bischofszell",
+    "it": "Polizia cantonale TG con il Ministero pubblico di Bischofszell",
+    "en": "Cantonal police TG with Bischofszell prosecutor"
+   }
+  },
+  "lesson": {
+   "de": "Kippende Stapler töten meist Fahrer, die nicht angegurtet sind und abspringen wollen. Rückhaltesystem benutzen, im Fahrzeug bleiben, Fahrwege mit Abstand zu Böschungen markieren.",
+   "fr": "Les chariots qui basculent tuent surtout des conducteurs non attachés qui tentent de sauter. Utiliser le système de retenue, rester dans la cabine et tracer les voies loin des talus.",
+   "it": "I carrelli che si ribaltano uccidono soprattutto conducenti senza cintura che cercano di saltare. Usare il sistema di ritenuta, restare a bordo e tracciare i percorsi lontano dalle scarpate.",
+   "en": "Tipping forklifts mostly kill unbelted drivers who try to jump clear. Use the restraint, stay in the cab and mark routes well away from banks."
+  },
+  "caseId": "case-2026-09-21-tg-buhwil-stapler"
+ },
+ {
+  "id": "2026-09-16-zh-zuerich-bauaufzug",
+  "date": "2026-09-16",
+  "dateType": "event",
+  "canton": "ZH",
+  "place": "Zürich (Kreis 5)",
+  "industry": "construction",
+  "hazard": "fall",
+  "outcome": "fatal",
+  "source": {
+   "name": "polizeinews.ch",
+   "url": "https://www.polizeinews.ch/2026/09/17/toedlicher-bauunfall-fordert-zweites-opfer-schwer-verletzter-arbeiter-stirbt-im-spital/",
+   "lang": "de"
+  },
+  "title": {
+   "de": "Bauunfall an Fassade fordert zwei Tote",
+   "fr": "Accident sur une façade en rénovation: deux morts",
+   "it": "Incidente su una facciata in ristrutturazione: due morti",
+   "en": "Accident on a facade under renovation kills two"
+  },
+  "facts": {
+   "activity": {
+    "de": "Fassadenarbeiten an einem Gebäude in Renovation",
+    "fr": "Travaux de façade sur un immeuble en rénovation",
+    "it": "Lavori di facciata su uno stabile in ristrutturazione",
+    "en": "Facade work on a building under renovation"
+   },
+   "what": {
+    "de": "Gemäss Medienberichten gab ein am Gerüst montierter Bauaufzug nach, während zwei Arbeiter in der Kabine standen. Ein Arbeiter starb vor Ort, der zweite am Abend im Spital.",
+    "fr": "Selon les médias, un monte-charge fixé à l’échafaudage a cédé alors que deux ouvriers se trouvaient dans la nacelle. L’un est mort sur place, l’autre le soir à l’hôpital.",
+    "it": "Secondo i media, un montacarichi fissato al ponteggio ha ceduto mentre due operai erano nella cabina. Uno è morto sul posto, l’altro la sera in ospedale.",
+    "en": "According to media reports, a hoist attached to the scaffold gave way while two workers were in the car. One died on site, the other in hospital that evening."
+   },
+   "equipment": {
+    "de": "Bauaufzug am Gerüst (gemäss Medien)",
+    "fr": "Monte-charge sur échafaudage (selon les médias)",
+    "it": "Montacarichi su ponteggio (secondo i media)",
+    "en": "Scaffold-mounted hoist (per media)"
+   },
+   "injuries": {
+    "de": "Zwei Tote (57 und 54 Jahre)",
+    "fr": "Deux morts (57 et 54 ans)",
+    "it": "Due morti (57 e 54 anni)",
+    "en": "Two dead (aged 57 and 54)"
+   },
+   "emergency": {
+    "de": "Reanimation vor Ort; ein Verletzter ins Spital",
+    "fr": "Réanimation sur place; un blessé hospitalisé",
+    "it": "Rianimazione sul posto; un ferito in ospedale",
+    "en": "Resuscitation on site; one casualty to hospital"
+   },
+   "investigation": {
+    "de": "Stadtpolizei Zürich mit Staatsanwaltschaft",
+    "fr": "Police municipale de Zurich avec le Ministère public",
+    "it": "Polizia della città di Zurigo con il Ministero pubblico",
+    "en": "Zurich city police with prosecutor"
+   }
+  },
+  "lesson": {
+   "de": "Bauaufzüge sind Maschinen mit Prüfpflicht: Verankerung am Gerüst, Montage nach Herstellerangaben und Abnahme durch eine befähigte Person sind Pflicht – auch bei Umbau und Versetzen.",
+   "fr": "Les monte-charges sont des machines soumises à contrôle: ancrage à l’échafaudage, montage selon le fabricant et réception par une personne compétente, aussi après chaque modification.",
+   "it": "I montacarichi sono macchine soggette a verifica: ancoraggio al ponteggio, montaggio secondo il fabbricante e collaudo da parte di una persona competente, anche dopo ogni modifica.",
+   "en": "Construction hoists are machines subject to inspection: anchorage to the scaffold, installation per the manufacturer and sign-off by a competent person – also after every change."
+  },
+  "extraSources": [
+   {
+    "name": "20 minutes",
+    "url": "https://www.20min.ch/fr/story/zurich-deux-morts-apres-l-effondrement-d-un-monte-charge-de-chantier-103634927",
+    "lang": "fr"
+   }
+  ],
+  "caseId": "case-2026-09-16-zh-zuerich-bauaufzug"
+ },
+ {
+  "id": "2026-09-10-sg-widnau-dach",
+  "date": "2026-09-10",
+  "dateType": "event",
+  "canton": "SG",
+  "place": "Widnau",
+  "industry": "cleaning",
+  "hazard": "fall",
+  "outcome": "serious",
+  "source": {
+   "name": "polizeinews.ch",
+   "url": "https://www.polizeinews.ch/2026/09/11/widnau-sg-schwerer-arbeitsunfall-17-jaehriger-stuerzt-rund-fuenf-meter-vom-dach/",
+   "lang": "de"
+  },
+  "title": {
+   "de": "17-Jähriger stürzt bei Reinigungsarbeiten vom Dach",
+   "fr": "Un jeune de 17 ans chute d’un toit en nettoyant",
+   "it": "Un 17enne cade da un tetto durante lavori di pulizia",
+   "en": "17-year-old falls from roof while cleaning"
+  },
+  "facts": {
+   "activity": {
+    "de": "Reinigungsarbeiten auf einem Dach",
+    "fr": "Travaux de nettoyage sur un toit",
+    "it": "Lavori di pulizia su un tetto",
+    "en": "Cleaning work on a roof"
+   },
+   "what": {
+    "de": "Ein 17-Jähriger reinigte ein Dach und stürzte rund fünf Meter in die Tiefe.",
+    "fr": "Un jeune de 17 ans nettoyait un toit et a chuté d’environ cinq mètres.",
+    "it": "Un ragazzo di 17 anni puliva un tetto ed è caduto da circa cinque metri.",
+    "en": "A 17-year-old was cleaning a roof and fell about five metres."
+   },
+   "equipment": null,
+   "injuries": {
+    "de": "Schwer verletzt",
+    "fr": "Grièvement blessé",
+    "it": "Ferito gravemente",
+    "en": "Seriously injured"
+   },
+   "emergency": {
+    "de": "Rettungsdienst, Transport ins Spital",
+    "fr": "Ambulance, transport à l’hôpital",
+    "it": "Ambulanza, trasporto in ospedale",
+    "en": "Ambulance to hospital"
+   },
+   "investigation": {
+    "de": "Kantonspolizei SG im Auftrag der Staatsanwaltschaft",
+    "fr": "Police cantonale SG sur mandat du Ministère public",
+    "it": "Polizia cantonale SG su incarico del Ministero pubblico",
+    "en": "Cantonal police SG on behalf of prosecutor"
+   }
+  },
+  "lesson": {
+   "de": "Jugendliche dürfen gefährliche Arbeiten nur gemäss Bildungsplan und unter Aufsicht ausführen. Dacharbeiten ohne kollektiven Absturzschutz sind für sie tabu.",
+   "fr": "Les jeunes ne peuvent effectuer des travaux dangereux que selon leur plan de formation et sous surveillance. Travailler sur un toit sans protection collective leur est interdit.",
+   "it": "I giovani possono svolgere lavori pericolosi solo secondo il piano di formazione e sotto sorveglianza. Lavorare su un tetto senza protezione collettiva è per loro escluso.",
+   "en": "Young workers may only do hazardous work under their training plan and supervision. Roof work without collective fall protection is off-limits for them."
+  },
+  "caseId": "case-2026-09-10-sg-widnau-dach"
+ },
+ {
+  "id": "2026-09-09-ti-piotta-ritom",
+  "date": "2026-09-09",
+  "dateType": "event",
+  "canton": "TI",
+  "place": "Piotta (Quinto)",
+  "industry": "energy",
+  "hazard": "explosion",
+  "outcome": "fatal",
+  "source": {
+   "name": "polizeinews.ch",
+   "url": "https://www.polizeinews.ch/2026/09/09/piotta-ti-explosion-in-alter-ritom-zentrale-zwei-arbeiter-sterben-bei-arbeitsunfall/",
+   "lang": "de"
+  },
+  "title": {
+   "de": "Explosion im alten Kraftwerk Ritom – zwei Arbeiter tot",
+   "fr": "Explosion dans l’ancienne centrale du Ritom – deux ouvriers tués",
+   "it": "Esplosione nella vecchia centrale del Ritom – due operai morti",
+   "en": "Explosion at old Ritom power station kills two workers"
+  },
+  "facts": {
+   "activity": {
+    "de": "Arbeiten von zwei Mitarbeitern in der alten Wasserkraftzentrale",
+    "fr": "Travaux de deux employés dans l’ancienne centrale hydroélectrique",
+    "it": "Lavori di due dipendenti nella vecchia centrale idroelettrica",
+    "en": "Two employees working inside the old hydro power station"
+   },
+   "what": {
+    "de": "Gemeldet wurde ein Brand im Innern des Gebäudes. Nach ersten Erkenntnissen kam es zu einer Explosion, von der beide anwesenden Arbeiter betroffen waren. Beide starben.",
+    "fr": "Un incendie à l’intérieur du bâtiment a été signalé. Selon les premiers éléments, une explosion a touché les deux ouvriers présents, qui sont décédés.",
+    "it": "È stato segnalato un incendio all’interno dell’edificio. Secondo una prima ricostruzione, un’esplosione ha coinvolto i due operai presenti, entrambi deceduti.",
+    "en": "A fire inside the building was reported. Initial findings point to an explosion that hit both workers present; both died."
+   },
+   "equipment": {
+    "de": "Anlage der alten Zentrale (Ursache offen)",
+    "fr": "Installation de l’ancienne centrale (cause inconnue)",
+    "it": "Impianto della vecchia centrale (causa ignota)",
+    "en": "Old power station installation (cause unknown)"
+   },
+   "injuries": {
+    "de": "Zwei Tote",
+    "fr": "Deux morts",
+    "it": "Due morti",
+    "en": "Two dead"
+   },
+   "emergency": {
+    "de": "Feuerwehren Biasca, Alta Leventina, Bellinzona; Tre Valli Soccorso; Rega",
+    "fr": "Pompiers de Biasca, Haute-Léventine, Bellinzone; Tre Valli Soccorso; Rega",
+    "it": "Pompieri di Biasca, Alta Leventina, Bellinzona; Tre Valli Soccorso; Rega",
+    "en": "Fire brigades Biasca, Alta Leventina, Bellinzona; Tre Valli Soccorso; Rega"
+   },
+   "investigation": {
+    "de": "Ermittlungen laufen",
+    "fr": "Enquête en cours",
+    "it": "Inchiesta in corso",
+    "en": "Investigation ongoing"
+   }
+  },
+  "lesson": {
+   "de": "Arbeiten in alten oder stillgelegten Anlagen bergen unbekannte Restenergien, Gase und Stoffe. Vor Beginn: Gefährdungsermittlung, Freischalten, Freimessen und eine schriftliche Arbeitsfreigabe.",
+   "fr": "Les installations anciennes ou désaffectées cachent énergies résiduelles, gaz et substances inconnus. Avant de commencer: analyse des dangers, consignation, mesures d’atmosphère et permis de travail écrit.",
+   "it": "Gli impianti vecchi o dismessi nascondono energie residue, gas e sostanze ignote. Prima di iniziare: analisi dei pericoli, messa in sicurezza, misurazioni e permesso di lavoro scritto.",
+   "en": "Old or decommissioned plants hide residual energy, gases and unknown substances. Before work: hazard analysis, isolation, gas testing and a written permit to work."
+  },
+  "caseId": "case-2026-09-09-ti-piotta-ritom"
+ },
+ {
+  "id": "2026-09-08-gr-pragg-jenaz-kran",
+  "date": "2026-09-08",
+  "dateType": "event",
+  "canton": "GR",
+  "place": "Pragg-Jenaz",
+  "industry": "agriculture",
+  "hazard": "crane",
+  "outcome": "serious",
+  "source": {
+   "name": "polizeinews.ch",
+   "url": "https://www.polizeinews.ch/2026/09/09/pragg-jenaz-gr-arbeiter-36-klemmt-hand-bei-kranarbeiten-ein-und-wird-schwer-verletzt/",
+   "lang": "de"
+  },
+  "title": {
+   "de": "Hand in Greifzange eines Ladekrans eingeklemmt",
+   "fr": "Main coincée dans la pince d’une grue de chargement",
+   "it": "Mano schiacciata nella pinza di una gru di carico",
+   "en": "Hand trapped in loader crane grab"
+  },
+  "facts": {
+   "activity": {
+    "de": "Abladen von Siloballen mit Ladekran von einer Lastwagenbrücke",
+    "fr": "Déchargement de balles d’ensilage d’un camion avec une grue de chargement",
+    "it": "Scarico di balle di insilato da un camion con gru di carico",
+    "en": "Unloading silage bales from a truck bed with a loader crane"
+   },
+   "what": {
+    "de": "Ein 36-jähriger Mann lud mit einem Kran Siloballen von einem Lastwagen ab. Dabei geriet seine Hand in den Bereich der Greifzange. Er konnte selbst Hilfe rufen.",
+    "fr": "Un homme de 36 ans déchargeait des balles d’ensilage avec une grue. Sa main s’est retrouvée prise dans la pince. Il a pu alerter lui-même les secours.",
+    "it": "Un uomo di 36 anni scaricava balle di insilato con una gru. La sua mano è rimasta presa nella pinza. Ha potuto chiamare i soccorsi da solo.",
+    "en": "A 36-year-old man was unloading silage bales from a truck with a crane. His hand got caught in the grab. He was able to call for help himself."
+   },
+   "equipment": {
+    "de": "Ladekran mit Greifzange",
+    "fr": "Grue de chargement avec pince",
+    "it": "Gru di carico con pinza",
+    "en": "Loader crane with grab"
+   },
+   "injuries": {
+    "de": "Schwer verletzt (Hand)",
+    "fr": "Grièvement blessé (main)",
+    "it": "Ferito gravemente (mano)",
+    "en": "Seriously injured (hand)"
+   },
+   "emergency": {
+    "de": "Rettungsdienst Schiers, Rega-Flug ins Spital",
+    "fr": "Ambulance de Schiers, transport par la Rega",
+    "it": "Ambulanza di Schiers, trasporto con la Rega",
+    "en": "Schiers ambulance, Rega airlift"
+   },
+   "investigation": {
+    "de": "Kantonspolizei GR klärt den Hergang ab.",
+    "fr": "La police cantonale (GR) enquête sur les circonstances.",
+    "it": "La polizia cantonale (GR) indaga sulla dinamica.",
+    "en": "Cantonal police (GR) investigating."
+   }
+  },
+  "lesson": {
+   "de": "Greifer nie von Hand führen oder richten, solange der Kran bewegt werden kann. Wer allein arbeitet, braucht ein Notfallkonzept – hier konnte der Verletzte zum Glück selbst alarmieren.",
+   "fr": "Ne jamais guider ou ajuster une pince à la main tant que la grue peut bouger. Le travail isolé exige un concept d’urgence – ici, le blessé a heureusement pu alerter lui-même.",
+   "it": "Mai guidare o sistemare la pinza a mano finché la gru può muoversi. Chi lavora da solo ha bisogno di un piano d’emergenza – qui per fortuna il ferito ha potuto dare l’allarme.",
+   "en": "Never guide or adjust a grab by hand while the crane can move. Lone work needs an emergency plan – luckily here the injured man could raise the alarm himself."
+  },
+  "caseId": "case-2026-09-08-gr-pragg-jenaz-kran"
+ },
+ {
+  "id": "2026-09-02-vs-le-chable-grue",
+  "date": "2026-09-02",
+  "dateType": "event",
+  "canton": "VS",
+  "place": "Le Châble (Val de Bagnes)",
+  "industry": "transport",
+  "hazard": "crane",
+  "outcome": "fatal",
+  "source": {
+   "name": "Police cantonale valaisanne",
+   "url": "https://www.policevalais.ch/communiques-pour-les-medias/le-chable-accident-mortel-de-travail/",
+   "lang": "fr"
+  },
+  "title": {
+   "de": "Ladekran kippt beim Montieren auf Lastwagenfahrer",
+   "fr": "Une grue bascule sur un chauffeur lors de son installation",
+   "it": "Una gru si ribalta sull’autista durante il montaggio",
+   "en": "Loader crane tips onto truck driver during installation"
+  },
+  "facts": {
+   "activity": {
+    "de": "Montage eines Krans am Heck eines Lastwagens im Firmendepot",
+    "fr": "Installation d’une grue à l’arrière d’un camion au dépôt de l’entreprise",
+    "it": "Montaggio di una gru sul retro di un camion nel deposito aziendale",
+    "en": "Fitting a crane to the rear of a truck at the company depot"
+   },
+   "what": {
+    "de": "Ein 53-jähriger Lastwagenchauffeur montierte im Depot einen Kran am Fahrzeugheck. Der Kran kippte aus ungeklärten Gründen und klemmte ihn gegen eine am Boden stehende Baggerschaufel.",
+    "fr": "Un chauffeur de 53 ans installait une grue à l’arrière de son camion au dépôt. La grue a basculé pour une raison indéterminée et l’a coincé contre un godet posé au sol.",
+    "it": "Un autista di 53 anni montava una gru sul retro del camion nel deposito. La gru si è ribaltata per motivi ignoti, schiacciandolo contro una benna appoggiata a terra.",
+    "en": "A 53-year-old truck driver was fitting a crane to the rear of his truck at the depot. The crane tipped for unknown reasons and pinned him against a bucket on the ground."
+   },
+   "equipment": {
+    "de": "Lastwagen-Ladekran, Baggerschaufel",
+    "fr": "Grue de camion, godet",
+    "it": "Gru da camion, benna",
+    "en": "Truck crane, excavator bucket"
+   },
+   "injuries": {
+    "de": "Tödlich",
+    "fr": "Mortel",
+    "it": "Mortale",
+    "en": "Fatal"
+   },
+   "emergency": {
+    "de": "Erste Hilfe durch Zeugen; OCVS 144, Air-Glaciers mit Arzt, Feuerwehr",
+    "fr": "Premiers secours par des témoins; OCVS 144, Air-Glaciers avec médecin, pompiers",
+    "it": "Primo soccorso dei testimoni; OCVS 144, Air-Glaciers con medico, pompieri",
+    "en": "First aid by witnesses; OCVS 144, Air-Glaciers with doctor, fire brigade"
+   },
+   "investigation": {
+    "de": "Staatsanwaltschaft hat eine Untersuchung eröffnet",
+    "fr": "Le Ministère public a ouvert une instruction",
+    "it": "Il Ministero pubblico ha aperto un’inchiesta",
+    "en": "Public prosecutor has opened an investigation"
+   }
+  },
+  "lesson": {
+   "de": "Montage und Demontage von Anbaugeräten sind Sonderarbeiten: Herstellerangaben befolgen, Teile vor dem Lösen abstützen und den Gefahrenbereich unter schweren Bauteilen nie betreten.",
+   "fr": "Monter ou démonter un équipement est un travail particulier: suivre le fabricant, étayer les pièces avant de les libérer et ne jamais se placer sous une charge lourde.",
+   "it": "Montare o smontare un’attrezzatura è un lavoro speciale: seguire il fabbricante, puntellare i pezzi prima di sganciarli e non sostare mai sotto parti pesanti.",
+   "en": "Fitting and removing attachments is non-routine work: follow the manufacturer, prop parts before releasing them and never stand beneath heavy components."
+  },
+  "caseId": "case-2026-09-02-vs-le-chable-grue"
+ },
+ {
+  "id": "2026-08-08-fr-belfaux-engin",
+  "date": "2026-08-08",
+  "dateType": "event",
+  "canton": "FR",
+  "place": "Belfaux",
+  "industry": "agriculture",
+  "hazard": "machinery",
+  "outcome": "injured",
+  "source": {
+   "name": "Police cantonale Fribourg",
+   "url": "https://www.fr.ch/dsjs/pol/actualites/accident-de-travail-avec-une-personne-blessee-a-belfaux",
+   "lang": "fr"
+  },
+  "title": {
+   "de": "Baumaschine überschlägt sich beim Planieren eines Felds",
+   "fr": "Un engin de chantier fait deux tonneaux en aplanissant un champ",
+   "it": "Una macchina edile si ribalta due volte livellando un campo",
+   "en": "Earthmoving machine rolls twice while levelling a field"
+  },
+  "facts": {
+   "activity": {
+    "de": "Planieren einer landwirtschaftlichen Parzelle mit Baumaschine",
+    "fr": "Aplanissement d’une parcelle agricole avec un engin de chantier",
+    "it": "Livellamento di un terreno agricolo con una macchina edile",
+    "en": "Levelling farmland with an earthmoving machine"
+   },
+   "what": {
+    "de": "Beim Rückwärtsmanöver am Parzellenrand verlor der 32-jährige Fahrer die Kontrolle. Die Maschine rutschte rund 15 m eine Böschung hinunter, überschlug sich zweimal und landete in einem Bach.",
+    "fr": "Lors d’une marche arrière en bordure de parcelle, le conducteur de 32 ans a perdu la maîtrise. L’engin a dévalé un talus sur une quinzaine de mètres, fait deux tonneaux et fini dans un ruisseau.",
+    "it": "Durante una retromarcia al bordo del terreno, il conducente di 32 anni ha perso il controllo. La macchina è scivolata per circa 15 m lungo una scarpata, si è ribaltata due volte ed è finita in un ruscello.",
+    "en": "Reversing at the edge of the plot, the 32-year-old driver lost control. The machine slid about 15 m down a bank, rolled twice and ended up in a stream."
+   },
+   "equipment": {
+    "de": "Baumaschine (Typ nicht angegeben)",
+    "fr": "Engin de chantier (type non précisé)",
+    "it": "Macchina edile (tipo non indicato)",
+    "en": "Earthmoving machine (type not stated)"
+   },
+   "injuries": {
+    "de": "Verletzt, musste befreit werden",
+    "fr": "Blessé, désincarcéré",
+    "it": "Ferito, estratto dai soccorritori",
+    "en": "Injured, had to be cut free"
+   },
+   "emergency": {
+    "de": "Rettungskolonne, Feuerwehr, Ambulanz; Bahnverkehr ca. 1 h unterbrochen",
+    "fr": "Colonne de secours, pompiers, ambulance; trafic ferroviaire interrompu env. 1 h",
+    "it": "Colonna di soccorso, pompieri, ambulanza; traffico ferroviario interrotto ca. 1 h",
+    "en": "Rescue team, fire brigade, ambulance; rail traffic halted about 1 h"
+   },
+   "investigation": {
+    "de": "Untersuchung läuft",
+    "fr": "Enquête en cours",
+    "it": "Inchiesta in corso",
+    "en": "Investigation ongoing"
+   }
+  },
+  "lesson": {
+   "de": "Rückwärtsfahren an Geländekanten ist eine der häufigsten Ursachen für Überschläge. Abstand zur Kante markieren, Einweiser einsetzen und immer angegurtet fahren.",
+   "fr": "La marche arrière près d’un bord est une cause fréquente de renversement. Marquer une distance de sécurité, utiliser un guide et toujours boucler la ceinture.",
+   "it": "La retromarcia vicino a un bordo è una causa frequente di ribaltamento. Segnare una distanza di sicurezza, usare un moviere e allacciare sempre la cintura.",
+   "en": "Reversing near an edge is one of the commonest causes of rollovers. Mark a safe distance, use a banksman and always wear the seatbelt."
+  },
+  "caseId": "case-2026-08-08-fr-belfaux-engin"
+ },
+ {
+  "id": "2026-07-23-vd-diablerets-toit",
+  "date": "2026-07-23",
+  "dateType": "event",
+  "canton": "VD",
+  "place": "Les Diablerets",
+  "industry": "construction",
+  "hazard": "fall",
+  "outcome": "fatal",
+  "source": {
+   "name": "20 minutes",
+   "url": "https://www.20min.ch/fr/story/canton-de-vaud-un-ouvrier-decede-apres-une-chute-sur-un-chantier-aux-diablerets-103608228",
+   "lang": "fr"
+  },
+  "title": {
+   "de": "Dachdecker stürzt tödlich von Chaletdach",
+   "fr": "Un couvreur fait une chute mortelle depuis le toit d’un chalet",
+   "it": "Un copritetto cade mortalmente dal tetto di uno chalet",
+   "en": "Roofer killed in fall from chalet roof"
+  },
+  "facts": {
+   "activity": {
+    "de": "Dachdeckerarbeiten an einem Chalet",
+    "fr": "Travaux de couverture sur un chalet",
+    "it": "Lavori di copertura su uno chalet",
+    "en": "Roofing work on a chalet"
+   },
+   "what": {
+    "de": "Ein 39-jähriger Dachdecker stürzte aus ungeklärten Gründen mehrere Meter vom unteren Teil des Daches. Kollegen alarmierten die Rettung.",
+    "fr": "Un couvreur de 39 ans a chuté de plusieurs mètres depuis le bas de la toiture, pour une raison encore inconnue. Ses collègues ont alerté les secours.",
+    "it": "Un copritetto di 39 anni è caduto per diversi metri dalla parte bassa del tetto, per motivi ancora da chiarire. I colleghi hanno dato l’allarme.",
+    "en": "A 39-year-old roofer fell several metres from the lower part of the roof for reasons not yet known. Colleagues raised the alarm."
+   },
+   "equipment": {
+    "de": "Dach (Absturzhöhe mehrere Meter)",
+    "fr": "Toit (chute de plusieurs mètres)",
+    "it": "Tetto (caduta di diversi metri)",
+    "en": "Roof (fall of several metres)"
+   },
+   "injuries": {
+    "de": "Tödlich",
+    "fr": "Mortel",
+    "it": "Mortale",
+    "en": "Fatal"
+   },
+   "emergency": {
+    "de": "Reanimation vor Ort, Rega, Gendarmerie",
+    "fr": "Réanimation sur place, Rega, gendarmerie",
+    "it": "Rianimazione sul posto, Rega, gendarmeria",
+    "en": "Resuscitation on site, Rega, gendarmerie"
+   },
+   "investigation": {
+    "de": "Strafuntersuchung der Staatsanwaltschaft VD",
+    "fr": "Instruction pénale du Ministère public vaudois",
+    "it": "Inchiesta penale del Ministero pubblico vodese",
+    "en": "Criminal investigation by Vaud prosecutor"
+   }
+  },
+  "lesson": {
+   "de": "Auch die Traufkante ist eine Absturzkante: Ab 3 m Absturzhöhe auf Dächern braucht es Seitenschutz oder Gerüst mit Dachfangwand – vom ersten bis zum letzten Arbeitstag.",
+   "fr": "Le bord de l’avant-toit est aussi un bord de chute: dès 3 m sur les toits, il faut garde-corps ou échafaudage avec paroi de protection – du premier au dernier jour.",
+   "it": "Anche la gronda è un bordo di caduta: sui tetti da 3 m servono parapetto o ponteggio con parete di protezione – dal primo all’ultimo giorno.",
+   "en": "The eaves are a fall edge too: from 3 m on roofs you need edge protection or scaffolding with a catch barrier – from the first to the last day."
+  },
+  "caseId": "case-2026-07-23-vd-diablerets-toit"
+ },
+ {
+  "id": "2026-06-26-vs-champery-gaz",
+  "date": "2026-06-26",
+  "dateType": "event",
+  "canton": "VS",
+  "place": "Champéry",
+  "industry": "industry",
+  "hazard": "hazmat",
+  "outcome": "fatal",
+  "source": {
+   "name": "Police cantonale valaisanne",
+   "url": "https://www.policevalais.ch/communiques-pour-les-medias/champery-un-accident-de-travail-fait-une-victime/",
+   "lang": "fr"
+  },
+  "title": {
+   "de": "Glockenguss: Gase beim Metallschmelzen – ein Toter",
+   "fr": "Fonte d’une cloche: gaz lors de la fusion du métal – un mort",
+   "it": "Fusione di una campana: gas durante la fusione del metallo – un morto",
+   "en": "Bell casting: fumes from molten metal – one dead"
+  },
+  "facts": {
+   "activity": {
+    "de": "Handwerkliche Herstellung einer Glocke in einer Werkstatt",
+    "fr": "Fabrication artisanale d’une cloche dans un atelier",
+    "it": "Fabbricazione artigianale di una campana in un laboratorio",
+    "en": "Hand-casting a bell in a workshop"
+   },
+   "what": {
+    "de": "Zwei Männer wurden beim Schmelzen des Metalls aus noch ungeklärtem Grund Gasen ausgesetzt. Sie verliessen die Werkstatt selbst und alarmierten die Rettung; einer brach danach zusammen und starb vor Ort.",
+    "fr": "Deux hommes ont été exposés à des gaz lors de la fusion du métal, pour une raison encore inconnue. Ils sont sortis seuls de l’atelier et ont alerté les secours; l’un a ensuite fait un malaise et est décédé sur place.",
+    "it": "Due uomini sono stati esposti a gas durante la fusione del metallo, per motivi ancora ignoti. Sono usciti da soli dal laboratorio e hanno dato l’allarme; uno ha poi avuto un malore ed è morto sul posto.",
+    "en": "Two men were exposed to fumes while melting metal, for reasons not yet known. They left the workshop on their own and called for help; one then collapsed and died at the scene."
+   },
+   "equipment": {
+    "de": "Metallschmelze (Gase)",
+    "fr": "Fusion de métal (gaz)",
+    "it": "Fusione di metallo (gas)",
+    "en": "Molten metal (fumes)"
+   },
+   "injuries": {
+    "de": "1 Toter (63), 1 Verletzter (64)",
+    "fr": "1 mort (63 ans), 1 blessé (64 ans)",
+    "it": "1 morto (63 anni), 1 ferito (64 anni)",
+    "en": "1 dead (63), 1 injured (64)"
+   },
+   "emergency": {
+    "de": "Reanimation erfolglos; Verletzter per Helikopter ins Universitätsspital Genf",
+    "fr": "Réanimation sans succès; blessé héliporté aux HUG",
+    "it": "Rianimazione senza successo; ferito elitrasportato agli HUG",
+    "en": "Resuscitation failed; injured man flown to Geneva University Hospitals"
+   },
+   "investigation": {
+    "de": "Strafuntersuchung der Staatsanwaltschaft eröffnet",
+    "fr": "Instruction ouverte par le Ministère public",
+    "it": "Istruzione aperta dal Ministero pubblico",
+    "en": "Criminal investigation opened by the prosecutor"
+   }
+  },
+  "lesson": {
+   "de": "Beim Schmelzen von Metall entstehen giftige Dämpfe: nur mit wirksamer Absaugung oder im Freien, Gaswarner und zweiter Fluchtweg.",
+   "fr": "La fusion de métal dégage des fumées toxiques: aspiration efficace ou plein air, détecteur de gaz et seconde issue.",
+   "it": "La fusione di metallo produce fumi tossici: aspirazione efficace o all’aperto, rilevatore di gas e seconda via di fuga.",
+   "en": "Melting metal gives off toxic fumes: use effective extraction or work outdoors, a gas detector and a second exit."
+  },
+  "caseId": "case-2026-06-26-vs-champery-gaz"
+ },
+ {
+  "id": "2026-06-15-vd-chavannes-chantier",
+  "date": "2026-06-15",
+  "dateType": "event",
+  "canton": "VD",
+  "place": "Chavannes-près-Renens",
+  "industry": "construction",
+  "hazard": "fall",
+  "outcome": "fatal",
+  "source": {
+   "name": "État de Vaud (Ministère public)",
+   "url": "https://www.vd.ch/actualites/actualite/news/26389-accident-de-travail-mortel-a-chavannes-pres-renens",
+   "lang": "fr"
+  },
+  "title": {
+   "de": "Arbeiter stürzt 9 m in einen Technikschacht",
+   "fr": "Un ouvrier chute de 9 m dans un vide technique",
+   "it": "Un operaio cade per 9 m in un vano tecnico",
+   "en": "Worker falls 9 m into a service void"
+  },
+  "facts": {
+   "activity": {
+    "de": "Reinigungsarbeiten im 1. Stock eines Neubaus",
+    "fr": "Nettoyage au 1er étage d’un bâtiment en construction",
+    "it": "Pulizie al 1° piano di un edificio in costruzione",
+    "en": "Cleaning on the 1st floor of a building under construction"
+   },
+   "what": {
+    "de": "Bei Reinigungsarbeiten in einem Rohbau stürzte ein 50-jähriger Arbeiter rund 9 m tief bis ins Untergeschoss, in den sogenannten Technikschacht.",
+    "fr": "En effectuant des nettoyages dans un bâtiment en construction, un ouvrier de 50 ans a chuté de 9 m jusqu’au sous-sol, dans le vide technique.",
+    "it": "Durante pulizie in un edificio in costruzione, un operaio di 50 anni è caduto per 9 m fino al piano interrato, nel vano tecnico.",
+    "en": "While cleaning in a building under construction, a 50-year-old worker fell about 9 m down to the basement service void."
+   },
+   "equipment": {
+    "de": "Bodenöffnung / Schacht",
+    "fr": "Ouverture dans le sol / vide technique",
+    "it": "Apertura nel pavimento / vano tecnico",
+    "en": "Floor opening / service void"
+   },
+   "injuries": {
+    "de": "Tödlich",
+    "fr": "Mortel",
+    "it": "Mortale",
+    "en": "Fatal"
+   },
+   "emergency": {
+    "de": "Gendarmerie, Polizei, Suva, Ambulanz, SMUR, GRIMP, Care-Team",
+    "fr": "Gendarmerie, police, Suva, ambulance, SMUR, GRIMP, soutien psychologique",
+    "it": "Gendarmeria, polizia, Suva, ambulanza, SMUR, GRIMP, supporto psicologico",
+    "en": "Gendarmerie, police, Suva, ambulance, SMUR, rope rescue, crisis support"
+   },
+   "investigation": {
+    "de": "Strafuntersuchung der Staatsanwaltschaft VD",
+    "fr": "Instruction pénale du Ministère public vaudois",
+    "it": "Inchiesta penale del Ministero pubblico vodese",
+    "en": "Criminal investigation by Vaud prosecutor"
+   }
+  },
+  "lesson": {
+   "de": "Boden- und Schachtöffnungen sind durchbruchsicher abzudecken und zu befestigen oder mit Seitenschutz zu sichern – besonders für Nachfolgegewerke wie Reinigung, die den Bau weniger gut kennen.",
+   "fr": "Les ouvertures dans les sols doivent être couvertes et fixées de façon résistante ou protégées par un garde-corps – surtout pour les corps de métier suivants, comme le nettoyage.",
+   "it": "Le aperture nei pavimenti vanno coperte in modo resistente e fissate o protette con parapetti – soprattutto per le ditte che arrivano dopo, come le pulizie.",
+   "en": "Floor and shaft openings must be covered with secured, load-bearing covers or guarded – especially for later trades such as cleaners who know the site less well."
+  },
+  "caseId": "case-2026-06-15-vd-chavannes-chantier"
+ },
+ {
+  "id": "2026-03-16-fr-le-mouret-poteau",
+  "date": "2026-03-16",
+  "dateType": "event",
+  "canton": "FR",
+  "place": "Le Mouret",
+  "industry": "energy",
+  "hazard": "crane",
+  "outcome": "injured",
+  "source": {
+   "name": "Police cantonale Fribourg",
+   "url": "https://www.fr.ch/dsjs/pol/actualites/accident-de-travail-avec-une-personne-blessee-a-le-mouret",
+   "lang": "fr"
+  },
+  "title": {
+   "de": "Strommast fällt auf Kran: Arbeiter erleidet Stromschlag",
+   "fr": "Un poteau électrique tombe sur une grue: ouvrier électrocuté",
+   "it": "Un palo elettrico cade su una gru: operaio folgorato",
+   "en": "Power pole falls on crane: worker electrocuted"
+  },
+  "facts": {
+   "activity": {
+    "de": "Unterhaltsarbeiten an einer Stromleitung in einem Feld",
+    "fr": "Travaux d’entretien sur une ligne électrique dans un champ",
+    "it": "Lavori di manutenzione su una linea elettrica in un campo",
+    "en": "Maintenance on a power line in a field"
+   },
+   "what": {
+    "de": "Aus ungeklärtem Grund fiel ein Strommast auf einen Kran, den ein 49-jähriger Arbeiter bediente. Er erlitt einen Stromschlag.",
+    "fr": "Pour une raison inconnue, un poteau électrique est tombé sur une grue manœuvrée par un ouvrier de 49 ans, qui a été électrocuté.",
+    "it": "Per motivi ignoti un palo elettrico è caduto su una gru manovrata da un operaio di 49 anni, rimasto folgorato.",
+    "en": "For unknown reasons a power pole fell onto a crane operated by a 49-year-old worker, who was electrocuted."
+   },
+   "equipment": {
+    "de": "Kran, Strommast / Stromleitung",
+    "fr": "Grue, poteau / ligne électrique",
+    "it": "Gru, palo / linea elettrica",
+    "en": "Crane, power pole / line"
+   },
+   "injuries": {
+    "de": "Verletzt, mit Helikopter ins Spital (Schwere nicht berichtet)",
+    "fr": "Blessé, héliporté (gravité non rapportée)",
+    "it": "Ferito, elitrasportato (gravità non riportata)",
+    "en": "Injured, airlifted (severity not reported)"
+   },
+   "emergency": {
+    "de": "Rega; Care-Team für Mitarbeitende",
+    "fr": "Rega; équipe psychosociale (EMUPS) pour les collègues",
+    "it": "Rega; team psicosociale per i colleghi",
+    "en": "Rega air rescue; psychosocial team for co-workers"
+   },
+   "investigation": {
+    "de": "Strafuntersuchung der Staatsanwaltschaft eröffnet",
+    "fr": "Instruction ouverte par le Ministère public",
+    "it": "Istruzione aperta dal Ministero pubblico",
+    "en": "Criminal investigation opened by the prosecutor"
+   }
+  },
+  "lesson": {
+   "de": "Vor Arbeiten an Freileitungen: freischalten, erden, Masten gegen Umfallen sichern – und Kranausleger aus dem Fallbereich.",
+   "fr": "Avant de travailler sur une ligne: mise hors tension, mise à terre, poteau assuré contre la chute – flèche de grue hors de la zone de chute.",
+   "it": "Prima di lavorare su una linea: disinserire, mettere a terra, assicurare il palo – braccio della gru fuori dalla zona di caduta.",
+   "en": "Before line work: de-energise, earth, secure poles against falling – keep crane booms out of the fall zone."
+  },
+  "caseId": "case-2026-03-16-fr-le-mouret-poteau"
+ },
+ {
+  "id": "2025-05-05-vs-sion-leiter",
+  "caseId": "case-2025-05-05-vs-sion-leiter",
+  "date": "2025-05-05",
+  "dateType": "event",
+  "canton": "VS",
+  "place": "Sion",
+  "industry": "construction",
+  "hazard": "fall",
+  "outcome": "fatal",
+  "source": {
+   "name": "Polizeinews.ch",
+   "url": "https://www.polizeinews.ch/2025/05/06/sitten-vs-63-jaehriger-stirbt-nach-leitersturz-bei-arbeit-an-gebaeudefassade/",
+   "lang": "de"
+  },
+  "title": {
+   "de": "Sturz von der Leiter beim Schild-Abbau: ein Toter",
+   "fr": "Chute d’échelle en démontant une enseigne: un mort",
+   "it": "Caduta dalla scala smontando un’insegna: un morto",
+   "en": "Ladder fall while removing a sign: one dead"
+  },
+  "facts": {
+   "activity": null,
+   "what": {
+    "de": "Zwei Männer demontierten von Leitern aus ein Metallschild an einer Fassade, als beide aus ungeklärten Gründen stürzten. Ein 63-Jähriger starb im Spital, der zweite wurde leicht verletzt.",
+    "fr": "Deux hommes démontaient depuis des échelles une enseigne métallique sur une façade quand ils ont chuté pour des raisons inconnues. Un homme de 63 ans est décédé à l’hôpital, l’autre a été légèrement blessé.",
+    "it": "Due uomini smontavano da scale un’insegna metallica su una facciata quando sono caduti per motivi ignoti. Un 63enne è morto in ospedale, l’altro è rimasto leggermente ferito.",
+    "en": "Two men were removing a metal sign from a façade from ladders when both fell for unknown reasons. A 63-year-old died in hospital; the other was slightly injured."
+   },
+   "equipment": null,
+   "injuries": {
+    "de": "1 Toter (63), 1 Leichtverletzter",
+    "fr": "1 mort (63 ans), 1 blessé léger",
+    "it": "1 morto (63 anni), 1 ferito lieve",
+    "en": "1 dead (63), 1 slightly injured"
+   },
+   "emergency": null,
+   "investigation": {
+    "de": "Strafuntersuchung der Staatsanwaltschaft eröffnet",
+    "fr": "Instruction ouverte par le Ministère public",
+    "it": "Istruzione aperta dal Ministero pubblico",
+    "en": "Criminal investigation opened by the prosecutor"
+   }
+  },
+  "lesson": {
+   "de": "Lasten an der Fassade nicht von der Leiter aus lösen – Hubarbeitsbühne oder Gerüst verwenden.",
+   "fr": "Ne pas démonter de charges en façade depuis une échelle – utiliser une nacelle ou un échafaudage.",
+   "it": "Non smontare carichi in facciata da una scala – usare una piattaforma o un ponteggio.",
+   "en": "Don't remove loads from a façade off a ladder – use a lift or scaffold."
   }
+ },
+ {
+  "id": "2025-04-01-so-daeniken-baum",
+  "caseId": "case-2025-04-01-so-daeniken-baum",
+  "date": "2025-04-01",
+  "dateType": "event",
+  "canton": "SO",
+  "place": "Däniken",
+  "industry": "forestry",
+  "hazard": "struck",
+  "outcome": "fatal",
+  "source": {
+   "name": "Polizeinews.ch",
+   "url": "https://www.polizeinews.ch/2025/04/01/daeniken-so-toedlicher-arbeitsunfall-im-wald-mann-28-von-baum-erschlagen/",
+   "lang": "de"
+  },
+  "title": {
+   "de": "Fallender Baum erschlägt Waldarbeiter (28)",
+   "fr": "Un arbre qui tombe tue un forestier de 28 ans",
+   "it": "Un albero in caduta uccide un boscaiolo di 28 anni",
+   "en": "Falling tree kills forest worker (28)"
+  },
+  "facts": {
+   "activity": null,
+   "what": {
+    "de": "Bei Waldarbeiten wurde ein 28-Jähriger von einem fallenden Baum getroffen und starb vor Ort. Das Arbeitsinspektorat war beigezogen.",
+    "fr": "Lors de travaux forestiers, un homme de 28 ans a été touché par un arbre en chute et est décédé sur place. L’inspection du travail a été appelée.",
+    "it": "Durante lavori nel bosco un 28enne è stato colpito da un albero in caduta ed è morto sul posto. È intervenuto l’ispettorato del lavoro.",
+    "en": "During forestry work a 28-year-old was hit by a falling tree and died at the scene. The labour inspectorate attended."
+   },
+   "equipment": null,
+   "injuries": {
+    "de": "Tödlich",
+    "fr": "Mortel",
+    "it": "Mortale",
+    "en": "Fatal"
+   },
+   "emergency": null,
+   "investigation": {
+    "de": "Strafuntersuchung der Staatsanwaltschaft eröffnet",
+    "fr": "Instruction ouverte par le Ministère public",
+    "it": "Istruzione aperta dal Ministero pubblico",
+    "en": "Criminal investigation opened by the prosecutor"
+   }
+  },
+  "lesson": {
+   "de": "Fällbereich klar markieren und absperren, Rückweiche vorbereiten, Funk- oder Sichtkontakt im Team halten.",
+   "fr": "Délimiter et fermer la zone d’abattage, préparer la voie de retraite, garder le contact radio ou visuel.",
+   "it": "Delimitare e chiudere la zona di abbattimento, preparare la via di fuga, mantenere il contatto radio o visivo.",
+   "en": "Mark and close the felling zone, prepare an escape route, keep radio or visual contact in the team."
+  }
+ },
+ {
+  "id": "2025-03-26-be-ostermundigen-sturz",
+  "caseId": "case-2025-03-26-be-ostermundigen-sturz",
+  "date": "2025-03-26",
+  "dateType": "event",
+  "canton": "BE",
+  "place": "Ostermundigen",
+  "industry": "construction",
+  "hazard": "fall",
+  "outcome": "fatal",
+  "source": {
+   "name": "Polizeinews.ch",
+   "url": "https://www.polizeinews.ch/2025/04/08/ostermundigen-be-55-jaehriger-bauarbeiter-stirbt-nach-schwerem-sturz-bei-arbeitsunfall/",
+   "lang": "de"
+  },
+  "title": {
+   "de": "Bauarbeiter (55) stürzt mehrere Meter ab und stirbt",
+   "fr": "Un ouvrier de 55 ans chute de plusieurs mètres et meurt",
+   "it": "Un operaio di 55 anni cade per diversi metri e muore",
+   "en": "Construction worker (55) falls several metres and dies"
+  },
+  "facts": {
+   "activity": null,
+   "what": {
+    "de": "Ein Bauarbeiter stürzte aus ungeklärten Gründen mehrere Meter in die Tiefe. Er starb gut eine Woche später im Spital.",
+    "fr": "Un ouvrier du bâtiment a chuté de plusieurs mètres pour des raisons inconnues. Il est décédé à l’hôpital une dizaine de jours plus tard.",
+    "it": "Un operaio edile è caduto per diversi metri per motivi ignoti. È morto in ospedale una decina di giorni dopo.",
+    "en": "A construction worker fell several metres for unknown reasons. He died in hospital about ten days later."
+   },
+   "equipment": null,
+   "injuries": {
+    "de": "Tödlich",
+    "fr": "Mortel",
+    "it": "Mortale",
+    "en": "Fatal"
+   },
+   "emergency": null,
+   "investigation": {
+    "de": "Strafuntersuchung der Staatsanwaltschaft eröffnet",
+    "fr": "Instruction ouverte par le Ministère public",
+    "it": "Istruzione aperta dal Ministero pubblico",
+    "en": "Criminal investigation opened by the prosecutor"
+   }
+  },
+  "lesson": {
+   "de": "Ab 2 m Absturzhöhe braucht es Seitenschutz oder Auffangsysteme – auch für kurze Arbeiten.",
+   "fr": "Dès 2 m de hauteur de chute: protection latérale ou dispositif de retenue, même pour des travaux courts.",
+   "it": "Da 2 m di altezza di caduta: protezione laterale o sistemi di arresto, anche per lavori brevi.",
+   "en": "From 2 m fall height you need edge protection or fall-arrest – even for short jobs."
+  }
+ },
+ {
+  "id": "2025-03-18-be-ittigen-sattelzug",
+  "caseId": "case-2025-03-18-be-ittigen-sattelzug",
+  "date": "2025-03-18",
+  "dateType": "event",
+  "canton": "BE",
+  "place": "Ittigen",
+  "industry": "transport",
+  "hazard": "vehicle",
+  "outcome": "fatal",
+  "source": {
+   "name": "Polizeinews.ch",
+   "url": "https://www.polizeinews.ch/2025/03/19/ittigen-be-zwischen-sattelzugmaschine-und-schweisstisch-eingeklemmt-arbeiter-19-tot/",
+   "lang": "de"
+  },
+  "title": {
+   "de": "Bei Reparatur eingeklemmt: Arbeiter (19) stirbt",
+   "fr": "Coincé lors d’une réparation: un ouvrier de 19 ans meurt",
+   "it": "Schiacciato durante una riparazione: muore un operaio di 19 anni",
+   "en": "Crushed during repair: worker (19) dies"
+  },
+  "facts": {
+   "activity": null,
+   "what": {
+    "de": "Bei Reparaturarbeiten wurde ein 19-Jähriger aus ungeklärten Gründen zwischen einer Sattelzugmaschine und einem Schweisstisch eingeklemmt; er starb im Spital.",
+    "fr": "Lors de travaux de réparation, un jeune de 19 ans a été coincé entre un tracteur de semi-remorque et une table de soudage, pour des raisons inconnues; il est décédé à l’hôpital.",
+    "it": "Durante una riparazione un 19enne è rimasto schiacciato tra una motrice e un tavolo di saldatura, per motivi ignoti; è morto in ospedale.",
+    "en": "During repair work a 19-year-old was crushed between a tractor unit and a welding table, for unknown reasons; he died in hospital."
+   },
+   "equipment": null,
+   "injuries": {
+    "de": "Tödlich",
+    "fr": "Mortel",
+    "it": "Mortale",
+    "en": "Fatal"
+   },
+   "emergency": null,
+   "investigation": {
+    "de": "Strafuntersuchung der Staatsanwaltschaft eröffnet",
+    "fr": "Instruction ouverte par le Ministère public",
+    "it": "Istruzione aperta dal Ministero pubblico",
+    "en": "Criminal investigation opened by the prosecutor"
+   }
+  },
+  "lesson": {
+   "de": "Fahrzeuge in der Werkstatt gegen Wegrollen und unbeabsichtigtes Starten sichern; niemand zwischen Fahrzeug und festen Einrichtungen, wenn es bewegt wird.",
+   "fr": "En atelier, caler les véhicules et empêcher tout démarrage involontaire; personne entre un véhicule et un équipement fixe pendant une manœuvre.",
+   "it": "In officina bloccare i veicoli contro il movimento e l’avvio involontario; nessuno tra veicolo e attrezzature fisse durante le manovre.",
+   "en": "In workshops, secure vehicles against rolling and unintended starts; nobody between a vehicle and fixed equipment while it moves."
+  }
+ },
+ {
+  "id": "2025-03-03-be-saanenmoeser-forst",
+  "caseId": "case-2025-03-03-be-saanenmoeser-forst",
+  "date": "2025-03-03",
+  "dateType": "event",
+  "canton": "BE",
+  "place": "Saanenmöser",
+  "industry": "forestry",
+  "hazard": "struck",
+  "outcome": "fatal",
+  "source": {
+   "name": "Polizeinews.ch",
+   "url": "https://www.polizeinews.ch/2025/03/04/saanenmoeser-be-baumstamm-trifft-arbeiter-21-jaehriger-stirbt-bei-forstarbeiten/",
+   "lang": "de"
+  },
+  "title": {
+   "de": "Baumstamm trifft Forstarbeiter (21) tödlich",
+   "fr": "Un tronc tue un forestier de 21 ans",
+   "it": "Un tronco uccide un boscaiolo di 21 anni",
+   "en": "Log kills forestry worker (21)"
+  },
+  "facts": {
+   "activity": null,
+   "what": {
+    "de": "Drei Männer waren mit Forstarbeiten beschäftigt, als einer von einem Baumstamm getroffen wurde. Der 21-Jährige starb noch vor Ort.",
+    "fr": "Trois hommes effectuaient des travaux forestiers quand l’un d’eux a été heurté par un tronc. Le jeune homme de 21 ans est décédé sur place.",
+    "it": "Tre uomini svolgevano lavori forestali quando uno è stato colpito da un tronco. Il 21enne è morto sul posto.",
+    "en": "Three men were doing forestry work when one was struck by a log. The 21-year-old died at the scene."
+   },
+   "equipment": null,
+   "injuries": {
+    "de": "Tödlich",
+    "fr": "Mortel",
+    "it": "Mortale",
+    "en": "Fatal"
+   },
+   "emergency": null,
+   "investigation": {
+    "de": "Strafuntersuchung der Staatsanwaltschaft eröffnet",
+    "fr": "Instruction ouverte par le Ministère public",
+    "it": "Istruzione aperta dal Ministero pubblico",
+    "en": "Criminal investigation opened by the prosecutor"
+   }
+  },
+  "lesson": {
+   "de": "Gefahrenbereich bei Fäll- und Rückearbeiten (doppelte Baumlänge) konsequent freihalten; rollende und rutschende Stämme am Hang einplanen.",
+   "fr": "Garder libre la zone dangereuse lors de l’abattage et du débardage (deux fois la hauteur de l’arbre); prévoir les troncs qui roulent ou glissent en pente.",
+   "it": "Tenere libera la zona di pericolo durante abbattimento ed esbosco (due volte l’altezza dell’albero); prevedere tronchi che rotolano o scivolano in pendio.",
+   "en": "Keep the danger zone clear during felling and skidding (twice the tree length); plan for logs rolling or sliding on slopes."
+  }
+ },
+ {
+  "id": "2025-02-06-fr-posat-mast",
+  "caseId": "case-2025-02-06-fr-posat-mast",
+  "date": "2025-02-06",
+  "dateType": "event",
+  "canton": "FR",
+  "place": "Posat",
+  "industry": "energy",
+  "hazard": "fall",
+  "outcome": "fatal",
+  "source": {
+   "name": "Polizeinews.ch",
+   "url": "https://www.polizeinews.ch/2025/02/07/posat-fr-tragischer-arbeitsunfall-16-jaehriger-stuerzt-aus-9-metern-hoehe-vom-strommast/",
+   "lang": "de"
+  },
+  "title": {
+   "de": "Holzmast bricht: Lernender (16) stürzt 9 Meter in den Tod",
+   "fr": "Un poteau en bois se brise: un apprenti de 16 ans chute de 9 m et meurt",
+   "it": "Si spezza un palo di legno: apprendista di 16 anni cade da 9 m e muore",
+   "en": "Wooden pole snaps: apprentice (16) falls 9 m and dies"
+  },
+  "facts": {
+   "activity": null,
+   "what": {
+    "de": "Bei Unterhaltsarbeiten an einer Niederspannungsleitung brach der Holzmast, auf dem ein 16-jähriger Lernender stand. Er stürzte 9 m ab und starb; ein Kollege am Mastfuss wurde leicht verletzt.",
+    "fr": "Lors de travaux sur une ligne basse tension, le poteau en bois sur lequel se trouvait un apprenti de 16 ans s’est brisé. Il a chuté de 9 m et est décédé; un collègue au pied du poteau a été légèrement blessé.",
+    "it": "Durante lavori su una linea a bassa tensione si è spezzato il palo di legno su cui si trovava un apprendista di 16 anni. È caduto da 9 m ed è morto; un collega ai piedi del palo è rimasto leggermente ferito.",
+    "en": "During maintenance on a low-voltage line, the wooden pole a 16-year-old apprentice was standing on broke. He fell 9 m and died; a colleague at its foot was slightly injured."
+   },
+   "equipment": null,
+   "injuries": {
+    "de": "1 Toter (16), 1 Leichtverletzter (18)",
+    "fr": "1 mort (16 ans), 1 blessé léger (18 ans)",
+    "it": "1 morto (16 anni), 1 ferito lieve (18 anni)",
+    "en": "1 dead (16), 1 slightly injured (18)"
+   },
+   "emergency": null,
+   "investigation": {
+    "de": "Strafuntersuchung der Staatsanwaltschaft eröffnet",
+    "fr": "Instruction ouverte par le Ministère public",
+    "it": "Istruzione aperta dal Ministero pubblico",
+    "en": "Criminal investigation opened by the prosecutor"
+   }
+  },
+  "lesson": {
+   "de": "Vor dem Besteigen eines Holzmasts dessen Standfestigkeit prüfen (Fäulnis am Boden) – im Zweifel sichern oder Hubarbeitsbühne nutzen. Lernende nie als Erste auf ungeprüfte Masten.",
+   "fr": "Avant de grimper sur un poteau en bois, contrôler sa solidité (pourriture au pied) – en cas de doute, haubaner ou utiliser une nacelle. Jamais un apprenti en premier sur un poteau non contrôlé.",
+   "it": "Prima di salire su un palo di legno verificarne la stabilità (marciume alla base) – nel dubbio ancorarlo o usare una piattaforma. Mai un apprendista per primo su un palo non verificato.",
+   "en": "Before climbing a wooden pole, check it is sound (rot at the base) – if in doubt, brace it or use a lift. Never send an apprentice first up an unchecked pole."
+  }
+ },
+ {
+  "id": "2025-02-04-vd-blonay-foreuse",
+  "date": "2025-02-04",
+  "dateType": "event",
+  "canton": "VD",
+  "place": "Blonay",
+  "industry": "construction",
+  "hazard": "machinery",
+  "outcome": "fatal",
+  "source": {
+   "name": "20 minutes",
+   "url": "https://www.20min.ch/fr/story/vaud-heurte-par-une-foreuse-un-ouvrier-decede-a-blonay-103274385",
+   "lang": "fr"
+  },
+  "title": {
+   "de": "Bohrgerät kippt am Hang: Arbeiter (26) tödlich getroffen",
+   "fr": "Une foreuse bascule dans une pente: ouvrier de 26 ans tué",
+   "it": "Una trivella si ribalta in pendio: operaio di 26 anni ucciso",
+   "en": "Drilling rig tips on slope: worker (26) killed"
+  },
+  "facts": {
+   "activity": {
+    "de": "Arbeit mit einem Raupen-Bohrgerät auf einer Baustelle",
+    "fr": "Travail avec une foreuse sur chenilles sur un chantier",
+    "it": "Lavoro con una trivella cingolata in cantiere",
+    "en": "Working with a tracked drilling rig on a site"
+   },
+   "what": {
+    "de": "Ein Bohrgerät auf Raupen kippte aus ungeklärten Gründen am Hang. Der Mast traf einen Arbeiter.",
+    "fr": "Une foreuse sur chenilles a basculé dans une pente pour des raisons indéterminées. Son mât a heurté un ouvrier.",
+    "it": "Una trivella cingolata si è ribaltata in pendio per motivi non chiariti. Il montante ha colpito un operaio.",
+    "en": "A tracked drilling rig tipped over on a slope for unknown reasons. Its mast struck a worker."
+   },
+   "equipment": {
+    "de": "Raupen-Bohrgerät (Mast)",
+    "fr": "Foreuse sur chenilles (mât)",
+    "it": "Trivella cingolata (montante)",
+    "en": "Tracked drilling rig (mast)"
+   },
+   "injuries": {
+    "de": "Tödlich",
+    "fr": "Mortel",
+    "it": "Mortale",
+    "en": "Fatal"
+   },
+   "emergency": {
+    "de": "Gendarmerie, Ambulanz, Feuerwehr, Suva und Care-Team vor Ort",
+    "fr": "Gendarmerie, ambulance, pompiers, Suva et équipe de soutien d’urgence",
+    "it": "Gendarmeria, ambulanza, pompieri, Suva e team di sostegno",
+    "en": "Police, ambulance, fire service, Suva and support team on site"
+   },
+   "investigation": {
+    "de": "Strafuntersuchung der Staatsanwaltschaft eröffnet",
+    "fr": "Instruction ouverte par le Ministère public",
+    "it": "Istruzione aperta dal Ministero pubblico",
+    "en": "Criminal investigation opened by the prosecutor"
+   }
+  },
+  "lesson": {
+   "de": "Bohrgeräte am Hang: Standsicherheit vorab prüfen, Mast nur auf tragfähigem, ebenem Grund aufstellen – und niemand im Kippbereich.",
+   "fr": "Foreuse en pente: vérifier la stabilité avant, mât levé seulement sur sol porteur et plan – personne dans la zone de basculement.",
+   "it": "Trivelle in pendio: verificare prima la stabilità, montante alzato solo su terreno portante e piano – nessuno nella zona di ribaltamento.",
+   "en": "Rigs on slopes: check stability first, raise the mast only on firm level ground – nobody in the tip-over zone."
+  },
+  "caseId": "case-2025-02-04-vd-blonay-foreuse"
+ },
+ {
+  "id": "2024-05-19-be-biel-lokfuehrer",
+  "caseId": "case-2024-05-19-be-biel-lokfuehrer",
+  "date": "2024-05-19",
+  "dateType": "event",
+  "canton": "BE",
+  "place": "Biel/Bienne",
+  "industry": "transport",
+  "hazard": "vehicle",
+  "outcome": "fatal",
+  "source": {
+   "name": "Polizeinews.ch",
+   "url": "https://www.polizeinews.ch/2024/05/19/biel-be-mann-bei-arbeitsunfall-verstorben/",
+   "lang": "de"
+  },
+  "title": {
+   "de": "Lokführer gerät im Bahnhof Biel unter den Zug",
+   "fr": "Un mécanicien passe sous un train en gare de Bienne",
+   "it": "Un macchinista finisce sotto il treno alla stazione di Bienne",
+   "en": "Train driver falls under train at Biel station"
+  },
+  "facts": {
+   "activity": null,
+   "what": {
+    "de": "Ein 63-jähriger Lokführer geriet beim Verlassen eines Zuges, in dem er mitgefahren war, aus ungeklärten Gründen unter den Zug und starb vor Ort.",
+    "fr": "Un mécanicien de 63 ans, qui voyageait dans un train, s’est retrouvé sous celui-ci en le quittant, pour des raisons inconnues, et est décédé sur place.",
+    "it": "Un macchinista di 63 anni, scendendo da un treno su cui viaggiava, è finito sotto il convoglio per motivi ignoti ed è morto sul posto.",
+    "en": "A 63-year-old train driver, riding as a passenger, ended up under the train while leaving it, for unknown reasons, and died at the scene."
+   },
+   "equipment": null,
+   "injuries": {
+    "de": "Tödlich",
+    "fr": "Mortel",
+    "it": "Mortale",
+    "en": "Fatal"
+   },
+   "emergency": null,
+   "investigation": {
+    "de": "Strafuntersuchung der Staatsanwaltschaft eröffnet",
+    "fr": "Instruction ouverte par le Ministère public",
+    "it": "Istruzione aperta dal Ministero pubblico",
+    "en": "Criminal investigation opened by the prosecutor"
+   }
+  },
+  "lesson": {
+   "de": "Ein- und Aussteigen nur bei Stillstand; auch Personal ist beim Verlassen eines Zuges im Gleisbereich gefährdet.",
+   "fr": "Monter et descendre seulement à l’arrêt complet; le personnel aussi est exposé en quittant un train.",
+   "it": "Salire e scendere solo a treno fermo; anche il personale è esposto scendendo dal treno.",
+   "en": "Board and alight only when fully stopped; staff are exposed too when leaving a train."
+  }
+ },
+ {
+  "id": "2024-01-22-ti-cavergno-strom",
+  "caseId": "case-2024-01-22-ti-cavergno-strom",
+  "date": "2024-01-22",
+  "dateType": "event",
+  "canton": "TI",
+  "place": "Cavergno",
+  "industry": "energy",
+  "hazard": "hazmat",
+  "outcome": "fatal",
+  "source": {
+   "name": "Polizeinews.ch",
+   "url": "https://www.polizeinews.ch/2024/01/23/cavergno-ti-toedlicher-arbeitsunfall-35-jaehriger-schweizer-erlitt-stromschlag/",
+   "lang": "de"
+  },
+  "title": {
+   "de": "Stromschlag im Wasserkraftwerk: Arbeiter (35) stirbt",
+   "fr": "Électrocution dans une centrale hydraulique: un ouvrier de 35 ans meurt",
+   "it": "Folgorazione in una centrale idroelettrica: muore un operaio di 35 anni",
+   "en": "Electric shock at hydro plant: worker (35) dies"
+  },
+  "facts": {
+   "activity": null,
+   "what": {
+    "de": "Bei Arbeiten in einem Wasserkraftwerk erlitt ein 35-Jähriger aus noch ungeklärten Gründen einen Stromschlag; er starb nach der Erstversorgung.",
+    "fr": "Lors de travaux dans une centrale hydroélectrique, un homme de 35 ans a été électrocuté pour des raisons encore inconnues; il est décédé après les premiers soins.",
+    "it": "Durante lavori in una centrale idroelettrica un 35enne è rimasto folgorato per motivi ancora da chiarire; è morto dopo le prime cure.",
+    "en": "While working in a hydroelectric plant, a 35-year-old suffered an electric shock for reasons still unclear; he died after first aid."
+   },
+   "equipment": null,
+   "injuries": {
+    "de": "Tödlich",
+    "fr": "Mortel",
+    "it": "Mortale",
+    "en": "Fatal"
+   },
+   "emergency": null,
+   "investigation": {
+    "de": "Strafuntersuchung der Staatsanwaltschaft eröffnet",
+    "fr": "Instruction ouverte par le Ministère public",
+    "it": "Istruzione aperta dal Ministero pubblico",
+    "en": "Criminal investigation opened by the prosecutor"
+   }
+  },
+  "lesson": {
+   "de": "Vor Arbeiten an elektrischen Anlagen: freischalten, gegen Wiedereinschalten sichern, Spannungsfreiheit prüfen, erden.",
+   "fr": "Avant toute intervention électrique: déclencher, condamner, vérifier l’absence de tension, mettre à terre.",
+   "it": "Prima di lavori elettrici: disinserire, bloccare, verificare l’assenza di tensione, mettere a terra.",
+   "en": "Before electrical work: switch off, lock out, verify no voltage, earth."
+  }
+ }
 ]

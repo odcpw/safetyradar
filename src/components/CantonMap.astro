@@ -1,0 +1,15 @@
+---
+// Canton tile map. mode 'link' (homepage: tiles link to the accidents list) or 'filter' (list pages: tiles toggle ?canton=).
+import { CANTONS, TILES } from '../lib';
+const { counts, lang, mode = 'link', caption } = Astro.props as { counts: Record<string, number>; lang: string; mode?: 'link' | 'filter'; caption: string };
+const maxC = Math.max(1, ...Object.values(counts));
+const level = (n: number) => n === 0 ? 0 : Math.min(4, Math.ceil((n / maxC) * 4));
+---
+<figure class="cmap" data-mode={mode}>
+  <div class="tiles">
+    {TILES.map(([c, x, y]) => { const n = counts[c] || 0; const st = `grid-column:${x + 1};grid-row:${y + 1}`; return n
+      ? <a class={`tile l${level(n)}`} style={st} href={mode === 'link' ? `/${lang}/accidents/?canton=${c}` : `?canton=${c}`} data-chip="canton" data-val={c} title={`${CANTONS[c]}: ${n}`}><span>{c}</span><b>{n}</b></a>
+      : <span class="tile l0" style={st} title={CANTONS[c]}><span>{c}</span></span>; })}
+  </div>
+  <figcaption>{caption}</figcaption>
+</figure>

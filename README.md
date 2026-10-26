@@ -53,3 +53,12 @@ Owner details (red TODO markers in imprint/privacy/about/post-a-job, all 4 langu
 Private preview at https://odcpw.github.io/safetyradar/ – `noindex, nofollow` on every page and a disallow-all robots.txt.
 `.github/workflows/pages.yml` builds on push to `main` with `SITE=https://odcpw.github.io BASE=/safetyradar NOINDEX=1`;
 `scripts/rebase.mjs` prefixes root-relative links with the base and writes the robots.txt. A normal `npm run build` targets safetyradar.ch at `/`.
+
+## v4 (2026-10-26)
+- Design C: stats strip, canton tile map, chronological list (date/canton gutter, severity edge, 2-line lesson teaser). No design switcher.
+- List items expand in place (`<details>`, works without JS) to a slim view; permalink pages keep the same slim content.
+- Accidents: one meta line, 1–2 sentence "what happened", lesson, source. Rulings: what happened / decision / why, one line per person, lesson, source.
+- Year + month chips with counts, combinable with the canton map and the selects; state lives in the URL (`?canton=BE&year=2025&month=03`, `&open=<caseId>` expands an item).
+- Homepage order: rulings, accidents, jobs.
+- Data seeds: `scripts/seed/rulings.py` → `rulings_v4.py` (2023–2026 backfill from entscheidsuche.ch, Téléverbier removed); `accidents.py` → `accidents_v3.py` → `accidents_v4.py` (polizeinews.ch archive back to 2024).
+- `scripts/fetch-sources.mjs`: new RSS sources from `docs/source-audit.md` (RSI, laRegione, Tio, Stadt Zürich, Stapo Winterthur, Uri, Tamedia, SRF, RTS, 20 Minuten, Blick, Watson; Atom supported). General-media feeds need an incident word in the title; the same event from several outlets is merged into one candidate (`alsoReportedBy`). `--since=2023-01-01` widens the entscheidsuche window; `--only=id1,id2` runs a subset.

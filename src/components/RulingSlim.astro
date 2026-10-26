@@ -1,0 +1,26 @@
+---
+import Lesson from './Lesson.astro';
+import { fmtDate, sanctionText } from '../lib';
+import { t, tax, pick, type Lang } from '../i18n/ui';
+const { item, lang, permalink = false } = Astro.props as { item: any; lang: Lang; permalink?: boolean };
+const tt = (k: string) => t(lang, k); const pk = (v: any) => pick(lang, v);
+const meta = [fmtDate(item.date, lang), pk(item.court), item.place ? `${item.place} (${item.canton})` : item.canton, tax(lang, 'outcome', item.outcome)].filter(Boolean);
+const why = pk(item.why) ?? (item.defendants?.length === 1 ? null : null);
+const line = (d: any) => {
+  const charge = (pk(d.charge) || '').replace(/\s*\(Art\.[^)]*\)|\s*\(art\.[^)]*\)/g, '');
+  const head = d.verdict === 'convicted' ? `${tt('w.convicted')} ${charge.charAt(0).toLowerCase() + charge.slice(1)}` : d.verdict === 'acquitted' ? `${tt('w.acquitted')} ${charge.charAt(0).toLowerCase() + charge.slice(1)}` : `${tt('w.open')} ${charge}`;
+  const sanc = d.verdict === 'convicted' ? (sanctionText(d.sanction, lang, tt, pk) || tt('w.nr')) : '';
+  const reason = pk(d.short) ?? pk(d.reasoning);
+  return { role: pk(d.role), text: `${head}${sanc ? ', ' + sanc : ''}.`, reason };
+};
+---
+<div class="slim">
+  <p class="mline">{meta.join(' · ')}{item.caseNumber && <> · {item.caseNumber}</>}</p>
+  {pk(item.facts?.what) && <p><span class="lbl">{tt('r.what')}</span> {pk(item.facts.what)}</p>}
+  {pk(item.appeal) && <p><span class="lbl">{tt('r.decided')}</span> {pk(item.appeal)}</p>}
+  {why && <p><span class="lbl">{tt('r.why')}</span> {why}</p>}
+  {item.defendants?.length > 0 && <ul class="people">{item.defendants.map((d: any) => { const l = line(d); return <li class={`v-${d.verdict}`}><b>{l.role}:</b> {l.text} {l.reason && <span class="why">{l.reason}</span>}</li>; })}</ul>}
+  <Lesson text={pk(item.lesson)} />
+  <p class="srcline">{tt('source')}: <a href={item.source.url} target="_blank" rel="noopener">{item.source.name}</a> ({item.source.lang.toUpperCase()}){item.extraSources?.map((s: any) => <> · <a href={s.url} target="_blank" rel="noopener">{s.name}</a> ({s.lang.toUpperCase()})</>)}
+  {permalink && <> · <a class="plink" href={`/${lang}/rulings/${item.id}/`}>{tt('permalink')}</a></>}</p>
+</div>

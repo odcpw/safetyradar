@@ -1,0 +1,14 @@
+---
+import Lesson from './Lesson.astro';
+import { fmtDate } from '../lib';
+import { t, tax, pick, type Lang } from '../i18n/ui';
+const { item, lang, permalink = false } = Astro.props as { item: any; lang: Lang; permalink?: boolean };
+const meta = [fmtDate(item.date, lang), item.place ? `${item.place} (${item.canton})` : item.canton, tax(lang, 'industry', item.industry), tax(lang, 'outcome', item.outcome)].filter(Boolean);
+---
+<div class="slim">
+  <p class="mline">{meta.join(' · ')}</p>
+  {pick(lang, item.facts?.what) && <p>{pick(lang, item.facts.what)}</p>}
+  <Lesson text={pick(lang, item.lesson)} />
+  <p class="srcline">{t(lang, 'source')}: <a href={item.source.url} target="_blank" rel="noopener">{item.source.name}</a> ({item.source.lang.toUpperCase()}){item.extraSources?.map((s: any) => <> · <a href={s.url} target="_blank" rel="noopener">{s.name}</a> ({s.lang.toUpperCase()})</>)}
+  {permalink && <> · <a class="plink" href={`/${lang}/accidents/${item.id}/`}>{t(lang, 'permalink')}</a></>}</p>
+</div>

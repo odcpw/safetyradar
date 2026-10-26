@@ -1,0 +1,69 @@
+---
+// Canton map + year/month chips + selects; all combinable, state mirrored in the URL (?canton=&year=&month=&outcome=...).
+import CantonMap from './CantonMap.astro';
+import { countBy, monthName, uniq } from '../lib';
+import { t, tax, type Lang } from '../i18n/ui';
+const { items, lang, target, mapCaption } = Astro.props as { items: any[]; lang: Lang; target: string; mapCaption: string };
+const years = uniq(items.map(i => i.date.slice(0, 4))).reverse();
+const yc = countBy(items, i => i.date.slice(0, 4));
+const mc = countBy(items, i => i.date.slice(5, 7));
+const months = Array.from({ length: 12 }, (_, i) => String(i + 1).padStart(2, '0'));
+const selects: [string, string, [string, string][]][] = [
+  ['outcome', t(lang, 'f.severity'), uniq(items.map(i => i.outcome)).map(h => [h, tax(lang, 'outcome', h)])],
+  ['industry', t(lang, 'filter.industry'), uniq(items.map(i => i.industry)).map(h => [h, tax(lang, 'industry', h)])],
+  ['lang', t(lang, 'filter.lang'), uniq(items.map(i => i.source.lang)).map(h => [h, h.toUpperCase()])],
+];
+---
+<form class="lf" data-target={target} data-of={t(lang, 'filter.of')} data-entries={t(lang, 'filter.entries')} onsubmit="return false">
+  <div class="lf-top">
+    <CantonMap counts={countBy(items, i => i.canton)} lang={lang} mode="filter" caption={mapCaption} />
+    <div class="lf-side">
+      <div class="chips" role="group" aria-label={t(lang, 'chip.year')}><span class="clbl">{t(lang, 'chip.year')}</span>
+        <a class="chip on" href="?" data-chip="year" data-val="">{t(lang, 'chip.all')}</a>
+        {years.map(y => <a class="chip" href={`?year=${y}`} data-chip="year" data-val={y}>{y} <b>{yc[y]}</b></a>)}
+      </div>
+      <div class="chips months" role="group" aria-label={t(lang, 'chip.month')}><span class="clbl">{t(lang, 'chip.month')}</span>
+        <a class="chip on" href="?" data-chip="month" data-val="">{t(lang, 'chip.all')}</a>
+        {months.map(m => <a class={`chip${mc[m] ? '' : ' zero'}`} href={`?month=${m}`} data-chip="month" data-val={m}>{monthName(+m, lang)} <b>{mc[m] || 0}</b></a>)}
+      </div>
+      <div class="sels">
+        {selects.map(([k, label, opts]) => <label>{label}<select name={k}><option value="">{t(lang, 'filter.all')}</option>{opts.map(([v, l]) => <option value={v}>{l}</option>)}</select></label>)}
+      </div>
+      <div class="lf-foot"><span class="count" aria-live="polite"></span> <span class="activecanton"></span> <button type="reset" class="linkbtn">{t(lang, 'filter.reset')}</button></div>
+    </div>
+  </div>
+</form>
+<script>
+  document.querySelectorAll<HTMLFormElement>('form.lf').forEach(form => {
+    const list = document.querySelector(form.dataset.target!)!;
+    const items = [...list.querySelectorAll<HTMLElement>('[data-canton]')];
+    const chips = [...form.querySelectorAll<HTMLAnchorElement>('[data-chip]')];
+    const selects = [...form.querySelectorAll<HTMLSelectElement>('select')];
+    const keys = ['canton', 'year', 'month', ...selects.map(s => s.name)];
+    const st: Record<string, string> = {};
+    const qp = new URLSearchParams(location.search);
+    keys.forEach(k => st[k] = qp.get(k) || '');
+    const match = (el: HTMLElement, skip?: string) => keys.every(k => k === skip || !st[k] || el.dataset[k] === st[k]);
+    const out = form.querySelector('.count')!; const ac = form.querySelector('.activecanton')!;
+    const apply = (push = true) => {
+      selects.forEach(s => s.value = st[s.name]);
+      let n = 0;
+      items.forEach(el => { const ok = match(el); el.classList.toggle('hidden', !ok); if (ok) n++; });
+      chips.forEach(c => {
+        const k = c.dataset.chip!, v = c.dataset.val!;
+        c.classList.toggle('on', st[k] === v);
+        if (v) { const cnt = items.filter(el => match(el, k) && el.dataset[k] === v).length; const b = c.querySelector('b'); if (b) b.textContent = String(cnt); c.classList.toggle('zero', cnt === 0); }
+      });
+      out.textContent = `${n} ${form.dataset.of} ${items.length} ${form.dataset.entries}`;
+      ac.textContent = st.canton ? `· ${st.canton} ✕` : '';
+      if (push) { const q = new URLSearchParams(); keys.forEach(k => st[k] && q.set(k, st[k])); if (qp.get('open')) q.set('open', qp.get('open')!); history.replaceState(null, '', (q.toString() ? '?' + q : location.pathname) + location.hash); }
+    };
+    chips.forEach(c => c.addEventListener('click', e => { e.preventDefault(); const k = c.dataset.chip!, v = c.dataset.val!; st[k] = st[k] === v ? '' : v; apply(); }));
+    ac.addEventListener('click', () => { st.canton = ''; apply(); });
+    form.addEventListener('change', e => { const s = e.target as HTMLSelectElement; st[s.name] = s.value; apply(); });
+    form.addEventListener('reset', () => setTimeout(() => { keys.forEach(k => st[k] = ''); apply(); }));
+    apply(false);
+    const openId = qp.get('open') || location.hash.slice(1);
+    if (openId) { const d = document.getElementById(openId); if (d instanceof HTMLDetailsElement) d.open = true; }
+  });
+</script>

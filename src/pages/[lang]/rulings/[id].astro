@@ -1,61 +1,17 @@
 ---
 import Base from '../../../layouts/Base.astro';
-import Lesson from '../../../components/Lesson.astro';
-import FactRow from '../../../components/FactRow.astro';
+import RulingSlim from '../../../components/RulingSlim.astro';
 import data from '../../../../data/rulings.json';
-import { CANTONS, fmtDate } from '../../../lib';
-import { t, tax, pick, LANGS, type Lang } from '../../../i18n/ui';
+import { t, pick, LANGS, type Lang } from '../../../i18n/ui';
 export function getStaticPaths() { return LANGS.flatMap(lang => data.map((item: any) => ({ params: { lang, id: item.id }, props: { item } }))); }
-const lang = Astro.params.lang as Lang; const { item } = Astro.props as any; const f = item.facts;
+const lang = Astro.params.lang as Lang; const { item } = Astro.props as any;
 const title = pick(lang, item.title)!;
-const fin = item.final === true ? t(lang,'yes') : item.final === false ? t(lang,'no') : null;
-const d = (v: string | null) => !v ? null : v.length === 7 ? new Date(v + '-01').toLocaleDateString({de:'de-CH',fr:'fr-CH',it:'it-CH',en:'en-GB'}[lang], { year: 'numeric', month: 'long' }) : fmtDate(v, lang);
-const chf = (n: number) => 'CHF ' + n.toLocaleString('de-CH');
-const yn = (b: boolean | null) => b === true ? t(lang,'yes') : b === false ? t(lang,'no').split(' ')[0] : null;
 ---
-<Base title={title} lang={lang} description={pick(lang, f.what) ?? undefined}>
-  <p><a href={`/${lang}/rulings/`}>{t(lang, 'back')}</a></p>
-  <div class="meta"><span class="tag canton">{item.canton}</span>{item.court && <span class="tag">{pick(lang,item.court)}</span>}{item.outcome && <span class={`tag out ${item.outcome}`}>{tax(lang,'outcome',item.outcome)}</span>}</div>
-  <h1>{title}</h1>
-  <div class="srcbox"><div><strong>{t(lang,'source')}:</strong> {item.source.name} · {t(lang,'source.lang')}: {item.source.lang.toUpperCase()}</div><a class="btn" href={item.source.url} target="_blank" rel="noopener">{t(lang,'source.open')}</a></div>
-  <h2>{t(lang,'detail.factsheet')}</h2>
-  <dl class="facts">
-    <FactRow lang={lang} label={t(lang,'f.accidentDate')} value={d(item.accidentDate)} />
-    <FactRow lang={lang} label={t(lang,'f.rulingDate')} value={d(item.date)} />
-    <FactRow lang={lang} label={t(lang,'f.court')} value={pick(lang,item.court)} />
-    <FactRow lang={lang} label={t(lang,'f.case')} value={item.caseNumber} />
-    <FactRow lang={lang} label={t(lang,'f.place')} value={`${item.place ? item.place + ' ' : ''}(${item.canton} – ${CANTONS[item.canton]})`} />
-    <FactRow lang={lang} label={t(lang,'f.industry')} value={item.industry ? tax(lang,'industry',item.industry) : null} />
-    <FactRow lang={lang} label={t(lang,'f.activity')} value={pick(lang,f.activity)} />
-    <FactRow lang={lang} label={t(lang,'f.what')} value={pick(lang,f.what)} />
-    <FactRow lang={lang} label={t(lang,'f.injuries')} value={pick(lang,f.injuries)} />
-    <FactRow lang={lang} label={t(lang,'f.employer')} value={pick(lang,item.employerRole)} />
-    <FactRow lang={lang} label={t(lang,'f.final')} value={fin} />
-    <FactRow lang={lang} label={t(lang,'f.appeal')} value={pick(lang,item.appeal)} />
-  </dl>
-  <h2>{t(lang,'f.defendants')}</h2>
-  <div class="defs">
-  {item.defendants.map((p: any) => { const s = p.sanction; return (
-    <section class="def">
-      <h3>{pick(lang,p.role)} <span class={`tag verdict ${p.verdict}`}>{t(lang,'d.'+p.verdict)}</span></h3>
-      <dl class="facts">
-        <FactRow lang={lang} label={t(lang,'f.charge')} value={pick(lang,p.charge)} />
-        <FactRow lang={lang} label={t(lang,'d.reasoning')} value={pick(lang,p.reasoning)} />
-        {p.verdict !== 'acquitted' && <>
-        <FactRow lang={lang} label={t(lang,'s.daily')} value={s.dailyUnits ? `${s.dailyUnits} ${t(lang,'s.units')}${s.dailyAmount ? ` ${t(lang,'s.per')} ${chf(s.dailyAmount)}` : ''}${s.dailyAmount ? ` (= ${chf(s.dailyUnits*s.dailyAmount)})` : ''}` : null} />
-        <FactRow lang={lang} label={t(lang,'s.suspended')} value={yn(s.suspended)} />
-        <FactRow lang={lang} label={t(lang,'s.probation')} value={s.probationYears ? `${s.probationYears} ${t(lang,'s.years')}` : null} />
-        <FactRow lang={lang} label={t(lang,'s.fine')} value={s.fineCHF ? chf(s.fineCHF) : null} />
-        <FactRow lang={lang} label={t(lang,'s.custodial')} value={pick(lang,s.custodial)} />
-        <FactRow lang={lang} label={t(lang,'s.costs')} value={pick(lang,s.costs)} />
-        <FactRow lang={lang} label={t(lang,'s.compensation')} value={pick(lang,s.compensation)} />
-        <FactRow lang={lang} label={t(lang,'s.bail')} value={pick(lang,s.bail)} />
-        {s.other && <FactRow lang={lang} label={t(lang,'s.other')} value={pick(lang,s.other)} />}
-        </>}
-      </dl>
-    </section>); })}
-  </div>
-  <Lesson text={pick(lang, item.lesson)} />
-  {item.extraSources?.map((s: any) => <p class="src">{t(lang,'source.also')}: <a href={s.url} target="_blank" rel="noopener">{s.name}</a> ({s.lang.toUpperCase()})</p>)}
+<Base title={title} lang={lang} description={pick(lang, item.facts?.what) ?? undefined}>
+  <p class="back"><a href={`/${lang}/rulings/`}>{t(lang, 'back')}</a></p>
+  <article class={`perma sev-${item.outcome ?? 'none'}`}>
+    <h1>{title}</h1>
+    <RulingSlim item={item} lang={lang} />
+  </article>
   <p class="src">{t(lang,'detail.disclaimer')}</p>
 </Base>

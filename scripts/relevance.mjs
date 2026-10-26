@@ -15,7 +15,9 @@ const IND = [['construction', /bau|chantier|cantiere|gerüst|échafaudage|ponteg
 const OUT = [['fatal', /tödlich|tot\b|stirbt|gestorben|verstorben|mortel|décéd|décès|tué|mort|mortale|morto|decedut|fatal|killed|†/i], ['life_threatening', /lebensbedrohlich|lebensgefährlich|pronostic vital|pericolo di vita/i], ['serious', /schwer verletzt|grièvement|gravemente|seriously/i], ['injured', /verletzt|blessé|ferit|injur/i]];
 const first = (rules, s) => (rules.find(([, re]) => re.test(s)) || [null])[0];
 
-export function classify({ title = '', url = '', lang, kind, sourceCanton, categories = [], trusted, sourceType }) {
+// General media feeds (v4) need an explicit incident word on top of a work keyword.
+const INCIDENT = /unfall|verunfall|verletzt|tödlich|stirbt|gestorben|\btot\b|eingeklemmt|stürz|abgestürzt|accident|blessé|mort|décéd|chute|électrocut|infortun|ferit|morto|decedut|incidente|caduto|precipitat|folgorat|schiacciat|verurteil|strafbefehl|condamn|condann/i;
+export function classify({ title = '', url = '', lang, kind, sourceCanton, categories = [], trusted, sourceType, general }) {
   const host = (() => { try { return new URL(url).hostname; } catch { return ''; } })();
   const text = `${title} ${categories.join(' ')}`;
   let canton = sourceCanton || null;
@@ -33,6 +35,7 @@ export function classify({ title = '', url = '', lang, kind, sourceCanton, categ
   if (FOREIGN_HOST.test(host) && !SWISS_HOST.test(host)) return drop('foreign publisher');
   if (FOREIGN_PLACE.test(text)) return drop('foreign place name');
   const work = WORK.test(text), road = ROAD.test(text), leisure = LEISURE.test(text);
+  if (general && !INCIDENT.test(title)) return drop('general media: no incident word in title');
   if (!work && (!trusted || road)) return drop(road ? 'road traffic (no work keyword)' : leisure ? 'leisure/mountain' : 'no workplace keyword');
   if (leisure && !/arbeit|travail|lavoro|forst|forest/i.test(title)) return drop('leisure/mountain');
   if (road && !/arbeitsunfall|accident de travail|infortunio sul lavoro|sul lavoro|baustelle|chantier|cantiere|ouvrier|operaio|arbeiter|stapler|kran|grue/i.test(text)) return drop('road traffic');

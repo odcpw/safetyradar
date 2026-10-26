@@ -1,5 +1,0 @@
----
-import { t, type Lang } from '../i18n/ui';
-const { label, value, lang } = Astro.props as { label: string; value: string | null | undefined; lang: Lang };
----
-<div class="fact"><dt>{label}</dt><dd class={value ? '' : 'nr'}>{value || t(lang, 'nr')}</dd></div>
