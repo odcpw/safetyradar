@@ -8,10 +8,11 @@ const lang = Astro.params.lang as Lang; const { item } = Astro.props as any;
 const title = pick(lang, item.title)!;
 ---
 <Base title={title} lang={lang} description={pick(lang, item.facts?.what) ?? undefined}>
-  <p class="back"><a href={`/${lang}/accidents/`}>{t(lang, 'back')}</a></p>
+  <p class="back"><a id="backlink" href={`/${lang}/accidents/`}>{t(lang, 'back')}</a></p>
   <article class={`perma sev-${item.outcome ?? 'none'}`}>
     <h1>{title}</h1>
     <AccidentSlim item={item} lang={lang} />
   </article>
   <p class="src">{t(lang,'detail.disclaimer')}</p>
+  <script is:inline>(function(){var a=document.getElementById('backlink');try{var r=new URL(document.referrer);if(r.origin===location.origin&&r.pathname===a.pathname)a.href=r.href;}catch(e){}})();</script>
 </Base>

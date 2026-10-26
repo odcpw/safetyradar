@@ -200,6 +200,16 @@ new.append(R("2026-08-19-bger-6b-784-2025-ag-dachplatte","2026-08-19",None,"AG",
  L("Das Bundesgericht hiess die Beschwerde des Verletzten gut (Rüge zum Anklagegrundsatz) und wies den Fall zurück; das Obergericht muss neu urteilen.","Le TF a admis le recours de la victime (grief relatif au principe d’accusation) et renvoyé l’affaire; la Cour suprême doit rejuger.","Il TF ha accolto il ricorso della vittima (censura sul principio accusatorio) e rinviato il caso; il Tribunale superiore deve rigiudicare.","The Federal Court upheld the injured worker's appeal (on the indictment principle) and sent it back; the High Court must rule again."),
  L("Auch 2,5 m können schwer verletzen: nicht tragfähige Dachflächen nur mit Laufstegen oder Netzen.","Même 2,5 m peuvent blesser gravement: surfaces non porteuses seulement avec passerelles ou filets.","Anche 2,5 m possono ferire gravemente: superfici non portanti solo con passerelle o reti.","Even 2.5 m can cause serious injury: non-load-bearing roofs only with crawling boards or nets.")))
 
+# v4.1: earlier (now quashed or replaced) sanctions as structured fields so totals can be computed at render time.
+PRIOR={('2026-06-24-bger-6b-657-2024-sz-dach',0):(S(120,440,True,None,13200),L("Vom Kantonsgericht verurteilt; vom Bundesgericht aufgehoben, neue Beurteilung ausstehend.","Condamné par le Tribunal cantonal; annulé par le TF, nouveau jugement en attente.","Condannato dal Tribunale cantonale; annullato dal TF, nuovo giudizio in attesa.","Convicted by the Cantonal Court; quashed by the Federal Court, new ruling pending.")),
+ ('2026-06-24-bger-6b-657-2024-sz-dach',1):(S(96,200,True,None,4800),L("Vom Kantonsgericht verurteilt; vom Bundesgericht aufgehoben, neue Beurteilung ausstehend.","Condamné par le Tribunal cantonal; annulé par le TF, nouveau jugement en attente.","Condannato dal Tribunale cantonale; annullato dal TF, nuovo giudizio in attesa.","Convicted by the Cantonal Court; quashed by the Federal Court, new ruling pending.")),
+ ('2026-08-19-bger-6b-784-2025-ag-dachplatte',0):(S(120,220,True,None,5280),None)}
+for n in new:
+  for i,d in enumerate(n['defendants']):
+    if (n['id'],i) in PRIOR:
+      ps,txt=PRIOR[(n['id'],i)]; d['priorSanction']=ps
+      if txt: d['reasoning']=txt; d['short']=txt
+      d['sanction']=S()
 old=[x for x in json.load(open(P)) if x['id']!='2025-12-01-bger-6b-688-2024-vs-verbier' and x['id'] not in {n['id'] for n in new}]
 for x in old:
   x.setdefault('why',None)

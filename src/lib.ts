@@ -16,13 +16,18 @@ export const TILES: [string, number, number][] = [
 export const countBy = (items: any[], f: (x: any) => string | null | undefined) => { const m: Record<string, number> = {}; items.forEach(x => { const k = f(x); if (k) m[k] = (m[k] || 0) + 1; }); return m; };
 const NUM: Record<Lang, string> = { de: 'de-CH', fr: 'fr-CH', it: 'it-CH', en: 'en-GB' };
 export const monthName = (m: number, lang: Lang) => new Date(2000, m - 1, 15).toLocaleDateString(NUM[lang], { month: 'short' });
-const chf = (n: number, lang: Lang) => n.toLocaleString(NUM[lang]);
+// Swiss style: apostrophe thousands separator in DE/FR/IT, comma in EN.
+export const chf = (n: number, lang: Lang) => { const [i, d] = String(Math.round(n * 100) / 100).split('.'); return i.replace(/\B(?=(\d{3})+(?!\d))/g, lang === 'en' ? ',' : '’') + (d ? '.' + d.padEnd(2, '0') : ''); };
 // One-line sentence summary for a defendant's sanction; null parts omitted, never invented.
 export const sanctionText = (s: any, lang: Lang, tt: (k: string) => string, pk: (v: any) => string | null) => {
   if (!s) return '';
   const parts: string[] = [];
   const cust = pk(s.custodial); if (cust) parts.push(cust);
-  if (s.dailyUnits) parts.push(`${s.dailyUnits} ${tt('w.dayfines')} ${s.dailyAmount != null ? chf(s.dailyAmount, lang) : '?'}${s.suspended === true ? ' ' + tt('w.susp') : s.suspended === false ? ' ' + tt('w.unsusp') : ''}`);
+  if (s.dailyUnits) {
+    // total only when both count and rate are known
+    const rate = s.dailyAmount != null ? ` ${tt('w.dayfines')} ${chf(s.dailyAmount, lang)} (${tt('w.total')} CHF ${chf(s.dailyUnits * s.dailyAmount, lang)})` : ` ${tt('w.dayfinesNoRate')}`;
+    parts.push(`${s.dailyUnits}${rate}${s.suspended === true ? ', ' + tt('w.susp') : s.suspended === false ? ', ' + tt('w.unsusp') : ''}`);
+  }
   if (s.fineCHF) parts.push(`${tt('w.fine')} ${chf(s.fineCHF, lang)}`);
   const other = pk(s.other); if (other && !parts.length) parts.push(other);
   return parts.join(' + ');

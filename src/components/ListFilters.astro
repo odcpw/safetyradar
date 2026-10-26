@@ -56,14 +56,12 @@ const selects: [string, string, [string, string][]][] = [
       });
       out.textContent = `${n} ${form.dataset.of} ${items.length} ${form.dataset.entries}`;
       ac.textContent = st.canton ? `· ${st.canton} ✕` : '';
-      if (push) { const q = new URLSearchParams(); keys.forEach(k => st[k] && q.set(k, st[k])); if (qp.get('open')) q.set('open', qp.get('open')!); history.replaceState(null, '', (q.toString() ? '?' + q : location.pathname) + location.hash); }
+      if (push) { const q = new URLSearchParams(); keys.forEach(k => st[k] && q.set(k, st[k])); history.replaceState(null, '', (q.toString() ? '?' + q : location.pathname) + location.hash); }
     };
     chips.forEach(c => c.addEventListener('click', e => { e.preventDefault(); const k = c.dataset.chip!, v = c.dataset.val!; st[k] = st[k] === v ? '' : v; apply(); }));
     ac.addEventListener('click', () => { st.canton = ''; apply(); });
     form.addEventListener('change', e => { const s = e.target as HTMLSelectElement; st[s.name] = s.value; apply(); });
     form.addEventListener('reset', () => setTimeout(() => { keys.forEach(k => st[k] = ''); apply(); }));
     apply(false);
-    const openId = qp.get('open') || location.hash.slice(1);
-    if (openId) { const d = document.getElementById(openId); if (d instanceof HTMLDetailsElement) d.open = true; }
   });
 </script>

@@ -1,20 +1,18 @@
 ---
-// B-list entry with inline expansion (<details>, works without JS).
-import AccidentSlim from './AccidentSlim.astro';
-import RulingSlim from './RulingSlim.astro';
+// List entry: news-style, title links to the permalink page.
 import { CANTONS, fmtDate } from '../lib';
 import { tax, pick, type Lang } from '../i18n/ui';
 const { item, lang, kind } = Astro.props as { item: any; lang: Lang; kind: 'accidents' | 'rulings' };
 const meta = kind === 'rulings' ? [pick(lang, item.court), tax(lang, 'outcome', item.outcome)] : [item.place, tax(lang, 'industry', item.industry), tax(lang, 'outcome', item.outcome)];
+const href = `/${lang}/${kind}/${item.id}/`;
 ---
-<details class={`item sev-${item.outcome ?? 'none'}`} id={item.caseId} data-canton={item.canton} data-outcome={item.outcome ?? ''} data-industry={item.industry ?? ''} data-lang={item.source.lang} data-year={item.date.slice(0, 4)} data-month={item.date.slice(5, 7)}>
-  <summary>
+<article class={`item sev-${item.outcome ?? 'none'}`} id={item.caseId} data-canton={item.canton} data-outcome={item.outcome ?? ''} data-industry={item.industry ?? ''} data-lang={item.source.lang} data-year={item.date.slice(0, 4)} data-month={item.date.slice(5, 7)}>
+  <div class="row">
     <div class="gutter"><time datetime={item.date}>{fmtDate(item.date, lang)}</time><span class="gc" title={CANTONS[item.canton]}>{item.canton}</span></div>
     <div class="body">
-      <h3>{pick(lang, item.title)}</h3>
+      <h3><a href={href}>{pick(lang, item.title)}</a></h3>
       <div class="meta2">{meta.filter(Boolean).map(m => <span>{m}</span>)}</div>
       {pick(lang, item.lesson) && <p class="teaser">{pick(lang, item.lesson)}</p>}
     </div>
-  </summary>
-  <div class="detail">{kind === 'rulings' ? <RulingSlim item={item} lang={lang} permalink /> : <AccidentSlim item={item} lang={lang} permalink />}</div>
-</details>
+  </div>
+</article>

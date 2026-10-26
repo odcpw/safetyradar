@@ -129,13 +129,13 @@
   },
   "caseNumber": null,
   "final": null,
-  "appeal": null,
-  "employerRole": {
-   "de": "Baustelle zur Umwandlung eines Hotels in eine Seniorenresidenz; Rolle des Unternehmens nicht berichtet.",
-   "fr": "Chantier de transformation d’un hôtel en résidence pour seniors; rôle de l’entreprise non rapporté.",
-   "it": "Cantiere di trasformazione di un albergo in residenza per anziani; ruolo dell’impresa non riportato.",
-   "en": "Site converting a hotel into a senior residence; company's role not reported."
+  "appeal": {
+   "de": "Corte delle Assise correzionali Lugano, Urteil am 2.9.2026 eröffnet; schriftliche Begründung am Folgetag.",
+   "fr": "Cour des assises correctionnelles de Lugano, jugement communiqué le 2.9.2026; motivation écrite le lendemain.",
+   "it": "Corte delle Assise correzionali di Lugano, sentenza comunicata il 2.9.2026; motivazioni scritte il giorno seguente.",
+   "en": "Lugano Correctional Assizes, verdict notified on 2.9.2026; written reasons the next day."
   },
+  "employerRole": null,
   "defendants": [
    {
     "role": {
@@ -152,10 +152,10 @@
     },
     "verdict": "convicted",
     "reasoning": {
-     "de": "Schuldig gesprochen; die Begründung ist im Bericht nicht wiedergegeben.",
-     "fr": "Reconnu coupable; la motivation n’est pas rapportée.",
-     "it": "Ritenuto colpevole; la motivazione non è riportata.",
-     "en": "Found guilty; reasoning not reported."
+     "de": "Überwachte Umsetzung und Einhaltung der (ungenügenden) Massnahmen nicht; setzte auch andere Schutzmassnahmen, etwa gegen Absturz am offenen Liftschacht, nicht durch.",
+     "fr": "N’a pas surveillé la mise en œuvre et le respect des mesures (insuffisantes); n’a pas non plus imposé d’autres protections, notamment contre les chutes à la cage d’ascenseur ouverte.",
+     "it": "Non ha sorvegliato attuazione ed esecuzione delle misure (insufficienti); non ha imposto altre protezioni, ad esempio contro le cadute nel vano ascensore aperto.",
+     "en": "Did not supervise how the (insufficient) measures were implemented and followed; also failed to enforce other protection, e.g. against falls at the open lift shaft."
     },
     "sanction": {
      "dailyUnits": 180,
@@ -169,7 +169,12 @@
      "bail": null,
      "other": null
     },
-    "short": null
+    "short": {
+     "de": "Überwachte Umsetzung und Einhaltung der (ungenügenden) Massnahmen nicht; setzte auch andere Schutzmassnahmen, etwa gegen Absturz am offenen Liftschacht, nicht durch.",
+     "fr": "N’a pas surveillé la mise en œuvre et le respect des mesures (insuffisantes); n’a pas non plus imposé d’autres protections, notamment contre les chutes à la cage d’ascenseur ouverte.",
+     "it": "Non ha sorvegliato attuazione ed esecuzione delle misure (insufficienti); non ha imposto altre protezioni, ad esempio contro le cadute nel vano ascensore aperto.",
+     "en": "Did not supervise how the (insufficient) measures were implemented and followed; also failed to enforce other protection, e.g. against falls at the open lift shaft."
+    }
    },
    {
     "role": {
@@ -186,10 +191,10 @@
     },
     "verdict": "convicted",
     "reasoning": {
-     "de": "Schuldig gesprochen; die Begründung ist im Bericht nicht wiedergegeben.",
-     "fr": "Reconnu coupable; la motivation n’est pas rapportée.",
-     "it": "Ritenuto colpevole; la motivazione non è riportata.",
-     "en": "Found guilty; reasoning not reported."
+     "de": "Sein Sicherheitsplan sicherte die Ankunftszone des Materials nicht wirksam ab.",
+     "fr": "Son plan de sécurité ne protégeait pas efficacement la zone d’arrivée du matériel.",
+     "it": "Il suo piano di sicurezza non proteggeva efficacemente la zona di arrivo del materiale.",
+     "en": "His safety plan did not effectively secure the landing zone for the material."
     },
     "sanction": {
      "dailyUnits": 180,
@@ -203,7 +208,12 @@
      "bail": null,
      "other": null
     },
-    "short": null
+    "short": {
+     "de": "Sein Sicherheitsplan sicherte die Ankunftszone des Materials nicht wirksam ab.",
+     "fr": "Son plan de sécurité ne protégeait pas efficacement la zone d’arrivée du matériel.",
+     "it": "Il suo piano di sicurezza non proteggeva efficacemente la zona di arrivo del materiale.",
+     "en": "His safety plan did not effectively secure the landing zone for the material."
+    }
    },
    {
     "role": {
@@ -215,10 +225,10 @@
     "charge": null,
     "verdict": "acquitted",
     "reasoning": {
-     "de": "Vollständig freigesprochen; Begründung nicht berichtet.",
-     "fr": "Acquitté sur toute la ligne; motivation non rapportée.",
-     "it": "Prosciolto su tutta la linea; motivazione non riportata.",
-     "en": "Fully acquitted; reasoning not reported."
+     "de": "Freigesprochen: Er hatte die erhaltenen Anweisungen ausgeführt.",
+     "fr": "Acquitté: il avait exécuté les instructions reçues.",
+     "it": "Prosciolto: aveva eseguito le istruzioni ricevute.",
+     "en": "Acquitted: he had carried out the instructions he was given."
     },
     "sanction": {
      "dailyUnits": null,
@@ -232,7 +242,12 @@
      "bail": null,
      "other": null
     },
-    "short": null
+    "short": {
+     "de": "Freigesprochen: Er hatte die erhaltenen Anweisungen ausgeführt.",
+     "fr": "Acquitté: il avait exécuté les instructions reçues.",
+     "it": "Prosciolto: aveva eseguito le istruzioni ricevute.",
+     "en": "Acquitted: he had carried out the instructions he was given."
+    }
    }
   ],
   "linkedAccidentId": null,
@@ -241,7 +256,18 @@
    "url": "https://www.rsi.ch/info/ticino-grigioni-e-insubria/Du-Lac-fu-omicidio-colposo--4054194.html",
    "lang": "it"
   },
-  "extraSources": [],
+  "extraSources": [
+   {
+    "name": "Tio.ch",
+    "url": "https://www.tio.ch/ticino/cronaca/1947586/hotel-lac",
+    "lang": "it"
+   },
+   {
+    "name": "laRegione",
+    "url": "https://epaper.laregione.ch/article/281848650471651",
+    "lang": "it"
+   }
+  ],
   "title": {
    "de": "Baustelle Ex-Hotel Du Lac: Bauführer und Sicherheitsverantwortlicher verurteilt",
    "fr": "Chantier de l’ex-Hôtel Du Lac: chef de chantier et responsable sécurité condamnés",
@@ -274,7 +300,12 @@
    "it": "Mai lanciare il materiale: scivolo o gru, zona di caduta sbarrata. Ne rispondono anche capocantiere e responsabile della sicurezza.",
    "en": "Never throw material down: use a chute or crane and fence the drop zone. Site management and the safety officer share liability."
   },
-  "why": null
+  "why": {
+   "de": "Der Sicherheitsplan sicherte die Zone, in der das durch den Liftschacht geworfene Material ankam, nicht wirksam ab; es fehlte die Gewissheit, dass sich dort niemand aufhält, bis die Würfe beendet sind – etwa mit eindeutigen Lichtsignalen, die vorgesehen, aber verworfen worden waren. Mit diesen Massnahmen wäre der Tod vermeidbar gewesen.",
+   "fr": "Le plan de sécurité ne protégeait pas efficacement la zone d’arrivée du matériel jeté par la cage d’ascenseur; rien ne garantissait que personne ne s’y trouve avant la fin des lancers – par exemple avec des signaux lumineux clairs, envisagés puis écartés. Avec ces mesures, le décès aurait été évitable.",
+   "it": "Il piano di sicurezza non metteva efficacemente in sicurezza la zona di arrivo del materiale gettato dal vano ascensore; mancava la certezza che nessuno vi si trovasse fino alla fine dei lanci – ad esempio con segnali luminosi inequivocabili, previsti ma scartati. Con queste misure il decesso sarebbe stato evitabile.",
+   "en": "The safety plan did not effectively secure the zone where material thrown down the lift shaft landed; nothing ensured nobody was there until the throwing had ended – e.g. clear light signals, which had been considered and dropped. With those measures the death would have been avoidable."
+  }
  },
  {
   "id": "2026-08-19-bger-6b-784-2025-ag-dachplatte",
@@ -337,18 +368,25 @@
      "costs": null,
      "compensation": null,
      "bail": null,
-     "other": {
-      "de": "Ursprünglicher Strafbefehl: 120 Tagessätze à CHF 220 bedingt + CHF 5280 Busse",
-      "fr": "Ordonnance initiale: 120 jours-amende à CHF 220 avec sursis + CHF 5280 d’amende",
-      "it": "Decreto iniziale: 120 aliquote da CHF 220 sospese + multa CHF 5280",
-      "en": "Original penalty order: 120 day-fines of CHF 220 suspended + CHF 5,280 fine"
-     }
+     "other": null
     },
     "short": {
      "de": "Zweimal freigesprochen; das Bundesgericht hob den Freispruch auf. Zum Unfallzeitpunkt waren weder Laufstege noch Auffangnetze montiert.",
      "fr": "Acquitté deux fois; le TF a annulé l’acquittement. Au moment de l’accident, il n’y avait ni passerelles ni filets.",
      "it": "Assolto due volte; il TF ha annullato l’assoluzione. Al momento dell’incidente non c’erano né passerelle né reti.",
      "en": "Acquitted twice; the Federal Court quashed the acquittal. At the time there were no crawling boards or safety nets."
+    },
+    "priorSanction": {
+     "dailyUnits": 120,
+     "dailyAmount": 220,
+     "suspended": true,
+     "probationYears": null,
+     "fineCHF": 5280,
+     "custodial": null,
+     "costs": null,
+     "compensation": null,
+     "bail": null,
+     "other": null
     }
    }
   ],
@@ -582,13 +620,18 @@
      },
      "bail": null,
      "other": {
-      "de": "Zusatzstrafe zu einem früheren Strafbefehl; Probezeit nicht berichtet",
-      "fr": "Peine complémentaire à une ordonnance pénale antérieure; délai d’épreuve non rapporté",
-      "it": "Pena aggiuntiva a un precedente decreto d’accusa; periodo di prova non riportato",
-      "en": "Additional sentence to an earlier penalty order; probation period not reported"
+      "de": "Zusatzstrafe zu einem früheren Strafbefehl",
+      "fr": "Peine complémentaire à une ordonnance pénale antérieure",
+      "it": "Pena aggiuntiva a un precedente decreto d’accusa",
+      "en": "Additional sentence to an earlier penalty order"
      }
     },
-    "short": null
+    "short": {
+     "de": "Liess Lernende während seiner Abwesenheit unbeaufsichtigt an der Fräse arbeiten.",
+     "fr": "A laissé des apprentis sur la fraiseuse sans surveillance pendant son absence.",
+     "it": "Ha lasciato apprendisti alla fresatrice senza sorveglianza durante la sua assenza.",
+     "en": "Let apprentices work the mill unsupervised while he was away."
+    }
    }
   ],
   "linkedAccidentId": null,
@@ -636,7 +679,12 @@
    "it": "I giovani su macchine pericolose vanno sorvegliati costantemente da un professionista. Se si è assenti: un sostituto, oppure la macchina resta ferma.",
    "en": "Young workers on dangerous machines need constant supervision by a skilled person. If you are away, arrange a stand-in or the machine stays off."
   },
-  "why": null
+  "why": {
+   "de": "Der Jugendarbeitsschutz verlangt bei Lernenden an gefährlichen Maschinen eine ständige Überwachung durch eine Fachperson. Der Unfall war für den Ausbildner vorhersehbar; das Mitverschulden des Lernenden (Handschuhe an der drehenden Maschine) entlastet ihn nicht.",
+   "fr": "La protection des jeunes travailleurs exige une surveillance permanente par un professionnel sur les machines dangereuses. L’accident était prévisible pour le formateur; la faute de l’apprenti (gants sur machine rotative) ne l’exonère pas.",
+   "it": "La protezione dei giovani lavoratori impone una sorveglianza costante da parte di un professionista sulle macchine pericolose. L’incidente era prevedibile per il formatore; la colpa dell’apprendista (guanti su macchina rotante) non lo scagiona.",
+   "en": "Youth-protection rules require constant supervision by a skilled person when apprentices use dangerous machines. The accident was foreseeable for the trainer; the apprentice's own fault (gloves on a rotating machine) does not relieve him."
+  }
  },
  {
   "id": "2026-06-24-bger-6b-657-2024-sz-dach",
@@ -684,10 +732,10 @@
     },
     "verdict": "open",
     "reasoning": {
-     "de": "Vom Kantonsgericht verurteilt (120 Tagessätze à CHF 440 bedingt + CHF 13’200 Busse); vom Bundesgericht aufgehoben, neue Beurteilung ausstehend.",
-     "fr": "Condamné par le Tribunal cantonal (120 jours-amende à CHF 440 avec sursis + CHF 13’200 d’amende); annulé par le TF, nouveau jugement en attente.",
-     "it": "Condannato dal Tribunale cantonale (120 aliquote da CHF 440 sospese + multa CHF 13’200); annullato dal TF, nuovo giudizio in attesa.",
-     "en": "Convicted by the Cantonal Court (120 day-fines of CHF 440 suspended + CHF 13,200 fine); quashed by the Federal Court, new ruling pending."
+     "de": "Vom Kantonsgericht verurteilt; vom Bundesgericht aufgehoben, neue Beurteilung ausstehend.",
+     "fr": "Condamné par le Tribunal cantonal; annulé par le TF, nouveau jugement en attente.",
+     "it": "Condannato dal Tribunale cantonale; annullato dal TF, nuovo giudizio in attesa.",
+     "en": "Convicted by the Cantonal Court; quashed by the Federal Court, new ruling pending."
     },
     "sanction": {
      "dailyUnits": null,
@@ -702,10 +750,22 @@
      "other": null
     },
     "short": {
-     "de": "Vom Kantonsgericht verurteilt (120 Tagessätze à CHF 440 bedingt + CHF 13’200 Busse); vom Bundesgericht aufgehoben, neue Beurteilung ausstehend.",
-     "fr": "Condamné par le Tribunal cantonal (120 jours-amende à CHF 440 avec sursis + CHF 13’200 d’amende); annulé par le TF, nouveau jugement en attente.",
-     "it": "Condannato dal Tribunale cantonale (120 aliquote da CHF 440 sospese + multa CHF 13’200); annullato dal TF, nuovo giudizio in attesa.",
-     "en": "Convicted by the Cantonal Court (120 day-fines of CHF 440 suspended + CHF 13,200 fine); quashed by the Federal Court, new ruling pending."
+     "de": "Vom Kantonsgericht verurteilt; vom Bundesgericht aufgehoben, neue Beurteilung ausstehend.",
+     "fr": "Condamné par le Tribunal cantonal; annulé par le TF, nouveau jugement en attente.",
+     "it": "Condannato dal Tribunale cantonale; annullato dal TF, nuovo giudizio in attesa.",
+     "en": "Convicted by the Cantonal Court; quashed by the Federal Court, new ruling pending."
+    },
+    "priorSanction": {
+     "dailyUnits": 120,
+     "dailyAmount": 440,
+     "suspended": true,
+     "probationYears": null,
+     "fineCHF": 13200,
+     "custodial": null,
+     "costs": null,
+     "compensation": null,
+     "bail": null,
+     "other": null
     }
    },
    {
@@ -723,10 +783,10 @@
     },
     "verdict": "open",
     "reasoning": {
-     "de": "Vom Kantonsgericht verurteilt (96 Tagessätze à CHF 200 bedingt + CHF 4800 Busse); vom Bundesgericht aufgehoben, neue Beurteilung ausstehend.",
-     "fr": "Condamné par le Tribunal cantonal (96 jours-amende à CHF 200 avec sursis + CHF 4800 d’amende); annulé par le TF, nouveau jugement en attente.",
-     "it": "Condannato dal Tribunale cantonale (96 aliquote da CHF 200 sospese + multa CHF 4800); annullato dal TF, nuovo giudizio in attesa.",
-     "en": "Convicted by the Cantonal Court (96 day-fines of CHF 200 suspended + CHF 4,800 fine); quashed by the Federal Court, new ruling pending."
+     "de": "Vom Kantonsgericht verurteilt; vom Bundesgericht aufgehoben, neue Beurteilung ausstehend.",
+     "fr": "Condamné par le Tribunal cantonal; annulé par le TF, nouveau jugement en attente.",
+     "it": "Condannato dal Tribunale cantonale; annullato dal TF, nuovo giudizio in attesa.",
+     "en": "Convicted by the Cantonal Court; quashed by the Federal Court, new ruling pending."
     },
     "sanction": {
      "dailyUnits": null,
@@ -741,10 +801,22 @@
      "other": null
     },
     "short": {
-     "de": "Vom Kantonsgericht verurteilt (96 Tagessätze à CHF 200 bedingt + CHF 4800 Busse); vom Bundesgericht aufgehoben, neue Beurteilung ausstehend.",
-     "fr": "Condamné par le Tribunal cantonal (96 jours-amende à CHF 200 avec sursis + CHF 4800 d’amende); annulé par le TF, nouveau jugement en attente.",
-     "it": "Condannato dal Tribunale cantonale (96 aliquote da CHF 200 sospese + multa CHF 4800); annullato dal TF, nuovo giudizio in attesa.",
-     "en": "Convicted by the Cantonal Court (96 day-fines of CHF 200 suspended + CHF 4,800 fine); quashed by the Federal Court, new ruling pending."
+     "de": "Vom Kantonsgericht verurteilt; vom Bundesgericht aufgehoben, neue Beurteilung ausstehend.",
+     "fr": "Condamné par le Tribunal cantonal; annulé par le TF, nouveau jugement en attente.",
+     "it": "Condannato dal Tribunale cantonale; annullato dal TF, nuovo giudizio in attesa.",
+     "en": "Convicted by the Cantonal Court; quashed by the Federal Court, new ruling pending."
+    },
+    "priorSanction": {
+     "dailyUnits": 96,
+     "dailyAmount": 200,
+     "suspended": true,
+     "probationYears": null,
+     "fineCHF": 4800,
+     "custodial": null,
+     "costs": null,
+     "compensation": null,
+     "bail": null,
+     "other": null
     }
    }
   ],
@@ -769,12 +841,7 @@
     "it": "Durante lo smontaggio di un tetto in fibrocemento non resistente i copritetto si muovevano su scale da tetto. Uno ha messo il piede accanto, ha sfondato una lastra ed è caduto per circa 7,8 m.",
     "en": "Removing a fibre-cement roof that was not walk-safe, roofers moved on roof ladders. One stepped beside the ladder, broke through a sheet and fell about 7.8 m."
    },
-   "injuries": {
-    "de": "Verletzt (Ausmass im Urteil nicht zusammengefasst)",
-    "fr": "Blessé (gravité non résumée dans l’arrêt)",
-    "it": "Ferito (entità non riassunta nella sentenza)",
-    "en": "Injured (extent not summarised in the ruling)"
-   }
+   "injuries": null
   },
   "why": {
    "de": "Das Bundesgericht hiess die Beschwerden der beiden Verurteilten gut und wies den Fall zurück; das Kantonsgericht muss neu urteilen.",
@@ -825,10 +892,10 @@
     },
     "verdict": "convicted",
     "reasoning": {
-     "de": "Gericht sah ihn als verantwortlich, weil das Betonelement aus dem Greifer seines Baggers rutschte und einen Arbeiter traf; die detaillierte Begründung ist nicht frei zugänglich berichtet.",
-     "fr": "Le tribunal l’a tenu pour responsable parce que l’élément en béton a glissé du grappin de sa pelle et a touché un ouvrier; la motivation détaillée n’est pas rapportée en accès libre.",
-     "it": "Il tribunale lo ha ritenuto responsabile perché l’elemento di cemento è scivolato dalla pinza del suo escavatore colpendo un operaio; la motivazione dettagliata non è riportata in accesso libero.",
-     "en": "The court held him responsible because the concrete element slipped from his excavator's grab and struck a worker; the detailed reasoning is not reported in freely accessible sources."
+     "de": "Das Betonelement rutschte aus dem Greifer seines Baggers und traf einen Arbeiter.",
+     "fr": "L’élément en béton a glissé du grappin de sa pelle et a touché un ouvrier.",
+     "it": "L’elemento di cemento è scivolato dalla pinza del suo escavatore colpendo un operaio.",
+     "en": "The concrete element slipped from his excavator's grab and struck a worker."
     },
     "sanction": {
      "dailyUnits": null,
@@ -842,7 +909,12 @@
      "bail": null,
      "other": null
     },
-    "short": null
+    "short": {
+     "de": "Das Betonelement rutschte aus dem Greifer seines Baggers und traf einen Arbeiter.",
+     "fr": "L’élément en béton a glissé du grappin de sa pelle et a touché un ouvrier.",
+     "it": "L’elemento di cemento è scivolato dalla pinza del suo escavatore colpendo un operaio.",
+     "en": "The concrete element slipped from his excavator's grab and struck a worker."
+    }
    }
   ],
   "linkedAccidentId": null,
@@ -1127,12 +1199,7 @@
     },
     "charge": null,
     "verdict": "convicted",
-    "reasoning": {
-     "de": "Verurteilt; Begründung nicht frei zugänglich berichtet.",
-     "fr": "Condamné; motivation non rapportée en accès libre.",
-     "it": "Condannato; motivazione non riportata in accesso libero.",
-     "en": "Convicted; reasoning not reported in freely accessible sources."
-    },
+    "reasoning": null,
     "sanction": {
      "dailyUnits": null,
      "dailyAmount": null,
@@ -1140,10 +1207,10 @@
      "probationYears": null,
      "fineCHF": null,
      "custodial": {
-      "de": "Unbedingte («ferme») Strafe laut Titel; Art und Höhe nicht frei zugänglich",
-      "fr": "Peine ferme selon le titre; nature et quotité non accessibles",
-      "it": "Pena da espiare secondo il titolo; tipo ed entità non accessibili",
-      "en": "Unsuspended sentence per headline; type and amount not accessible"
+      "de": "unbedingte Strafe",
+      "fr": "peine ferme",
+      "it": "pena da scontare",
+      "en": "unsuspended sentence"
      },
      "costs": null,
      "compensation": null,
@@ -1161,12 +1228,7 @@
     },
     "charge": null,
     "verdict": "convicted",
-    "reasoning": {
-     "de": "Verurteilt; Begründung nicht frei zugänglich berichtet.",
-     "fr": "Condamné; motivation non rapportée en accès libre.",
-     "it": "Condannato; motivazione non riportata in accesso libero.",
-     "en": "Convicted; reasoning not reported in freely accessible sources."
-    },
+    "reasoning": null,
     "sanction": {
      "dailyUnits": null,
      "dailyAmount": null,
@@ -1203,10 +1265,10 @@
     "en": "Site work with an excavator"
    },
    "what": {
-    "de": "Einem Arbeiter wurde der Fuss von der Schaufel eines Baggers zerquetscht. Weitere Details sind nicht frei zugänglich.",
-    "fr": "Un ouvrier a eu le pied écrasé par le godet d’une pelle mécanique. Les autres détails ne sont pas accessibles librement.",
-    "it": "Un operaio ha avuto il piede schiacciato dalla benna di un escavatore. Altri dettagli non sono liberamente accessibili.",
-    "en": "A worker's foot was crushed by an excavator bucket. Further details are not freely accessible."
+    "de": "Der Fuss eines Arbeiters wurde von der Schaufel eines Baggers zerquetscht.",
+    "fr": "Un ouvrier a eu le pied écrasé par le godet d’une pelle mécanique.",
+    "it": "Il piede di un operaio è stato schiacciato dalla benna di un escavatore.",
+    "en": "A worker's foot was crushed by an excavator bucket."
    },
    "injuries": {
     "de": "Bleibende Behinderung",
@@ -1242,10 +1304,10 @@
   "caseNumber": "P/10983/2021 (AARP/74/2026)",
   "final": null,
   "appeal": {
-   "de": "Polizeigericht verurteilte (18.3.2025); die Berufungskammer hiess die Berufung teilweise gut, reduzierte die Strafe und bestätigte den Schuldspruch. Weiterzug nicht berichtet.",
-   "fr": "Condamné par le Tribunal de police (18.3.2025); appel partiellement admis, peine réduite, culpabilité confirmée. Recours ultérieur non rapporté.",
-   "it": "Condannato dal Tribunale di polizia (18.3.2025); appello parzialmente accolto, pena ridotta, colpevolezza confermata. Ulteriore ricorso non riportato.",
-   "en": "Convicted by the police court (18.3.2025); appeal partly upheld, sentence reduced, conviction confirmed. Further appeal not reported."
+   "de": "Polizeigericht verurteilte (18.3.2025); die Berufungskammer hiess die Berufung teilweise gut, reduzierte die Strafe und bestätigte den Schuldspruch.",
+   "fr": "Condamné par le Tribunal de police (18.3.2025); appel partiellement admis, peine réduite, culpabilité confirmée.",
+   "it": "Condannato dal Tribunale di polizia (18.3.2025); appello parzialmente accolto, pena ridotta, colpevolezza confermata.",
+   "en": "Convicted by the police court (18.3.2025); appeal partly upheld, sentence reduced, conviction confirmed."
   },
   "employerRole": {
    "de": "Rohbaufirma; Unternehmen nicht angeklagt.",
@@ -1515,7 +1577,12 @@
    "it": "Una coclea rotante deve avere la protezione prevista dal manuale – altrimenti non si trivella. Niente abiti aperti vicino a parti rotanti.",
    "en": "A rotating auger needs the guard the manual specifies – without it, no drilling. No loose clothing near rotating parts."
   },
-  "why": null
+  "why": {
+   "de": "Die Betriebsanleitung verbot Arbeiten neben dem ungeschützten, laufenden Bohrer. Der Arbeitgeber wusste das und liess trotzdem arbeiten; der Bediener bohrte trotz Person in der Nähe. Bemühungen nach dem Unfall mildern die Strafe nicht.",
+   "fr": "Le manuel interdisait de travailler à côté de la tarière non protégée en marche. L’employeur le savait et a laissé faire; l’opérateur a foré alors qu’une personne était proche. Les efforts après l’accident ne réduisent pas la peine.",
+   "it": "Il manuale vietava di lavorare accanto alla trivella non protetta in funzione. Il datore lo sapeva e ha lasciato fare; l’operatore ha forato con una persona vicina. Gli sforzi dopo l’incidente non riducono la pena.",
+   "en": "The manual prohibited working next to the running, unguarded auger. The employer knew and let it happen; the operator drilled with a person close by. Efforts after the accident do not reduce the sentence."
+  }
  },
  {
   "id": "2025-11-12-bger-6b-521-2025-fr-kran",
@@ -1780,12 +1847,7 @@
     "it": "Un operaio è scivolato cadendo per circa 2,2 m dal bordo del tetto non protetto.",
     "en": "A worker slipped and fell about 2.2 m over the unprotected roof edge."
    },
-   "injuries": {
-    "de": "Verletzt (Ausmass nicht berichtet)",
-    "fr": "Blessé (gravité non rapportée)",
-    "it": "Ferito (entità non riportata)",
-    "en": "Injured (extent not reported)"
-   }
+   "injuries": null
   },
   "lesson": {
    "de": "Absturzsicherung gehört vor Arbeitsbeginn ins Sicherheitskonzept – und jemand muss dafür zuständig sein.",
@@ -1938,10 +2000,10 @@
   "final": null,
   "appeal": null,
   "employerRole": {
-   "de": "Beide Chauffeure holten Recyclingmaterial auf der Deponie ab; Rolle von Arbeitgeber und Deponiebetreiber nicht berichtet.",
-   "fr": "Les deux chauffeurs venaient chercher des déchets recyclés à la décharge; rôle de l’employeur et de l’exploitant non rapporté.",
-   "it": "Entrambi gli autisti ritiravano materiali riciclati in discarica; ruolo del datore e del gestore non riportato.",
-   "en": "Both drivers were collecting recycled material at the landfill; role of employer and site operator not reported."
+   "de": "Beide Chauffeure holten Recyclingmaterial auf der Deponie ab",
+   "fr": "Les deux chauffeurs venaient chercher des déchets recyclés à la décharge",
+   "it": "Entrambi gli autisti ritiravano materiali riciclati in discarica",
+   "en": "Both drivers were collecting recycled material at the landfill"
   },
   "defendants": [
    {
@@ -2039,10 +2101,10 @@
   "caseNumber": "P/5337/2018 (AARP/80/2025)",
   "final": null,
   "appeal": {
-   "de": "Polizeigericht (29.7.2024): je 7 Monate Freiheitsstrafe bedingt. Die Berufungskammer ersetzte das durch bedingte Geldstrafen; Schuldsprüche bestätigt. Weiterzug nicht berichtet.",
-   "fr": "Tribunal de police (29.7.2024): 7 mois avec sursis chacun. La Chambre d’appel a remplacé par des peines pécuniaires avec sursis; culpabilités confirmées. Recours ultérieur non rapporté.",
-   "it": "Tribunale di polizia (29.7.2024): 7 mesi sospesi ciascuno. La Camera d’appello li ha sostituiti con pene pecuniarie sospese; colpevolezze confermate. Ulteriore ricorso non riportato.",
-   "en": "Police court (29.7.2024): 7 months suspended each. The appeal chamber replaced these with suspended day-fines; convictions upheld. Further appeal not reported."
+   "de": "Polizeigericht (29.7.2024): je 7 Monate Freiheitsstrafe bedingt. Die Berufungskammer ersetzte das durch bedingte Geldstrafen; Schuldsprüche bestätigt.",
+   "fr": "Tribunal de police (29.7.2024): 7 mois avec sursis chacun. La Chambre d’appel a remplacé par des peines pécuniaires avec sursis; culpabilités confirmées.",
+   "it": "Tribunale di polizia (29.7.2024): 7 mesi sospesi ciascuno. La Camera d’appello li ha sostituiti con pene pecuniarie sospese; colpevolezze confermate.",
+   "en": "Police court (29.7.2024): 7 months suspended each. The appeal chamber replaced these with suspended day-fines; convictions upheld."
   },
   "employerRole": {
    "de": "Zimmereifirma (Arbeitgeber) und Lieferant mit Kranlastwagen; Unternehmen nicht angeklagt.",
