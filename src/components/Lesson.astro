@@ -1,0 +1,5 @@
+---
+// Lesson block: no heading, just a subtle icon (shield-check).
+const { text } = Astro.props;
+---
+{text && <p class="lesson"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M12 2 4 5v6c0 5 3.4 9.7 8 11 4.6-1.3 8-6 8-11V5l-8-3Zm-1.2 14.2-3.5-3.5 1.4-1.4 2.1 2.1 4.9-4.9 1.4 1.4-6.3 6.3Z"/></svg><span>{text}</span></p>}

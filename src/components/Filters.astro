@@ -1,0 +1,32 @@
+---
+import { t, type Lang } from '../i18n/ui';
+interface F { key: string; label: string; options: [string, string][] }
+const { filters, target, lang } = Astro.props as { filters: F[]; target: string; lang: Lang };
+---
+<form class="filters" data-target={target} data-of={t(lang, 'filter.of')} data-entries={t(lang, 'filter.entries')} onsubmit="return false">
+  {filters.map(f => (
+    <label>{f.label}
+      <select name={f.key}><option value="">{t(lang, 'filter.all')}</option>{f.options.map(([v, l]) => <option value={v}>{l}</option>)}</select>
+    </label>
+  ))}
+  <button type="reset" class="btn secondary" style="color:var(--ink)">{t(lang, 'filter.reset')}</button>
+  <span class="count" aria-live="polite"></span>
+</form>
+<script>
+  document.querySelectorAll<HTMLFormElement>('form.filters').forEach(form => {
+    const list = document.querySelector(form.dataset.target!)!;
+    const cards = [...list.querySelectorAll<HTMLElement>('[data-canton]')];
+    const out = form.querySelector('.count')!;
+    const params = new URLSearchParams(location.search);
+    form.querySelectorAll('select').forEach(s => { if (params.get(s.name)) s.value = params.get(s.name)!; });
+    const apply = () => {
+      const sel = [...form.querySelectorAll('select')].filter(s => s.value);
+      let n = 0;
+      cards.forEach(c => { const ok = sel.every(s => c.dataset[s.name] === s.value); c.classList.toggle('hidden', !ok); if (ok) n++; });
+      out.textContent = `${n} ${form.dataset.of} ${cards.length} ${form.dataset.entries}`;
+      const q = new URLSearchParams(); sel.forEach(s => q.set(s.name, s.value));
+      history.replaceState(null, '', q.toString() ? '?' + q : location.pathname);
+    };
+    form.addEventListener('change', apply); form.addEventListener('reset', () => setTimeout(apply)); apply();
+  });
+</script>

@@ -1,0 +1,33 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Lesson from '../../../components/Lesson.astro';
+import FactRow from '../../../components/FactRow.astro';
+import data from '../../../../data/accidents.json';
+import { CANTONS, fmtDate } from '../../../lib';
+import { t, tax, pick, LANGS, type Lang } from '../../../i18n/ui';
+export function getStaticPaths() { return LANGS.flatMap(lang => data.map((item: any) => ({ params: { lang, id: item.id }, props: { item } }))); }
+const lang = Astro.params.lang as Lang; const { item } = Astro.props as any; const f = item.facts;
+const title = pick(lang, item.title)!;
+---
+<Base title={title} lang={lang} description={pick(lang, f.what) ?? undefined}>
+  <p><a href={`/${lang}/accidents/`}>{t(lang, 'back')}</a></p>
+  <div class="meta"><span class="tag canton">{item.canton}</span><span class={`tag out ${item.outcome}`}>{tax(lang,'outcome',item.outcome)}</span></div>
+  <h1>{title}</h1>
+  <div class="srcbox"><div><strong>{t(lang,'source')}:</strong> {item.source.name} · {t(lang,'source.lang')}: {item.source.lang.toUpperCase()}</div><a class="btn" href={item.source.url} target="_blank" rel="noopener">{t(lang,'source.open')}</a></div>
+  <h2>{t(lang,'detail.factsheet')}</h2>
+  <dl class="facts">
+    <FactRow lang={lang} label={t(lang,'f.date')} value={fmtDate(item.date, lang)} />
+    <FactRow lang={lang} label={t(lang,'f.place')} value={`${item.place ? item.place + ' ' : ''}(${item.canton} – ${CANTONS[item.canton]})`} />
+    <FactRow lang={lang} label={t(lang,'f.industry')} value={tax(lang,'industry',item.industry)} />
+    <FactRow lang={lang} label={t(lang,'f.activity')} value={pick(lang,f.activity)} />
+    <FactRow lang={lang} label={t(lang,'f.what')} value={pick(lang,f.what)} />
+    <FactRow lang={lang} label={t(lang,'f.severity')} value={tax(lang,'outcome',item.outcome)} />
+    <FactRow lang={lang} label={t(lang,'f.equipment')} value={pick(lang,f.equipment)} />
+    <FactRow lang={lang} label={t(lang,'f.injuries')} value={pick(lang,f.injuries)} />
+    <FactRow lang={lang} label={t(lang,'f.emergency')} value={pick(lang,f.emergency)} />
+    <FactRow lang={lang} label={t(lang,'f.investigation')} value={pick(lang,f.investigation)} />
+  </dl>
+  <Lesson text={pick(lang, item.lesson)} />
+  {item.extraSources?.map((s: any) => <p class="src">{t(lang,'source.also')}: <a href={s.url} target="_blank" rel="noopener">{s.name}</a> ({s.lang.toUpperCase()})</p>)}
+  <p class="src">{t(lang,'detail.disclaimer')}</p>
+</Base>

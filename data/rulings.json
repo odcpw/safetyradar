@@ -1,0 +1,1228 @@
+[
+  {
+    "id": "2026-07-03-bger-7b-1323-2024",
+    "caseId": "case-2026-07-03-bger-7b-1323-2024",
+    "date": "2026-07-03",
+    "accidentDate": "2019-01-17",
+    "canton": "AG",
+    "place": "Bezirk Brugg",
+    "industry": "industry",
+    "hazard": "machinery",
+    "outcome": "serious",
+    "court": {
+      "de": "Bundesgericht (II. strafrechtliche Abteilung)",
+      "fr": "Tribunal fédéral (IIe Cour de droit pénal)",
+      "it": "Tribunale federale (II Corte di diritto penale)",
+      "en": "Federal Supreme Court (2nd Criminal Law Division)"
+    },
+    "caseNumber": "7B_1323/2024",
+    "final": true,
+    "appeal": {
+      "de": "Bezirksgericht Brugg (2022) und Obergericht Aargau (2023, Strafe reduziert) sprachen schuldig; Bundesgericht wies die Beschwerde ab – rechtskräftig.",
+      "fr": "Condamné par le Tribunal de district de Brugg (2022) et la Cour suprême d’Argovie (2023, peine réduite); recours rejeté par le TF – définitif.",
+      "it": "Condannato dal Tribunale distrettuale di Brugg (2022) e dal Tribunale superiore di Argovia (2023, pena ridotta); ricorso respinto dal TF – definitivo.",
+      "en": "Convicted by Brugg District Court (2022) and Aargau High Court (2023, sentence reduced); Federal Court dismissed the appeal – final."
+    },
+    "employerRole": {
+      "de": "Ausbildungsbetrieb (Maschinenbau); das Unternehmen selbst war nicht angeklagt.",
+      "fr": "Entreprise formatrice (mécanique); l’entreprise elle-même n’était pas prévenue.",
+      "it": "Azienda formatrice (meccanica); l’azienda non era imputata.",
+      "en": "Training company (mechanical engineering); the company itself was not charged."
+    },
+    "defendants": [
+      {
+        "role": {
+          "de": "Berufsbildner (Lehrlingsausbildner)",
+          "fr": "Formateur d’apprentis",
+          "it": "Formatore degli apprendisti",
+          "en": "Apprentice trainer"
+        },
+        "charge": {
+          "de": "Fahrlässige schwere Körperverletzung (Art. 125 StGB)",
+          "fr": "Lésions corporelles graves par négligence (art. 125 CP)",
+          "it": "Lesioni gravi colpose (art. 125 CP)",
+          "en": "Serious bodily harm by negligence (Art. 125 SCC)"
+        },
+        "verdict": "convicted",
+        "reasoning": {
+          "de": "Liess Lernende im 1. Lehrjahr während seiner Abwesenheit an der Fräsmaschine arbeiten, obwohl der Jugendarbeitsschutz eine ständige Überwachung durch eine Fachkraft verlangt. Der Unfall war vorhersehbar; das Mitverschulden des Lernenden (Handschuhe an rotierender Maschine) entlastet ihn nicht.",
+          "fr": "A laissé des apprentis de 1re année travailler sur la fraiseuse en son absence, alors que la protection des jeunes travailleurs exige une surveillance permanente par un professionnel. L’accident était prévisible; la faute concomitante de l’apprenti (gants sur machine rotative) ne l’exonère pas.",
+          "it": "Ha lasciato lavorare apprendisti del 1° anno alla fresatrice in sua assenza, benché la protezione dei giovani lavoratori imponga una sorveglianza costante da parte di un professionista. L’incidente era prevedibile; la corresponsabilità dell’apprendista (guanti su macchina rotante) non lo scagiona.",
+          "en": "Let first-year apprentices work the milling machine while he was away, although youth-protection rules require constant supervision by a skilled person. The accident was foreseeable; the apprentice's own fault (gloves on a rotating machine) does not relieve him."
+        },
+        "sanction": {
+          "dailyUnits": 50,
+          "dailyAmount": 180,
+          "suspended": true,
+          "probationYears": null,
+          "fineCHF": 1500,
+          "custodial": null,
+          "costs": {
+            "de": "Bundesgerichtskosten CHF 3000",
+            "fr": "Frais du TF CHF 3000",
+            "it": "Spese TF CHF 3000",
+            "en": "Federal Court costs CHF 3,000"
+          },
+          "compensation": {
+            "de": "Schadenersatzpflicht dem Grundsatz nach; Parteientschädigungen an den Lernenden CHF 15’981.10 (1. Instanz) und CHF 3188 (Berufung)",
+            "fr": "Obligation de réparer le dommage sur le principe; indemnités au lésé CHF 15’981.10 (1re instance) et CHF 3188 (appel)",
+            "it": "Obbligo di risarcimento in linea di principio; indennità al leso CHF 15’981.10 (1ª istanza) e CHF 3188 (appello)",
+            "en": "Liable for damages in principle; party costs to the apprentice CHF 15,981.10 (first instance) and CHF 3,188 (appeal)"
+          },
+          "bail": null,
+          "other": {
+            "de": "Zusatzstrafe zu einem früheren Strafbefehl; Probezeit nicht berichtet",
+            "fr": "Peine complémentaire à une ordonnance pénale antérieure; délai d’épreuve non rapporté",
+            "it": "Pena aggiuntiva a un precedente decreto d’accusa; periodo di prova non riportato",
+            "en": "Additional sentence to an earlier penalty order; probation period not reported"
+          }
+        }
+      }
+    ],
+    "linkedAccidentId": null,
+    "source": {
+      "name": "Bundesgericht (Entscheid)",
+      "url": "https://www.bger.ch/ext/eurospider/live/de/php/aza/http/index.php?highlight_docid=aza%3A%2F%2F03-07-2026-7B_1323-2024&lang=de&type=show_document",
+      "lang": "de"
+    },
+    "extraSources": [
+      {
+        "name": "Aargauer Zeitung",
+        "url": "https://www.aargauerzeitung.ch/aargau/brugg/lehrling-an-fraesmaschine-schwer-verletzt-urteil-bestaetigt-ld.4203388",
+        "lang": "de"
+      }
+    ],
+    "title": {
+      "de": "Lernender an Fräsmaschine verletzt: Bundesgericht bestätigt Strafe für Berufsbildner",
+      "fr": "Apprenti blessé à une fraiseuse: le TF confirme la peine du formateur",
+      "it": "Apprendista ferito a una fresatrice: il TF conferma la pena del formatore",
+      "en": "Apprentice injured at milling machine: Federal Court upholds trainer's conviction"
+    },
+    "facts": {
+      "activity": {
+        "de": "Arbeit von Lernenden (1. Lehrjahr) an einer Fräsmaschine ohne Aufsicht",
+        "fr": "Travail d’apprentis de 1re année sur une fraiseuse sans surveillance",
+        "it": "Lavoro di apprendisti del 1° anno alla fresatrice senza sorveglianza",
+        "en": "First-year apprentices working a milling machine unsupervised"
+      },
+      "what": {
+        "de": "Am Vortag hatten die Lernenden erstmals – unter Aufsicht – an der Fräse gearbeitet. Am Unfalltag war der Ausbildner abwesend. Der Handschuh eines Lernenden wurde von der drehenden Fräse erfasst und eingezogen.",
+        "fr": "La veille, les apprentis avaient utilisé la fraiseuse pour la première fois, sous surveillance. Le jour de l’accident, le formateur était absent. Le gant d’un apprenti a été happé par la fraise en rotation.",
+        "it": "Il giorno prima gli apprendisti avevano usato la fresa per la prima volta, sorvegliati. Il giorno dell’incidente il formatore era assente. Il guanto di un apprendista è stato agganciato dalla fresa in rotazione.",
+        "en": "The day before, the apprentices had used the mill for the first time under supervision. On the day of the accident the trainer was away. An apprentice's glove was caught and pulled in by the rotating cutter."
+      },
+      "injuries": {
+        "de": "Schwere Hand- und Unterarmverletzungen links",
+        "fr": "Graves blessures à la main et à l’avant-bras gauches",
+        "it": "Gravi ferite a mano e avambraccio sinistri",
+        "en": "Severe left hand and forearm injuries"
+      }
+    },
+    "lesson": {
+      "de": "Jugendliche an gefährlichen Maschinen brauchen ständige Aufsicht durch eine Fachperson. Wer abwesend ist, organisiert eine Vertretung oder lässt die Maschine stehen.",
+      "fr": "Les jeunes sur des machines dangereuses doivent être surveillés en permanence par un professionnel. En cas d’absence: un remplaçant, ou la machine reste à l’arrêt.",
+      "it": "I giovani su macchine pericolose vanno sorvegliati costantemente da un professionista. Se si è assenti: un sostituto, oppure la macchina resta ferma.",
+      "en": "Young workers on dangerous machines need constant supervision by a skilled person. If you are away, arrange a stand-in or the machine stays off."
+    }
+  },
+  {
+    "id": "2026-06-17-sg-wildhaus-bagger",
+    "caseId": "case-2026-06-17-sg-wildhaus-bagger",
+    "date": "2026-06-17",
+    "accidentDate": "2025-02",
+    "canton": "SG",
+    "place": "Wildhaus",
+    "industry": "construction",
+    "hazard": "crane",
+    "outcome": "serious",
+    "court": {
+      "de": "Kreisgericht Toggenburg",
+      "fr": "Tribunal d’arrondissement du Toggenburg",
+      "it": "Tribunale distrettuale del Toggenburgo",
+      "en": "Toggenburg District Court"
+    },
+    "caseNumber": null,
+    "final": null,
+    "appeal": null,
+    "employerRole": null,
+    "defendants": [
+      {
+        "role": {
+          "de": "Baggerführer",
+          "fr": "Conducteur de pelle",
+          "it": "Escavatorista",
+          "en": "Excavator operator"
+        },
+        "charge": {
+          "de": "Fahrlässige schwere Körperverletzung (Art. 125 StGB)",
+          "fr": "Lésions corporelles graves par négligence (art. 125 CP)",
+          "it": "Lesioni gravi colpose (art. 125 CP)",
+          "en": "Serious bodily harm by negligence (Art. 125 SCC)"
+        },
+        "verdict": "convicted",
+        "reasoning": {
+          "de": "Gericht sah ihn als verantwortlich, weil das Betonelement aus dem Greifer seines Baggers rutschte und einen Arbeiter traf; die detaillierte Begründung ist nicht frei zugänglich berichtet.",
+          "fr": "Le tribunal l’a tenu pour responsable parce que l’élément en béton a glissé du grappin de sa pelle et a touché un ouvrier; la motivation détaillée n’est pas rapportée en accès libre.",
+          "it": "Il tribunale lo ha ritenuto responsabile perché l’elemento di cemento è scivolato dalla pinza del suo escavatore colpendo un operaio; la motivazione dettagliata non è riportata in accesso libero.",
+          "en": "The court held him responsible because the concrete element slipped from his excavator's grab and struck a worker; the detailed reasoning is not reported in freely accessible sources."
+        },
+        "sanction": {
+          "dailyUnits": null,
+          "dailyAmount": null,
+          "suspended": null,
+          "probationYears": null,
+          "fineCHF": null,
+          "custodial": null,
+          "costs": null,
+          "compensation": null,
+          "bail": null,
+          "other": null
+        }
+      }
+    ],
+    "linkedAccidentId": null,
+    "source": {
+      "name": "St. Galler Tagblatt",
+      "url": "https://www.tagblatt.ch/ostschweiz/toggenburg/schuldspruch-nach-unfall-beim-rueckbach-des-ehemaligen-hotels-acker-in-wildhaus-ld.4187614",
+      "lang": "de"
+    },
+    "extraSources": [
+      {
+        "name": "Wiler/W&O (wundo.ch)",
+        "url": "https://www.wundo.ch/artikel/beton-zertruemmerte-seine-beine-schuldspruch-fuer-baggerfuehrer-nach-arbeitsunfall/",
+        "lang": "de"
+      }
+    ],
+    "title": {
+      "de": "Betonteil fällt aus Baggergreifer: Baggerführer verurteilt",
+      "fr": "Un bloc de béton tombe du grappin: le conducteur de pelle condamné",
+      "it": "Blocco di cemento cade dalla pinza: escavatorista condannato",
+      "en": "Concrete block falls from excavator grab: operator convicted"
+    },
+    "facts": {
+      "activity": {
+        "de": "Rückbau einer Brandruine mit Bagger und Greifer",
+        "fr": "Démolition d’une ruine incendiée à la pelle avec grappin",
+        "it": "Demolizione di un rudere incendiato con escavatore e pinza",
+        "en": "Demolishing a fire-damaged ruin with an excavator grab"
+      },
+      "what": {
+        "de": "Beim Rückbau eines abgebrannten Hotels rutschte ein tonnenschweres Betonelement aus dem Greifer und traf einen Bauarbeiter.",
+        "fr": "Lors de la démolition d’un hôtel incendié, un élément en béton de plusieurs tonnes a glissé du grappin et a touché un ouvrier.",
+        "it": "Durante la demolizione di un albergo bruciato, un elemento di cemento di diverse tonnellate è scivolato dalla pinza colpendo un operaio.",
+        "en": "During demolition of a burnt-out hotel, a multi-tonne concrete element slipped out of the grab and struck a worker."
+      },
+      "injuries": {
+        "de": "Mehrere Knochenbrüche an den Beinen, sieben Operationen",
+        "fr": "Plusieurs fractures aux jambes, sept opérations",
+        "it": "Diverse fratture alle gambe, sette operazioni",
+        "en": "Multiple leg fractures, seven operations"
+      }
+    },
+    "lesson": {
+      "de": "Beim Rückbau mit Greifer: niemand im Schwenk- und Fallbereich der Last. Der Maschinenführer stoppt, solange jemand im Gefahrenbereich ist.",
+      "fr": "En démolition au grappin, personne dans la zone de rotation et de chute. Le conducteur s’arrête tant que quelqu’un s’y trouve.",
+      "it": "Nella demolizione con pinza nessuno nella zona di rotazione e caduta. Il manovratore si ferma finché qualcuno vi si trova.",
+      "en": "In grab demolition nobody may be in the swing or drop zone. The operator stops while anyone is in the danger area."
+    }
+  },
+  {
+    "id": "2026-07-28-tg-frauenfeld-verzinkerei",
+    "caseId": "case-2026-07-28-tg-frauenfeld-verzinkerei",
+    "date": "2026-07-28",
+    "accidentDate": "2025-08",
+    "canton": "TG",
+    "place": "Frauenfeld (Region)",
+    "industry": "industry",
+    "hazard": "crane",
+    "outcome": "serious",
+    "court": {
+      "de": "Staatsanwaltschaft Frauenfeld (Strafbefehl)",
+      "fr": "Ministère public de Frauenfeld (ordonnance pénale)",
+      "it": "Ministero pubblico di Frauenfeld (decreto d’accusa)",
+      "en": "Frauenfeld Public Prosecutor (penalty order)"
+    },
+    "caseNumber": null,
+    "final": true,
+    "appeal": {
+      "de": "Strafbefehl nicht angefochten – rechtskräftig.",
+      "fr": "Ordonnance pénale non contestée – définitive.",
+      "it": "Decreto d’accusa non impugnato – definitivo.",
+      "en": "Penalty order not contested – final."
+    },
+    "employerRole": {
+      "de": "Metallverarbeitender Betrieb (Verzinkerei); keine Massnahmen gegen das Unternehmen berichtet.",
+      "fr": "Entreprise de traitement des métaux (galvanisation); aucune mesure contre l’entreprise rapportée.",
+      "it": "Azienda metallurgica (zincatura); nessuna misura contro l’azienda riportata.",
+      "en": "Metalworking company (galvanising); no action against the company reported."
+    },
+    "defendants": [
+      {
+        "role": {
+          "de": "Kranführer (Mitarbeiter)",
+          "fr": "Grutier (employé)",
+          "it": "Gruista (dipendente)",
+          "en": "Crane operator (employee)"
+        },
+        "charge": {
+          "de": "Fahrlässige schwere Körperverletzung (Art. 125 StGB)",
+          "fr": "Lésions corporelles graves par négligence (art. 125 CP)",
+          "it": "Lesioni gravi colpose (art. 125 CP)",
+          "en": "Serious bodily harm by negligence (Art. 125 SCC)"
+        },
+        "verdict": "convicted",
+        "reasoning": {
+          "de": "Hängte das heisse Gestell nur auf einer Seite vollständig aus und fuhr den Kran weg; dadurch wurde es mitgerissen und fiel auf einen Kollegen. Mit der gebotenen Sorgfalt wäre der Unfall vermeidbar gewesen.",
+          "fr": "N’a décroché complètement qu’un côté du cadre brûlant puis a déplacé la grue, qui l’a entraîné sur un collègue. Avec la diligence requise, l’accident était évitable.",
+          "it": "Ha sganciato completamente un solo lato del telaio rovente e ha spostato la gru, che lo ha trascinato su un collega. Con la dovuta diligenza l’incidente era evitabile.",
+          "en": "Fully unhooked only one side of the hot rack and moved the crane off, dragging it onto a colleague. With due care the accident was avoidable."
+        },
+        "sanction": {
+          "dailyUnits": 30,
+          "dailyAmount": 120,
+          "suspended": true,
+          "probationYears": 2,
+          "fineCHF": 500,
+          "custodial": null,
+          "costs": {
+            "de": "Verfahrenskosten; total inkl. Busse rund CHF 2000",
+            "fr": "Frais de procédure; env. CHF 2000 au total avec l’amende",
+            "it": "Spese procedurali; circa CHF 2000 in totale con la multa",
+            "en": "Procedural costs; about CHF 2,000 in total incl. fine"
+          },
+          "compensation": {
+            "de": "Zivilforderungen auf den Zivilweg verwiesen",
+            "fr": "Prétentions civiles renvoyées au juge civil",
+            "it": "Pretese civili rinviate al foro civile",
+            "en": "Civil claims referred to civil courts"
+          },
+          "bail": null,
+          "other": null
+        }
+      }
+    ],
+    "linkedAccidentId": null,
+    "source": {
+      "name": "Thurgauer Zeitung",
+      "url": "https://www.thurgauerzeitung.ch/ostschweiz/kanton-thurgau/frauenfeld-31-jaehriger-nach-arbeitsunfall-bestraft-ld.4189521",
+      "lang": "de"
+    },
+    "extraSources": [],
+    "title": {
+      "de": "Heisses Verzinkungsgestell fällt auf Kollegen: Strafbefehl gegen Kranführer",
+      "fr": "Un cadre de galvanisation brûlant tombe sur un collègue: ordonnance pénale contre le grutier",
+      "it": "Telaio di zincatura rovente cade su un collega: decreto d’accusa contro il gruista",
+      "en": "Hot galvanising rack falls on colleague: penalty order for crane operator"
+    },
+    "facts": {
+      "activity": {
+        "de": "Kranarbeit in einer Verzinkerei (Ausheben aus dem Zinkbad)",
+        "fr": "Travail à la grue dans une galvanisation (sortie du bain de zinc)",
+        "it": "Lavoro con gru in una zincatura (estrazione dal bagno di zinco)",
+        "en": "Crane work at a galvanising plant (lifting from the zinc bath)"
+      },
+      "what": {
+        "de": "Ein rund 440 °C heisses Gestell wurde auf einem Abkühlbalken abgesetzt, aber nur einseitig ausgehängt. Beim Wegfahren des Krans kippte es auf einen Kollegen, der rund 45 Sekunden darunter lag.",
+        "fr": "Un cadre à environ 440 °C a été posé sur une poutre de refroidissement mais décroché d’un seul côté. En repartant, la grue l’a fait basculer sur un collègue, coincé dessous environ 45 secondes.",
+        "it": "Un telaio a circa 440 °C è stato posato su una trave di raffreddamento ma sganciato da un solo lato. Ripartendo, la gru lo ha fatto cadere su un collega, rimasto sotto circa 45 secondi.",
+        "en": "A rack at about 440 °C was set on a cooling beam but unhooked on one side only. When the crane moved off it toppled onto a colleague, who was trapped underneath for about 45 seconds."
+      },
+      "injuries": {
+        "de": "Verbrennungen dritten Grades an Rücken, Schultern, Arm und Bein; operiert",
+        "fr": "Brûlures du troisième degré au dos, aux épaules, au bras et à la jambe; opéré",
+        "it": "Ustioni di terzo grado a schiena, spalle, braccio e gamba; operato",
+        "en": "Third-degree burns to back, shoulders, arm and leg; surgery"
+      }
+    },
+    "lesson": {
+      "de": "Vor dem Wegfahren: alle Anschlagpunkte sichtbar frei? Niemand neben abgesetzten heissen Lasten, bis der Kran weg ist.",
+      "fr": "Avant de repartir: tous les points d’élingage visiblement libres? Personne à côté d’une charge brûlante tant que la grue n’est pas dégagée.",
+      "it": "Prima di ripartire: tutti i punti di aggancio visibilmente liberi? Nessuno accanto a carichi roventi finché la gru non si è allontanata.",
+      "en": "Before moving off: are all hook points visibly free? Nobody next to a hot load until the crane is clear."
+    }
+  },
+  {
+    "id": "2025-11-02-be-projektleiter-dach",
+    "caseId": "case-2025-11-02-be-projektleiter-dach",
+    "date": "2025-11-02",
+    "accidentDate": null,
+    "canton": "BE",
+    "place": null,
+    "industry": "construction",
+    "hazard": "fall",
+    "outcome": "injured",
+    "court": {
+      "de": "Staatsanwaltschaft Kanton Bern (Strafbefehl)",
+      "fr": "Ministère public du canton de Berne (ordonnance pénale)",
+      "it": "Ministero pubblico del Cantone di Berna (decreto d’accusa)",
+      "en": "Bern Public Prosecutor (penalty order)"
+    },
+    "caseNumber": null,
+    "final": null,
+    "appeal": null,
+    "employerRole": {
+      "de": "Baufirma; auf der Baustelle gab es weder Sicherheitskonzept noch verantwortliche Person für Arbeitssicherheit.",
+      "fr": "Entreprise de construction; le chantier n’avait ni concept de sécurité ni responsable de la sécurité.",
+      "it": "Impresa edile; il cantiere non aveva né piano di sicurezza né responsabile della sicurezza.",
+      "en": "Construction firm; the site had neither a safety plan nor a person responsible for safety."
+    },
+    "defendants": [
+      {
+        "role": {
+          "de": "Projektleiter",
+          "fr": "Chef de projet",
+          "it": "Capoprogetto",
+          "en": "Project manager"
+        },
+        "charge": {
+          "de": "Widerhandlung gegen das Unfallversicherungsgesetz (UVG)",
+          "fr": "Infraction à la loi sur l’assurance-accidents (LAA)",
+          "it": "Infrazione alla legge sull’assicurazione contro gli infortuni (LAINF)",
+          "en": "Violation of the Accident Insurance Act (UVG)"
+        },
+        "verdict": "convicted",
+        "reasoning": {
+          "de": "Klärte nicht ab, welche Schutzmassnahmen nötig waren: kein Sicherheitskonzept, keine zuständige Person, keine vorgeschriebene Dachfangwand.",
+          "fr": "N’a pas déterminé les mesures de protection nécessaires: pas de concept de sécurité, pas de responsable, pas de paroi de protection obligatoire.",
+          "it": "Non ha stabilito le misure di protezione necessarie: nessun piano di sicurezza, nessun responsabile, nessuna parete di protezione obbligatoria.",
+          "en": "Did not determine the protective measures needed: no safety plan, no responsible person, no required roof catch barrier."
+        },
+        "sanction": {
+          "dailyUnits": null,
+          "dailyAmount": null,
+          "suspended": null,
+          "probationYears": null,
+          "fineCHF": 1500,
+          "custodial": null,
+          "costs": {
+            "de": "Untersuchungsgebühren CHF 1420 + Auslagen CHF 150 (total CHF 3070)",
+            "fr": "Émoluments CHF 1420 + débours CHF 150 (total CHF 3070)",
+            "it": "Emolumenti CHF 1420 + spese CHF 150 (totale CHF 3070)",
+            "en": "Fees CHF 1,420 + expenses CHF 150 (total CHF 3,070)"
+          },
+          "compensation": null,
+          "bail": null,
+          "other": null
+        }
+      }
+    ],
+    "linkedAccidentId": null,
+    "source": {
+      "name": "20 Minuten",
+      "url": "https://www.20min.ch/story/kanton-bern-wand-nicht-gesichert-bauarbeiter-stuerzt-in-die-tiefe-103435073",
+      "lang": "de"
+    },
+    "extraSources": [],
+    "title": {
+      "de": "Kein Sicherheitskonzept: Projektleiter nach Dachsturz gebüsst",
+      "fr": "Pas de concept de sécurité: un chef de projet sanctionné après une chute de toit",
+      "it": "Nessun piano di sicurezza: capoprogetto multato dopo una caduta dal tetto",
+      "en": "No safety plan: project manager fined after roof fall"
+    },
+    "facts": {
+      "activity": {
+        "de": "Dacharbeiten ohne Dachfangwand",
+        "fr": "Travaux de toiture sans paroi de protection",
+        "it": "Lavori sul tetto senza parete di protezione",
+        "en": "Roof work without a catch barrier"
+      },
+      "what": {
+        "de": "Ein Arbeiter rutschte aus und stürzte rund 2,2 m über die ungesicherte Dachkante.",
+        "fr": "Un ouvrier a glissé et chuté d’environ 2,2 m depuis le bord du toit non protégé.",
+        "it": "Un operaio è scivolato cadendo per circa 2,2 m dal bordo del tetto non protetto.",
+        "en": "A worker slipped and fell about 2.2 m over the unprotected roof edge."
+      },
+      "injuries": {
+        "de": "Verletzt (Ausmass nicht berichtet)",
+        "fr": "Blessé (gravité non rapportée)",
+        "it": "Ferito (entità non riportata)",
+        "en": "Injured (extent not reported)"
+      }
+    },
+    "lesson": {
+      "de": "Absturzsicherung gehört vor Arbeitsbeginn ins Sicherheitskonzept – und jemand muss dafür zuständig sein.",
+      "fr": "La protection antichute doit figurer dans le concept de sécurité avant le début des travaux, avec un responsable désigné.",
+      "it": "La protezione anticaduta va nel piano di sicurezza prima dell’inizio dei lavori, con un responsabile designato.",
+      "en": "Fall protection belongs in the safety plan before work starts, with someone named responsible."
+    }
+  },
+  {
+    "id": "2026-10-08-zh-horgen-pv-dach",
+    "caseId": "case-2026-10-08-zh-horgen-pv-dach",
+    "date": "2026-10-08",
+    "accidentDate": "2024-09",
+    "canton": "ZH",
+    "place": "Rüschlikon",
+    "industry": "construction",
+    "hazard": "fall",
+    "outcome": "injured",
+    "court": {
+      "de": "Bezirksgericht Horgen",
+      "fr": "Tribunal de district de Horgen",
+      "it": "Tribunale distrettuale di Horgen",
+      "en": "Horgen District Court"
+    },
+    "caseNumber": null,
+    "final": false,
+    "appeal": {
+      "de": "Berufung direkt nach dem Urteil angemeldet – nicht rechtskräftig.",
+      "fr": "Appel annoncé dès le jugement – pas définitif.",
+      "it": "Appello annunciato subito dopo la sentenza – non definitivo.",
+      "en": "Appeal lodged right after the verdict – not final."
+    },
+    "employerRole": {
+      "de": "Baufirma als Projektverantwortliche; Montage an ein Subunternehmen vergeben (laut Verteidigung).",
+      "fr": "Entreprise de construction responsable du projet; montage confié à un sous-traitant (selon la défense).",
+      "it": "Impresa edile responsabile del progetto; montaggio affidato a un subappaltatore (secondo la difesa).",
+      "en": "Construction firm in charge of the project; installation subcontracted (according to the defence)."
+    },
+    "defendants": [
+      {
+        "role": {
+          "de": "Projektleiter der Baufirma",
+          "fr": "Chef de projet de l’entreprise",
+          "it": "Capoprogetto dell’impresa",
+          "en": "Project manager of the construction firm"
+        },
+        "charge": {
+          "de": "Fahrlässige Gefährdung durch Verletzung der Regeln der Baukunde (Art. 229 StGB)",
+          "fr": "Violation par négligence des règles de l’art de construire (art. 229 CP)",
+          "it": "Violazione colposa delle regole dell’arte edilizia (art. 229 CP)",
+          "en": "Negligent breach of building regulations (Art. 229 SCC)"
+        },
+        "verdict": "convicted",
+        "reasoning": {
+          "de": "Gab als Projektleiter ungenügende Sicherheitsmassnahmen frei: Zur Hofseite fehlte jede Absturzsicherung (Gerüst, Spenglergang o. ä.). Dokumente wiesen ihn als Projektleiter aus; laut Zeugen kam die Anweisung, sich nicht zu sichern, von ihm. Verschulden als gering eingestuft.",
+          "fr": "A validé en tant que chef de projet des mesures insuffisantes: aucune protection antichute côté cour (échafaudage, passerelle, etc.). Les documents le désignaient comme chef de projet; selon des témoins, la consigne de ne pas s’assurer venait de lui. Faute jugée légère.",
+          "it": "Da capoprogetto ha approvato misure insufficienti: nessuna protezione anticaduta verso il cortile (ponteggio, passerella ecc.). I documenti lo indicavano come capoprogetto; secondo testimoni, l’istruzione di non assicurarsi veniva da lui. Colpa giudicata lieve.",
+          "en": "As project manager he approved inadequate measures: no fall protection on the courtyard side (scaffold, walkway or similar). Documents named him project manager; witnesses said the instruction not to tie off came from him. Fault rated as minor."
+        },
+        "sanction": {
+          "dailyUnits": 120,
+          "dailyAmount": 280,
+          "suspended": true,
+          "probationYears": 2,
+          "fineCHF": null,
+          "custodial": null,
+          "costs": null,
+          "compensation": null,
+          "bail": null,
+          "other": {
+            "de": "Staatsanwaltschaft hatte zusätzlich eine Busse von CHF 6200 beantragt (nicht verhängt)",
+            "fr": "Le Ministère public avait aussi requis une amende de CHF 6200 (non prononcée)",
+            "it": "Il Ministero pubblico aveva chiesto anche una multa di CHF 6200 (non inflitta)",
+            "en": "Prosecutor had also sought a CHF 6,200 fine (not imposed)"
+          }
+        }
+      }
+    ],
+    "linkedAccidentId": null,
+    "source": {
+      "name": "blue News",
+      "url": "https://www.bluewin.ch/de/news/schweiz/handwerker-stuerzt-vom-dach-chef-ist-im-buero-schuld-soll-trotzdem-der-chef-sein-li.3628625",
+      "lang": "de"
+    },
+    "extraSources": [],
+    "title": {
+      "de": "PV-Montage ohne Absturzsicherung auf einer Dachseite: Projektleiter schuldig",
+      "fr": "Pose de panneaux solaires sans protection sur un côté du toit: chef de projet coupable",
+      "it": "Posa di pannelli solari senza protezione su un lato del tetto: capoprogetto colpevole",
+      "en": "Solar install with one roof side unprotected: project manager convicted"
+    },
+    "facts": {
+      "activity": {
+        "de": "Montage einer Photovoltaikanlage auf einem Flachdach",
+        "fr": "Pose d’une installation photovoltaïque sur un toit plat",
+        "it": "Montaggio di un impianto fotovoltaico su un tetto piano",
+        "en": "Installing a PV system on a flat roof"
+      },
+      "what": {
+        "de": "Drei Dachseiten waren gesichert, die vierte zum Innenhof nicht. Ein Handwerker wollte kippende Solarpanels halten und stürzte rund 3,1 m in die Tiefe.",
+        "fr": "Trois côtés du toit étaient protégés, pas le quatrième côté cour. Un artisan a voulu retenir des panneaux qui basculaient et a chuté d’environ 3,1 m.",
+        "it": "Tre lati del tetto erano protetti, il quarto verso il cortile no. Un artigiano ha cercato di trattenere pannelli che si ribaltavano ed è caduto per circa 3,1 m.",
+        "en": "Three roof sides were guarded, the courtyard side was not. A tradesman tried to hold toppling solar panels and fell about 3.1 m."
+      },
+      "injuries": {
+        "de": "Mittelhandbruch, Fersenverletzung (operiert)",
+        "fr": "Fracture d’un métacarpien, blessure au talon (opérée)",
+        "it": "Frattura di un metacarpo, lesione al tallone (operata)",
+        "en": "Broken hand bone, heel injury (surgery)"
+      }
+    },
+    "lesson": {
+      "de": "Absturzsicherung auf drei von vier Seiten reicht nicht. Wer Sicherheitsmassnahmen freigibt, haftet – auch aus dem Büro.",
+      "fr": "Une protection sur trois côtés sur quatre ne suffit pas. Qui valide les mesures en répond, même depuis le bureau.",
+      "it": "Una protezione su tre lati su quattro non basta. Chi approva le misure ne risponde, anche dall’ufficio.",
+      "en": "Edge protection on three of four sides is not enough. Whoever signs off the measures is liable, even from the office."
+    }
+  },
+  {
+    "id": "2025-06-30-fr-chatillon-decharge",
+    "caseId": "case-2025-06-30-fr-chatillon-decharge",
+    "date": "2025-06-30",
+    "accidentDate": "2023-12-11",
+    "canton": "FR",
+    "place": "Châtillon",
+    "industry": "transport",
+    "hazard": "vehicle",
+    "outcome": "fatal",
+    "court": {
+      "de": "Tribunal pénal de la Sarine",
+      "fr": "Tribunal pénal de la Sarine",
+      "it": "Tribunale penale della Sarine",
+      "en": "Sarine Criminal Court"
+    },
+    "caseNumber": null,
+    "final": null,
+    "appeal": null,
+    "employerRole": {
+      "de": "Beide Chauffeure holten Recyclingmaterial auf der Deponie ab; Rolle von Arbeitgeber und Deponiebetreiber nicht berichtet.",
+      "fr": "Les deux chauffeurs venaient chercher des déchets recyclés à la décharge; rôle de l’employeur et de l’exploitant non rapporté.",
+      "it": "Entrambi gli autisti ritiravano materiali riciclati in discarica; ruolo del datore e del gestore non riportato.",
+      "en": "Both drivers were collecting recycled material at the landfill; role of employer and site operator not reported."
+    },
+    "defendants": [
+      {
+        "role": {
+          "de": "Lastwagenchauffeur",
+          "fr": "Chauffeur poids lourd",
+          "it": "Autista di camion",
+          "en": "Truck driver"
+        },
+        "charge": {
+          "de": "Fahrlässige Tötung (Art. 117 StGB)",
+          "fr": "Homicide par négligence (art. 117 CP)",
+          "it": "Omicidio colposo (art. 117 CP)",
+          "en": "Negligent homicide (Art. 117 SCC)"
+        },
+        "verdict": "convicted",
+        "reasoning": {
+          "de": "Fuhr los, ohne den Bereich direkt vor der Kabine zu überblicken, und überrollte einen Berufskollegen, der zu Fuss vor dem Fahrzeug durchging.",
+          "fr": "A démarré sans contrôler la zone juste devant sa cabine et a écrasé un collègue qui passait à pied devant le véhicule.",
+          "it": "È partito senza controllare la zona davanti alla cabina e ha investito un collega che passava a piedi davanti al veicolo.",
+          "en": "Moved off without checking the area right in front of the cab and ran over a fellow driver walking in front of the truck."
+        },
+        "sanction": {
+          "dailyUnits": 90,
+          "dailyAmount": 60,
+          "suspended": true,
+          "probationYears": 2,
+          "fineCHF": null,
+          "custodial": null,
+          "costs": null,
+          "compensation": null,
+          "bail": null,
+          "other": null
+        }
+      }
+    ],
+    "linkedAccidentId": null,
+    "source": {
+      "name": "La Liberté",
+      "url": "https://www.laliberte.ch/articles/regions/justice/un-chauffeur-sanctionne-apres-avoir-ecrase-un-collegue-1074361",
+      "lang": "fr"
+    },
+    "extraSources": [],
+    "title": {
+      "de": "Deponie Châtillon: Lastwagenfahrer überrollt Berufskollegen",
+      "fr": "Décharge de Châtillon: un chauffeur écrase un collègue",
+      "it": "Discarica di Châtillon: autista investe un collega",
+      "en": "Châtillon landfill: truck driver runs over fellow driver"
+    },
+    "facts": {
+      "activity": {
+        "de": "Abholen von Recyclingmaterial auf einer Deponie mit Lastwagen",
+        "fr": "Prise en charge de déchets recyclés à une décharge en camion",
+        "it": "Ritiro di materiali riciclati in discarica con camion",
+        "en": "Collecting recycled material at a landfill by truck"
+      },
+      "what": {
+        "de": "Nach dem Wägen ging ein anderer Chauffeur zu Fuss zu seinem Lastwagen zurück und passierte direkt vor dem Fahrzeug des Beschuldigten, der ihn aus der Kabine nicht sah.",
+        "fr": "Après la pesée, un autre chauffeur revenait à pied vers son camion et est passé juste devant le véhicule du prévenu, qui ne l’a pas vu depuis sa cabine.",
+        "it": "Dopo la pesatura un altro autista tornava a piedi al suo camion ed è passato davanti al veicolo dell’imputato, che dalla cabina non lo ha visto.",
+        "en": "After weighing, another driver walked back to his truck and passed directly in front of the defendant's vehicle; the defendant did not see him from the cab."
+      },
+      "injuries": {
+        "de": "Tödlich",
+        "fr": "Mortel",
+        "it": "Mortale",
+        "en": "Fatal"
+      }
+    },
+    "lesson": {
+      "de": "Der tote Winkel vor der Lkw-Kabine ist gross: getrennte Fusswege, Frontkameras oder Spiegel – und erst Blickkontakt, dann losfahren.",
+      "fr": "L’angle mort devant un camion est grand: cheminements piétons séparés, caméras ou miroirs frontaux – et contact visuel avant de démarrer.",
+      "it": "L’angolo cieco davanti al camion è ampio: percorsi pedonali separati, telecamere o specchi frontali – e contatto visivo prima di partire.",
+      "en": "The blind spot in front of a truck cab is large: separate walkways, front cameras or mirrors – and eye contact before moving off."
+    }
+  },
+  {
+    "id": "2026-09-02-ti-paradiso-du-lac",
+    "caseId": "case-2026-09-02-ti-paradiso-du-lac",
+    "date": "2026-09-02",
+    "accidentDate": "2021-01-08",
+    "canton": "TI",
+    "place": "Paradiso",
+    "industry": "construction",
+    "hazard": "struck",
+    "outcome": "fatal",
+    "court": {
+      "de": "Corte delle assise correzionali (Lugano)",
+      "fr": "Cour des assises correctionnelles (Lugano)",
+      "it": "Corte delle assise correzionali (Lugano)",
+      "en": "Correctional Assizes Court (Lugano)"
+    },
+    "caseNumber": null,
+    "final": null,
+    "appeal": null,
+    "employerRole": {
+      "de": "Baustelle zur Umwandlung eines Hotels in eine Seniorenresidenz; Rolle des Unternehmens nicht berichtet.",
+      "fr": "Chantier de transformation d’un hôtel en résidence pour seniors; rôle de l’entreprise non rapporté.",
+      "it": "Cantiere di trasformazione di un albergo in residenza per anziani; ruolo dell’impresa non riportato.",
+      "en": "Site converting a hotel into a senior residence; company's role not reported."
+    },
+    "defendants": [
+      {
+        "role": {
+          "de": "Bauführer (Capocantiere)",
+          "fr": "Chef de chantier",
+          "it": "Capocantiere",
+          "en": "Site foreman"
+        },
+        "charge": {
+          "de": "Fahrlässige Tötung; Verletzung der Regeln der Baukunde",
+          "fr": "Homicide par négligence; violation des règles de l’art de construire",
+          "it": "Omicidio colposo; violazione delle regole dell’arte edilizia",
+          "en": "Negligent homicide; breach of building regulations"
+        },
+        "verdict": "convicted",
+        "reasoning": {
+          "de": "Schuldig gesprochen; die Begründung ist im Bericht nicht wiedergegeben.",
+          "fr": "Reconnu coupable; la motivation n’est pas rapportée.",
+          "it": "Ritenuto colpevole; la motivazione non è riportata.",
+          "en": "Found guilty; reasoning not reported."
+        },
+        "sanction": {
+          "dailyUnits": 180,
+          "dailyAmount": null,
+          "suspended": true,
+          "probationYears": 2,
+          "fineCHF": null,
+          "custodial": null,
+          "costs": null,
+          "compensation": null,
+          "bail": null,
+          "other": null
+        }
+      },
+      {
+        "role": {
+          "de": "Sicherheitsverantwortlicher (Techniker)",
+          "fr": "Responsable technique de la sécurité",
+          "it": "Tecnico responsabile delle misure di sicurezza",
+          "en": "Safety officer (technician)"
+        },
+        "charge": {
+          "de": "Fahrlässige Tötung (Art. 117 StGB)",
+          "fr": "Homicide par négligence (art. 117 CP)",
+          "it": "Omicidio colposo (art. 117 CP)",
+          "en": "Negligent homicide (Art. 117 SCC)"
+        },
+        "verdict": "convicted",
+        "reasoning": {
+          "de": "Schuldig gesprochen; die Begründung ist im Bericht nicht wiedergegeben.",
+          "fr": "Reconnu coupable; la motivation n’est pas rapportée.",
+          "it": "Ritenuto colpevole; la motivazione non è riportata.",
+          "en": "Found guilty; reasoning not reported."
+        },
+        "sanction": {
+          "dailyUnits": 180,
+          "dailyAmount": null,
+          "suspended": true,
+          "probationYears": 2,
+          "fineCHF": null,
+          "custodial": null,
+          "costs": null,
+          "compensation": null,
+          "bail": null,
+          "other": null
+        }
+      },
+      {
+        "role": {
+          "de": "Arbeiter, der den Rahmen hinunterwarf",
+          "fr": "Ouvrier qui a lancé le cadre",
+          "it": "Operaio che lanciò il telaio",
+          "en": "Worker who threw the frame"
+        },
+        "charge": null,
+        "verdict": "acquitted",
+        "reasoning": {
+          "de": "Vollständig freigesprochen; Begründung nicht berichtet.",
+          "fr": "Acquitté sur toute la ligne; motivation non rapportée.",
+          "it": "Prosciolto su tutta la linea; motivazione non riportata.",
+          "en": "Fully acquitted; reasoning not reported."
+        },
+        "sanction": {
+          "dailyUnits": null,
+          "dailyAmount": null,
+          "suspended": null,
+          "probationYears": null,
+          "fineCHF": null,
+          "custodial": null,
+          "costs": null,
+          "compensation": null,
+          "bail": null,
+          "other": null
+        }
+      }
+    ],
+    "linkedAccidentId": null,
+    "source": {
+      "name": "RSI",
+      "url": "https://www.rsi.ch/info/ticino-grigioni-e-insubria/Du-Lac-fu-omicidio-colposo--4054194.html",
+      "lang": "it"
+    },
+    "extraSources": [],
+    "title": {
+      "de": "Baustelle Ex-Hotel Du Lac: Bauführer und Sicherheitsverantwortlicher verurteilt",
+      "fr": "Chantier de l’ex-Hôtel Du Lac: chef de chantier et responsable sécurité condamnés",
+      "it": "Cantiere ex Hotel Du Lac: condannati capocantiere e tecnico della sicurezza",
+      "en": "Former Hotel Du Lac site: foreman and safety officer convicted"
+    },
+    "facts": {
+      "activity": {
+        "de": "Umbau eines Hotels in eine Seniorenresidenz",
+        "fr": "Transformation d’un hôtel en résidence pour seniors",
+        "it": "Trasformazione di un albergo in residenza per anziani",
+        "en": "Converting a hotel into a senior residence"
+      },
+      "what": {
+        "de": "Ein Holzrahmen wurde vom sechsten Stock hinuntergeworfen und traf einen 54-jährigen Arbeiter unten auf der Baustelle.",
+        "fr": "Un cadre en bois a été jeté depuis le sixième étage et a touché un ouvrier de 54 ans en contrebas.",
+        "it": "Un telaio di legno è stato lanciato dal sesto piano e ha travolto un operaio di 54 anni sottostante.",
+        "en": "A wooden frame was thrown from the sixth floor and struck a 54-year-old worker below."
+      },
+      "injuries": {
+        "de": "Tödlich",
+        "fr": "Mortel",
+        "it": "Mortale",
+        "en": "Fatal"
+      }
+    },
+    "lesson": {
+      "de": "Abbruchmaterial nie werfen: Schuttrutsche oder Kran, Fallzone absperren. Bauführung und Sicherheitsverantwortliche haften mit.",
+      "fr": "Ne jamais jeter les matériaux: goulotte ou grue, zone de chute balisée. Direction de chantier et responsable sécurité en répondent aussi.",
+      "it": "Mai lanciare il materiale: scivolo o gru, zona di caduta sbarrata. Ne rispondono anche capocantiere e responsabile della sicurezza.",
+      "en": "Never throw material down: use a chute or crane and fence the drop zone. Site management and the safety officer share liability."
+    }
+  },
+  {
+    "id": "2025-11-14-bger-6b-365-2025-ge-vigne",
+    "caseId": "case-2025-11-14-bger-6b-365-2025-ge-vigne",
+    "date": "2025-11-14",
+    "accidentDate": "2018-02-22",
+    "canton": "GE",
+    "place": null,
+    "industry": "agriculture",
+    "hazard": "machinery",
+    "outcome": "serious",
+    "court": {
+      "de": "Bundesgericht (I. strafrechtliche Abteilung)",
+      "fr": "Tribunal fédéral (Ire Cour de droit pénal)",
+      "it": "Tribunale federale (I Corte di diritto penale)",
+      "en": "Federal Supreme Court (1st Criminal Law Division)"
+    },
+    "caseNumber": "6B_365/2025, 6B_380/2025",
+    "final": true,
+    "appeal": {
+      "de": "Polizeigericht Genf (30.4.2024), Berufungen abgewiesen (Cour de justice, 6.3.2025), Bundesgericht wies beide Beschwerden ab – rechtskräftig.",
+      "fr": "Tribunal de police (30.4.2024), appels rejetés (Cour de justice, 6.3.2025), recours rejetés par le TF – définitif.",
+      "it": "Tribunale di polizia (30.4.2024), appelli respinti (Cour de justice, 6.3.2025), ricorsi respinti dal TF – definitivo.",
+      "en": "Police Court (30 Apr 2024), appeals dismissed (Court of Justice, 6 Mar 2025), both appeals dismissed by the Federal Court – final."
+    },
+    "employerRole": {
+      "de": "Weinbaubetrieb des verurteilten Arbeitgebers; die Bohrmaschine (Prototyp) wurde von einem Landmaschinenunternehmen gewartet, das auch den Bediener stellte.",
+      "fr": "Domaine viticole de l’employeur condamné; la foreuse (prototype) était entretenue par une entreprise de machines agricoles qui fournissait aussi l’opérateur.",
+      "it": "Azienda vitivinicola del datore condannato; la trivella (prototipo) era gestita da una ditta di macchine agricole che forniva anche l’operatore.",
+      "en": "Vineyard of the convicted employer; the prototype drill was maintained by an agricultural-machinery firm that also supplied the operator."
+    },
+    "defendants": [
+      {
+        "role": {
+          "de": "Arbeitgeber (Winzer)",
+          "fr": "Employeur (vigneron)",
+          "it": "Datore di lavoro (viticoltore)",
+          "en": "Employer (wine grower)"
+        },
+        "charge": {
+          "de": "Fahrlässige schwere Körperverletzung (Art. 125 StGB)",
+          "fr": "Lésions corporelles graves par négligence (art. 125 CP)",
+          "it": "Lesioni gravi colpose (art. 125 CP)",
+          "en": "Serious bodily harm by negligence (Art. 125 SCC)"
+        },
+        "verdict": "convicted",
+        "reasoning": {
+          "de": "Liess seinen Arbeiter neben der laufenden Bohrschnecke arbeiten, obwohl diese entgegen der Betriebsanleitung keine Schutzvorrichtung hatte – was ihm bekannt war. Seine Bemühungen nach dem Unfall mindern die Strafe nicht.",
+          "fr": "A fait travailler son ouvrier à côté de la vis en marche, alors qu’elle n’avait pas la protection exigée par le manuel – ce qu’il savait. Ses efforts après l’accident n’atténuent pas la peine.",
+          "it": "Ha fatto lavorare il suo operaio accanto alla coclea in funzione, priva della protezione prevista dal manuale – cosa che sapeva. I suoi sforzi dopo l’incidente non riducono la pena.",
+          "en": "Had his worker work next to the running auger although, contrary to the manual, it had no guard – which he knew. His efforts after the accident do not reduce the sentence."
+        },
+        "sanction": {
+          "dailyUnits": 140,
+          "dailyAmount": 30,
+          "suspended": true,
+          "probationYears": 3,
+          "fineCHF": null,
+          "custodial": null,
+          "costs": {
+            "de": "Bundesgerichtskosten CHF 3000",
+            "fr": "Frais du TF CHF 3000",
+            "it": "Spese TF CHF 3000",
+            "en": "Federal Court costs CHF 3,000"
+          },
+          "compensation": {
+            "de": "Anwaltskosten des Opfers CHF 24’376.44, solidarisch mit dem Bediener",
+            "fr": "Frais d’avocat de la victime CHF 24’376.44, solidairement avec l’opérateur",
+            "it": "Spese legali della vittima CHF 24’376.44, in solido con l’operatore",
+            "en": "Victim's legal costs CHF 24,376.44, jointly with the operator"
+          },
+          "bail": null,
+          "other": null
+        }
+      },
+      {
+        "role": {
+          "de": "Maschinenbediener (Mitarbeiter des Landmaschinenunternehmens)",
+          "fr": "Opérateur de la foreuse (employé de l’entreprise de machines)",
+          "it": "Operatore della trivella (dipendente della ditta di macchine)",
+          "en": "Drill operator (employee of the machinery firm)"
+        },
+        "charge": {
+          "de": "Fahrlässige schwere Körperverletzung (Art. 125 StGB)",
+          "fr": "Lésions corporelles graves par négligence (art. 125 CP)",
+          "it": "Lesioni gravi colpose (art. 125 CP)",
+          "en": "Serious bodily harm by negligence (Art. 125 SCC)"
+        },
+        "verdict": "convicted",
+        "reasoning": {
+          "de": "Bohrte weiter, obwohl die Bedingungen den Sicherheitsvorgaben der Betriebsanleitung widersprachen (ungeschützte Schnecke, Person in unmittelbarer Nähe).",
+          "fr": "A foré dans des conditions contraires aux normes de sécurité du manuel (vis non protégée, personne à proximité immédiate).",
+          "it": "Ha trivellato in condizioni contrarie alle norme di sicurezza del manuale (coclea non protetta, persona nelle immediate vicinanze).",
+          "en": "Drilled in conditions contrary to the manual's safety rules (unguarded auger, a person close by)."
+        },
+        "sanction": {
+          "dailyUnits": 90,
+          "dailyAmount": 30,
+          "suspended": true,
+          "probationYears": 3,
+          "fineCHF": null,
+          "custodial": null,
+          "costs": {
+            "de": "Bundesgerichtskosten CHF 3000",
+            "fr": "Frais du TF CHF 3000",
+            "it": "Spese TF CHF 3000",
+            "en": "Federal Court costs CHF 3,000"
+          },
+          "compensation": {
+            "de": "Anwaltskosten des Opfers CHF 24’376.44, solidarisch mit dem Arbeitgeber",
+            "fr": "Frais d’avocat de la victime CHF 24’376.44, solidairement avec l’employeur",
+            "it": "Spese legali della vittima CHF 24’376.44, in solido con il datore",
+            "en": "Victim's legal costs CHF 24,376.44, jointly with the employer"
+          },
+          "bail": null,
+          "other": null
+        }
+      }
+    ],
+    "linkedAccidentId": null,
+    "source": {
+      "name": "Tribunal fédéral (arrêt, via OpenCaseLaw)",
+      "url": "https://mcp.opencaselaw.ch/entscheid/bger_6B_365_2025",
+      "lang": "fr"
+    },
+    "extraSources": [
+      {
+        "name": "20 minutes",
+        "url": "https://www.20min.ch/fr/story/geneve-grave-accident-du-travail-vigneron-condamne-103111586",
+        "lang": "fr"
+      },
+      {
+        "name": "20 minutes",
+        "url": "https://www.20min.ch/fr/story/geneve-condamnation-confirmee-apres-un-grave-accident-du-travail-103475533",
+        "lang": "fr"
+      }
+    ],
+    "title": {
+      "de": "Arm von Bohrschnecke erfasst: Winzer und Maschinenbediener rechtskräftig verurteilt",
+      "fr": "Bras arraché par une foreuse: vigneron et opérateur définitivement condamnés",
+      "it": "Braccio strappato da una trivella: viticoltore e operatore condannati in via definitiva",
+      "en": "Arm torn off by vineyard auger: grower and drill operator finally convicted"
+    },
+    "facts": {
+      "activity": {
+        "de": "Bohren von Löchern zwischen Rebzeilen für ein Bewässerungssystem",
+        "fr": "Forage de trous entre les rangs de vigne pour un système d’irrigation",
+        "it": "Trivellazione di fori tra i filari per un impianto d’irrigazione",
+        "en": "Drilling holes between vine rows for an irrigation system"
+      },
+      "what": {
+        "de": "Der Arbeiter verfüllte neben der laufenden Bohrmaschine ein Loch, verlor beim Aufrichten das Gleichgewicht und stolperte gegen die ungeschützte Schnecke, die seine offene Jacke erfasste.",
+        "fr": "L’ouvrier rebouchait un trou près de la foreuse en marche; en se relevant il a perdu l’équilibre et a trébuché contre la vis non protégée, qui a happé sa veste ouverte.",
+        "it": "L’operaio riempiva un foro accanto alla trivella in funzione; rialzandosi ha perso l’equilibrio ed è inciampato contro la coclea non protetta, che ha agganciato la giacca aperta.",
+        "en": "The worker was refilling a hole next to the running drill; standing up he lost balance and stumbled into the unguarded auger, which caught his open jacket."
+      },
+      "injuries": {
+        "de": "Rechter Arm und Teil eines Ohrs abgerissen",
+        "fr": "Bras droit et partie d’une oreille arrachés",
+        "it": "Braccio destro e parte di un orecchio strappati",
+        "en": "Right arm and part of an ear torn off"
+      }
+    },
+    "lesson": {
+      "de": "Rotierende Schnecken brauchen den Schutz aus der Betriebsanleitung – fehlt er, wird nicht gebohrt. Keine offene Kleidung an drehenden Teilen.",
+      "fr": "Une vis rotative doit avoir la protection prévue par le manuel – sinon on ne fore pas. Pas de vêtements ouverts près de pièces en rotation.",
+      "it": "Una coclea rotante deve avere la protezione prevista dal manuale – altrimenti non si trivella. Niente abiti aperti vicino a parti rotanti.",
+      "en": "A rotating auger needs the guard the manual specifies – without it, no drilling. No loose clothing near rotating parts."
+    }
+  },
+  {
+    "id": "2025-12-01-bger-6b-688-2024-vs-verbier",
+    "caseId": "case-2025-12-01-bger-6b-688-2024-vs-verbier",
+    "date": "2025-12-01",
+    "accidentDate": "2014-12-22",
+    "canton": "VS",
+    "place": "Verbier",
+    "industry": "transport",
+    "hazard": "struck",
+    "outcome": "fatal",
+    "court": {
+      "de": "Bundesgericht (I. strafrechtliche Abteilung)",
+      "fr": "Tribunal fédéral (Ire Cour de droit pénal)",
+      "it": "Tribunale federale (I Corte di diritto penale)",
+      "en": "Federal Supreme Court (1st Criminal Law Division)"
+    },
+    "caseNumber": "6B_688/2024",
+    "final": true,
+    "appeal": {
+      "de": "Bezirksgericht Entremont (2022), Kantonsgericht Wallis (2024, Strafe wegen Zeitablauf reduziert), Beschwerde vom Bundesgericht abgewiesen – rechtskräftig.",
+      "fr": "Tribunal du district de l’Entremont (2022), Tribunal cantonal (2024, peine réduite vu l’écoulement du temps), recours rejeté par le TF – définitif.",
+      "it": "Tribunale distrettuale dell’Entremont (2022), Tribunale cantonale (2024, pena ridotta per il tempo trascorso), ricorso respinto dal TF – definitivo.",
+      "en": "Entremont District Court (2022), Valais Cantonal Court (2024, sentence reduced for elapsed time), appeal dismissed by the Federal Court – final."
+    },
+    "employerRole": {
+      "de": "Bergbahnunternehmen; als juristische Person angeklagt und freigesprochen (rechtskräftig). Es entschädigte die Familie des Opfers.",
+      "fr": "Société de remontées mécaniques; prévenue et acquittée (définitif). Elle a indemnisé la famille de la victime.",
+      "it": "Società di impianti di risalita; imputata e assolta (definitivo). Ha indennizzato la famiglia della vittima.",
+      "en": "Ski-lift company; charged and acquitted (final). It compensated the victim's family."
+    },
+    "defendants": [
+      {
+        "role": {
+          "de": "Pistenchef (stellvertretend auch Sicherheitschef des Sektors)",
+          "fr": "Chef des pistes (remplaçant aussi le chef sécurité du secteur)",
+          "it": "Capo delle piste (anche sostituto del capo sicurezza del settore)",
+          "en": "Head of piste service (also standing in as sector safety chief)"
+        },
+        "charge": {
+          "de": "Fahrlässige Tötung (Art. 117 StGB)",
+          "fr": "Homicide par négligence (art. 117 CP)",
+          "it": "Omicidio colposo (art. 117 CP)",
+          "en": "Negligent homicide (Art. 117 SCC)"
+        },
+        "verdict": "convicted",
+        "reasoning": {
+          "de": "Als Verantwortlicher des Pisten- und Rettungsdienstes hatte er eine Garantenstellung und musste dafür sorgen und kontrollieren, dass die Absperrkordel vor der Sesselbahn mit gelb-schwarzen Wimpeln markiert war. Dass er die Kordel nicht selbst gespannt hatte, entlastet ihn nicht; auf das Vertrauensprinzip konnte er sich als Kontrollverantwortlicher nicht berufen.",
+          "fr": "Responsable du service des pistes et de sauvetage, il avait une position de garant et devait faire poser et contrôler des fanions jaune-noir sur la corde devant le télésiège. Ne pas avoir posé la corde lui-même ne l’exonère pas; chargé du contrôle, il ne pouvait invoquer le principe de la confiance.",
+          "it": "Responsabile del servizio piste e soccorso, aveva una posizione di garante e doveva far munire e controllare la corda davanti alla seggiovia con bandierine giallo-nere. Non averla posata lui stesso non lo scagiona; incaricato del controllo, non poteva invocare il principio dell’affidamento.",
+          "en": "As head of piste and rescue service he had a guarantor duty to ensure and check that the rope in front of the chairlift carried yellow-black warning flags. Not having strung the rope himself does not relieve him; as the person responsible for checks he could not rely on others."
+        },
+        "sanction": {
+          "dailyUnits": 36,
+          "dailyAmount": 145,
+          "suspended": true,
+          "probationYears": 2,
+          "fineCHF": null,
+          "custodial": null,
+          "costs": {
+            "de": "Bundesgerichtskosten CHF 3000",
+            "fr": "Frais du TF CHF 3000",
+            "it": "Spese TF CHF 3000",
+            "en": "Federal Court costs CHF 3,000"
+          },
+          "compensation": null,
+          "bail": null,
+          "other": {
+            "de": "1. Instanz: 90 Tagessätze à CHF 160; reduziert wegen Zeitablauf und Verletzung des Beschleunigungsgebots",
+            "fr": "1re instance: 90 jours-amende à CHF 160; réduite pour écoulement du temps et violation du principe de célérité",
+            "it": "1ª istanza: 90 aliquote da CHF 160; ridotta per il tempo trascorso e violazione del principio di celerità",
+            "en": "First instance: 90 daily units of CHF 160; reduced for elapsed time and undue delay"
+          }
+        }
+      }
+    ],
+    "linkedAccidentId": null,
+    "source": {
+      "name": "Tribunal fédéral (arrêt, via OpenCaseLaw)",
+      "url": "https://mcp.opencaselaw.ch/entscheid/bger_6B_688_2024",
+      "lang": "fr"
+    },
+    "extraSources": [
+      {
+        "name": "Blick (ATS)",
+        "url": "https://www.blick.ch/fr/suisse/romande/ski-un-employe-de-televerbier-condamne-pour-un-accident-mortel/n7qhnk1",
+        "lang": "fr"
+      }
+    ],
+    "title": {
+      "de": "Unmarkierte Absperrkordel an Sesselbahn: Pistenchef rechtskräftig verurteilt",
+      "fr": "Corde non signalée au départ d’un télésiège: chef des pistes définitivement condamné",
+      "it": "Corda non segnalata alla partenza di una seggiovia: capo piste condannato in via definitiva",
+      "en": "Unflagged rope at chairlift: head of piste service finally convicted"
+    },
+    "facts": {
+      "activity": {
+        "de": "Pistensicherung und Signalisation an der Talstation einer Sesselbahn",
+        "fr": "Sécurisation et signalisation à l’aire de départ d’un télésiège",
+        "it": "Messa in sicurezza e segnaletica alla partenza di una seggiovia",
+        "en": "Securing and signing the boarding area of a chairlift"
+      },
+      "what": {
+        "de": "Eine Skifahrerin (Kundin, nicht Arbeitnehmerin) prallte gegen eine rund 1,1 m hohe Kordel ohne Warnwimpel, die den Sicherheitsbereich vor der Sesselbahn abgrenzte.",
+        "fr": "Une skieuse (cliente, non employée) a heurté une corde d’environ 1,1 m de haut sans fanions, qui délimitait le périmètre de sécurité du télésiège.",
+        "it": "Una sciatrice (cliente, non dipendente) ha urtato una corda alta circa 1,1 m senza bandierine, che delimitava il perimetro di sicurezza della seggiovia.",
+        "en": "A skier (a customer, not an employee) hit a rope about 1.1 m high without warning flags that marked off the chairlift safety area."
+      },
+      "injuries": {
+        "de": "Tödlich",
+        "fr": "Mortel",
+        "it": "Mortale",
+        "en": "Fatal"
+      }
+    },
+    "lesson": {
+      "de": "Wer Sicherheitskontrollen verantwortet, haftet auch für Arbeiten anderer. Absperrungen müssen von weitem sichtbar sein – nach jedem Pistenunterhalt prüfen.",
+      "fr": "Qui est chargé des contrôles répond aussi du travail des autres. Les barrages doivent être visibles de loin – à vérifier après chaque damage.",
+      "it": "Chi è incaricato dei controlli risponde anche del lavoro altrui. Gli sbarramenti devono essere visibili da lontano – da verificare dopo ogni battitura.",
+      "en": "Whoever is responsible for safety checks answers for others' work too. Barriers must be visible from afar – check after every grooming run."
+    }
+  },
+  {
+    "id": "2026-03-03-fr-dompierre-pelle",
+    "caseId": "case-2026-03-03-fr-dompierre-pelle",
+    "date": "2026-03-03",
+    "accidentDate": null,
+    "canton": "FR",
+    "place": "Dompierre",
+    "industry": "construction",
+    "hazard": "machinery",
+    "outcome": "serious",
+    "court": null,
+    "caseNumber": null,
+    "final": null,
+    "appeal": null,
+    "employerRole": null,
+    "defendants": [
+      {
+        "role": {
+          "de": "Vorgesetzter des Opfers",
+          "fr": "Supérieur de la victime",
+          "it": "Superiore della vittima",
+          "en": "Victim's supervisor"
+        },
+        "charge": null,
+        "verdict": "convicted",
+        "reasoning": {
+          "de": "Verurteilt; Begründung nicht frei zugänglich berichtet.",
+          "fr": "Condamné; motivation non rapportée en accès libre.",
+          "it": "Condannato; motivazione non riportata in accesso libero.",
+          "en": "Convicted; reasoning not reported in freely accessible sources."
+        },
+        "sanction": {
+          "dailyUnits": null,
+          "dailyAmount": null,
+          "suspended": false,
+          "probationYears": null,
+          "fineCHF": null,
+          "custodial": {
+            "de": "Unbedingte («ferme») Strafe laut Titel; Art und Höhe nicht frei zugänglich",
+            "fr": "Peine ferme selon le titre; nature et quotité non accessibles",
+            "it": "Pena da espiare secondo il titolo; tipo ed entità non accessibili",
+            "en": "Unsuspended sentence per headline; type and amount not accessible"
+          },
+          "costs": null,
+          "compensation": null,
+          "bail": null,
+          "other": null
+        }
+      },
+      {
+        "role": {
+          "de": "Arbeitskollege des Opfers",
+          "fr": "Collègue de la victime",
+          "it": "Collega della vittima",
+          "en": "Victim's co-worker"
+        },
+        "charge": null,
+        "verdict": "convicted",
+        "reasoning": {
+          "de": "Verurteilt; Begründung nicht frei zugänglich berichtet.",
+          "fr": "Condamné; motivation non rapportée en accès libre.",
+          "it": "Condannato; motivazione non riportata in accesso libero.",
+          "en": "Convicted; reasoning not reported in freely accessible sources."
+        },
+        "sanction": {
+          "dailyUnits": null,
+          "dailyAmount": null,
+          "suspended": null,
+          "probationYears": null,
+          "fineCHF": null,
+          "custodial": null,
+          "costs": null,
+          "compensation": null,
+          "bail": null,
+          "other": null
+        }
+      }
+    ],
+    "linkedAccidentId": null,
+    "source": {
+      "name": "La Liberté",
+      "url": "https://www.laliberte.ch/articles/regions/justice/un-ouvrier-avait-eu-le-pied-ecrase-par-le-godet-dune-pelle-mecanique-1306887",
+      "lang": "fr"
+    },
+    "extraSources": [],
+    "title": {
+      "de": "Fuss von Baggerschaufel zerquetscht: Vorgesetzter und Kollege verurteilt",
+      "fr": "Pied écrasé par un godet de pelle: supérieur et collègue condamnés",
+      "it": "Piede schiacciato dalla benna: superiore e collega condannati",
+      "en": "Foot crushed by excavator bucket: supervisor and co-worker convicted"
+    },
+    "facts": {
+      "activity": {
+        "de": "Baustellenarbeit mit Bagger",
+        "fr": "Travaux de chantier avec pelle mécanique",
+        "it": "Lavori di cantiere con escavatore",
+        "en": "Site work with an excavator"
+      },
+      "what": {
+        "de": "Einem Arbeiter wurde der Fuss von der Schaufel eines Baggers zerquetscht. Weitere Details sind nicht frei zugänglich.",
+        "fr": "Un ouvrier a eu le pied écrasé par le godet d’une pelle mécanique. Les autres détails ne sont pas accessibles librement.",
+        "it": "Un operaio ha avuto il piede schiacciato dalla benna di un escavatore. Altri dettagli non sono liberamente accessibili.",
+        "en": "A worker's foot was crushed by an excavator bucket. Further details are not freely accessible."
+      },
+      "injuries": {
+        "de": "Bleibende Behinderung",
+        "fr": "Handicap permanent",
+        "it": "Disabilità permanente",
+        "en": "Permanent disability"
+      }
+    },
+    "lesson": {
+      "de": "Niemand im Arbeitsbereich von Schaufel oder Löffel, solange der Bagger arbeitet – Sichtkontakt und klare Zeichen vereinbaren.",
+      "fr": "Personne dans la zone du godet tant que la pelle travaille – contact visuel et signes convenus.",
+      "it": "Nessuno nel raggio della benna mentre l’escavatore lavora – contatto visivo e segnali concordati.",
+      "en": "Nobody within reach of the bucket while the excavator works – agree on eye contact and clear signals."
+    }
+  }
+]

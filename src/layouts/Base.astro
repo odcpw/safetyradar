@@ -1,0 +1,41 @@
+---
+import '../styles/global.css';
+import { t, languages, LANGS, type Lang } from '../i18n/ui';
+interface Props { title: string; description?: string; lang: Lang }
+const { title, lang } = Astro.props;
+const description = Astro.props.description ?? t(lang, 'meta.description');
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
+const rest = Astro.url.pathname.replace(BASE, '').replace(/^\/(de|fr|it|en)(\/|$)/, '');
+const cur = '/' + rest.replace(/\/$/, '');
+const nav = [['', 'nav.home'], ['accidents', 'nav.accidents'], ['rulings', 'nav.rulings'], ['jobs', 'nav.jobs'], ['newsletter', 'nav.newsletter'], ['about', 'nav.about']];
+---
+<!doctype html>
+<html lang={lang}>
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{title === 'Safety Radar' ? title : `${title} · Safety Radar`}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+  {LANGS.map(l => <link rel="alternate" hreflang={l} href={new URL(`/${l}/${rest}`, Astro.site)} />)}
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  {process.env.NOINDEX === '1' && <meta name="robots" content="noindex, nofollow" />}
+  <meta name="theme-color" content="#14202b" />
+</head>
+<body>
+  <header class="site"><div class="wrap">
+    <a class="logo" href={`/${lang}/`}><span class="dot" aria-hidden="true"></span>Safety Radar</a>
+    <nav class="langs" aria-label="Language">
+      {LANGS.map(l => <a href={`/${l}/${rest}`} hreflang={l} lang={l} title={languages[l]} aria-current={l === lang ? 'true' : undefined}>{l.toUpperCase()}</a>)}
+    </nav>
+    <nav class="main" aria-label="Navigation">
+      {nav.map(([href, key]) => { const active = href === '' ? cur === '/' : cur.startsWith('/' + href); return <a href={`/${lang}/${href ? href + '/' : ''}`} aria-current={active ? 'page' : undefined}>{t(lang, key)}</a>; })}
+    </nav>
+    <details class="menu"><summary aria-label={t(lang,'nav.menu')}>☰ {t(lang,'nav.menu')}</summary><nav aria-label="Navigation (mobile)">{nav.map(([href, key]) => { const active = href === '' ? cur === '/' : cur.startsWith('/' + href); return <a href={`/${lang}/${href ? href + '/' : ''}`} aria-current={active ? 'page' : undefined}>{t(lang, key)}</a>; })}</nav></details>
+  </div></header>
+  <main><div class="wrap"><slot /></div></main>
+  <footer class="site"><div class="wrap">
+    <div><strong>Safety Radar</strong> · safetyradar.ch<br/>{t(lang, 'footer.note')}</div>
+    <div><a href={`/${lang}/imprint/`}>{t(lang, 'nav.imprint')}</a> · <a href={`/${lang}/privacy/`}>{t(lang, 'nav.privacy')}</a> · <a href={`/${lang}/jobs/post/`}>{t(lang, 'nav.postjob')}</a> · <a href={`/${lang}/about/`}>{t(lang, 'nav.about')}</a></div>
+  </div></footer>
+</body>
+</html>

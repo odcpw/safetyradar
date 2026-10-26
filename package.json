@@ -1,0 +1,24 @@
+{
+  "name": "safetyradar",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && node scripts/rebase.mjs",
+    "preview": "astro preview",
+    "fetch": "node scripts/fetch-sources.mjs",
+    "update": "node scripts/update.mjs",
+    "queue": "node scripts/queue-report.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "astro": "^5.18.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

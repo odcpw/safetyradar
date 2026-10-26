@@ -1,0 +1,19 @@
+---
+import Base from '../../../layouts/Base.astro';
+import JobCard from '../../../components/JobCard.astro';
+import Filters from '../../../components/Filters.astro';
+import jobs from '../../../../data/jobs.json';
+import { byDateDesc, uniq } from '../../../lib';
+import { t, tax, LANGS, type Lang } from '../../../i18n/ui';
+export function getStaticPaths() { return LANGS.map(lang => ({ params: { lang } })); }
+const lang = Astro.params.lang as Lang;
+const items: any[] = [...jobs].sort(byDateDesc('datePosted'));
+---
+<Base title={t(lang,'jobs.title')} lang={lang}>
+  <h1>{t(lang,'jobs.title')}</h1>
+  <p class="lead">{t(lang,'jobs.lead')}</p>
+  <p><a class="btn" href={`/${lang}/jobs/post/`}>{t(lang,'nav.postjob')}</a></p>
+  <Filters lang={lang} target="#list" filters={[{ key:'canton', label:t(lang,'filter.canton'), options: uniq(items.map(i=>i.canton ?? '—')).map(c=>[c,c]) },{ key:'role', label:t(lang,'filter.role'), options: uniq(items.map(i=>i.role)).map(r=>[r,tax(lang,'role',r)]) },{ key:'lang', label:t(lang,'filter.lang'), options: uniq(items.map(i=>i.lang)).map(r=>[r,r.toUpperCase()]) }] as any} />
+  <div id="list" class="grid">{items.map(i => <JobCard item={i} lang={lang} />)}</div>
+  <p class="src" style="margin-top:16px">{t(lang,'jobs.note')}</p>
+</Base>

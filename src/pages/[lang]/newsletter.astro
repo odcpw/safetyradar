@@ -1,0 +1,13 @@
+---
+import Base from '../../layouts/Base.astro';
+import NewsletterForm from '../../components/NewsletterForm.astro';
+import { t, LANGS, type Lang } from '../../i18n/ui';
+export function getStaticPaths() { return LANGS.map(lang => ({ params: { lang } })); }
+const lang = Astro.params.lang as Lang;
+---
+<Base title={t(lang,'nav.newsletter')} lang={lang}>
+  <h1>{t(lang,'nl.title')}</h1>
+  <p class="lead">{t(lang,'nl.pitch')}</p>
+  <div class="card"><NewsletterForm lang={lang} /></div>
+  <p class="notice" style="margin-top:16px">{t(lang,'nl.notice')}</p>
+</Base>

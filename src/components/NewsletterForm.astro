@@ -1,0 +1,11 @@
+---
+// Placeholder: no provider wired yet. TODO: connect provider and set form action.
+import { t, type Lang } from '../i18n/ui';
+const { lang } = Astro.props as { lang: Lang };
+---
+<form class="nl" action="#" method="post" onsubmit="event.preventDefault();this.querySelector('.nl-msg').hidden=false;">
+  <input type="email" name="email" required placeholder={t(lang, 'nl.placeholder')} aria-label="E-Mail" />
+  <button class="btn" type="submit">{t(lang, 'nl.button')}</button>
+  <p class="nl-msg src" hidden>{t(lang, 'nl.thanks')}</p>
+</form>
+<p class="src">{t(lang, 'nl.small')} <a href={`/${lang}/privacy/`}>{t(lang, 'nav.privacy')}</a>.</p>
