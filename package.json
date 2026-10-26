@@ -9,7 +9,8 @@
     "preview": "astro preview",
     "fetch": "node scripts/fetch-sources.mjs",
     "update": "node scripts/update.mjs",
-    "queue": "node scripts/queue-report.mjs"
+    "queue": "node scripts/queue-report.mjs",
+    "fetch:jobs": "node scripts/fetch-jobs.mjs"
   },
   "keywords": [],
   "author": "",

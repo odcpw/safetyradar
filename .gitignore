@@ -10,3 +10,5 @@ screenshots/
 npm-debug.log*
 data/queue.json
 data/queue-report.md
+data/jobs-queue.json
+data/jobs-queue-summary.md

@@ -90,3 +90,35 @@ Also worth wiring as email (no RSS found): Kapo ZH, AG, SO, SZ, ZG, NW, GL newsl
 | EKAS | homepage 200, no feed found |
 | Cantonal Arbeitsinspektorate, Arbeitssicherheit Schweiz | not verified |
 These publish few incident-level items (statistics/campaigns); low value for the incident feed, medium for context.
+
+## Jobs crawler (`npm run fetch:jobs`, audited 2026-10-26)
+
+`scripts/fetch-jobs.mjs` runs daily inside `npm run update`. It checks robots.txt before every request, sends ~1 request/second
+as `SafetyRadarBot`, keeps only title, employer, place/canton, language, posting date, URL and source (no ad text), filters titles to
+safety roles (DE/FR/IT/EN regex; drops IT/cyber, food, patient, drug safety and apprenticeships), dedupes against `data/jobs.json`
+and itself (URL + normalized title/employer), drops inactive postings and anything older than 60 days, and writes
+`data/jobs-queue.json` + `data/jobs-queue-summary.md` (both gitignored). Nothing is published automatically.
+
+### Used
+| Source | Endpoint type | robots.txt | Notes |
+|---|---|---|---|
+| jobs.ch | public search page `/de/stellenangebote/?term=…` (also `/fr/offres-emplois/`, `/en/vacancies/`); result JSON embedded in `window.__INIT__` | search pages allowed; `/api/`, `/api_proxy/`, `/*?*feat=`, `/detail/*/*/*` disallowed (not used) | 14 terms × 1 page (20 hits). Search is semantic, so most hits are noise and get filtered out. |
+| jobup.ch | same JobCloud platform, `/fr/emplois/?term=…` | same as jobs.ch | 5 FR terms. |
+| jobscout24.ch | public HTML category pages `/de/jobs/<keyword>/` | allowed (`/careers/`, `/companies/`, `/de/apply/` etc. disallowed) | stellen.ch redirects here. Only relative dates (“2 W”), so dates are approximate or missing. |
+| Novartis | Workday CXS JSON `POST /wday/cxs/novartis/Novartis_Careers/jobs` | allowed (only `/refreshFacet/` disallowed) | No safety hits on first run. |
+| Alcon | Workday CXS JSON `careers_alcon` | allowed | No safety hits on first run. |
+
+### Excluded
+| Source | Reason |
+|---|---|
+| Indeed (ch.indeed.com) | HTTP 403 + captcha for our bot; `/*?rss` disallowed; ToS forbid automated access. |
+| LinkedIn | robots.txt says crawling needs permission; `/jobs-guest/` and `/jobs?runSearch` disallowed. |
+| job-room.ch / arbeit.swiss (SECO) | robots.txt: “Do not crawl Job Adverts”, `Disallow: /job-search/`. The job-room API needs an API agreement with SECO. |
+| SmartRecruiters API (api.smartrecruiters.com) | robots.txt allows only LinkedInBot; `User-agent: * Disallow: /`. |
+| ABB (Workday) | robots.txt disallows `/External_Career_Page/` (the career site we would query). |
+| ostjob.ch / westjob.ch | ostjob blocks many job bots, disallows `/api` and `/export`; the search is a JS app with no stable public URL. westjob.ch did not respond. |
+| profession.ch | did not respond (connection failed). |
+| Roche (Phenom careers.roche.com) | search is rendered client-side via a Phenom API; not added (could be added later if a public feed turns up). |
+| Greenhouse/Lever | boards probed for Sika, Holcim, Implenia, Lonza, Stadler, Axpo: none exist (404). |
+| Holcim, Sandoz, Givaudan, Nestlé, Zurich, Swiss Re, Syngenta, Lonza (Workday guesses) | tenant/site name unknown (HTTP 4xx); not added. |
+| suissepro.org, SGAS | no machine-readable job board; check by hand. |
