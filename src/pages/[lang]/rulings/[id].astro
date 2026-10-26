@@ -15,7 +15,7 @@ const yn = (b: boolean | null) => b === true ? t(lang,'yes') : b === false ? t(l
 ---
 <Base title={title} lang={lang} description={pick(lang, f.what) ?? undefined}>
   <p><a href={`/${lang}/rulings/`}>{t(lang, 'back')}</a></p>
-  <div class="meta"><span class="tag canton">{item.canton}</span>{item.court && <span class="tag">{pick(lang,item.court)}</span>}{item.outcome && <span class={`tag out ${item.outcome}`}>{tax(lang,'outcome',item.outcome)}</span>}</div>
+  <div class="meta"><span class="tag canton">{item.canton}</span>{item.court && <span class="tag">{pick(lang,item.court)}</span>}{item.outcome && <span class={`tag out ${item.outcome}`}>{tax(lang,'outcome',item.outcome)}</span>}<span class="v-only vd">{d(item.date)}</span></div>
   <h1>{title}</h1>
   <div class="srcbox"><div><strong>{t(lang,'source')}:</strong> {item.source.name} · {t(lang,'source.lang')}: {item.source.lang.toUpperCase()}</div><a class="btn" href={item.source.url} target="_blank" rel="noopener">{t(lang,'source.open')}</a></div>
   <h2>{t(lang,'detail.factsheet')}</h2>

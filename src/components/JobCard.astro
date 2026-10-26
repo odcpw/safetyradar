@@ -3,14 +3,18 @@ import { fmtDate } from '../lib';
 import { t, tax, type Lang } from '../i18n/ui';
 const { item, lang } = Astro.props as { item: any; lang: Lang };
 ---
-<article class="card" data-canton={item.canton ?? '—'} data-role={item.role} data-lang={item.lang}>
-  <div class="jobrow">
-    <div>
-      <h3><a href={item.url} target="_blank" rel="noopener nofollow">{item.title}</a></h3>
-      <div><strong>{item.employer}</strong> · {item.location}{item.canton && ` (${item.canton})`}</div>
-      <div class="meta"><span class="tag">{tax(lang, 'role', item.role)}</span><span class="tag">{item.lang.toUpperCase()}</span></div>
+<article class="card item job" data-canton={item.canton ?? '—'} data-role={item.role} data-lang={item.lang}>
+  <div class="v-only gutter"><time datetime={item.datePosted}>{fmtDate(item.datePosted, lang)}</time>{item.canton && <span class="gc">{item.canton}</span>}</div>
+  <div class="body">
+    <div class="jobrow">
+      <div>
+        <h3><a href={item.url} target="_blank" rel="noopener nofollow">{item.title}</a></h3>
+        <div class="emp"><strong>{item.employer}</strong> · {item.location}{item.canton && ` (${item.canton})`}</div>
+        <div class="meta"><span class="tag">{tax(lang, 'role', item.role)}</span><span class="tag">{item.lang.toUpperCase()}</span></div>
+        <div class="v-only meta2"><span class="m-date">{fmtDate(item.datePosted, lang)}</span><span>{tax(lang, 'role', item.role)}</span><span>{t(lang, 'jobs.adlang')}: {item.lang.toUpperCase()}</span><span class="m-src">{item.source} ↗</span></div>
+      </div>
+      <div class="right">{fmtDate(item.datePosted, lang)}<br/><a href={item.url} target="_blank" rel="noopener nofollow">{t(lang, 'jobs.ad')}</a></div>
     </div>
-    <div class="right">{fmtDate(item.datePosted, lang)}<br/><a href={item.url} target="_blank" rel="noopener nofollow">{t(lang, 'jobs.ad')}</a></div>
+    <div class="src">{t(lang, 'source')}: {item.source}<span class="chk"> · {t(lang, 'jobs.checked')} {fmtDate(item.checked, lang)}</span></div>
   </div>
-  <div class="src">{t(lang, 'source')}: {item.source} · {t(lang, 'jobs.checked')} {fmtDate(item.checked, lang)}</div>
 </article>
