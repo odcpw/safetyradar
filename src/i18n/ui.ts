@@ -105,6 +105,13 @@ const S: Record<string, T4> = {
   'postjob.b3': { de: 'Viersprachig: DE, FR, IT, EN. Preise werden beim Start kommuniziert.', fr: 'Quadrilingue: DE, FR, IT, EN. Les prix seront communiqués au lancement.', it: 'Quadrilingue: DE, FR, IT, EN. I prezzi saranno comunicati al lancio.', en: 'Four languages: DE, FR, IT, EN. Pricing announced at launch.' },
   'postjob.contact': { de: 'Interesse? Schreiben Sie an', fr: 'Intéressé? Écrivez à', it: 'Interessati? Scrivete a', en: 'Interested? Email' },
   'postjob.free': { de: 'Bis dahin listen wir öffentliche Inserate kostenlos mit Link aufs Original. Korrektur oder Entfernung? Kurze Nachricht genügt.', fr: 'D’ici là, nous listons gratuitement des annonces publiques avec lien vers l’original. Correction ou retrait? Un message suffit.', it: 'Nel frattempo elenchiamo gratuitamente annunci pubblici con link all’originale. Correzione o rimozione? Basta un messaggio.', en: 'Until then we list public ads free of charge with a link to the original. Correction or removal? Just send a note.' },
+  'jobs.adlang': { de: 'Sprache', fr: 'Langue', it: 'Lingua', en: 'Language' },
+  'stats.window': { de: 'Letzte 12 Monate', fr: '12 derniers mois', it: 'Ultimi 12 mesi', en: 'Last 12 months' },
+  'stats.fatal': { de: 'tödliche Unfälle', fr: 'accidents mortels', it: 'infortuni mortali', en: 'fatal accidents' },
+  'stats.injured': { de: 'Unfälle mit Verletzten', fr: 'accidents avec blessés', it: 'infortuni con feriti', en: 'accidents with injuries' },
+  'stats.rulings': { de: 'Urteile & Strafbefehle', fr: 'jugements et ordonnances', it: 'sentenze e decreti', en: 'rulings & penalty orders' },
+  'stats.jobs': { de: 'offene Stellen', fr: 'offres ouvertes', it: 'offerte aperte', en: 'open jobs' },
+  'map.title': { de: 'Arbeitsunfälle nach Kanton', fr: 'Accidents du travail par canton', it: 'Infortuni per cantone', en: 'Workplace accidents by canton' },
   'todo.email': { de: 'TODO: E-Mail-Adresse', fr: 'TODO: adresse e-mail', it: 'TODO: indirizzo e-mail', en: 'TODO: email address' },
 };
 

@@ -6,13 +6,33 @@ import NewsletterForm from '../../components/NewsletterForm.astro';
 import accidents from '../../../data/accidents.json';
 import rulings from '../../../data/rulings.json';
 import jobs from '../../../data/jobs.json';
-import { byDateDesc } from '../../lib';
+import { byDateDesc, CANTONS } from '../../lib';
 import { t, LANGS, type Lang } from '../../i18n/ui';
 export function getStaticPaths() { return LANGS.map(lang => ({ params: { lang } })); }
 const lang = Astro.params.lang as Lang;
 const a = [...accidents].sort(byDateDesc('date')).slice(0, 6);
 const r = [...rulings].sort(byDateDesc('date')).slice(0, 4);
 const j = [...jobs].sort(byDateDesc('datePosted')).slice(0, 4);
+
+// Redesign variants B/C: data strip + canton tile map (last 12 months, relative to build date)
+const cut = new Date(); cut.setFullYear(cut.getFullYear() - 1);
+const since = cut.toISOString().slice(0, 10);
+const acc12 = (accidents as any[]).filter(x => x.date >= since);
+const nFatal = acc12.filter(x => x.outcome === 'fatal').length;
+const nInjured = acc12.filter(x => ['life_threatening', 'serious', 'injured'].includes(x.outcome)).length;
+const nRulings = (rulings as any[]).filter(x => x.date >= since).length;
+const byCanton: Record<string, number> = {};
+acc12.forEach(x => { byCanton[x.canton] = (byCanton[x.canton] || 0) + 1; });
+const maxC = Math.max(1, ...Object.values(byCanton));
+// Approximate geographic tile layout: [canton, col, row]
+const TILES: [string, number, number][] = [
+  ['BS',2,0],['BL',3,0],['SH',4,0],['TG',5,0],
+  ['JU',1,1],['SO',2,1],['AG',3,1],['ZH',4,1],['SG',5,1],['AR',6,1],
+  ['NE',1,2],['BE',2,2],['LU',3,2],['ZG',4,2],['SZ',5,2],['AI',6,2],
+  ['VD',0,3],['FR',1,3],['OW',2,3],['NW',3,3],['UR',4,3],['GL',5,3],['GR',6,3],
+  ['GE',0,4],['VS',2,4],['TI',4,4],
+];
+const level = (n: number) => n === 0 ? 0 : Math.min(4, Math.ceil((n / maxC) * 4));
 ---
 <Base title="Safety Radar" lang={lang}>
   <section class="hero">
@@ -20,15 +40,36 @@ const j = [...jobs].sort(byDateDesc('datePosted')).slice(0, 4);
     <p class="lead">{t(lang, 'home.hero')}</p>
     <p><a class="btn" href={`/${lang}/accidents/`}>{t(lang, 'home.cta.accidents')}</a> <a class="btn secondary" href={`/${lang}/jobs/`}>{t(lang, 'nav.jobs')}</a></p>
   </section>
+  <section class="v-only intro">
+    <div class="intro-text">
+      <h1 class="sr-only">Safety Radar</h1>
+      <p class="lead">{t(lang, 'home.hero')}</p>
+      <div class="stats">
+        <a class="stat sev-fatal" href={`/${lang}/accidents/?outcome=fatal`}><b>{nFatal}</b><span>{t(lang, 'stats.fatal')}</span></a>
+        <a class="stat sev-serious" href={`/${lang}/accidents/`}><b>{nInjured}</b><span>{t(lang, 'stats.injured')}</span></a>
+        <a class="stat" href={`/${lang}/rulings/`}><b>{nRulings}</b><span>{t(lang, 'stats.rulings')}</span></a>
+        <a class="stat" href={`/${lang}/jobs/`}><b>{jobs.length}</b><span>{t(lang, 'stats.jobs')}</span></a>
+      </div>
+      <p class="stats-note">{t(lang, 'stats.window')}</p>
+    </div>
+    <figure class="cmap">
+      <div class="tiles" style="--cols:7;--rows:5">
+        {TILES.map(([c, x, y]) => { const n = byCanton[c] || 0; return n
+          ? <a class={`tile l${level(n)}`} style={`grid-column:${x + 1};grid-row:${y + 1}`} href={`/${lang}/accidents/?canton=${c}`} title={`${CANTONS[c]}: ${n}`}><span>{c}</span><b>{n}</b></a>
+          : <span class="tile l0" style={`grid-column:${x + 1};grid-row:${y + 1}`} title={CANTONS[c]}><span>{c}</span></span>; })}
+      </div>
+      <figcaption>{t(lang, 'map.title')} · {t(lang, 'stats.window')}</figcaption>
+    </figure>
+  </section>
   <h2>{t(lang, 'home.latest.accidents')}</h2>
   <div class="grid cols-2">{a.map(i => <ItemCard item={i} lang={lang} kind="accidents" />)}</div>
-  <p><a href={`/${lang}/accidents/`}>{t(lang, 'home.all')}</a></p>
+  <p class="more"><a href={`/${lang}/accidents/`}>{t(lang, 'home.all')}</a></p>
   <h2>{t(lang, 'home.latest.rulings')}</h2>
   <div class="grid cols-2">{r.map(i => <ItemCard item={i} lang={lang} kind="rulings" />)}</div>
-  <p><a href={`/${lang}/rulings/`}>{t(lang, 'home.all')}</a></p>
+  <p class="more"><a href={`/${lang}/rulings/`}>{t(lang, 'home.all')}</a></p>
   <h2>{t(lang, 'home.latest.jobs')}</h2>
   <div class="grid cols-2">{j.map(i => <JobCard item={i} lang={lang} />)}</div>
-  <p><a href={`/${lang}/jobs/`}>{t(lang, 'home.all')}</a></p>
+  <p class="more"><a href={`/${lang}/jobs/`}>{t(lang, 'home.all')}</a></p>
   <h2>{t(lang, 'nl.title')}</h2>
   <div class="card"><p>{t(lang, 'nl.pitch')}</p><NewsletterForm lang={lang} /></div>
 </Base>

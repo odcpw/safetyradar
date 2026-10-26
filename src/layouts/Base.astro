@@ -20,6 +20,17 @@ const nav = [['', 'nav.home'], ['accidents', 'nav.accidents'], ['rulings', 'nav.
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   {process.env.NOINDEX === '1' && <meta name="robots" content="noindex, nofollow" />}
   <meta name="theme-color" content="#14202b" />
+  <script is:inline>
+    // Design preview switcher: o = original, a/b/c = variants. ?design=x sets it; choice is remembered.
+    (function () {
+      var k = 'sr-design', d = new URLSearchParams(location.search).get('design');
+      if (!d) { try { d = localStorage.getItem(k); } catch (e) {} }
+      if (!/^[oabc]$/.test(d || '')) d = 'o';
+      try { localStorage.setItem(k, d); } catch (e) {}
+      var h = document.documentElement; h.dataset.design = d;
+      h.classList.toggle('redesign', d !== 'o'); h.classList.toggle('listview', d === 'b' || d === 'c');
+    })();
+  </script>
 </head>
 <body>
   <header class="site"><div class="wrap">
@@ -37,5 +48,27 @@ const nav = [['', 'nav.home'], ['accidents', 'nav.accidents'], ['rulings', 'nav.
     <div><strong>Safety Radar</strong> · safetyradar.ch<br/>{t(lang, 'footer.note')}</div>
     <div><a href={`/${lang}/imprint/`}>{t(lang, 'nav.imprint')}</a> · <a href={`/${lang}/privacy/`}>{t(lang, 'nav.privacy')}</a> · <a href={`/${lang}/jobs/post/`}>{t(lang, 'nav.postjob')}</a> · <a href={`/${lang}/about/`}>{t(lang, 'nav.about')}</a></div>
   </div></footer>
+  <div class="dsw" role="group" aria-label="Design preview">
+    <span class="dsw-name" aria-live="polite"></span>
+    <button type="button" data-d="o" title="Original">Original</button><button type="button" data-d="a" title="A · Aufgeräumt">A</button><button type="button" data-d="b" title="B · Liste">B</button><button type="button" data-d="c" title="C · Liste + Karte">C</button>
+  </div>
+  <script is:inline>
+    (function () {
+      var names = { o: 'Original', a: 'A · Aufgeräumt', b: 'B · Liste', c: 'C · Liste + Karte' };
+      var h = document.documentElement, bar = document.querySelector('.dsw'), out = bar.querySelector('.dsw-name');
+      function set(d) {
+        h.dataset.design = d; h.classList.toggle('redesign', d !== 'o'); h.classList.toggle('listview', d === 'b' || d === 'c');
+        try { localStorage.setItem('sr-design', d); } catch (e) {}
+        bar.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.d === d ? 'true' : 'false'); });
+        out.textContent = d === 'o' ? '' : names[d];
+      }
+      bar.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) set(b.dataset.d); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key !== 'd' || e.metaKey || e.ctrlKey || e.altKey || /input|select|textarea/i.test(e.target.tagName)) return;
+        var o = ['o', 'a', 'b', 'c']; set(o[(o.indexOf(h.dataset.design) + 1) % 4]);
+      });
+      set(h.dataset.design || 'o');
+    })();
+  </script>
 </body>
 </html>

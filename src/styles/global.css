@@ -60,3 +60,128 @@ details.menu{display:none}
  details.menu nav a{color:#cfd8e2;text-decoration:none;padding:8px 10px;border-radius:8px;background:#ffffff12}
  details.menu nav a[aria-current=page]{background:#ffffff2a;color:#fff}
 }
+
+/* ================================================================
+   Design preview switcher + redesign variants.
+   html[data-design=o] (default) renders exactly as before.
+   .redesign = A, B, C · .listview = B, C · [data-design=c] adds the canton map.
+   ================================================================ */
+.v-only{display:none}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+body{padding-bottom:64px}
+.dsw{position:fixed;left:50%;bottom:12px;transform:translateX(-50%);z-index:50;display:flex;align-items:center;gap:2px;background:#14202bf2;color:#fff;border-radius:999px;padding:4px 4px 4px 12px;box-shadow:0 4px 18px #0004;font:600 .8rem/1 system-ui,sans-serif}
+.dsw-name:empty{display:none}
+.dsw-name{margin-right:8px;white-space:nowrap;color:#cfd8e2;font-weight:500}
+.dsw button{all:unset;cursor:pointer;padding:7px 11px;border-radius:999px;color:#cfd8e2}
+.dsw button:hover{background:#ffffff1a;color:#fff}
+.dsw button[aria-pressed=true]{background:#f2c200;color:#14202b}
+.dsw button:focus-visible{outline:2px solid #f2c200;outline-offset:1px}
+@media print{.dsw{display:none}}
+
+/* ---------- shared by A, B, C ---------- */
+.redesign{
+  --signal:#f2c200;                       /* ISO 7010 warning yellow: dark surfaces only */
+  --sev:#adb5bd;--sev-ink:var(--muted);
+  --link:#0b5cad;
+}
+.redesign .sev-fatal{--sev:#8a1414;--sev-ink:#8a1414}
+.redesign .sev-life_threatening{--sev:#c92a2a;--sev-ink:#b02525}
+.redesign .sev-serious{--sev:#e8590c;--sev-ink:#b8460a}
+.redesign .sev-injured{--sev:#f59f00;--sev-ink:#8f5c00}
+.redesign .sev-property{--sev:#adb5bd;--sev-ink:#5b6876}
+
+/* header: navy + signal yellow instead of orange */
+.redesign .logo .dot{border-color:var(--signal);background:radial-gradient(circle,var(--signal) 30%,transparent 32%),repeating-radial-gradient(circle,#fff3 0 2px,transparent 2px 7px)}
+.redesign nav.langs a[aria-current=true]{background:var(--signal);border-color:var(--signal);color:#14202b}
+.redesign .btn{background:var(--ink)}
+.redesign .btn.secondary{background:transparent}
+.redesign .hero .btn:not(.secondary){background:var(--signal);color:#14202b}
+
+/* items: fewer pills, severity edge, lesson teaser, whole item clickable */
+.redesign .item{position:relative;transition:background .12s}
+.redesign .item:hover{background:#fbfcfd}
+.redesign .item h3 a::after{content:"";position:absolute;inset:0}
+.redesign .item h3 a:hover{text-decoration:none}
+.redesign .item:hover h3 a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
+.redesign .item .body{display:flex;flex-direction:column}
+.redesign .item .meta,.redesign .item .src{display:none}
+/* separators: every span gets a leading dot; the container is shifted left and clipped, so dots that start a line disappear */
+.redesign .meta2{display:flex;flex-wrap:wrap;align-items:center;font-size:.82rem;color:var(--muted);margin:2px 0 2px -1.1em;clip-path:inset(0 0 0 1.1em)}
+.redesign .meta2>span::before{content:"·";display:inline-block;width:1.1em;text-align:center;color:#b6bec7}
+.redesign .meta2 .m-canton{font-size:.78rem;padding:2px 8px;margin-left:calc(1.1em * .82 / .78)}
+.redesign .meta2 .m-canton::before{content:none}
+[data-design=a] .meta2 .m-canton+span::before{content:"";width:.45em}
+[data-design=a] .meta2 .m-src{display:none}
+@media(max-width:520px){.listview .meta2 .m-src{display:none}}
+.redesign .meta2 .m-sev{color:var(--sev-ink);font-weight:600}
+.redesign .teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;margin:6px 0 0;font-size:.9rem;color:#3d4a57;line-height:1.45}
+.redesign .teaser::before{content:"";display:inline-block;width:.55em;height:.55em;border-radius:2px;background:var(--ok);margin-right:.45em;vertical-align:.08em}
+/* jobs */
+.redesign .job .right,.redesign .job .chk,.redesign .job .meta{display:none}
+.redesign .job .src{display:none}
+.redesign .job .emp{font-size:.95rem}
+.redesign .job .meta2{display:flex}
+/* detail pages */
+.redesign .vd{display:inline;font-size:.85rem;color:var(--muted);align-self:center;margin-left:4px}
+.redesign .tag.out{background:none;color:var(--sev-ink);font-weight:600;padding-left:2px}
+.redesign .meta:has(.tag.out.fatal){--sev-ink:#8a1414}
+.redesign .meta:has(.tag.out.life_threatening){--sev-ink:#b02525}
+.redesign .meta:has(.tag.out.serious){--sev-ink:#b8460a}
+.redesign .meta:has(.tag.out.injured){--sev-ink:#8f5c00}
+.redesign .srcbox{border:1px solid var(--line);background:#fff}
+.redesign .srcbox .btn{background:transparent;color:var(--accent);border:1px solid var(--accent);padding:8px 14px}
+.redesign .srcbox .btn:hover{background:var(--accent);color:#fff}
+
+/* ---------- A · Aufgeräumt: cards kept, cleaned up ---------- */
+[data-design=a] .hero{background:var(--ink);padding:24px 22px}
+[data-design=a] .hero h1{font-size:1.35rem;color:#fff}
+[data-design=a] .item{border-left:4px solid var(--sev)}
+[data-design=a] .item .meta2{order:-1;margin:0 0 6px -1.1em}
+[data-design=a] .item h3{margin:0}
+
+/* ---------- B/C · Liste: one chronological column ---------- */
+.listview .hero{display:none}
+.listview .intro{display:block;margin:4px 0 8px}
+.listview .intro .lead{color:var(--ink);font-size:1.08rem;max-width:62ch;margin:0 0 16px}
+.listview .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+@media(min-width:640px){.listview .stats{grid-template-columns:repeat(4,1fr)}}
+.listview .stat{display:flex;flex-direction:column;gap:2px;background:#fff;padding:12px 14px;text-decoration:none;color:var(--muted);font-size:.82rem;line-height:1.25}
+.listview .stat b{font-size:1.6rem;line-height:1.1;color:var(--ink);font-variant-numeric:tabular-nums;font-weight:700}
+.listview .stat.sev-fatal b{color:#8a1414}
+.listview .stat:hover{background:#fbfcfd}
+.listview .stat:hover span{text-decoration:underline}
+.listview .stats-note{font-size:.78rem;color:var(--muted);margin:6px 0 0}
+.listview main h2{font-size:.8rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:700;display:flex;align-items:center;gap:12px;margin:2.2em 0 .7em}
+.listview main h2::after{content:"";flex:1;height:1px;background:var(--line)}
+.listview .grid{display:block!important;background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.listview .grid>.item{display:grid;grid-template-columns:86px 1fr;gap:14px;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:14px 16px 14px 18px;box-shadow:inset 3px 0 0 var(--sev)}
+.listview .grid>.item:last-child{border-bottom:0}
+.listview .grid>.item.hidden{display:none}
+.listview .grid>.job{box-shadow:none}
+.listview .gutter{display:flex;flex-direction:column;gap:4px;font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums;padding-top:2px}
+.listview .gutter .gc{font-weight:700;color:var(--ink);letter-spacing:.02em}
+.listview .item h3{margin:0 0 2px;font-size:1.02rem}
+.listview .meta2 .m-canton,.listview .meta2 .m-date{display:none}
+.listview p.more{text-align:right;margin:8px 0 0;font-size:.9rem}
+@media(max-width:520px){
+  .listview .grid>.item{grid-template-columns:1fr;gap:2px;padding:12px 14px 12px 16px}
+  .listview .gutter{flex-direction:row;gap:8px;font-size:.76rem;padding:0}
+}
+/* lesson moves up on detail pages */
+.listview main .wrap:has(> dl.facts){display:flex;flex-direction:column}
+.listview main .wrap:has(> dl.facts)>*{order:2}
+.listview main .wrap:has(> dl.facts)>:nth-child(-n+3){order:0}
+.listview main .wrap:has(> dl.facts)>.lesson{order:1;margin:4px 0 8px}
+
+/* ---------- C · Liste + Karte ---------- */
+[data-design=c] .intro{display:grid;gap:20px;align-items:start}
+@media(min-width:820px){[data-design=c] .intro{grid-template-columns:1fr 330px}}
+.cmap{display:none;margin:0}
+[data-design=c] .cmap{display:block;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:14px}
+.cmap .tiles{display:grid;grid-template-columns:repeat(var(--cols),1fr);grid-template-rows:repeat(var(--rows),auto);gap:3px}
+.cmap .tile{aspect-ratio:1;border-radius:5px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:.68rem;line-height:1.1;text-decoration:none;font-weight:600;color:#6b7783;background:#f1f3f5}
+.cmap .tile b{font-size:.82rem;font-variant-numeric:tabular-nums}
+/* neutral navy ramp: red stays reserved for severity */
+.cmap .l1{background:#dde5ee;color:#24384c}.cmap .l2{background:#a9bdd2;color:#14202b}.cmap .l3{background:#5f7fa3;color:#fff}.cmap .l4{background:#24384c;color:#fff}
+.cmap a.tile:hover{outline:2px solid var(--ink);outline-offset:-2px}
+.cmap figcaption{font-size:.78rem;color:var(--muted);margin-top:10px}
