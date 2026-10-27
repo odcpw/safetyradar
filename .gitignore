@@ -12,3 +12,7 @@ data/queue.json
 data/queue-report.md
 data/jobs-queue.json
 data/jobs-queue-summary.md
+data/review.md
+data/drafts/
+data/llm-usage.jsonl
+data/cache/

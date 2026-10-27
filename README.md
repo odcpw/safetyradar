@@ -27,9 +27,24 @@ Always link and name the source. No names of victims or private defendants.
    relevance filter (`scripts/relevance.mjs`: workplace keywords in 4 languages, road-traffic/leisure exclusions, foreign publisher/place exclusions,
    Swiss canton/publisher signal, criminal-chamber filter for court decisions, "same canton ±2 days" duplicate check),
    draft skeleton in `data/queue.json` (status `draft`, guessed canton/hazard/industry/outcome), report, rebuild.
-2. **Reviewer step (the assistant, on a daily schedule):** open each draft's source, verify facts, write the fact sheet + lesson in DE/FR/IT/EN,
-   add it to `accidents.json`/`rulings.json` via the seed scripts, set queue status `published` or `rejected`, rebuild. Court decisions from
-   entscheidsuche.ch are pre-filtered by query only and must be read to confirm they concern a workplace accident.
+   Then, if `OPENAI_API_KEY` is set (skipped with a warning otherwise, or if the API fails):
+   - `npm run classify` – labels every new `data/queue.json` item once (`item.llm`, cached by URL hash). News titles: OpenAI
+     **Decisions API** (`POST /v1/decisions`, `gpt-6-luna`, input-only billing) sorts accident / ruling / other in batches of 20;
+     candidates (p ≥ 0.1) then go to the **Responses API** (`gpt-6-luna`, strict JSON schema) for keep, canton, place, date, industry,
+     outcome, language, reason and a dedupe hint (`dupOf`: id of a published entry or `queue:<hash>`). Court decisions from
+     entscheidsuche.ch are judged from their full text (HTML or PDF via `pdftotext`, cached in `data/cache/text/`); case numbers already in
+     `rulings.json` are matched exactly.
+   - `npm run classify:jobs` – labels `data/jobs-queue.json` (`job.llm`: keep, role, canton, reason, repost `group`).
+   - `npm run draft:rulings` – for new kept rulings, drafts a full `rulings.json`-shaped entry (DE/FR/IT/EN) into
+     `data/drafts/rulings/<id>.json` (max 5/run). Never writes `rulings.json`.
+   - `data/review.md` (from `queue-report.mjs`) lists only kept items, grouped by event, with dedupe hints, draft paths, unlinked extra
+     sources for published entries, and kept jobs grouped by repost.
+   Caps per script run (env): `LLM_MAX_CALLS` 300, `LLM_MAX_TOKENS` 1,000,000, `LLM_MAX_USD` 0.50. Every run appends tokens and
+   estimated USD/CHF cost to `data/llm-usage.jsonl`. Models: `LLM_MODEL` / `LLM_DRAFT_MODEL` (default `gpt-6-luna`). Prices are in
+   `scripts/lib/llm.mjs` (verified 2026-10-27 at developers.openai.com/api/docs/pricing). Typical daily cost: < USD 0.02.
+2. **Reviewer step (the assistant, on a daily schedule):** read `data/review.md` (not the whole queue). For each new group open the
+   source, verify facts, write/adjust the fact sheet + lesson (for rulings start from the draft JSON: check every fact, remove `_draft`),
+   add it to `accidents.json`/`rulings.json`, set queue status `published` or `rejected`, rebuild. LLM labels are hints, not facts.
 3. **Owner:** spot-check; fill legal TODOs; later deploy.
 
 ## Sources (see `scripts/fetch-sources.mjs`)

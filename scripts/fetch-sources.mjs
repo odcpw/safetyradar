@@ -10,7 +10,7 @@ import { classify } from './relevance.mjs';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const QUEUE = path.join(ROOT, 'data', 'queue.json');
 const PUBLISHED = ['accidents.json', 'rulings.json', 'jobs.json'].map(f => path.join(ROOT, 'data', f));
-const UA = 'SafetyRadarBot/0.2 (+https://safetyradar.ch)';
+import { UA, allowedByRobots } from './lib/fetch-text.mjs';
 // --since=YYYY-MM-DD widens the entscheidsuche window (default: last 180 days), e.g. `node scripts/fetch-sources.mjs --since=2023-01-01` for a backfill.
 // --only=id1,id2 runs a subset of sources.
 const ARG = Object.fromEntries(process.argv.slice(2).filter(a => a.startsWith('--')).map(a => { const [k, v] = a.slice(2).split('='); return [k, v ?? '1']; }));
@@ -65,34 +65,6 @@ export const SOURCES = [
   { id: 'entscheidsuche', lang: 'multi', type: 'entscheidsuche', kind: 'ruling', url: 'https://entscheidsuche.ch/_search.php',
     query: '("Arbeitsunfall" OR "Baustelle" OR "Arbeitssicherheit" OR "accident de travail" OR "chantier" OR "sécurité au travail" OR "infortunio sul lavoro" OR "cantiere" OR "sicurezza sul lavoro") AND (fahrlässig* OR "par négligence" OR colpos* OR "Art. 229" OR "art. 229" OR "Regeln der Baukunde" OR "règles de l\'art")' },
 ];
-
-const robotsCache = new Map();
-async function allowedByRobots(url) {
-  const u = new URL(url);
-  if (!robotsCache.has(u.origin)) {
-    const rules = [];
-    try {
-      const r = await fetch(u.origin + '/robots.txt', { headers: { 'User-Agent': UA }, signal: AbortSignal.timeout(15000) });
-      if (r.ok) {
-        let applies = false, lastWasUA = false;
-        for (const raw of (await r.text()).split('\n')) {
-          const line = raw.split('#')[0].trim(); if (!line) continue;
-          const i = line.indexOf(':'); const k = line.slice(0, i).trim().toLowerCase(); const v = line.slice(i + 1).trim();
-          if (k === 'user-agent') { applies = (lastWasUA && applies) || v === '*' || /safetyradar/i.test(v); lastWasUA = true; continue; }
-          lastWasUA = false;
-          if (applies && (k === 'allow' || k === 'disallow') && v) rules.push({ allow: k === 'allow', path: v });
-        }
-      }
-    } catch { /* unreachable robots => treat as allowed */ }
-    robotsCache.set(u.origin, rules);
-  }
-  const p = u.pathname + u.search; let best = null;
-  for (const rule of robotsCache.get(u.origin)) {
-    const re = new RegExp('^' + rule.path.replace(/[.+?^{}()|[\]\\]/g, '\\$&').replace(/\*/g, '.*').replace(/\\\$$/, '$'));
-    if (re.test(p) && (!best || rule.path.length > best.path.length || (rule.path.length === best.path.length && rule.allow))) best = rule;
-  }
-  return !best || best.allow;
-}
 
 const decode = s => (s || '').replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1').replace(/<[^>]+>/g, '')
   .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#0?39;|&#8217;|&rsquo;/g, '’').replace(/&#(\d+);/g, (_, n) => String.fromCharCode(n)).replace(/\s+/g, ' ').trim();

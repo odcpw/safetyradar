@@ -10,7 +10,10 @@
     "fetch": "node scripts/fetch-sources.mjs",
     "update": "node scripts/update.mjs",
     "queue": "node scripts/queue-report.mjs",
-    "fetch:jobs": "node scripts/fetch-jobs.mjs"
+    "fetch:jobs": "node scripts/fetch-jobs.mjs",
+    "classify": "node scripts/classify.mjs",
+    "classify:jobs": "node scripts/classify-jobs.mjs",
+    "draft:rulings": "node scripts/draft-rulings.mjs"
   },
   "keywords": [],
   "author": "",
