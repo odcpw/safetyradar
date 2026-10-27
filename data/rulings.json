@@ -112,6 +112,182 @@
   "why": null
  },
  {
+  "id": "2026-09-23-bger-6b-341-2025-ge-kranlastwagen",
+  "caseId": "case-2025-03-05-ge-cj-p-5337-2018-kranlastwagen",
+  "date": "2026-09-23",
+  "accidentDate": "2018-03-09",
+  "canton": "GE",
+  "place": null,
+  "industry": "construction",
+  "hazard": "crane",
+  "outcome": "serious",
+  "court": {
+   "de": "Bundesgericht",
+   "fr": "Tribunal fédéral",
+   "it": "Tribunale federale",
+   "en": "Federal Supreme Court"
+  },
+  "caseNumber": "6B_341/2025, 6B_349/2025",
+  "final": true,
+  "appeal": {
+   "de": "Polizeigericht (29.7.2024) und Cour de justice Genf (5.3.2025) verurteilten beide. Das Bundesgericht bestätigte den Schuldspruch des Kranführers; der Arbeitgeber-Chef focht seinen nicht mehr an. Wegen 20 % Mitverschulden des Verletzten sinkt die Genugtuung von CHF 160’000 auf CHF 128’000.",
+   "fr": "Le Tribunal de police (29.7.2024) et la Cour de justice (5.3.2025) ont condamné les deux. Le TF a confirmé la culpabilité du grutier; le patron de l’employeur ne contestait plus la sienne. Faute concomitante de 20 % du lésé: le tort moral passe de CHF 160’000 à CHF 128’000.",
+   "it": "Il Tribunale di polizia (29.7.2024) e la Cour de justice (5.3.2025) hanno condannato entrambi. Il TF ha confermato la colpevolezza del gruista; il titolare del datore di lavoro non contestava più la sua. Con una colpa concorrente del 20 % della vittima, il torto morale scende da CHF 160’000 a CHF 128’000.",
+   "en": "The police court (29.7.2024) and the Geneva Court of Justice (5.3.2025) convicted both. The Federal Court upheld the crane operator’s conviction; the employer’s head no longer contested his. With 20% contributory fault by the injured worker, moral damages fall from CHF 160,000 to CHF 128,000."
+  },
+  "employerRole": {
+   "de": "Zimmereifirma (Arbeitgeber des Verletzten) und Lieferant mit Kranlastwagen; Unternehmen nicht angeklagt.",
+   "fr": "Entreprise de charpente (employeur du lésé) et fournisseur avec camion-grue; entreprises non prévenues.",
+   "it": "Carpenteria (datore di lavoro della vittima) e fornitore con autogru; aziende non imputate.",
+   "en": "Carpentry firm (the injured worker’s employer) and supplier with crane truck; companies not charged."
+  },
+  "defendants": [
+   {
+    "role": {
+     "de": "Fahrer und Kranführer des Lieferanten",
+     "fr": "Chauffeur et grutier du fournisseur",
+     "it": "Autista e gruista del fornitore",
+     "en": "Supplier’s driver and crane operator"
+    },
+    "charge": {
+     "de": "Fahrlässige schwere Körperverletzung (Art. 125 StGB)",
+     "fr": "Lésions corporelles graves par négligence (art. 125 CP)",
+     "it": "Lesioni gravi colpose (art. 125 CP)",
+     "en": "Serious bodily harm by negligence (Art. 125 SCC)"
+    },
+    "verdict": "convicted",
+    "reasoning": {
+     "de": "Hob die Last ohne Sicht auf Haken und Ladefläche und ohne instruierten Einweiser an; ein Kollege, der den Verkehr regelte, bestätigte nur das Anhängen. Das unvorsichtige Verhalten des Verletzten war nicht so aussergewöhnlich, dass es den Kausalzusammenhang unterbrach.",
+     "fr": "A levé la charge sans vue sur le crochet et le plateau et sans guide qualifié; un collègue qui réglait la circulation n’a confirmé que l’accrochage. L’imprudence du lésé n’était pas extraordinaire au point de rompre le lien de causalité.",
+     "it": "Ha sollevato il carico senza vedere gancio e pianale e senza un segnalatore istruito; un collega che regolava il traffico ha solo confermato l’aggancio. L’imprudenza della vittima non era tanto straordinaria da interrompere il nesso causale.",
+     "en": "Lifted without a view of the hook or deck and without a trained signaller; a colleague directing traffic only confirmed the hook-up. The worker’s carelessness was not so extraordinary as to break the causal link."
+    },
+    "sanction": {
+     "dailyUnits": 180,
+     "dailyAmount": 30,
+     "suspended": true,
+     "probationYears": 3,
+     "fineCHF": null,
+     "custodial": null,
+     "costs": {
+      "de": "Bundesgerichtskosten CHF 2000",
+      "fr": "Frais du TF CHF 2000",
+      "it": "Spese TF CHF 2000",
+      "en": "Federal Court costs CHF 2,000"
+     },
+     "compensation": {
+      "de": "Genugtuung CHF 128’000 solidarisch (statt 160’000); 80 % Haftung",
+      "fr": "Tort moral CHF 128’000 solidairement (au lieu de 160’000); responsabilité de 80 %",
+      "it": "Torto morale CHF 128’000 in solido (invece di 160’000); responsabilità dell’80 %",
+      "en": "Moral damages CHF 128,000 jointly (instead of 160,000); 80% liability"
+     },
+     "bail": null,
+     "other": null
+    },
+    "short": {
+     "de": "Hob die Last blind und ohne Einweiser an – Schuldspruch bestätigt.",
+     "fr": "A levé la charge à l’aveugle et sans guide – culpabilité confirmée.",
+     "it": "Ha sollevato il carico alla cieca e senza segnalatore – colpevolezza confermata.",
+     "en": "Lifted the load blind and without a signaller – conviction upheld."
+    }
+   },
+   {
+    "role": {
+     "de": "Leiter des Arbeitgebers",
+     "fr": "Responsable de l’entreprise employeuse",
+     "it": "Responsabile dell’azienda datrice di lavoro",
+     "en": "Head of the employer"
+    },
+    "charge": {
+     "de": "Fahrlässige schwere Körperverletzung (Art. 125 StGB)",
+     "fr": "Lésions corporelles graves par négligence (art. 125 CP)",
+     "it": "Lesioni gravi colpose (art. 125 CP)",
+     "en": "Serious bodily harm by negligence (Art. 125 SCC)"
+    },
+    "verdict": "convicted",
+    "reasoning": {
+     "de": "Bestritt vor Bundesgericht nur noch die Höhe der Genugtuung (Mitverschulden), nicht den Schuldspruch.",
+     "fr": "Ne contestait plus devant le TF que le montant du tort moral (faute concomitante), pas sa condamnation.",
+     "it": "Davanti al TF contestava solo l’importo del torto morale (colpa concorrente), non la condanna.",
+     "en": "Before the Federal Court he only contested the damages (contributory fault), not his conviction."
+    },
+    "sanction": {
+     "dailyUnits": 140,
+     "dailyAmount": 110,
+     "suspended": true,
+     "probationYears": 3,
+     "fineCHF": null,
+     "custodial": null,
+     "costs": {
+      "de": "Bundesgerichtskosten CHF 2000",
+      "fr": "Frais du TF CHF 2000",
+      "it": "Spese TF CHF 2000",
+      "en": "Federal Court costs CHF 2,000"
+     },
+     "compensation": {
+      "de": "Genugtuung CHF 128’000 solidarisch (statt 160’000); 80 % Haftung",
+      "fr": "Tort moral CHF 128’000 solidairement (au lieu de 160’000); responsabilité de 80 %",
+      "it": "Torto morale CHF 128’000 in solido (invece di 160’000); responsabilità dell’80 %",
+      "en": "Moral damages CHF 128,000 jointly (instead of 160,000); 80% liability"
+     },
+     "bail": null,
+     "other": {
+      "de": "Zusatzstrafe zu einem Strafbefehl von 2018",
+      "fr": "Peine complémentaire à une ordonnance de 2018",
+      "it": "Pena aggiuntiva a un decreto del 2018",
+      "en": "Additional sentence to a 2018 penalty order"
+     }
+    },
+    "short": {
+     "de": "Schuldspruch nicht mehr angefochten; Genugtuung wegen Mitverschulden reduziert.",
+     "fr": "Condamnation non contestée; tort moral réduit pour faute concomitante.",
+     "it": "Condanna non più contestata; torto morale ridotto per colpa concorrente.",
+     "en": "Conviction no longer contested; damages cut for contributory fault."
+    }
+   }
+  ],
+  "linkedAccidentId": null,
+  "source": {
+   "name": "entscheidsuche.ch",
+   "url": "https://entscheidsuche.ch/docs/CH_BGer/CH_BGer_006_6B-341-2025_2026-09-23.html",
+   "lang": "fr"
+  },
+  "extraSources": [],
+  "title": {
+   "de": "Von Kranlast vom Lastwagen gestossen: Bundesgericht bestätigt Schuldspruch, 20 % Mitverschulden",
+   "fr": "Poussé du camion par la charge de la grue: le TF confirme la condamnation, 20 % de faute concomitante",
+   "it": "Spinto giù dal camion dal carico della gru: il TF conferma la condanna, 20 % di colpa concorrente",
+   "en": "Pushed off truck by crane load: Federal Court upholds conviction, 20% contributory fault"
+  },
+  "facts": {
+   "activity": null,
+   "what": {
+    "de": "Beim Abladen von Isolationspaletten auf einer engen Strasse bediente der Fahrer den Kran vom Steuerstand auf der dem Kran abgewandten Seite. Er hob eine Palette an, während ein Zimmermann noch auf der Ladefläche auf anderen Paletten stand; die Last stiess ihn zu Boden.",
+    "fr": "Lors du déchargement de palettes d’isolation dans une rue étroite, le chauffeur manœuvrait la grue depuis le poste opposé à celle-ci. Il a levé une palette alors qu’un charpentier était encore sur le plateau, monté sur d’autres palettes; la charge l’a fait tomber.",
+    "it": "Durante lo scarico di bancali isolanti in una strada stretta, l’autista manovrava la gru dalla postazione sul lato opposto. Ha sollevato un bancale mentre un carpentiere era ancora sul pianale, sopra altri bancali; il carico lo ha fatto cadere.",
+    "en": "Unloading insulation pallets on a narrow street, the driver worked the crane from the control post on the far side. He lifted a pallet while a carpenter was still on the deck standing on other pallets; the load knocked him to the ground."
+   },
+   "injuries": {
+    "de": "Vollständige Querschnittlähmung; Suva-Leistungen von über CHF 3,2 Mio.",
+    "fr": "Paraplégie complète; prestations Suva de plus de CHF 3,2 mio",
+    "it": "Paraplegia completa; prestazioni Suva oltre CHF 3,2 mio",
+    "en": "Complete paraplegia; Suva benefits of over CHF 3.2 million"
+   }
+  },
+  "why": {
+   "de": "Der Verletzte blieb trotz Kranbewegung nahe der Last und hatte 1,36–1,72 g/kg Alkohol im Blut. Weil ihn niemand für das Abladen instruiert hatte, wiegt sein Fehler nur leicht. Die Vorinstanz hatte jedes Mitverschulden verneint, weil Sicherheitsregeln gerade vor solcher Unvorsicht schützen sollen – das Bundesgericht sah das anders und setzte 20 % fest.",
+   "fr": "Le lésé est resté près de la charge malgré la manœuvre et présentait 1,36–1,72 g/kg d’alcool. Faute d’instruction pour le déchargement, sa faute est légère. L’instance cantonale avait exclu toute faute concomitante, les règles de sécurité visant justement ce genre d’imprudence; le TF n’a pas suivi et a fixé 20 %.",
+   "it": "La vittima è rimasta vicino al carico nonostante la manovra e aveva 1,36–1,72 g/kg di alcol nel sangue. Non essendo stata istruita per lo scarico, la sua colpa è lieve. L’istanza cantonale aveva escluso ogni colpa concorrente perché le regole di sicurezza mirano proprio a tali imprudenze; il TF non l’ha seguita e ha fissato il 20 %.",
+   "en": "The worker stayed near the moving load and had 1.36–1.72 g/kg of alcohol in his blood. As nobody had briefed him for unloading, his fault was minor. The lower court had ruled out contributory fault because safety rules exist to guard against such carelessness; the Federal Court disagreed and set it at 20%."
+  },
+  "lesson": {
+   "de": "Wer den Kran ohne Sicht auf Last und Haken bedient, braucht einen instruierten Einweiser – nicht jemanden, der nebenbei den Verkehr regelt. Helfer beim Abladen vorher instruieren: weg aus dem Schwenkbereich, solange die Last sich bewegt.",
+   "fr": "Qui manœuvre une grue sans voir la charge ni le crochet a besoin d’un guide formé, pas de quelqu’un qui règle la circulation en parallèle. Instruire les aides avant le déchargement: hors de la zone de rotation tant que la charge bouge.",
+   "it": "Chi manovra la gru senza vedere carico e gancio ha bisogno di un segnalatore istruito, non di qualcuno che intanto regola il traffico. Istruire prima chi aiuta allo scarico: fuori dal raggio di rotazione finché il carico si muove.",
+   "en": "If you cannot see the load or hook, you need a trained signaller, not someone directing traffic on the side. Brief everyone helping to unload beforehand: out of the slewing zone while the load moves."
+  }
+ },
+ {
   "id": "2026-09-02-ti-paradiso-du-lac",
   "caseId": "case-2026-09-02-ti-paradiso-du-lac",
   "date": "2026-09-02",
@@ -549,6 +725,83 @@
   "why": null
  },
  {
+  "id": "2026-07-27-bger-7b-1045-2025-sg-dach",
+  "caseId": "case-2026-07-27-bger-7b-1045-2025-sg-dach",
+  "date": "2026-07-27",
+  "accidentDate": "2024-08-05",
+  "canton": "SG",
+  "place": null,
+  "industry": "construction",
+  "hazard": "fall",
+  "outcome": "serious",
+  "court": {
+   "de": "Bundesgericht",
+   "fr": "Tribunal fédéral",
+   "it": "Tribunale federale",
+   "en": "Federal Supreme Court"
+  },
+  "caseNumber": "7B_1045/2025",
+  "final": false,
+  "appeal": {
+   "de": "Die Staatsanwaltschaft St. Gallen stellte die Untersuchung gegen Unbekannt ein (29.4.2025), die Anklagekammer bestätigte (28.8.2025). Das Bundesgericht hiess die Beschwerde des Verletzten gut: Die Untersuchung wird fortgesetzt – Ausgang offen.",
+   "fr": "Le Ministère public saint-gallois a classé l’enquête contre inconnu (29.4.2025), confirmé par la Chambre d’accusation (28.8.2025). Le TF a admis le recours du blessé: l’enquête doit reprendre – issue ouverte.",
+   "it": "Il Ministero pubblico sangallese ha abbandonato l’inchiesta contro ignoti (29.4.2025), confermato dalla Camera d’accusa (28.8.2025). Il TF ha accolto il ricorso del ferito: l’inchiesta deve proseguire – esito aperto.",
+   "en": "St. Gallen prosecutors closed the investigation against persons unknown (29.4.2025), upheld by the indictment chamber (28.8.2025). The Federal Court upheld the injured worker’s appeal: the investigation must continue – outcome open."
+  },
+  "employerRole": {
+   "de": "Temporärarbeiter, an ein Dachdeckergeschäft verliehen, das im Auftrag das Dach einer Halle erneuerte. Verfahren gegen Unbekannt.",
+   "fr": "Travailleur temporaire mis à disposition d’une entreprise de couverture chargée de refaire le toit d’une halle. Procédure contre inconnu.",
+   "it": "Lavoratore interinale messo a disposizione di una ditta di copertura incaricata di rifare il tetto di un capannone. Procedimento contro ignoti.",
+   "en": "Temp worker placed with a roofing firm hired to renew a hall roof. Proceedings against persons unknown."
+  },
+  "defendants": [],
+  "linkedAccidentId": null,
+  "source": {
+   "name": "entscheidsuche.ch",
+   "url": "https://entscheidsuche.ch/docs/CH_BGer/CH_BGer_007_7B-1045-2025_2026-07-27.html",
+   "lang": "de"
+  },
+  "extraSources": [],
+  "title": {
+   "de": "Ungesichert vom Hallendach gestürzt: Bundesgericht verlangt weitere Untersuchung",
+   "fr": "Chute non assurée d’un toit de halle: le TF exige la poursuite de l’enquête",
+   "it": "Caduta senza protezione dal tetto di un capannone: il TF chiede di proseguire l’inchiesta",
+   "en": "Unsecured fall from hall roof: Federal Court orders investigation to continue"
+  },
+  "facts": {
+   "activity": {
+    "de": "Rückbau eines Hallendachs; Stahlkonstruktion per Kran entfernt",
+    "fr": "Démontage d’un toit de halle; structure métallique retirée à la grue",
+    "it": "Smontaggio del tetto di un capannone; struttura in acciaio rimossa con la gru",
+    "en": "Dismantling a hall roof; steel structure removed by crane"
+   },
+   "what": {
+    "de": "Nach dem Abheben der Stahlkonstruktion wollte der Temporärarbeiter ungesichert ein zurückgebliebenes Blech holen. Er stürzte 5,2 m auf ein Gerüst und weitere rund 2,6 m auf den Hallenboden bzw. eine Förderanlage.",
+    "fr": "Après l’enlèvement de la structure, le travailleur temporaire a voulu récupérer sans s’assurer une tôle restée en place. Il a chuté de 5,2 m sur un échafaudage, puis d’environ 2,6 m sur le sol de la halle et une installation de convoyage.",
+    "it": "Dopo la rimozione della struttura, l’interinale ha voluto recuperare senza assicurarsi una lamiera rimasta. È caduto per 5,2 m su un ponteggio e per altri 2,6 m circa sul pavimento del capannone e su un nastro trasportatore.",
+    "en": "After the steel structure was lifted off, the temp worker went to fetch a leftover sheet without tying off. He fell 5.2 m onto a scaffold and about 2.6 m further onto the hall floor and a conveyor."
+   },
+   "injuries": {
+    "de": "Laut eigenen Angaben Brüche beider Schulterblätter, zweier Rippen und im Gesicht; Rega-Flug ins Spital; weiterhin arbeitsunfähig",
+    "fr": "Selon ses dires, fractures des deux omoplates, de deux côtes et au visage; héliporté par la Rega; toujours en incapacité de travail",
+    "it": "Secondo lui, fratture di entrambe le scapole, di due costole e al volto; trasportato dalla Rega; tuttora inabile al lavoro",
+    "en": "By his own account, fractures of both shoulder blades, two ribs and the face; Rega airlift; still unable to work"
+   }
+  },
+  "why": {
+   "de": "Laut Suva-Unfallbericht wurde ohne Absturzsicherung (PSAgA) gearbeitet, obwohl das Sicherheitskonzept sie vorsah und Höhensicherungsgeräte montiert waren; auch die geplante Absperrung des absturzgefährdeten Bereichs fehlte. Ob die Verantwortlichen genug beaufsichtigt und kontrolliert haben, ist abzuklären – auch erfahrene Arbeiter brauchen ein Minimum an Kontrolle. Eigenes Fehlverhalten schliesst eine Mitverantwortung anderer nicht aus.",
+   "fr": "Selon le rapport de la Suva, le travail se faisait sans EPI antichute alors que le concept de sécurité le prévoyait et que des antichutes étaient installés; le balisage prévu de la zone à risque manquait aussi. Il faut établir si les responsables ont assez surveillé et contrôlé: même les ouvriers expérimentés exigent un minimum de contrôle. La faute du blessé n’exclut pas la responsabilité d’autres personnes.",
+   "it": "Secondo il rapporto Suva si lavorava senza DPI anticaduta, benché previsti dal piano di sicurezza e con dispositivi già montati; mancava anche la delimitazione prevista della zona a rischio. Va chiarito se i responsabili hanno vigilato e controllato a sufficienza: anche i lavoratori esperti richiedono un minimo di controllo. La colpa del ferito non esclude la responsabilità di altri.",
+   "en": "Suva’s accident report says the work was done without fall-arrest PPE although the safety plan required it and the devices were installed; the planned barrier around the fall zone was also missing. Whether those responsible supervised and checked enough must be investigated – even experienced workers need a minimum of oversight. The worker’s own mistake does not rule out others’ responsibility."
+  },
+  "lesson": {
+   "de": "Ein Sicherheitskonzept auf Papier genügt nicht: Wer Höhensicherungsgeräte montiert, muss auch kontrollieren, dass sie benutzt werden – gerade bei «nur schnell»-Handgriffen und bei Temporärpersonal.",
+   "fr": "Un concept de sécurité sur papier ne suffit pas: qui installe des antichutes doit aussi contrôler qu’ils sont utilisés, surtout pour les gestes «vite fait» et le personnel temporaire.",
+   "it": "Un piano di sicurezza sulla carta non basta: chi monta i dispositivi anticaduta deve anche controllare che vengano usati, soprattutto per i gesti «al volo» e con il personale interinale.",
+   "en": "A safety plan on paper is not enough: if you install fall-arrest devices, check they are used – especially for quick jobs and with temp staff."
+  }
+ },
+ {
   "id": "2026-07-03-bger-7b-1323-2024",
   "caseId": "case-2026-07-03-bger-7b-1323-2024",
   "date": "2026-07-03",
@@ -826,7 +1079,13 @@
    "url": "https://entscheidsuche.ch/docs/CH_BGer/CH_BGer_006_6B-657-2024_2026-06-24.html",
    "lang": "de"
   },
-  "extraSources": [],
+  "extraSources": [
+   {
+    "name": "Luzerner Zeitung",
+    "url": "https://www.luzernerzeitung.ch/zentralschweiz/schwyz/httpswwwbotechnachrichtenschwyzschwyzer-arbeitsunfall-muss-neu-aufgerollt-werden-art-1712755-ld.4203363",
+    "lang": "de"
+   }
+  ],
   "title": {
    "de": "Durch Faserzementdach gebrochen: Bundesgericht hebt Urteile auf",
    "fr": "Chute à travers un toit en fibrociment: le TF annule les condamnations",
@@ -963,6 +1222,147 @@
    "en": "In grab demolition nobody may be in the swing or drop zone. The operator stops while anyone is in the danger area."
   },
   "why": null
+ },
+ {
+  "id": "2026-05-26-be-og-bk-25-485-bagger",
+  "caseId": "case-2026-05-26-be-og-bk-25-485-bagger",
+  "date": "2026-05-26",
+  "accidentDate": "2024-05-14",
+  "canton": "BE",
+  "place": null,
+  "industry": "construction",
+  "hazard": "machinery",
+  "outcome": "injured",
+  "court": {
+   "de": "Obergericht Bern, Beschwerdekammer in Strafsachen",
+   "fr": "Cour suprême du canton de Berne, Chambre de recours pénale",
+   "it": "Tribunale superiore di Berna, Camera dei reclami penali",
+   "en": "Bern High Court, Criminal Appeals Chamber"
+  },
+  "caseNumber": "BK 25 485",
+  "final": null,
+  "appeal": {
+   "de": "Die Staatsanwaltschaft Emmental-Oberaargau stellte das Verfahren gegen den Polier ein (2.10.2025). Das Obergericht wies die Beschwerde des Verletzten ab; er trägt die Kosten von CHF 2200.",
+   "fr": "Le Ministère public Emmental-Haute-Argovie a classé la procédure contre le contremaître (2.10.2025). La Cour suprême a rejeté le recours du blessé, qui supporte les frais de CHF 2200.",
+   "it": "Il Ministero pubblico Emmental-Alta Argovia ha abbandonato il procedimento contro il capocantiere (2.10.2025). Il Tribunale superiore ha respinto il reclamo del ferito, che sopporta le spese di CHF 2200.",
+   "en": "The Emmental-Oberaargau prosecutor dropped the case against the foreman (2.10.2025). The High Court dismissed the injured worker’s appeal; he bears costs of CHF 2,200."
+  },
+  "employerRole": null,
+  "defendants": [
+   {
+    "role": {
+     "de": "Polier, der den Mobilbagger fuhr",
+     "fr": "Contremaître aux commandes de la pelle mobile",
+     "it": "Capocantiere alla guida dell’escavatore gommato",
+     "en": "Foreman driving the wheeled excavator"
+    },
+    "charge": {
+     "de": "Fahrlässige schwere, evtl. einfache Körperverletzung; Widerhandlung gegen das UVG",
+     "fr": "Lésions corporelles graves, subsidiairement simples, par négligence; infraction à la LAA",
+     "it": "Lesioni gravi, subordinatamente semplici, colpose; infrazione alla LAINF",
+     "en": "Serious, alternatively simple, bodily harm by negligence; breach of the Accident Insurance Act"
+    },
+    "verdict": "dismissed",
+    "reasoning": {
+     "de": "Kontrollierte vor dem Anfahren über Spiegel und Kamera, wo seine Leute standen; ein Bedienfehler war nicht nachweisbar. Dass der Arbeiter danach ohne Blickkontakt in den Spalt zwischen Bagger und Mauer trat, musste er nicht erwarten.",
+     "fr": "A vérifié avant de démarrer, par rétroviseurs et caméra, où se trouvaient ses ouvriers; aucune erreur de manœuvre prouvée. Il ne devait pas s’attendre à ce que l’ouvrier entre ensuite sans contact visuel entre la pelle et le mur.",
+     "it": "Prima di partire ha controllato con specchi e telecamera dove si trovavano i suoi uomini; nessun errore di manovra provato. Non doveva aspettarsi che l’operaio entrasse poi senza contatto visivo tra escavatore e muro.",
+     "en": "Checked mirrors and camera for his crew before moving off; no operating error could be proven. He did not have to expect the worker to then step between machine and wall without eye contact."
+    },
+    "sanction": {
+     "dailyUnits": null,
+     "dailyAmount": null,
+     "suspended": null,
+     "probationYears": null,
+     "fineCHF": null,
+     "custodial": null,
+     "costs": null,
+     "compensation": null,
+     "bail": null,
+     "other": null
+    },
+    "short": null
+   },
+   {
+    "role": {
+     "de": "Verletzter Bauarbeiter",
+     "fr": "Ouvrier blessé",
+     "it": "Operaio ferito",
+     "en": "Injured construction worker"
+    },
+    "charge": {
+     "de": "Widerhandlung gegen das UVG",
+     "fr": "Infraction à la LAA",
+     "it": "Infrazione alla LAINF",
+     "en": "Breach of the Accident Insurance Act"
+    },
+    "verdict": "dismissed",
+    "reasoning": {
+     "de": "Betrat den Gefahrenbereich weisungswidrig; die Staatsanwaltschaft sah wegen seiner eigenen Betroffenheit von einer Strafe ab.",
+     "fr": "Est entré dans la zone dangereuse contre les consignes; le Ministère public a renoncé à le punir vu qu’il était lui-même touché.",
+     "it": "È entrato nella zona di pericolo contro le istruzioni; il Ministero pubblico ha rinunciato a punirlo perché lui stesso colpito.",
+     "en": "Entered the danger zone against instructions; the prosecutor waived punishment as he was himself the one hurt."
+    },
+    "sanction": {
+     "dailyUnits": null,
+     "dailyAmount": null,
+     "suspended": null,
+     "probationYears": null,
+     "fineCHF": null,
+     "custodial": null,
+     "costs": null,
+     "compensation": null,
+     "bail": null,
+     "other": null
+    },
+    "short": null
+   }
+  ],
+  "linkedAccidentId": null,
+  "source": {
+   "name": "entscheidsuche.ch",
+   "url": "https://entscheidsuche.ch/docs/BE_ZivilStraf/BE_OG_008_BK-2025-485_2026-05-26.pdf",
+   "lang": "de"
+  },
+  "extraSources": [],
+  "title": {
+   "de": "Zwischen Bagger und Mauer eingeklemmt: Einstellung für Polier bestätigt",
+   "fr": "Coincé entre la pelle et un mur: le classement pour le contremaître confirmé",
+   "it": "Schiacciato tra escavatore e muro: confermato l’abbandono per il capocantiere",
+   "en": "Pinned between excavator and wall: case against foreman stays dropped"
+  },
+  "facts": {
+   "activity": {
+    "de": "Strassenbau: Ausbau des Belags mit einem Mobilbagger",
+    "fr": "Travaux routiers: dépose du revêtement à la pelle mobile",
+    "it": "Lavori stradali: rimozione della pavimentazione con escavatore gommato",
+    "en": "Road works: removing asphalt with a wheeled excavator"
+   },
+   "what": {
+    "de": "Der Polier fuhr den Bagger nahe an eine Gartenmauer, damit ein Lieferwagen passieren konnte. Danach ging ein Bauarbeiter durch den 70–80 cm schmalen Spalt zwischen Bagger und Mauer; beim Weiterfahren klemmte ihn das Planierschild am Bein ein.",
+    "fr": "Le contremaître a rapproché la pelle d’un mur de jardin pour laisser passer une camionnette. Un ouvrier est ensuite passé dans l’espace de 70–80 cm entre la pelle et le mur; à la reprise, la lame l’a coincé à la jambe.",
+    "it": "Il capocantiere ha accostato l’escavatore a un muro di giardino per far passare un furgone. Un operaio è poi passato nello spazio di 70–80 cm tra escavatore e muro; alla ripartenza la lama gli ha schiacciato la gamba.",
+    "en": "The foreman moved the excavator close to a garden wall to let a van pass. A worker then walked through the 70–80 cm gap between machine and wall; as the machine moved off, the dozer blade pinned his leg."
+   },
+   "injuries": {
+    "de": "Am Bein eingeklemmt und verletzt",
+    "fr": "Jambe coincée et blessée",
+    "it": "Gamba schiacciata e ferita",
+    "en": "Leg pinned and injured"
+   }
+  },
+  "why": {
+   "de": "Das Gericht glaubte dem Polier, dass er vor dem Anfahren den Gefahrenbereich geprüft hatte; danach durfte er nach vorne schauen. Der Arbeiter kannte die Suva-Regel «nur mit Blickkontakt in den Gefahrenbereich», hatte an der Mauer nichts zu tun und hatte trotz Null-Toleranz ein Bier getrunken. Sein Verhalten war so aussergewöhnlich, dass es einen allfälligen Fehler des Poliers in den Hintergrund drängen würde.",
+   "fr": "La Cour a cru le contremaître, qui avait vérifié la zone dangereuse avant de démarrer et pouvait ensuite regarder devant lui. L’ouvrier connaissait la règle Suva «zone dangereuse seulement avec contact visuel», n’avait rien à faire près du mur et avait bu une bière malgré la tolérance zéro. Ce comportement était si extraordinaire qu’il reléguerait à l’arrière-plan une éventuelle faute du contremaître.",
+   "it": "La Corte ha creduto al capocantiere, che aveva controllato la zona di pericolo prima di partire e poteva poi guardare avanti. L’operaio conosceva la regola Suva «nella zona di pericolo solo con contatto visivo», non aveva nulla da fare presso il muro e aveva bevuto una birra nonostante la tolleranza zero. Il suo comportamento era così straordinario da relegare in secondo piano un eventuale errore del capocantiere.",
+   "en": "The court believed the foreman had checked the danger zone before moving and could then look ahead. The worker knew Suva’s rule “enter a machine’s danger zone only with eye contact”, had no task by the wall and had drunk a beer despite a zero-tolerance policy. His conduct was so unusual that it would overshadow any fault by the foreman."
+  },
+  "lesson": {
+   "de": "Den Gefahrenbereich einer Baumaschine nur mit Blickkontakt und Okay des Maschinisten betreten – auch «nur schnell vorbei». Enge Stellen zwischen Maschine und Mauer absperren oder von einer Hilfsperson überwachen lassen.",
+   "fr": "N’entrer dans la zone dangereuse d’un engin qu’avec contact visuel et accord du machiniste, même pour «passer vite». Barrer les passages étroits entre engin et mur ou les faire surveiller par une personne.",
+   "it": "Entrare nella zona di pericolo di una macchina solo con contatto visivo e via libera del macchinista, anche per «passare al volo». Sbarrare i passaggi stretti tra macchina e muro o farli sorvegliare da una persona.",
+   "en": "Enter a machine’s danger zone only with eye contact and the operator’s OK, even just to slip past. Block off tight gaps between machine and wall or have a banksman watch them."
+  }
  },
  {
   "id": "2026-05-22-bger-6b-940-2024-vd-decoffrage",
@@ -2086,7 +2486,7 @@
   "id": "2025-03-05-ge-cj-p-5337-2018-kranlastwagen",
   "caseId": "case-2025-03-05-ge-cj-p-5337-2018-kranlastwagen",
   "date": "2025-03-05",
-  "accidentDate": "2018-03-18",
+  "accidentDate": "2018-03-09",
   "canton": "GE",
   "place": null,
   "industry": "construction",

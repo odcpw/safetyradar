@@ -8,7 +8,7 @@ const meta = [fmtDate(item.date, lang), pk(item.court), item.place ? `${item.pla
 const why = pk(item.why) ?? (item.defendants?.length === 1 ? null : null);
 const line = (d: any) => {
   const charge = (pk(d.charge) || '').replace(/\s*\(Art\.[^)]*\)|\s*\(art\.[^)]*\)/g, '');
-  const head = d.verdict === 'convicted' ? `${tt('w.convicted')} ${charge.charAt(0).toLowerCase() + charge.slice(1)}` : d.verdict === 'acquitted' ? `${tt('w.acquitted')} ${charge.charAt(0).toLowerCase() + charge.slice(1)}` : `${tt('w.open')} ${charge}`;
+  const head = d.verdict === 'convicted' ? `${tt('w.convicted')} ${charge.charAt(0).toLowerCase() + charge.slice(1)}` : d.verdict === 'acquitted' ? `${tt('w.acquitted')} ${charge.charAt(0).toLowerCase() + charge.slice(1)}` : d.verdict === 'dismissed' ? `${tt('w.dismissed')} ${charge}` : `${tt('w.open')} ${charge}`;
   const sanc = d.verdict === 'convicted' ? (sanctionText(d.sanction, lang, tt, pk) || '') : d.priorSanction ? `${tt('w.prior')}: ${sanctionText(d.priorSanction, lang, tt, pk)}` : '';
   const reason = pk(d.short) ?? pk(d.reasoning);
   return { role: pk(d.role), text: `${head}${sanc ? ', ' + sanc : ''}.`, reason };

@@ -33,6 +33,7 @@ const S: Record<string, T4> = {
   'w.convicted': { de: 'verurteilt wegen', fr: 'condamné pour', it: 'condannato per', en: 'convicted of' },
   'w.acquitted': { de: 'freigesprochen von', fr: 'acquitté de', it: 'assolto da', en: 'acquitted of' },
   'w.open': { de: 'Verfahren offen –', fr: 'procédure ouverte –', it: 'procedura aperta –', en: 'case open –' },
+  'w.dismissed': { de: 'Verfahren eingestellt –', fr: 'procédure classée –', it: 'procedimento abbandonato –', en: 'proceedings dropped –' },
   'w.nr': { de: 'Strafe nicht berichtet', fr: 'peine non rapportée', it: 'pena non riportata', en: 'sentence not reported' },
   'nav.home': { de: 'Start', fr: 'Accueil', it: 'Home', en: 'Home' },
   'nav.accidents': { de: 'Unfälle', fr: 'Accidents', it: 'Infortuni', en: 'Accidents' },
