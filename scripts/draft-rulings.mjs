@@ -62,7 +62,7 @@ try {
   for (const x of todo.slice(0, MAX)) {
     const text = await getText(x.url);
     if (!text || text.length < 1500) { console.warn(`  skip (no usable text): ${x.url}`); x.draftNote = 'no fetchable text (news report?) – draft manually'; continue; }
-    const d = await extract({ system: SYS, model: MODEL, name: 'ruling', schema: SCHEMA,
+    const d = await extract({ system: SYS, model: MODEL, name: 'ruling', schema: SCHEMA, effort: process.env.LLM_EFFORT_DRAFT || 'medium',
       input: `Two published entries, for format and tone only:\n${JSON.stringify(examples)}\n\nSource: ${x.url}\nDecision text:\n${text.slice(0, 60000)}` });
     const fed = /bundesgericht|tribunal fédéral|federal supreme/i.test(`${d.court?.de} ${d.court?.fr} ${d.court?.en}`);
     const cn = (d.caseNumber || '').split(/[,;]|\s(?:et|und|e)\s/)[0].trim().toLowerCase().replace(/[^a-z0-9]+/g, '-');
@@ -71,7 +71,7 @@ try {
     const { slug, ...rest } = d;
     const entry = { id, caseId: `case-${d.accidentDate || d.date}-${d.canton?.toLowerCase()}-${d.slug}`, ...rest, linkedAccidentId: null,
       source: { name: new URL(x.url).hostname.replace(/^www\./, ''), url: x.url, lang: x.lang === 'multi' ? null : x.lang }, extraSources: [],
-      _draft: { model: MODEL, at: new Date().toISOString(), queueKey: hash(x.url), dedupeHint: x.llm.dupOf || null, note: 'LLM draft – verify every fact against the source before publishing; remove _draft.' } };
+      _draft: { model: MODEL, effort: process.env.LLM_EFFORT_DRAFT || 'medium', at: new Date().toISOString(), queueKey: hash(x.url), dedupeHint: x.llm.dupOf || null, note: 'LLM draft – verify every fact against the source before publishing; remove _draft.' } };
     const file = new URL(`${id}.json`, OUT);
     fs.writeFileSync(file, JSON.stringify(entry, null, 1));
     x.draftPath = `data/drafts/rulings/${id}.json`; n++;

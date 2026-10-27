@@ -40,7 +40,12 @@ Always link and name the source. No names of victims or private defendants.
    - `data/review.md` (from `queue-report.mjs`) lists only kept items, grouped by event, with dedupe hints, draft paths, unlinked extra
      sources for published entries, and kept jobs grouped by repost.
    Caps per script run (env): `LLM_MAX_CALLS` 300, `LLM_MAX_TOKENS` 1,000,000, `LLM_MAX_USD` 0.50. Every run appends tokens and
-   estimated USD/CHF cost to `data/llm-usage.jsonl`. Models: `LLM_MODEL` / `LLM_DRAFT_MODEL` (default `gpt-6-luna`). Prices are in
+   estimated USD/CHF cost to `data/llm-usage.jsonl`. Models: `LLM_MODEL` / `LLM_DRAFT_MODEL` (default `gpt-6-luna`). Reasoning effort per step: `LLM_EFFORT_EXTRACT` (default `low`),
+   `LLM_EFFORT_JOBS` (`low`), `LLM_EFFORT_DRAFT` (`medium`). `LLM_FIELDS_VIA=decisions` moves the enumerable fields (keep, type,
+   canton, industry, outcome, language, dedupe pick from ≤8 nearby entries + 'none'; jobs: keep, role, canton) to the Decisions API
+   and keeps Responses only for free text; default `responses`, because on the 2026-10-27 queue it was less accurate
+   (missed 1 of 18 published items, 3 vs 1 reviewer-rejected kept, industry/outcome agreement 62 %/77 %; jobs 17 vs 15 extra keeps, 2 canton errors).
+   Comparison runs: `LLM_REDO_STAGE2=1` reuses the cached first sort and redoes field extraction. Prices are in
    `scripts/lib/llm.mjs` (verified 2026-10-27 at developers.openai.com/api/docs/pricing). Typical daily cost: < USD 0.02.
 2. **Reviewer step (the assistant, on a daily schedule):** read `data/review.md` (not the whole queue). For each new group open the
    source, verify facts, write/adjust the fact sheet + lesson (for rulings start from the draft JSON: check every fact, remove `_draft`),
