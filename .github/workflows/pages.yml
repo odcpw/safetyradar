@@ -1,4 +1,4 @@
-name: Deploy preview to GitHub Pages
+name: Deploy preview to GitHub Pages (safetyradar.ch)
 on:
   push:
     branches: [main]
@@ -22,8 +22,8 @@ jobs:
       - run: npm ci
       - run: npm run build
         env:
-          SITE: https://odcpw.github.io
-          BASE: /safetyradar
+          SITE: https://safetyradar.ch
+          BASE: /
           NOINDEX: '1'
       - uses: actions/upload-pages-artifact@v3
         with:

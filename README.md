@@ -70,9 +70,9 @@ Owner details (red TODO markers in imprint/privacy/about/post-a-job, all 4 langu
 - Seeds: `scripts/seed/accidents.py` then `scripts/seed/accidents_v3.py`; `scripts/seed/rulings.py`.
 
 ## Preview deployment (GitHub Pages)
-Private preview at https://odcpw.github.io/safetyradar/ – `noindex, nofollow` on every page and a disallow-all robots.txt.
-`.github/workflows/pages.yml` builds on push to `main` with `SITE=https://odcpw.github.io BASE=/safetyradar NOINDEX=1`;
-`scripts/rebase.mjs` prefixes root-relative links with the base and writes the robots.txt. A normal `npm run build` targets safetyradar.ch at `/`.
+Private preview at https://safetyradar.ch (GitHub Pages custom domain, `public/CNAME`; old https://odcpw.github.io/safetyradar/ redirects) – `noindex, nofollow` on every page and a disallow-all robots.txt.
+`.github/workflows/pages.yml` builds on push to `main` with `SITE=https://safetyradar.ch BASE=/ NOINDEX=1`;
+`scripts/rebase.mjs` writes the disallow-all robots.txt (and would prefix links if a non-root BASE were set). A normal `npm run build` targets safetyradar.ch at `/`.
 
 ## v4 (2026-10-26)
 - Design C: stats strip, canton tile map, chronological list (date/canton gutter, severity edge, 2-line lesson teaser). No design switcher.
