@@ -1,0 +1,3 @@
+# Alternative to the systemd timer (crontab -e as user safetyradar):
+CRON_TZ=Europe/Zurich
+0 7 * * 1-5 cd /opt/safetyradar && set -a && . ./.env && set +a && git pull --ff-only && npm ci && NOINDEX=1 npm run update >> /var/log/safetyradar/update.log 2>&1 && rsync -a --delete dist/ /var/www/safetyradar/

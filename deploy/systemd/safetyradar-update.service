@@ -1,0 +1,17 @@
+[Unit]
+Description=Safety Radar daily pipeline (fetch, LLM classify/draft, build)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=safetyradar
+WorkingDirectory=/opt/safetyradar
+EnvironmentFile=/opt/safetyradar/.env
+Environment=NOINDEX=1 SITE=https://safetyradar.ch BASE=/
+ExecStart=/usr/bin/git pull --ff-only
+ExecStart=/usr/bin/npm ci --no-audit --no-fund
+ExecStart=/usr/bin/npm run update
+# Publish the fresh build atomically to the web root served by Caddy/nginx
+ExecStartPost=/usr/bin/rsync -a --delete /opt/safetyradar/dist/ /var/www/safetyradar/
+TimeoutStartSec=45min

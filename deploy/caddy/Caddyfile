@@ -1,0 +1,12 @@
+# Caddy obtains and renews Let's Encrypt certificates automatically once DNS points here.
+safetyradar.ch, www.safetyradar.ch {
+	@www host www.safetyradar.ch
+	redir @www https://safetyradar.ch{uri} permanent
+	# docker-compose mount; use /var/www/safetyradar on a host install
+	root * /srv/safetyradar
+	encode zstd gzip
+	# remove at go-live together with NOINDEX=1
+	header X-Robots-Tag "noindex, nofollow"
+	header /_astro/* Cache-Control "public, max-age=31536000, immutable"
+	file_server
+}

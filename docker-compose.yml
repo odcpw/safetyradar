@@ -1,0 +1,12 @@
+# Optional: docker compose run --rm pipeline   (daily job); Caddy runs on the host or as below.
+services:
+  pipeline:
+    build: .
+    env_file: .env
+    volumes: ["./data:/app/data", "./dist:/app/dist"]
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    ports: ["80:80", "443:443"]
+    volumes: ["./deploy/caddy/Caddyfile:/etc/caddy/Caddyfile:ro", "./dist:/srv/safetyradar:ro", "caddy_data:/data"]
+volumes: { caddy_data: {} }

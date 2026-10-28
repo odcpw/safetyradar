@@ -1,0 +1,10 @@
+[Unit]
+Description=Run Safety Radar pipeline weekdays 07:00 Europe/Zurich
+
+[Timer]
+OnCalendar=Mon..Fri *-*-* 07:00:00 Europe/Zurich
+Persistent=true
+RandomizedDelaySec=120
+
+[Install]
+WantedBy=timers.target
