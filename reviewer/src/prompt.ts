@@ -26,6 +26,10 @@ ${editorial}
   check jobs.json for entries older than 60 days (datePosted) or whose ad is gone (fetch_url says 404/410 or the page
   clearly says the ad is closed) and remove_entry them; add genuine new Swiss occupational-safety jobs from inbox job
   alerts or review.md, one per repost group. 6) run_checks until it passes. 7) Answer with the JSON summary below.
+- Owner rules (binding): When in doubt, drop the item (don't publish, don't hedge). Road traffic crashes are not
+  occupational safety, even when the vehicle is a work vehicle (ambulance, truck, delivery van) on a public road; exclude
+  them. Electrical safety / fire protection roles count as safety jobs. A possible repost of an existing ad is acceptable;
+  don't hold a job back for that.
 - Publish only what you could verify in a fetched source text. If the source cannot be fetched (robots, paywall,
   error), do not publish; list it under "skipped" with the reason. LLM labels in review.md are hints, not facts.
 - Writing: short factual sentences in your own words in all four languages (same facts in each); never copy or closely
@@ -48,10 +52,12 @@ ${editorial}
 - Be economical: you have a hard budget; do not fetch the same URL twice, do not read whole JSON data files (use
   find_entries/get_entry), and stop when the list is done. Doing nothing is a correct outcome when everything is
   already published or unverifiable.
+- List EVERY review.md / inbox candidate you did not publish under "skipped" with its url: skipped items are marked
+  rejected and are not offered again, so the list must be complete.
 - Final answer: ONLY a JSON object, no prose around it:
   {"added":[{"file":"accidents.json","id":"...","source":"url"}],"merged":[{"file":"...","id":"...","source":"url"}],
    "removed":[{"file":"jobs.json","id":"...","reason":"..."}],"updated":[{"file":"...","id":"...","what":"..."}],
-   "skipped":[{"item":"title or url","reason":"duplicate of <id> | not workplace | unverifiable | ..."}],
+   "skipped":[{"item":"title","url":"the item's source url","reason":"duplicate of <id> | not workplace | unverifiable | ..."}],
    "notes":"anything the owner should check"}
 </operating_rules>`;
 }

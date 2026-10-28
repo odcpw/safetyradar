@@ -11,7 +11,7 @@ sources (RSS, Bing News, entscheidsuche.ch, job sites, police/job e-mails)
   → scripts/classify*.mjs, draft-rulings.mjs    (OpenAI, gpt-6-luna, capped USD 0.50/run) → item.llm, data/drafts/rulings/
   → scripts/queue-report.mjs                    → data/review.md
   → scripts/email-intake.mjs                    (AgentMail API) → data/inbox/ (untrusted)
-  → reviewer edits data/accidents.json, rulings.json, jobs.json (docs/EDITORIAL.md; reviewer/ = Pi Durable agent → review PR)
+  → reviewer edits data/accidents.json, rulings.json, jobs.json (docs/EDITORIAL.md; reviewer/ = Pi Durable agent → validate + build → push to main; decisions fed back to queue.json)
   → npm run build (astro + scripts/rebase.mjs)  → dist/ → GitHub Pages (or VPS, docs/DEPLOY-VPS.md)
 ```
 

@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 // Stage 2: the daily editorial reviewer. A Pi Durable agent edits data/accidents.json, rulings.json and jobs.json in a
-// separate git worktree (branch review/YYYY-MM-DD from origin/main), then the host validates, builds, commits, pushes and
-// opens a PR. Crash-safe: the conversation lives in SQLite (reviewer/state/), a restart with the same date resumes it.
+// separate detached git worktree from origin/main; the host then validates and builds, commits, rebases on origin/main and
+// pushes straight to main (no PRs). Broken data is never pushed. Decisions are fed back to stage 1 (data/queue.json,
+// data/jobs-queue.json) so handled items leave data/review.md. Crash-safe: the conversation lives in SQLite
+// (reviewer/state/), a restart with the same date resumes it.
 //   npm --prefix reviewer run review -- [--dry-run] [--date=YYYY-MM-DD]
 import { execFileSync } from "node:child_process";
 import fs from "node:fs";
@@ -15,6 +17,7 @@ import { openNodeSqliteStorage } from "@earendil-works/pi-durable/storage/sqlite
 import { PRICES, totalUsd } from "./cost.ts";
 import { systemPrompt } from "./prompt.ts";
 import { createTools, DATA_FILES } from "./tools.ts";
+import { applyFeedback } from "../../scripts/lib/review-feedback.mjs";
 
 const ctx = BACKGROUND_CONTEXT;
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
@@ -31,14 +34,12 @@ const BASE = env("REVIEW_BASE", "origin/main");
 const STATE = path.resolve(ROOT, env("REVIEW_STATE_DIR", "reviewer/state"));
 const AUTHOR = env("GIT_AUTHOR_NAME", "odcpw"), EMAIL = env("GIT_AUTHOR_EMAIL", "odcpw@users.noreply.github.com");
 const TAG = `${DATE}${DRY ? "-dry" : ""}`;
-const BRANCH = `review/${DATE}`;
 const WT = path.join(STATE, `worktree-${TAG}`);
 const RUN_FILE = path.join(STATE, `run-${TAG}.json`);
 const USAGE_FILE = path.join(STATE, `usage-${TAG}.json`);
 
 const log = (...a: unknown[]) => console.log(`[reviewer ${new Date().toLocaleTimeString("de-CH", { timeZone: "Europe/Zurich" })}]`, ...a);
 const git = (cwd: string, ...a: string[]) => execFileSync("git", a, { cwd, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }).trim();
-const gh = (...a: string[]) => execFileSync("gh", a, { cwd: ROOT, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }).trim();
 const readJson = (f: string, d: any) => (fs.existsSync(f) ? JSON.parse(fs.readFileSync(f, "utf8")) : d);
 const writeJson = (f: string, v: unknown) => fs.writeFileSync(f, JSON.stringify(v, null, 1));
 
@@ -55,8 +56,7 @@ function spentToday(exceptThis: boolean): number {
 function prepareWorktree() {
 	if (fs.existsSync(WT)) { log(`reusing worktree ${path.relative(ROOT, WT)}`); return; }
 	git(ROOT, "fetch", "--quiet", "origin", "main");
-	if (DRY) git(ROOT, "worktree", "add", "--detach", WT, BASE);
-	else git(ROOT, "worktree", "add", "-B", BRANCH, WT, BASE);
+	git(ROOT, "worktree", "add", "--detach", WT, BASE);
 	fs.symlinkSync(path.join(ROOT, "node_modules"), path.join(WT, "node_modules"));
 	log(`worktree ${path.relative(ROOT, WT)} at ${BASE} (${git(WT, "rev-parse", "--short", "HEAD")})`);
 }
@@ -77,16 +77,6 @@ function changes() {
 		};
 	}
 	return out;
-}
-
-function pendingReviews(): string {
-	try {
-		const prs = JSON.parse(gh("pr", "list", "--state", "open", "--json", "headRefName,title,url,body", "--limit", "30")) as any[];
-		const open = prs.filter((p) => p.headRefName.startsWith("review/") && p.headRefName !== BRANCH);
-		if (!open.length) return "";
-		return "\nThese earlier review PRs are still open (not on main yet). Do NOT add their items again:\n" +
-			open.map((p) => `- ${p.title} ${p.url}\n${String(p.body).split("\n").filter((l) => /^\s*[-*] (added|merged|removed)/i.test(l)).join("\n")}`).join("\n");
-	} catch { return ""; }
 }
 
 async function runAgent(run: any): Promise<{ answer: string; status: string; usd: number }> {
@@ -141,7 +131,7 @@ async function runAgent(run: any): Promise<{ answer: string; status: string; usd
 	const timer = setInterval(() => void tick().catch(() => {}), 1000);
 
 	run.started = true; writeJson(RUN_FILE, run);
-	const content = `Today is ${DATE}. Do the daily review of Safety Radar per the house rules: list_inputs, read data/review.md and the inbox items, dedupe against the published files, verify against sources, edit the data files, run_checks, then give the JSON summary.${pendingReviews()}`;
+	const content = `Today is ${DATE}. Do the daily review of Safety Radar per the house rules: list_inputs, read data/review.md and the inbox items, dedupe against the published files, verify against sources, edit the data files, run_checks, then give the JSON summary.`;
 	const sub = await root.submit({ type: "input", content, requestId: `review-${TAG}` }, ctx);
 	const settled = await sub.wait(ctx);
 	clearInterval(timer);
@@ -161,8 +151,8 @@ function parseSummary(answer: string): any {
 	try { return m ? JSON.parse(m[0]) : null; } catch { return null; }
 }
 
-function prBody(sum: any, ch: ReturnType<typeof changes>, usd: number, status: string): string {
-	const L: string[] = [`Automated daily review ${DATE} (model ${MODEL}, cost USD ${usd.toFixed(3)}, ${status}). Please check before merging.`, ""];
+function reportBody(sum: any, ch: ReturnType<typeof changes>, usd: number, status: string): string {
+	const L: string[] = [`Automated daily review ${DATE} (model ${MODEL}, cost USD ${usd.toFixed(3)}, ${status}). Pushed to main by the host after validation and build.`, ""];
 	L.push("### Changes (from the data diff)");
 	for (const [f, c] of Object.entries(ch)) {
 		for (const id of c.added) L.push(`- added ${f}: \`${id}\``);
@@ -180,6 +170,25 @@ function prBody(sum: any, ch: ReturnType<typeof changes>, usd: number, status: s
 	}
 	L.push("", "_E-mails and fetched pages were treated as untrusted data. Generated by reviewer/ (Pi Durable)._");
 	return L.join("\n");
+}
+
+/** Validate + build the worktree as it is now; throws with the tail of the error output. */
+function hostChecks() {
+	execFileSync("node", [path.join(ROOT, "scripts/validate-data.mjs"), path.join(WT, "data")], { cwd: WT, stdio: "pipe" });
+	execFileSync("npm", ["run", "build", "--silent"], { cwd: WT, stdio: "pipe", env: { ...process.env, NOINDEX: "1" } });
+}
+
+/** Rebase the review commit on origin/main, re-check, push HEAD:main; one retry after a rejected push, else abort. */
+function pushToMain(): string {
+	for (let attempt = 1; attempt <= 2; attempt++) {
+		git(WT, "fetch", "--quiet", "origin", "main");
+		try { git(WT, "rebase", "--quiet", "origin/main"); }
+		catch (e: any) { try { git(WT, "rebase", "--abort"); } catch { /* none */ } return `NOT pushed: rebase on origin/main conflicted (${String(e.stderr ?? e.message).trim().slice(-300)})`; }
+		try { hostChecks(); } catch (e: any) { return `NOT pushed: checks failed after rebase: ${String(e.stderr ?? e.stdout ?? e.message).slice(-800)}`; }
+		try { git(WT, "push", "--quiet", "origin", "HEAD:main"); return `pushed ${git(WT, "rev-parse", "--short", "HEAD")} to main`; }
+		catch (e: any) { log(`push attempt ${attempt} rejected: ${String(e.stderr ?? e.message).trim().slice(-300)}`); }
+	}
+	return "NOT pushed: push to main rejected twice";
 }
 
 async function main() {
@@ -201,29 +210,34 @@ async function main() {
 	// Host-side checks are authoritative, whatever the agent claimed.
 	let checks = "not run (no changes)";
 	if (any) {
-		try { execFileSync("node", [path.join(ROOT, "scripts/validate-data.mjs"), path.join(WT, "data")], { cwd: WT, stdio: "pipe" }); execFileSync("npm", ["run", "build", "--silent"], { cwd: WT, stdio: "pipe", env: { ...process.env, NOINDEX: "1" } }); checks = "passed"; }
+		try { hostChecks(); checks = "passed"; }
 		catch (e: any) { checks = `FAILED: ${String(e.stderr ?? e.stdout ?? e.message).slice(-1500)}`; }
 	}
-	const body = prBody(summary, ch, Number(run.usd), run.status);
+	const body = reportBody(summary, ch, Number(run.usd), run.status);
 	fs.writeFileSync(path.join(STATE, `review-${TAG}.md`), body + `\n\nChecks: ${checks}\n\nAgent answer:\n\n${run.answer}\n`);
 	fs.writeFileSync(path.join(STATE, `review-${TAG}.diff`), diff);
 	log(`changes: ${JSON.stringify(ch)}; checks ${checks}; diff ${path.relative(ROOT, path.join(STATE, `review-${TAG}.diff`))}`);
 
 	if (DRY || !any || !checks.startsWith("passed") || run.status !== "done") {
-		run.result = DRY ? "dry-run: diff written" : !any ? "nothing new – no PR" : `no PR: ${run.status !== "done" ? run.status : "checks failed"}`;
+		run.result = DRY ? "dry-run: diff written, nothing pushed" : !any ? "nothing new – nothing pushed"
+			: `NOT pushed (changes discarded): ${run.status !== "done" ? run.status : "checks failed"}`;
 	} else {
 		const title = `Daily review ${DATE}: +${n("accidents.json", "added")} accidents, +${n("rulings.json", "added")} rulings, +${n("jobs.json", "added")} jobs (-${n("jobs.json", "removed")} gone)`;
 		git(WT, "add", ...DATA_FILES.map((f) => `data/${f}`));
-		git(WT, "-c", `user.name=${AUTHOR}`, "-c", `user.email=${EMAIL}`, "commit", "--quiet", "-m", title, "-m", "Automated reviewer run (reviewer/). See PR for sources.");
-		git(WT, "push", "--quiet", "--force-with-lease", "-u", "origin", BRANCH);
-		let url = "";
-		try { url = gh("pr", "view", BRANCH, "--json", "url", "-q", ".url"); } catch { /* none yet */ }
-		if (!url) url = gh("pr", "create", "--base", "main", "--head", BRANCH, "--title", title, "--body", body);
-		run.result = `PR ${url}`; run.pr = url;
+		git(WT, "-c", `user.name=${AUTHOR}`, "-c", `user.email=${EMAIL}`, "commit", "--quiet", "-m", title, "-m", body);
+		run.result = pushToMain();
+	}
+	if (!DRY && run.status === "done" && (!any || run.result.startsWith("pushed"))) {
+		// Feed decisions back to stage 1 only when they reached main (or there was nothing to change), so review.md stops repeating them.
+		const fb = applyFeedback(path.join(ROOT, "data"), summary, ch, DATE);
+		log(`feedback to stage 1: ${JSON.stringify(fb)}`);
+	} else if (DRY && summary) {
+		log(`dry-run: feedback to stage 1 would mark ${JSON.stringify(applyFeedback(path.join(ROOT, "data"), summary, ch, DATE, { dry: true }))}`);
 	}
 	run.phase = "done"; writeJson(RUN_FILE, run);
 	git(ROOT, "worktree", "remove", "--force", WT);
 	log(run.result);
+	if (run.result.startsWith("NOT pushed")) process.exitCode = 4; // reported by run-daily.sh as a failed run
 }
 
 main().catch((e) => { console.error(`reviewer failed: ${e?.message ?? e}`); process.exit(1); });

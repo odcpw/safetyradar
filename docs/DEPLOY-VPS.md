@@ -1,6 +1,6 @@
 # Moving Safety Radar to a VPS (plan)
 
-Status: **prepared, not deployed** (branch `vps-runner`). GitHub Pages (`.github/workflows/pages.yml`) remains the live host. The VPS path is an alternative; both can run in parallel until DNS is switched.
+Status: **prepared, not deployed** (code on `main`). GitHub Pages (`.github/workflows/pages.yml`) remains the live host. The VPS path is an alternative; both can run in parallel until DNS is switched.
 
 ## Daily flow on the VPS (`deploy/run-daily.sh`)
 ```
@@ -10,9 +10,10 @@ systemd timer 07:00 Europe/Zurich (Mon–Fri) → deploy/run-daily.sh   (flock: 
                                         → data/review.md, data/drafts/rulings/, data/queue.json, build of main
   3. Intake   scripts/email-intake.mjs  AgentMail API → data/inbox/*.json (untrusted, gitignored; state data/inbox/.state.json)
   4. Stage 2  reviewer/ (Pi Durable)    agent with house rules (docs/EDITORIAL.md) edits data/{accidents,rulings,jobs}.json in a
-                                        git worktree on branch review/YYYY-MM-DD from origin/main; host validates + builds,
-                                        commits, pushes, opens a PR (≤ USD 1.00/run, ≤ USD 3.00/day)
-  5. Publish  rsync dist/ → /var/www/safetyradar (main only; review changes go live after the owner merges the PR)
+                                        detached git worktree from origin/main; host validates + builds, commits, rebases on
+                                        origin/main, re-checks and pushes directly to main (no PRs; ≤ USD 1.00/run, ≤ USD 3.00/day).
+                                        Decisions are written back to data/queue.json / jobs-queue.json (published/rejected).
+  5. Publish  git pull, npm run build, rsync dist/ → /var/www/safetyradar (GitHub Pages also deploys every push to main)
 ```
 GitHub Pages (`.github/workflows/pages.yml`) is unchanged and keeps deploying `main` until DNS moves.
 
@@ -21,25 +22,32 @@ GitHub Pages (`.github/workflows/pages.yml`) is unchanged and keeps deploying `m
 | Stage 1 | `npm run update` | unchanged |
 | E-mail intake | `scripts/email-intake.mjs` | needs `AGENTMAIL_API_KEY`; without it the step is skipped. Stores subject + plain text only (no attachments), prunes after 21 days. Test: `npm test` (synthetic fixture). |
 | Reviewer | `reviewer/` (`npm run review -- [--dry-run] [--date=YYYY-MM-DD]`) | Node ≥ 22.19 (pi-durable 1.4.0 needs `node:sqlite`). Model `gpt-6.1-sol` (USD 2.00 in / 0.10 cached / 10.00 out per 1M, developers.openai.com/api/docs/pricing, 2026-10-28). |
-| Validation | `scripts/validate-data.mjs` (`npm run validate`) | schema + house-rule checks; the reviewer and the host both run it before a PR. |
+| Validation | `scripts/validate-data.mjs` (`npm run validate`) | schema + house-rule checks; the reviewer and the host both run it before anything is pushed. |
 | Hosting | Caddy (`deploy/caddy/Caddyfile`) or nginx | as before |
 
 ### Reviewer details
 - **Tools (only these):** `list_inputs`, `read_file` (repo files except `.env*`, `.git`, `node_modules`, state, keys), `fetch_url`
   (public http(s) only, private/metadata IPs blocked, robots.txt respected, 5 MB, PDFs via `pdftotext`), `find_entries`/`get_entry`,
   `upsert_entry`/`add_source`/`remove_entry` (only `data/accidents.json`, `rulings.json`, `jobs.json`), `run_checks` (validation + build).
-  No shell, no git: commits, pushes and the PR are done by the host code after its own validation/build.
+  No shell, no git: the commit and the push to `main` are done by the host code after its own validation/build.
 - **Prompt:** `docs/EDITORIAL.md` verbatim + operating rules (`reviewer/src/prompt.ts`). Mail, web pages, drafts are untrusted; the prompt
   forbids following instructions in them.
 - **Crash safety:** the conversation is stored in `reviewer/state/review-<date>.sqlite`. Re-running the same day reopens it and
-  `harness.resume()` continues where it stopped (tested: SIGKILL mid-run, restart finished the run and opened the PR). A finished day is
+  `harness.resume()` continues where it stopped (tested: SIGKILL mid-run, the restart finished the run). A finished day is
   recorded in `reviewer/state/run-<date>.json` and is not repeated.
 - **Cost caps:** spend is read from the harness after every step and priced with `reviewer/src/cost.ts`; at the cap minus a safety margin the
   agent's tools are blocked and the run is aborted. Daily total across runs (`REVIEW_DAILY_MAX_USD`) from `reviewer/state/usage-*.json`;
   every run is also appended to `data/llm-usage.jsonl`.
-- **Outputs:** `reviewer/state/review-<date>.diff` and `.md` (PR body + agent answer). `--dry-run` writes only these (detached worktree,
-  no branch, no push). No PR when nothing changed, the run did not finish, or checks failed.
-- **Open review PRs** are listed to the agent so it does not re-add items that are waiting for the owner's merge.
+- **Outputs:** `reviewer/state/review-<date>.diff` and `.md` (report = commit message body + agent answer). `--dry-run` writes only
+  these (no commit, no push, queue state untouched; it logs what the feedback step would mark).
+- **Push to main (no PRs):** after its own validation + build pass, the host commits (`odcpw`), fetches and rebases on `origin/main`,
+  validates + builds again and pushes `HEAD:main`. A rejected push is retried once after a fresh rebase; a rebase conflict, a failed
+  check or a second rejection aborts: nothing is pushed, the reason is logged and the reviewer exits 4 (run-daily.sh reports it).
+  Unfinished runs or failed checks discard the changes. Broken data is never pushed.
+- **Feedback to stage 1:** after a successful push (or a finished run with no changes) `scripts/lib/review-feedback.mjs` marks queue
+  items whose URL is now published as `published` and every item the agent listed under `skipped` as `rejected` (with
+  `review: {date, decision, reason|id}`) in `data/queue.json` / `data/jobs-queue.json`. `scripts/queue-report.mjs` leaves those out
+  of `data/review.md`, so handled items do not come back every day.
 
 ## Hetzner setup (Debian 12/13 or Ubuntu 24.04)
 1. **Instance:** a small shared-vCPU Cloud server – Cost-Optimized/Regular Performance x86 (CX/CPX line) or Arm (CAX line) with 2 vCPU,
@@ -56,14 +64,12 @@ GitHub Pages (`.github/workflows/pages.yml`) is unchanged and keeps deploying `m
 5. **User + checkout:** `adduser --system --group --home /opt/safetyradar safetyradar`;
    `sudo -u safetyradar git clone https://github.com/odcpw/safetyradar /opt/safetyradar`; `mkdir -p /var/www/safetyradar && chown safetyradar /var/www/safetyradar`.
 6. **Secrets – only in `/opt/safetyradar/.env`** (`cp .env.example .env`, `chown safetyradar: .env && chmod 600 .env`, never committed,
-   `.gitignore` covers it): `OPENAI_API_KEY`, `AGENTMAIL_API_KEY`, `GH_TOKEN`. Keep `NOINDEX=1` until go-live. Back the file up offline.
-7. **GitHub write access for review PRs** (pick one; owner decision):
-   - *Recommended:* a **fine-grained PAT** limited to `odcpw/safetyradar` with *Contents: read/write* and *Pull requests: read/write*,
-     as `GH_TOKEN` in `.env`; then once `sudo -u safetyradar gh auth setup-git` so `git push` uses it. Branch protection on `main`
-     (require PR) keeps the bot from pushing to `main` directly.
-   - *Deploy key:* `ssh-keygen -t ed25519 -f /opt/safetyradar/.ssh/id_ed25519` (user safetyradar), add the public key in repo Settings →
-     Deploy keys **with write access**, `git remote set-url origin git@github.com:odcpw/safetyradar.git`. A deploy key can push branches
-     but **cannot open PRs**, so `GH_TOKEN` (PRs only) is still needed – or open PRs by hand from the pushed `review/*` branch.
+   `.gitignore` covers it): `OPENAI_API_KEY`, `AGENTMAIL_API_KEY`, `GH_TOKEN` (push only). Keep `NOINDEX=1` until go-live. Back the file up offline.
+7. **GitHub push access to `main`** (the reviewer pushes directly; no PRs, so no PR scope and no "require PR" branch protection):
+   - *PAT:* a **fine-grained PAT** limited to `odcpw/safetyradar` with only *Contents: read/write*, as `GH_TOKEN` in `.env`; then once
+     `sudo -u safetyradar gh auth setup-git` so `git push` uses it.
+   - *Deploy key (no token at all):* `ssh-keygen -t ed25519 -f /opt/safetyradar/.ssh/id_ed25519` (user safetyradar), add the public key
+     in repo Settings → Deploy keys **with write access**, `git remote set-url origin git@github.com:odcpw/safetyradar.git`.
 8. **Copy working state** from the current box so stage 1 doesn't re-label everything: `data/queue.json`, `data/jobs-queue.json`,
    `data/llm-usage.jsonl`, `data/drafts/`, `data/cache/` (all gitignored). Then `npm ci && npm --prefix reviewer ci`.
 9. **First runs:** `sudo -u safetyradar env REVIEW_ARGS=--dry-run deploy/run-daily.sh` → read `reviewer/state/review-<date>.diff`; then a
@@ -76,7 +82,7 @@ poppler). Trigger it from a host timer/cron instead of `ExecStart`. Put an SSH d
 
 ### Moving the daily review off the assistant box
 Until the VPS runs, the existing 07:00 assistant job keeps working as before. When the VPS timer is enabled, stop the assistant's
-daily routine (otherwise both edit the same items). The VPS reviewer opens PRs instead of pushing to `main`; the owner merges.
+daily routine (otherwise both edit the same items). Like the assistant, the VPS reviewer pushes to `main` directly.
 
 ## DNS at Hostpoint (later, owner)
 Currently apex A records → GitHub Pages (185.199.108–111.153), `www` CNAME → odcpw.github.io.
@@ -88,6 +94,7 @@ Restore the GitHub A records (185.199.108.153, .109, .110, .111) and `www` CNAME
 `safetyradar.ch` in repo Settings → Pages (`public/CNAME` is still in the repo), re-run the Pages workflow. Stop the VPS timer if the VPS pushes.
 
 ## Known open issues (2026-10-28)
+- Fixed 2026-10-28: reviewer decisions now reach `data/queue.json` (published/rejected), so they no longer reappear in `review.md`.
 - police-ti feed (www4.ti.ch) ECONNRESET two days running (TLS reset from the box; retest from the VPS).
 - ZH, SZ, BS, SG police newsletters subscribed but not yet arriving.
 - jobscout24 job-alert confirmation pending.
@@ -95,7 +102,7 @@ Restore the GitHub A records (185.199.108.153, .109, .110, .111) and `www` CNAME
 ## Owner decisions before the move
 - VPS provider/OS/size and location; who has root.
 - Caddy vs nginx, Docker vs host install.
-- Reviewer on the VPS: PAT vs deploy key (+PAT for PRs); merge policy for review PRs (owner merges daily?).
+- Reviewer on the VPS: PAT (Contents RW) vs deploy key. Decided 2026-10-28: no PRs, the reviewer pushes to main.
 - E-mail intake: option B implemented (AgentMail API, needs an API key).
 - When to drop `NOINDEX=1` and fill the legal TODOs (imprint/privacy).
 - Keep GitHub Pages as permanent fallback or disable it.

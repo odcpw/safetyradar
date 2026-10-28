@@ -1,5 +1,5 @@
 [Unit]
-Description=Safety Radar daily run (stage 1 fetch/classify, e-mail intake, LLM reviewer -> review PR, publish build)
+Description=Safety Radar daily run (stage 1 fetch/classify, e-mail intake, LLM reviewer -> push to main, publish build)
 After=network-online.target
 Wants=network-online.target
 
