@@ -1,9 +1,13 @@
-# Optional: docker compose run --rm pipeline   (daily job); Caddy runs on the host or as below.
+# Daily job: docker compose run --rm pipeline   (from a host timer/cron; the image holds only the toolchain).
+# Caddy serves ./dist; alternatively run Caddy on the host (deploy/caddy/Caddyfile).
 services:
   pipeline:
     build: .
     env_file: .env
-    volumes: ["./data:/app/data", "./dist:/app/dist"]
+    environment: { SAFETYRADAR_ENV_LOADED: "1", PUBLISH_DIR: "" }
+    volumes:
+      - .:/app                                   # checkout incl. .git, data/, reviewer/state (gitignored state)
+      - ./deploy/ssh:/home/node/.ssh:ro          # optional: deploy key + known_hosts for git push over SSH
   caddy:
     image: caddy:2
     restart: unless-stopped

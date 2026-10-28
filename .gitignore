@@ -17,3 +17,7 @@ data/drafts/
 data/llm-usage.jsonl
 data/cache/
 !.env.example
+data/inbox/
+reviewer/state/
+deploy/ssh/
+reviewer/*.log

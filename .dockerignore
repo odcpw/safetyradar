@@ -6,3 +6,6 @@ dist
 .env.*
 screenshots
 data/cache
+reviewer/node_modules
+reviewer/state
+data/inbox
