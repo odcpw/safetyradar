@@ -116,6 +116,8 @@ async function runSource(s) {
 }
 
 const norm = u => { try { const x = new URL(u); x.hash = ''; x.search = ''; return x.toString().replace(/\/$/, ''); } catch { return u; } };
+// Same ad on jobs.ch/jobup.ch/jobscout24 (any language path) shares one UUID.
+const adId = u => (String(u).match(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i) || [])[0]?.toLowerCase() || null;
 const jobKey = (t, e) => fold(t).replace(/\(.*?\)|\d+\s*-?\s*\d*\s*%|[^a-z]+/g, ' ').trim() + '|' + fold(e).split(/[^a-z]+/).filter(w => w.length > 2)[0];
 
 async function main() {
@@ -123,9 +125,11 @@ async function main() {
   const old = JSON.parse(await fs.readFile(QUEUE, 'utf8').catch(() => '[]'));
   const cutoff = ago(MAX_AGE_DAYS);
   const pubUrls = new Set(published.map(j => norm(j.url))), pubKeys = new Set(published.map(j => jobKey(j.title, j.employer)));
+  const pubIds = new Set(published.flatMap(j => [j.url, ...(j.alsoAt || []).map(a => a.url || a)]).map(adId).filter(Boolean));
+  const isPub = (u, k) => pubUrls.has(norm(u)) || pubKeys.has(k) || (adId(u) && pubIds.has(adId(u)));
   const queue = [], urls = new Set(), keys = new Map(), report = {};
   // keep earlier, still-fresh candidates (and their review status) so the queue is stable day to day
-  for (const q of old) if ((!q.datePosted || q.datePosted >= cutoff) && !pubUrls.has(norm(q.url)) && !pubKeys.has(jobKey(q.title, q.employer))) {
+  for (const q of old) if ((!q.datePosted || q.datePosted >= cutoff) && !isPub(q.url, jobKey(q.title, q.employer)) && !(q.alsoAt || []).some(a => isPub(a.url, ''))) {
     queue.push(q); urls.add(norm(q.url)); keys.set(jobKey(q.title, q.employer), q); }
   const now = new Date().toISOString();
   for (const s of SOURCES) {
@@ -136,7 +140,7 @@ async function main() {
       for (const i of items) {
         if (!isSafety(i.title)) continue; row.safety++;
         const url = norm(i.url), key = jobKey(i.title, i.employer);
-        if (pubUrls.has(url) || pubKeys.has(key)) { row.published++; continue; }
+        if (isPub(i.url, key)) { row.published++; continue; }
         if (i.active === false || (i.datePosted && i.datePosted < cutoff)) { row.expired++; continue; }
         if (urls.has(url)) continue;
         const twin = keys.get(key);

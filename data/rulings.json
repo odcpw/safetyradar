@@ -802,6 +802,108 @@
   }
  },
  {
+  "id": "2026-07-21-ge-cj-p-11093-2021-rollgeruest",
+  "caseId": "case-2019-06-05-ge-rollgeruest",
+  "date": "2026-07-21",
+  "accidentDate": "2019-06-05",
+  "canton": "GE",
+  "place": null,
+  "industry": "construction",
+  "hazard": "fall",
+  "outcome": "serious",
+  "court": {
+   "de": "Genfer Cour de justice, Chambre pénale de recours",
+   "fr": "Cour de justice de Genève, Chambre pénale de recours",
+   "it": "Corte di giustizia di Ginevra, Camera dei reclami penali",
+   "en": "Geneva Court of Justice, Criminal Appeals Chamber"
+  },
+  "caseNumber": "ACPR/699/2026; P/11093/2021",
+  "final": false,
+  "appeal": {
+   "de": "Die Staatsanwaltschaft trat am 18.2.2022 nicht auf die Strafanzeige ein; die Beschwerdekammer bestätigte dies am 23.8.2022 (ACPR/580/2022). Am 4.3.2026 lehnte die Staatsanwaltschaft eine Wiederaufnahme ab; das Gericht wies die Beschwerde des Verletzten am 21.7.2026 ab. Er trägt die Kosten von CHF 1000. Weiterzug ans Bundesgericht möglich.",
+   "fr": "Le Ministère public n’est pas entré en matière sur la plainte le 18.2.2022; la Chambre pénale de recours a confirmé le 23.8.2022 (ACPR/580/2022). Le 4.3.2026, le Ministère public a refusé de reprendre la procédure; la Cour a rejeté le recours du blessé le 21.7.2026. Il supporte les frais de CHF 1000. Recours au Tribunal fédéral possible.",
+   "it": "Il Ministero pubblico non è entrato nel merito della querela il 18.2.2022; la Camera penale di ricorso ha confermato il 23.8.2022 (ACPR/580/2022). Il 4.3.2026 il Ministero pubblico ha rifiutato di riaprire la procedura; il 21.7.2026 la Corte ha respinto il ricorso del ferito, che sopporta le spese di CHF 1000. Possibile ricorso al Tribunale federale.",
+   "en": "The prosecutor declined to open proceedings on the complaint on 18 Feb 2022; the appeals chamber upheld this on 23 Aug 2022 (ACPR/580/2022). On 4 Mar 2026 the prosecutor refused to reopen the case; the court dismissed the injured worker’s appeal on 21 Jul 2026. He bears costs of CHF 1,000. Appeal to the Federal Supreme Court possible."
+  },
+  "employerRole": {
+   "de": "Der Verletzte arbeitete für eine Firma auf der Baustelle; die Anzeige richtete sich gegen seinen damaligen Chef persönlich. Die Rollgerüste hatte eine andere Firma aufgestellt, der Hubwagen gehörte der Generalunternehmung. Firmen standen nicht im Verfahren.",
+   "fr": "Le blessé travaillait pour une entreprise présente sur le chantier; la plainte visait personnellement son patron d’alors. Les échafaudages roulants avaient été montés par une autre société, le transpalette appartenait à l’entreprise générale. Aucune société n’était partie à la procédure.",
+   "it": "Il ferito lavorava per un’impresa attiva sul cantiere; la querela era rivolta personalmente al suo capo di allora. I ponteggi mobili erano stati montati da un’altra ditta, il transpallet apparteneva all’impresa generale. Nessuna società era parte del procedimento.",
+   "en": "The injured man worked for a firm on the site; the complaint targeted his then boss personally. Another company had set up the mobile scaffolds, and the pallet truck belonged to the general contractor. No company was party to the proceedings."
+  },
+  "defendants": [
+   {
+    "role": {
+     "de": "Damaliger Chef des verletzten Arbeiters",
+     "fr": "Patron de l’ouvrier blessé à l’époque",
+     "it": "Capo dell’operaio ferito all’epoca",
+     "en": "Injured worker’s boss at the time"
+    },
+    "charge": {
+     "de": "Strafanzeige wegen schwerer Körperverletzung, eventuell fahrlässiger Körperverletzung (Art. 122/125 StGB); geprüft wurde nur Art. 125",
+     "fr": "Plainte pour lésions corporelles graves, subsidiairement par négligence (art. 122/125 CP); seul l’art. 125 a été examiné",
+     "it": "Querela per lesioni gravi, subordinatamente colpose (art. 122/125 CP); esaminato solo l’art. 125",
+     "en": "Complaint for serious, alternatively negligent, bodily harm (Arts. 122/125 SCC); only Art. 125 was examined"
+    },
+    "verdict": "dismissed",
+    "reasoning": {
+     "de": "Er bestritt, den Hubwagen gefahren zu haben; laut Bauleitung fuhren nur Leute der Generalunternehmung solche Geräte. Ein Augenzeuge war nicht auffindbar. Die angeblich neue Einschätzung des Baustelleninspektors war unbelegt und betraf Berichte, die schon in den Akten lagen.",
+     "fr": "Il a contesté avoir conduit le transpalette; selon la direction du chantier, seuls les employés de l’entreprise générale utilisaient ces engins. Un témoin oculaire n’a pas pu être retrouvé. La prétendue nouvelle appréciation de l’inspecteur n’était pas étayée et portait sur des rapports déjà au dossier.",
+     "it": "Ha negato di aver guidato il transpallet; secondo la direzione del cantiere solo i dipendenti dell’impresa generale usavano tali mezzi. Un testimone oculare non è stato reperito. La presunta nuova valutazione dell’ispettore non era suffragata e riguardava rapporti già agli atti.",
+     "en": "He denied driving the pallet truck; site management said only general-contractor staff used such machines. An eyewitness could not be traced. The supposed new view of the site inspector was unsupported and concerned reports already on file."
+    },
+    "sanction": null,
+    "priorSanction": null,
+    "short": null
+   }
+  ],
+  "title": {
+   "de": "Sturz vom Rollgerüst: Gericht lehnt neue Ermittlungen ab",
+   "fr": "Chute d’un échafaudage mobile: la Cour refuse de rouvrir l’enquête",
+   "it": "Caduta da un ponteggio mobile: la Corte rifiuta nuove indagini",
+   "en": "Fall from mobile scaffold: court refuses to reopen investigation"
+  },
+  "facts": {
+   "activity": {
+    "de": "Arbeiter verlegten in rund fünf Metern Höhe Dämmplatten an einer Decke.",
+    "fr": "Des ouvriers posaient des plaques isolantes au plafond, à environ cinq mètres de hauteur.",
+    "it": "Gli operai posavano pannelli isolanti sul soffitto, a circa cinque metri di altezza.",
+    "en": "Workers were fitting ceiling insulation panels at a height of about five metres."
+   },
+   "what": {
+    "de": "Ein Arbeiter stürzte am 5. Juni 2019 im Untergeschoss eines Rohbaus von einem rund fünf Meter hohen Rollgerüst. Zum Hergang gibt es zwei Versionen: Laut erstem Unfallbericht schoben die Arbeiter zwei aneinander gekoppelte Rollgerüste von oben weiter, worauf beide kippten. Laut dem Verletzten rammte sein Chef beim Nachschub von Material mit einem elektrischen Hubwagen ein Gerüst. Der Ablauf liess sich nicht klären.",
+    "fr": "Le 5 juin 2019, un ouvrier est tombé d’un échafaudage roulant d’environ cinq mètres au sous-sol d’un bâtiment en gros œuvre. Deux versions s’opposent: selon le premier compte rendu, les ouvriers déplaçaient depuis le haut deux échafaudages amarrés l’un à l’autre, qui ont basculé. Selon le blessé, son patron a percuté un échafaudage avec un transpalette électrique en apportant du matériel. Le déroulement n’a pas pu être établi.",
+    "it": "Il 5 giugno 2019 un operaio è caduto da un ponteggio mobile di circa cinque metri nel piano interrato di un edificio al rustico. Esistono due versioni: secondo il primo rapporto gli operai spostavano dall’alto due ponteggi collegati tra loro, che si sono ribaltati. Secondo il ferito, il suo capo ha urtato un ponteggio con un transpallet elettrico portando materiale. La dinamica non è stata chiarita.",
+    "en": "On 5 June 2019 a worker fell from a mobile scaffold about five metres high in the basement of a building shell. There are two accounts: the first accident report says the workers were pushing two linked scaffolds along from above when both tipped. The injured man says his boss hit a scaffold with an electric pallet truck while bringing material. The sequence could not be established."
+   },
+   "injuries": {
+    "de": "Schwer verletzt: gut drei Monate Spital, danach Reha bis Ende November 2019, später zwei weitere Operationen; nach eigenen Angaben weiterhin arbeitsunfähig.",
+    "fr": "Grièvement blessé: plus de trois mois d’hôpital, puis réadaptation jusqu’à fin novembre 2019, ensuite deux autres opérations; se dit toujours en incapacité de travail.",
+    "it": "Ferito gravemente: oltre tre mesi in ospedale, poi riabilitazione fino a fine novembre 2019, in seguito altri due interventi; si dichiara tuttora inabile al lavoro.",
+    "en": "Seriously injured: just over three months in hospital, then rehab until late November 2019, later two more operations; says he is still unable to work."
+   }
+  },
+  "why": {
+   "de": "Eine Wiederaufnahme braucht neue Tatsachen oder Beweise, die nicht schon in den Akten lagen und eine Strafbarkeit konkret möglich machen. Das angebliche Gespräch mit dem Inspektor war weder datiert noch belegt, und es betraf nur dessen persönliche Meinung zu bekannten Berichten. Zudem hätte der Verletzte den Inspektor schon im ersten Verfahren befragen lassen können.",
+   "fr": "La reprise exige des faits ou preuves nouveaux, absents du dossier, rendant concrètement envisageable une responsabilité pénale. Le prétendu entretien avec l’inspecteur n’était ni daté ni étayé et ne reflétait que son avis personnel sur des rapports connus. Le blessé aurait en outre pu demander son audition dès la première procédure.",
+   "it": "La riapertura richiede fatti o prove nuovi, non già agli atti, che rendano concretamente ipotizzabile una responsabilità penale. Il presunto colloquio con l’ispettore non era né datato né provato e rifletteva solo la sua opinione su rapporti noti. Il ferito avrebbe inoltre potuto chiederne l’audizione già nella prima procedura.",
+   "en": "Reopening requires new facts or evidence not already on file that make criminal liability concretely possible. The alleged talk with the inspector was neither dated nor documented and only reflected his personal view of known reports. The worker could also have asked for the inspector to be heard in the first proceedings."
+  },
+  "lesson": {
+   "de": "Rollgerüste nie mit Personen darauf verschieben und gekoppelte Gerüste nur nach Herstellerangaben bewegen. Fahrverkehr mit Hubwagen braucht Abstand zu Gerüsten. Nach einem Unfall sofort Zeugen und Hergang festhalten – sonst bleibt die Verantwortung oft ungeklärt.",
+   "fr": "Ne jamais déplacer un échafaudage roulant avec des personnes dessus et ne déplacer des échafaudages couplés que selon le fabricant. Les transpalettes doivent rester à distance des échafaudages. Après un accident, consigner aussitôt témoins et déroulement – sinon la responsabilité reste souvent floue.",
+   "it": "Mai spostare un ponteggio mobile con persone sopra e muovere ponteggi collegati solo secondo il fabbricante. I transpallet devono stare a distanza dai ponteggi. Dopo un infortunio, registrare subito testimoni e dinamica – altrimenti la responsabilità resta spesso incerta.",
+   "en": "Never move a mobile scaffold with people on it, and move linked scaffolds only as the manufacturer specifies. Keep pallet trucks clear of scaffolds. After an accident, record witnesses and the sequence at once – otherwise responsibility often stays unresolved."
+  },
+  "linkedAccidentId": null,
+  "source": {
+   "name": "entscheidsuche.ch",
+   "url": "https://entscheidsuche.ch/docs/GE_Gerichte/GE_CJ_011_P-11093-2021_2026-07-21.pdf",
+   "lang": "fr"
+  },
+  "extraSources": []
+ },
+ {
   "id": "2026-07-03-bger-7b-1323-2024",
   "caseId": "case-2026-07-03-bger-7b-1323-2024",
   "date": "2026-07-03",

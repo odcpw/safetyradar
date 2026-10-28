@@ -10,33 +10,20 @@
     "url": "https://www.jobs.ch/de/stellenangebote/detail/d53dcb5d-d2fc-4337-9082-e45e420c3e6b/",
     "source": "jobs.ch",
     "lang": "en",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
   },
   {
-    "id": "liebherr-hse-bulle",
-    "title": "Spécialiste Environnement et Sécurité au Travail (HSE)",
-    "employer": "Liebherr Maschinen Bulle AG",
-    "location": "Bulle",
-    "canton": "FR",
-    "role": "hse",
+    "id": "trb-chemedica-securite",
+    "title": "Chargé·e de sécurité",
+    "employer": "TRB Chemedica SA",
+    "location": "Vouvry",
+    "canton": "VS",
+    "role": "sibe",
     "datePosted": "2026-10-27",
-    "url": "https://www.jobscout24.ch/de/job/b866785c-eb44-41ab-b637-7b7f90a5becf/",
-    "source": "jobscout24.ch",
+    "url": "https://www.jobs.ch/fr/offres-emplois/detail/3b96cd5f-e3a1-4f37-9d31-96d4deb1ef45/",
+    "source": "jobs.ch",
     "lang": "fr",
-    "checked": "2026-10-27"
-  },
-  {
-    "id": "stellenwerk-asgs-so",
-    "title": "Spezialist Arbeitssicherheit & Gesundheitsschutz (ASGS) 100 % (m/w/d)",
-    "employer": "Stellenwerk AG (Personalvermittlung)",
-    "location": "Südostschweiz",
-    "canton": null,
-    "role": "asgs",
-    "datePosted": "2026-10-27",
-    "url": "https://www.jobscout24.ch/de/job/37f61106-001f-44dd-ad99-ca44377847bb/",
-    "source": "jobscout24.ch",
-    "lang": "de",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
   },
   {
     "id": "emmi-hs-mittelland",
@@ -49,7 +36,7 @@
     "url": "https://www.jobs.ch/de/stellenangebote/detail/9e649824-7c8a-4c15-a1b9-e1487783adb7/",
     "source": "jobs.ch",
     "lang": "en",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
   },
   {
     "id": "emmi-hs-bern-ost",
@@ -62,7 +49,7 @@
     "url": "https://www.jobs.ch/de/stellenangebote/detail/249247a8-a1e7-4e79-984b-235ab98d8fe1/",
     "source": "jobs.ch",
     "lang": "en",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
   },
   {
     "id": "emmi-hs-ostschweiz",
@@ -75,7 +62,7 @@
     "url": "https://www.jobs.ch/de/stellenangebote/detail/2d2c2cf6-45e0-447d-9e71-9d1c5d89cc75/",
     "source": "jobs.ch",
     "lang": "en",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
   },
   {
     "id": "emmi-hs-zentralschweiz",
@@ -88,7 +75,7 @@
     "url": "https://www.jobscout24.ch/de/job/9f9d7f49-83c5-4afc-b793-d3947f32ec1f/",
     "source": "jobscout24.ch",
     "lang": "en",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
   },
   {
     "id": "renata-as",
@@ -101,7 +88,20 @@
     "url": "https://www.jobs.ch/de/stellenangebote/detail/0667650c-96ad-4c02-bbd5-5d801fab7547/",
     "source": "jobs.ch",
     "lang": "de",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
+  },
+  {
+    "id": "flumroc-safety-lean",
+    "title": "Safety Officer & Lean Coordinator",
+    "employer": "Flumroc AG",
+    "location": "Flums",
+    "canton": "SG",
+    "role": "hse",
+    "datePosted": "2026-10-26",
+    "url": "https://www.jobscout24.ch/de/job/ebb53e0b-fff1-4b41-bf97-a9c73b9cf116/",
+    "source": "jobscout24.ch",
+    "lang": "de",
+    "checked": "2026-10-28"
   },
   {
     "id": "syngenta-hse",
@@ -114,7 +114,7 @@
     "url": "https://jobs.smartrecruiters.com/syngentagroup/744000156783199",
     "source": "SmartRecruiters",
     "lang": "de",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
   },
   {
     "id": "arxada-as-umwelt",
@@ -127,7 +127,7 @@
     "url": "https://www.jobs.ch/de/stellenangebote/detail/f212a40b-fb2b-40a2-9109-5c3ac3bf3f95/",
     "source": "jobs.ch",
     "lang": "de",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
   },
   {
     "id": "bachem-hse-bubendorf",
@@ -140,7 +140,7 @@
     "url": "https://www.jobup.ch/fr/emplois/detail/f33af355-105e-4cf4-9652-bdbda0460acc/",
     "source": "jobup.ch",
     "lang": "fr",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
   },
   {
     "id": "ffbg-as-brandschutz",
@@ -153,7 +153,7 @@
     "url": "https://jobs.migros.ch/de/unsere-unternehmen/job/fresh-food-beverage-group/fachspezialistin-arbeitssicherheit-und-brandschutz/9d9d4e97-b04f-4f83-9cdb-0d7c09863779",
     "source": "Migros Jobs",
     "lang": "de",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
   },
   {
     "id": "bachem-hse-vionnaz",
@@ -166,7 +166,7 @@
     "url": "https://www.jobup.ch/fr/emplois/detail/d1cb09aa-457e-4680-aaf5-0ffb2afc07d8/",
     "source": "jobup.ch",
     "lang": "fr",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
   },
   {
     "id": "she-coord-kaiseraugst",
@@ -179,7 +179,7 @@
     "url": "https://www.jobs.ch/de/stellenangebote/detail/b2b12c30-be3b-4997-be25-a5af29a21ba5/",
     "source": "jobs.ch",
     "lang": "de",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
   },
   {
     "id": "hapa-hse",
@@ -192,7 +192,7 @@
     "url": "https://www.jobs.ch/de/stellenangebote/detail/b60cfd2a-a2fd-48a7-847d-10feee85d8d1/",
     "source": "jobs.ch",
     "lang": "de",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
   },
   {
     "id": "securitas-sst-aubonne",
@@ -205,7 +205,7 @@
     "url": "https://www.jobup.ch/fr/emplois/detail/dd05f5ab-1407-4223-ad63-ac8c9915500b/",
     "source": "jobup.ch",
     "lang": "fr",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
   },
   {
     "id": "wago-ehs",
@@ -218,7 +218,7 @@
     "url": "https://www.jobup.ch/fr/emplois/detail/00ae65d7-8cbe-4fde-bdd7-a8441146fc77/",
     "source": "jobup.ch",
     "lang": "fr",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
   },
   {
     "id": "careerplus-hse-fr",
@@ -231,7 +231,7 @@
     "url": "https://www.jobscout24.ch/de/job/d344d897-3367-42df-862c-7bca2cfad14f/",
     "source": "jobscout24.ch",
     "lang": "fr",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
   },
   {
     "id": "randstad-hse-hinwil",
@@ -244,7 +244,7 @@
     "url": "https://www.randstad.ch/en/jobs/hse-manager-fmd_hinwil_16b60646-4a7f-420d-a449-88c7cd809d0b/",
     "source": "randstad.ch",
     "lang": "en",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
   },
   {
     "id": "avery-ehs",
@@ -257,7 +257,20 @@
     "url": "https://www.jobs.ch/de/stellenangebote/detail/b482d62f-b788-4e51-970d-585f3a1b9653/",
     "source": "jobs.ch",
     "lang": "de",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
+  },
+  {
+    "id": "kas-kursleiter-as",
+    "title": "Kursleiter/in praxisorientierte Ausbildungen Arbeitssicherheit 60–100 %",
+    "employer": "Kompetenzzentrum für Arbeitssicherheit AG",
+    "location": "Embrach",
+    "canton": "ZH",
+    "role": "asgs",
+    "datePosted": "2026-10-16",
+    "url": "https://www.jobs.ch/de/stellenangebote/detail/f960b068-6bd6-4582-aab1-485812aaf10d/",
+    "source": "jobs.ch",
+    "lang": "de",
+    "checked": "2026-10-28"
   },
   {
     "id": "mpage-senior-hse-zh",
@@ -270,7 +283,7 @@
     "url": "https://www.jobs.ch/de/stellenangebote/detail/f1804a04-ddaa-4a21-a6e0-08dedd3b7c4c/",
     "source": "jobs.ch",
     "lang": "en",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
   },
   {
     "id": "gigroup-sst-ne",
@@ -283,7 +296,7 @@
     "url": "https://cvsuisse.com/emploi/pcialiste-en-scurit-au-travail----gion-euchtel--ressier-1332647/",
     "source": "CVSuisse.com",
     "lang": "fr",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
   },
   {
     "id": "getec-asgs",
@@ -296,7 +309,7 @@
     "url": "https://www.jobs.ch/de/stellenangebote/detail/bbec54de-d79c-482c-b46f-09a89869eaad/",
     "source": "jobs.ch",
     "lang": "de",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
   },
   {
     "id": "verdeil-sst",
@@ -309,7 +322,7 @@
     "url": "https://www.jobs.ch/fr/offres-emplois/detail/79ab11e0-d1f2-40c9-876d-fad36bf545ae/",
     "source": "jobs.ch",
     "lang": "fr",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
   },
   {
     "id": "lidl-as",
@@ -322,7 +335,7 @@
     "url": "https://www.jobs.ch/de/stellenangebote/detail/e087e45e-5758-44ad-89db-1d065f52e0c3/",
     "source": "jobs.ch",
     "lang": "de",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
   },
   {
     "id": "jnj-process-safety",
@@ -335,7 +348,7 @@
     "url": "https://www.careers.jnj.com/en/jobs/r-090125/ehs-process-safety-manager/",
     "source": "careers.jnj.com",
     "lang": "en",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
   },
   {
     "id": "glb-asgs",
@@ -348,7 +361,7 @@
     "url": "https://www.jobs.ch/fr/offres-emplois/detail/7335bc48-b68d-471b-b561-cead83ff17ec/",
     "source": "jobs.ch",
     "lang": "fr",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
   },
   {
     "id": "suva-bauing-asgs",
@@ -361,7 +374,7 @@
     "url": "https://www.jobs.ch/de/stellenangebote/detail/579a5993-a383-4e25-92c6-944a973ca14d/",
     "source": "jobs.ch",
     "lang": "de",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
   },
   {
     "id": "aarvia-as",
@@ -374,7 +387,7 @@
     "url": "https://www.jobs.ch/de/stellenangebote/detail/14158ad2-1c85-4f97-bbb4-cd6aa472987a/",
     "source": "jobs.ch",
     "lang": "de",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
   },
   {
     "id": "glencore-safety",
@@ -387,7 +400,7 @@
     "url": "https://www.jobs.ch/de/stellenangebote/detail/4f8bac9b-d3de-4a1d-8080-8f0688a7f17f/",
     "source": "jobs.ch",
     "lang": "en",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
   },
   {
     "id": "jura-asgs",
@@ -400,7 +413,7 @@
     "url": "https://www.jobs.ch/de/stellenangebote/detail/5e97f99f-034d-4dec-b3ed-0d9976da2341/",
     "source": "jobs.ch",
     "lang": "de",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
   },
   {
     "id": "ssc-manno",
@@ -413,7 +426,7 @@
     "url": "https://lavoro.cdt.ch/announces/2567/ingegnerearchitetto-specialista-antincendio-e-specialista-sicurezza-sul-lavoro",
     "source": "lavoro.cdt.ch",
     "lang": "it",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
   },
   {
     "id": "hitachi-hse-gcb",
@@ -426,7 +439,7 @@
     "url": "https://www.jobs.ch/de/stellenangebote/detail/a36e68c7-9cbe-48b3-b511-2c3e8597c4c4/",
     "source": "jobs.ch",
     "lang": "en",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
   },
   {
     "id": "cellap-ehs",
@@ -439,7 +452,7 @@
     "url": "https://www.jobs.ch/de/stellenangebote/detail/0e8a94a6-999a-44f8-a81a-f0a526bf5911/",
     "source": "jobs.ch",
     "lang": "en",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
   },
   {
     "id": "steeltec-leiter-asgs",
@@ -452,7 +465,7 @@
     "url": "https://www.jobs.ch/de/stellenangebote/detail/1ee9acd5-8a9b-41dd-9773-bbda552ab87c/",
     "source": "jobs.ch",
     "lang": "de",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
   },
   {
     "id": "ruag-safety-officer",
@@ -465,7 +478,7 @@
     "url": "https://www.jobs.ch/de/stellenangebote/detail/0b131437-0e84-4775-ac95-4ac6fce92657/",
     "source": "jobs.ch",
     "lang": "de",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
   },
   {
     "id": "erm-hse-consultant",
@@ -478,7 +491,7 @@
     "url": "https://www.jobs.ch/de/stellenangebote/detail/6dd3af9d-4e7b-4397-8f95-f9667cd9b211/",
     "source": "jobs.ch",
     "lang": "en",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
   },
   {
     "id": "marti-sibe",
@@ -491,7 +504,7 @@
     "url": "https://www.jobs.ch/de/stellenangebote/detail/4c931067-1839-46da-ac50-899c446b0fe5/",
     "source": "jobs.ch",
     "lang": "de",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
   },
   {
     "id": "kaestli-sibe",
@@ -504,7 +517,7 @@
     "url": "https://www.jobs.ch/de/stellenangebote/detail/2c0fb4cd-54c6-4396-be04-af05024c0cbb/",
     "source": "jobs.ch",
     "lang": "de",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
   },
   {
     "id": "vsl-hs-manager",
@@ -517,7 +530,20 @@
     "url": "https://www.jobs.ch/de/stellenangebote/detail/e7afc307-903b-42e6-814c-897d01dc2065/",
     "source": "jobs.ch",
     "lang": "en",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
+  },
+  {
+    "id": "juliusbaer-workplace-safety",
+    "title": "Workplace Safety & Physical Security Officer 100 % (f/m/d)",
+    "employer": "Bank Julius Bär & Co. AG",
+    "location": "Zürich",
+    "canton": "ZH",
+    "role": "hse",
+    "datePosted": "2026-09-22",
+    "url": "https://www.jobs.ch/de/stellenangebote/detail/f70d8001-85b2-4b9f-bb03-0738ad8d1d5a/",
+    "source": "jobs.ch",
+    "lang": "de",
+    "checked": "2026-10-28"
   },
   {
     "id": "implenia-hs-supervisor",
@@ -530,7 +556,7 @@
     "url": "https://www.jobs.ch/de/stellenangebote/detail/a0eb0ea1-0408-4759-a9bb-b050a4c3bf7d/",
     "source": "jobs.ch",
     "lang": "en",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
   },
   {
     "id": "coopers-sheq",
@@ -543,7 +569,7 @@
     "url": "https://www.jobs.ch/de/stellenangebote/detail/f3c3e8c9-6e31-4b77-9c81-fbe1542c32df/",
     "source": "jobs.ch",
     "lang": "de",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
   },
   {
     "id": "watertech-ehs",
@@ -556,6 +582,6 @@
     "url": "https://www.jobs.ch/de/stellenangebote/detail/7388a40c-3e60-42d1-898b-d8ddde427d4e/",
     "source": "jobs.ch",
     "lang": "en",
-    "checked": "2026-10-27"
+    "checked": "2026-10-28"
   }
 ]

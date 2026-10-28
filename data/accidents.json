@@ -63,7 +63,14 @@
    "it": "Sulle piste strette servono piazzole di scambio e regole di precedenza chiare tra macchine. Telaio di protezione e cintura evitano che il conducente venga sbalzato fuori.",
    "en": "Narrow site roads need passing places and clear right-of-way rules between machines. A rollover protective structure and seatbelt keep the driver from being thrown out."
   },
-  "caseId": "case-2026-10-22-gl-muehlehorn-walze"
+  "caseId": "case-2026-10-22-gl-muehlehorn-walze",
+  "extraSources": [
+   {
+    "name": "24 heures",
+    "url": "https://www.24heures.ch/glaris-un-ouvrier-ejecte-de-son-rouleau-compresseur-850920896365",
+    "lang": "fr"
+   }
+  ]
  },
  {
   "id": "2026-10-22-ti-paradiso-ponteggio",
@@ -135,6 +142,21 @@
     "name": "Tio.ch",
     "url": "https://www.tio.ch/ticino/cronaca/1958557/grave-cantiere-operaio-infortunio-impalcatura",
     "lang": "it"
+   },
+   {
+    "name": "laRegione",
+    "url": "https://www.laregione.ch/cantone/luganese/1958559/morte-sul-lavoro-deceduto-un-architetto-a-paradiso",
+    "lang": "it"
+   },
+   {
+    "name": "RSI",
+    "url": "https://www.rsi.ch/s/4185560",
+    "lang": "it"
+   },
+   {
+    "name": "polizeinews.ch",
+    "url": "https://www.polizeinews.ch/2026/10/27/tragoedie-auf-baustelle-architekt-52-stuerzt-von-geruest-und-stirbt-trotz-reanimation",
+    "lang": "de"
    }
   ]
  },
@@ -661,7 +683,14 @@
    "it": "Chi imbraca o guida non sta mai nella zona di rotazione o caduta del carico. L’escavatore va usato per sollevare solo con gancio, omologazione e contatto visivo con chi guida.",
    "en": "Whoever slings or signals never stands in the swing or drop zone of the load. Use an excavator for lifting only with a load hook, approval and eye contact between operator and signaller."
   },
-  "caseId": "case-2026-09-28-sg-pfaefers-abladen"
+  "caseId": "case-2026-09-28-sg-pfaefers-abladen",
+  "extraSources": [
+   {
+    "name": "polizei.news",
+    "url": "https://polizei.news/2026/09/28/tragischer-baustellenunfall-29-jaehriger-stirbt-bei-abladearbeiten",
+    "lang": "de"
+   }
+  ]
  },
  {
   "id": "2026-09-24-bl-reinach-labor",
@@ -793,7 +822,14 @@
    "it": "I carrelli che si ribaltano uccidono soprattutto conducenti senza cintura che cercano di saltare. Usare il sistema di ritenuta, restare a bordo e tracciare i percorsi lontano dalle scarpate.",
    "en": "Tipping forklifts mostly kill unbelted drivers who try to jump clear. Use the restraint, stay in the cab and mark routes well away from banks."
   },
-  "caseId": "case-2026-09-21-tg-buhwil-stapler"
+  "caseId": "case-2026-09-21-tg-buhwil-stapler",
+  "extraSources": [
+   {
+    "name": "Blick",
+    "url": "https://www.blick.ch/schweiz/deutscher-38-stirbt-bei-arbeitsunfall-in-buhwil-tg/e3lvh5t",
+    "lang": "de"
+   }
+  ]
  },
  {
   "id": "2026-09-16-zh-zuerich-bauaufzug",
@@ -864,6 +900,11 @@
     "name": "20 minutes",
     "url": "https://www.20min.ch/fr/story/zurich-deux-morts-apres-l-effondrement-d-un-monte-charge-de-chantier-103634927",
     "lang": "fr"
+   },
+   {
+    "name": "20 Minuten",
+    "url": "https://www.20min.ch/story/zuerich-hauptbahnhof-unfall-auf-baustelle-polizei-mit-grossaufgebot-vor-ort-103634386",
+    "lang": "de"
    }
   ],
   "caseId": "case-2026-09-16-zh-zuerich-bauaufzug"
@@ -999,6 +1040,16 @@
     "name": "polizeinews.ch (update)",
     "url": "https://www.polizeinews.ch/2026/09/13/toedliche-explosion-im-kraftwerk-zwei-arbeiter-18%e2%80%a0-und-55%e2%80%a0-kommen-ums-leben",
     "lang": "de"
+   },
+   {
+    "name": "polizeinews.ch",
+    "url": "https://www.polizeinews.ch/2026/09/09/piotta-ti-zwei-aet-mitarbeitende-sterben-bei-schwerem-unfall-im-alten-ritom-kraftwerk",
+    "lang": "de"
+   },
+   {
+    "name": "watson.ch",
+    "url": "https://www.watson.ch/fr/suisse/police/564451990-un-accident-de-travail-fait-deux-blesses-au-tessin",
+    "lang": "fr"
    }
   ]
  },
@@ -1330,7 +1381,19 @@
    "it": "La fusione di metallo produce fumi tossici: aspirazione efficace o all’aperto, rilevatore di gas e seconda via di fuga.",
    "en": "Melting metal gives off toxic fumes: use effective extraction or work outdoors, a gas detector and a second exit."
   },
-  "caseId": "case-2026-06-26-vs-champery-gaz"
+  "caseId": "case-2026-06-26-vs-champery-gaz",
+  "extraSources": [
+   {
+    "name": "watson.ch",
+    "url": "https://www.watson.ch/fr/suisse/valais/315788033-valais-un-homme-meurt-dans-un-accident-de-travail-a-champery",
+    "lang": "fr"
+   },
+   {
+    "name": "Blick",
+    "url": "https://www.blick.ch/fr/suisse/romande/valais-un-senior-meurt-dans-un-accident-de-travail/8k70hbk",
+    "lang": "fr"
+   }
+  ]
  },
  {
   "id": "2026-06-15-vd-chavannes-chantier",
@@ -1582,7 +1645,92 @@
    "it": "Prima di lavorare su una linea: disinserire, mettere a terra, assicurare il palo – braccio della gru fuori dalla zona di caduta.",
    "en": "Before line work: de-energise, earth, secure poles against falling – keep crane booms out of the fall zone."
   },
-  "caseId": "case-2026-03-16-fr-le-mouret-poteau"
+  "caseId": "case-2026-03-16-fr-le-mouret-poteau",
+  "extraSources": [
+   {
+    "name": "Blick",
+    "url": "https://www.blick.ch/fr/suisse/romande/le-mouret-fr-accident-de-travail-un-ouvrier-electrocute/qgjc9p5",
+    "lang": "fr"
+   }
+  ]
+ },
+ {
+  "id": "2025-12-15-zh-egg-kranarm",
+  "date": "2025-12-15",
+  "dateType": "event",
+  "canton": "ZH",
+  "place": "Egg",
+  "industry": "construction",
+  "hazard": "crane",
+  "outcome": "fatal",
+  "source": {
+   "name": "Kantonspolizei Zürich",
+   "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2025/12/251215r_egg_arbunf.html",
+   "lang": "de"
+  },
+  "extraSources": [
+   {
+    "name": "swissinfo.ch (Keystone-SDA)",
+    "url": "https://www.swissinfo.ch/ger/29-j%c3%a4hriger-stirbt-bei-arbeitsunfall-im-z%c3%bcrcherischen-egg/90641861",
+    "lang": "de"
+   },
+   {
+    "name": "Zürcher Oberland Medien",
+    "url": "https://www.zo-online.ch/blaulicht/2025-12-15/29-jaehriger-mann-stirbt-in-egg-bei-kranunfall",
+    "lang": "de"
+   }
+  ],
+  "title": {
+   "de": "Ladekran-Ausleger bricht beim Kiesheben – Arbeiter getötet",
+   "fr": "La flèche d’une grue de camion se rompt en levant du gravier – un ouvrier tué",
+   "it": "Si spezza il braccio di una gru su camion durante il sollevamento di ghiaia – operaio ucciso",
+   "en": "Truck crane boom snaps while lifting gravel – worker killed"
+  },
+  "facts": {
+   "activity": {
+    "de": "Kies mit dem Ladekran eines Lastwagens auf ein Dach heben",
+    "fr": "Levage de gravier sur un toit avec la grue d’un camion",
+    "it": "Sollevamento di ghiaia su un tetto con la gru di un camion",
+    "en": "Lifting gravel onto a roof with a truck-mounted crane"
+   },
+   "what": {
+    "de": "Während des Hebens brach der Kranausleger aus noch ungeklärten Gründen auseinander. Ein herabstürzender Teil des Auslegers traf einen 29-jährigen Arbeiter.",
+    "fr": "Pendant le levage, la flèche de la grue s’est rompue pour une raison encore inconnue. Une partie de la flèche est tombée et a heurté un ouvrier de 29 ans.",
+    "it": "Durante il sollevamento il braccio della gru si è spezzato per motivi ancora da chiarire. Una parte del braccio, cadendo, ha colpito un operaio di 29 anni.",
+    "en": "During the lift the crane boom broke apart for reasons not yet known. A falling section of the boom struck a 29-year-old worker."
+   },
+   "equipment": {
+    "de": "Lastwagen mit Ladekran",
+    "fr": "Camion avec grue de chargement",
+    "it": "Camion con gru di carico",
+    "en": "Truck with loader crane"
+   },
+   "injuries": {
+    "de": "Tödlich; starb trotz Reanimation am Unfallort",
+    "fr": "Mortel; décédé sur place malgré la réanimation",
+    "it": "Mortale; deceduto sul posto nonostante la rianimazione",
+    "en": "Fatal; died at the scene despite resuscitation"
+   },
+   "emergency": {
+    "de": "Erste Hilfe durch First Responder und Kommunalpolizei, danach Rettungsdienst mit Notarzt",
+    "fr": "Premiers secours par les first responders et la police communale, puis ambulance avec médecin urgentiste",
+    "it": "Primo soccorso da first responder e polizia comunale, poi ambulanza con medico d’urgenza",
+    "en": "First aid by first responders and municipal police, then ambulance crew with emergency doctor"
+   },
+   "investigation": {
+    "de": "Kantonspolizei ZH und Staatsanwaltschaft See/Oberland ermitteln; Lastwagen mit Kran sichergestellt. Suva vor Ort.",
+    "fr": "La police cantonale (ZH) et le Ministère public See/Oberland enquêtent; camion-grue saisi. La Suva était sur place.",
+    "it": "Indagano la polizia cantonale (ZH) e il Ministero pubblico See/Oberland; camion con gru sequestrato. Presente la Suva.",
+    "en": "Zurich cantonal police and the See/Oberland prosecutor are investigating; the crane truck was seized. Suva attended."
+   }
+  },
+  "lesson": {
+   "de": "Unter Ausleger und Last hat niemand etwas zu suchen – auch nicht bei routinemässigem Material-Heben. Ladekrane brauchen die periodische Prüfung und vor jedem Einsatz eine Sichtkontrolle auf Risse und Verformungen.",
+   "fr": "Personne ne doit se trouver sous la flèche ou la charge, même pour un levage de routine. Les grues de chargement exigent un contrôle périodique et, avant chaque utilisation, un contrôle visuel des fissures et déformations.",
+   "it": "Nessuno deve stare sotto il braccio o il carico, nemmeno durante un sollevamento di routine. Le gru di carico richiedono il controllo periodico e, prima di ogni impiego, un controllo visivo di crepe e deformazioni.",
+   "en": "Nobody belongs under the boom or the load, even for a routine lift. Loader cranes need their periodic inspection and a visual check for cracks and deformation before every use."
+  },
+  "caseId": "case-2025-12-15-zh-egg-kranarm"
  },
  {
   "id": "2025-12-11-vd-bex-palette",
