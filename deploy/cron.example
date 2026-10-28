@@ -1,3 +1,3 @@
 # Alternative to the systemd timer (crontab -e as user safetyradar). run-daily.sh loads .env itself.
 CRON_TZ=Europe/Zurich
-0 7 * * 1-5 PUBLISH_DIR=/var/www/safetyradar /opt/safetyradar/deploy/run-daily.sh >> /var/log/safetyradar/daily.log 2>&1
+0 7 * * 1-5 /srv/safetyradar/app/deploy/run-daily.sh >> /srv/safetyradar/daily.log 2>&1

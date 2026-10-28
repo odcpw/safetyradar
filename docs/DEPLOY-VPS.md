@@ -1,5 +1,24 @@
 # Moving Safety Radar to a VPS (plan)
 
+## VPS local mode (cx43, from 2026-10-28)
+The VPS builds and serves the site itself; there are **no daily GitHub pushes and no GitHub login on the VPS**.
+- `.env` (`/srv/safetyradar/.env`): `GIT_PUSH=0`, `PUBLISH_DIR=/srv/safetyradar/www`, `SITE=https://safetyradar.ch`, `BASE=/`, `NOINDEX=1`.
+  The systemd unit takes these from `.env` only. Switching back to GitHub Pages: `GIT_PUSH=1`, `PUBLISH_DIR=` and push credentials.
+- **Data vs code ownership:** data (`data/accidents.json`, `rulings.json`, `jobs.json`) is changed **only on the VPS** from now on and kept
+  as local commits on the VPS `main` (history); code is changed **only on GitHub**. Do not commit data on GitHub any more (stop the
+  assistant's daily routine when the VPS timer is enabled).
+- **Code updates:** before each run `git pull --rebase -X theirs origin main` over https (public repo, read-only, no auth) replays the
+  local data commits on top of the new code. If GitHub ever does touch a data file, the local data wins conflicting hunks
+  (`-X theirs` = the replayed local commit in a rebase); the result is validated, and on any failure the run resets to the previous
+  HEAD and continues with the old code (logged as a warning, run status 1).
+- **Reviewer:** worktree from the local `main`; after validate + build the host commits and fast-forwards the local `main`
+  (`committed <sha> to local main (no push)`). It never pushes when `GIT_PUSH=0`; the agent has no git/shell tools and its prompt says so.
+- **Publish:** fresh `npm run build`, copied to `/srv/safetyradar/www.releases/<stamp>-<sha>`, then the symlink `/srv/safetyradar/www`
+  is switched atomically (`mv -T`); the last 5 releases are kept. Caddy serves `root * /srv/safetyradar/www` (`deploy/caddy/Caddyfile`).
+- **Backup:** `deploy/backup.sh` via `safetyradar-backup.timer` (02:30 Europe/Zurich): `git bundle --all` of the app repo + a tarball of
+  `reviewer/state` and the gitignored stage-1 state into `/srv/safetyradar/backups`, 14 days. Never includes `.env`.
+  Option later: push the data history to a private GitHub repo/branch as an off-site backup (needs a write credential on the VPS).
+
 Status: **prepared, not deployed** (code on `main`). GitHub Pages (`.github/workflows/pages.yml`) remains the live host. The VPS path is an alternative; both can run in parallel until DNS is switched.
 
 ## Daily flow on the VPS (`deploy/run-daily.sh`)

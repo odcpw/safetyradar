@@ -1,5 +1,5 @@
 [Unit]
-Description=Safety Radar daily run (stage 1 fetch/classify, e-mail intake, LLM reviewer -> push to main, publish build)
+Description=Safety Radar daily run (code pull, stage 1, e-mail intake, LLM reviewer -> local commit, atomic publish to /srv/safetyradar/www)
 After=network-online.target
 Wants=network-online.target
 
@@ -7,16 +7,17 @@ Wants=network-online.target
 Type=oneshot
 User=safetyradar
 Group=safetyradar
-WorkingDirectory=/opt/safetyradar
-# Secrets: /opt/safetyradar/.env (chmod 600, owner safetyradar). Never commit it.
-EnvironmentFile=/opt/safetyradar/.env
-Environment=NOINDEX=1 SITE=https://safetyradar.ch BASE=/ PUBLISH_DIR=/var/www/safetyradar SAFETYRADAR_ENV_LOADED=1
+WorkingDirectory=/srv/safetyradar/app
+# Secrets + mode: /srv/safetyradar/.env (600, safetyradar; app/.env symlinks to it): GIT_PUSH=0, PUBLISH_DIR=/srv/safetyradar/www,
+# NOINDEX=1, SITE/BASE. Values are taken from .env only (no Environment= overrides), so .env is the single switch.
+EnvironmentFile=/srv/safetyradar/.env
+Environment=SAFETYRADAR_ENV_LOADED=1 HOME=/srv/safetyradar
 Environment=PATH=/usr/local/bin:/usr/bin:/bin
-ExecStart=/opt/safetyradar/deploy/run-daily.sh
+ExecStart=/srv/safetyradar/app/deploy/run-daily.sh
 TimeoutStartSec=90min
-# Hardening: the job only needs its checkout, the web root and the network.
+Nice=10
 NoNewPrivileges=yes
 PrivateTmp=yes
 ProtectSystem=strict
 ProtectHome=read-only
-ReadWritePaths=/opt/safetyradar /var/www/safetyradar
+ReadWritePaths=/srv/safetyradar

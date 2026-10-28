@@ -1,0 +1,15 @@
+[Unit]
+Description=Safety Radar nightly local backup (git bundle + reviewer/state, 14 days)
+
+[Service]
+Type=oneshot
+User=safetyradar
+Group=safetyradar
+WorkingDirectory=/srv/safetyradar/app
+Environment=BACKUP_DIR=/srv/safetyradar/backups BACKUP_KEEP_DAYS=14 PATH=/usr/local/bin:/usr/bin:/bin
+ExecStart=/srv/safetyradar/app/deploy/backup.sh
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/srv/safetyradar/backups

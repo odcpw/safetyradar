@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 // Stage 2: the daily editorial reviewer. A Pi Durable agent edits data/accidents.json, rulings.json and jobs.json in a
-// separate detached git worktree from origin/main; the host then validates and builds, commits, rebases on origin/main and
-// pushes straight to main (no PRs). Broken data is never pushed. Decisions are fed back to stage 1 (data/queue.json,
+// separate detached git worktree; the host then validates and builds and commits. GIT_PUSH=1 (GitHub Pages mode): worktree from
+// origin/main, rebase on origin/main and push straight to main (no PRs). GIT_PUSH=0 (VPS local mode, default): worktree from
+// the local main, fast-forward the local main to the commit, never push. Broken data is never committed to main. Decisions are fed back to stage 1 (data/queue.json,
 // data/jobs-queue.json) so handled items leave data/review.md. Crash-safe: the conversation lives in SQLite
 // (reviewer/state/), a restart with the same date resumes it.
 //   npm --prefix reviewer run review -- [--dry-run] [--date=YYYY-MM-DD]
@@ -30,7 +31,8 @@ const THINKING = env("REVIEW_THINKING", "medium") as any;
 const MAX_USD = Number(env("REVIEW_MAX_USD", "1.00"));
 const DAILY_MAX_USD = Number(env("REVIEW_DAILY_MAX_USD", "3.00"));
 const MAX_TOOL_CALLS = Number(env("REVIEW_MAX_TOOL_CALLS", "80")); // pi-durable 1.4.0 has no maxTurns yet
-const BASE = env("REVIEW_BASE", "origin/main");
+const PUSH = env("GIT_PUSH", "0") === "1"; // 0 = local commits only (VPS), 1 = push to origin main (GitHub Pages mode)
+const BASE = env("REVIEW_BASE", PUSH ? "origin/main" : "main");
 const STATE = path.resolve(ROOT, env("REVIEW_STATE_DIR", "reviewer/state"));
 const AUTHOR = env("GIT_AUTHOR_NAME", "odcpw"), EMAIL = env("GIT_AUTHOR_EMAIL", "odcpw@users.noreply.github.com");
 const TAG = `${DATE}${DRY ? "-dry" : ""}`;
@@ -55,7 +57,7 @@ function spentToday(exceptThis: boolean): number {
 
 function prepareWorktree() {
 	if (fs.existsSync(WT)) { log(`reusing worktree ${path.relative(ROOT, WT)}`); return; }
-	git(ROOT, "fetch", "--quiet", "origin", "main");
+	if (PUSH) git(ROOT, "fetch", "--quiet", "origin", "main");
 	git(ROOT, "worktree", "add", "--detach", WT, BASE);
 	fs.symlinkSync(path.join(ROOT, "node_modules"), path.join(WT, "node_modules"));
 	log(`worktree ${path.relative(ROOT, WT)} at ${BASE} (${git(WT, "rev-parse", "--short", "HEAD")})`);
@@ -152,7 +154,7 @@ function parseSummary(answer: string): any {
 }
 
 function reportBody(sum: any, ch: ReturnType<typeof changes>, usd: number, status: string): string {
-	const L: string[] = [`Automated daily review ${DATE} (model ${MODEL}, cost USD ${usd.toFixed(3)}, ${status}). Pushed to main by the host after validation and build.`, ""];
+	const L: string[] = [`Automated daily review ${DATE} (model ${MODEL}, cost USD ${usd.toFixed(3)}, ${status}). ${PUSH ? "Pushed to main" : "Committed to the local main on the VPS (no push)"} by the host after validation and build.`, ""];
 	L.push("### Changes (from the data diff)");
 	for (const [f, c] of Object.entries(ch)) {
 		for (const id of c.added) L.push(`- added ${f}: \`${id}\``);
@@ -191,6 +193,19 @@ function pushToMain(): string {
 	return "NOT pushed: push to main rejected twice";
 }
 
+/** Local mode: fast-forward the local main (checked out in ROOT) to the review commit; rebase it on main once if main moved. */
+function commitToLocalMain(): string {
+	try {
+		if (git(ROOT, "rev-parse", "--abbrev-ref", "HEAD") !== "main") return "NOT committed: ROOT is not on branch main";
+		try { git(WT, "rebase", "--quiet", "main"); }
+		catch (e: any) { try { git(WT, "rebase", "--abort"); } catch { /* none */ } return `NOT committed: rebase on local main conflicted (${String(e.stderr ?? e.message).trim().slice(-300)})`; }
+		try { hostChecks(); } catch (e: any) { return `NOT committed: checks failed after rebase: ${String(e.stderr ?? e.stdout ?? e.message).slice(-800)}`; }
+		const sha = git(WT, "rev-parse", "HEAD");
+		git(ROOT, "merge", "--ff-only", "--quiet", sha);
+		return `committed ${sha.slice(0, 7)} to local main (no push)`;
+	} catch (e: any) { return `NOT committed: ${String(e.stderr ?? e.message).trim().slice(-300)}`; }
+}
+
 async function main() {
 	const run = readJson(RUN_FILE, { date: DATE, dry: DRY, phase: "agent" });
 	if (run.phase === "done") { log(`already done for ${TAG}: ${run.result}`); return; }
@@ -225,9 +240,9 @@ async function main() {
 		const title = `Daily review ${DATE}: +${n("accidents.json", "added")} accidents, +${n("rulings.json", "added")} rulings, +${n("jobs.json", "added")} jobs (-${n("jobs.json", "removed")} gone)`;
 		git(WT, "add", ...DATA_FILES.map((f) => `data/${f}`));
 		git(WT, "-c", `user.name=${AUTHOR}`, "-c", `user.email=${EMAIL}`, "commit", "--quiet", "-m", title, "-m", body);
-		run.result = pushToMain();
+		run.result = PUSH ? pushToMain() : commitToLocalMain();
 	}
-	if (!DRY && run.status === "done" && (!any || run.result.startsWith("pushed"))) {
+	if (!DRY && run.status === "done" && (!any || run.result.startsWith("pushed") || run.result.startsWith("committed"))) {
 		// Feed decisions back to stage 1 only when they reached main (or there was nothing to change), so review.md stops repeating them.
 		const fb = applyFeedback(path.join(ROOT, "data"), summary, ch, DATE);
 		log(`feedback to stage 1: ${JSON.stringify(fb)}`);
@@ -237,7 +252,7 @@ async function main() {
 	run.phase = "done"; writeJson(RUN_FILE, run);
 	git(ROOT, "worktree", "remove", "--force", WT);
 	log(run.result);
-	if (run.result.startsWith("NOT pushed")) process.exitCode = 4; // reported by run-daily.sh as a failed run
+	if (run.result.startsWith("NOT ")) process.exitCode = 4; // reported by run-daily.sh as a failed run
 }
 
 main().catch((e) => { console.error(`reviewer failed: ${e?.message ?? e}`); process.exit(1); });

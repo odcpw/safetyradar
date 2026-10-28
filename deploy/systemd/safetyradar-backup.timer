@@ -1,0 +1,10 @@
+[Unit]
+Description=Safety Radar nightly local backup 02:30 Europe/Zurich
+
+[Timer]
+OnCalendar=*-*-* 02:30:00 Europe/Zurich
+Persistent=true
+RandomizedDelaySec=300
+
+[Install]
+WantedBy=timers.target
