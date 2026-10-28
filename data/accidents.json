@@ -157,6 +157,21 @@
     "name": "polizeinews.ch",
     "url": "https://www.polizeinews.ch/2026/10/27/tragoedie-auf-baustelle-architekt-52-stuerzt-von-geruest-und-stirbt-trotz-reanimation",
     "lang": "de"
+   },
+   {
+    "name": "blue News",
+    "url": "https://www.bluewin.ch/it/attualita/svizzera/tragico-infortunio-sul-lavoro-a-paradiso-muore-un-architetto-di-52-anni-li.3645284",
+    "lang": "it"
+   },
+   {
+    "name": "Corriere del Ticino",
+    "url": "https://www.cdt.ch/news/ticino/cade-da-unimpalcatura-a-paradiso-grave-un-operaio-442524",
+    "lang": "it"
+   },
+   {
+    "name": "RSI",
+    "url": "https://www.rsi.ch/info/ticino-grigioni-e-insubria/Grave-infortunio-in-un-cantiere-a-Paradiso--4185347.html",
+    "lang": "it"
    }
   ]
  },
@@ -486,6 +501,54 @@
    "en": "A crane collapse without injuries is a near miss with a lot to learn from. Stability, ground, erection and wind limits must be checked and documented before use."
   },
   "caseId": "case-2026-10-06-be-ipsach-kran"
+ },
+ {
+  "id": "2026-10-05-ne-neuchatel-ambulance",
+  "caseId": "case-2026-10-05-ne-neuchatel-ambulance",
+  "date": "2026-10-05",
+  "dateType": "event",
+  "canton": "NE",
+  "place": "Neuchâtel",
+  "industry": "transport",
+  "hazard": "vehicle",
+  "outcome": "injured",
+  "source": {
+   "name": "Polizeinews.ch",
+   "url": "https://www.polizeinews.ch/2026/10/08/ambulanz-kippt-nach-kollision-mit-leitplanke-um-rettungssanitaeterin-verletzt",
+   "lang": "de"
+  },
+  "title": {
+   "de": "Rettungsdienstmitarbeiterin bei Ambulanzunfall verletzt",
+   "fr": "Une ambulancière blessée lors du renversement d’une ambulance",
+   "it": "Soccorritrice ferita nel ribaltamento di un’ambulanza",
+   "en": "Ambulance worker injured when vehicle overturns"
+  },
+  "facts": {
+   "activity": {
+    "de": "Patiententransport zum Spital",
+    "fr": "Transport d’une patiente vers l’hôpital",
+    "it": "Trasporto di una paziente in ospedale",
+    "en": "Transporting a patient to hospital"
+   },
+   "what": {
+    "de": "Eine Ambulanz stiess auf der Rue des Falaises gegen eine Leitplanke und kippte um. Die Ursache war noch ungeklärt.",
+    "fr": "Une ambulance a heurté une glissière sur la rue des Falaises et s’est renversée. La cause restait inconnue.",
+    "it": "Un’ambulanza ha urtato un guardrail in rue des Falaises e si è ribaltata. La causa non era ancora chiarita.",
+    "en": "An ambulance hit a crash barrier on Rue des Falaises and overturned. The cause had not yet been established."
+   },
+   "injuries": {
+    "de": "Die Mitarbeiterin, die die Patientin begleitete, wurde leicht verletzt. Der Fahrer blieb unverletzt.",
+    "fr": "L’employée accompagnant la patiente a été légèrement blessée. Le conducteur est indemne.",
+    "it": "L’addetta che accompagnava la paziente ha riportato ferite lievi. Il conducente è rimasto illeso.",
+    "en": "The worker accompanying the patient suffered minor injuries. The driver was unhurt."
+   }
+  },
+  "lesson": {
+   "de": "Bei Patiententransporten die vorgesehenen Rückhaltesysteme nutzen. Betreuung während der Fahrt so planen, dass unnötiges ungesichertes Bewegen vermieden wird.",
+   "fr": "Utiliser les dispositifs de retenue prévus lors des transports sanitaires. Organiser les soins en route pour limiter les déplacements sans protection.",
+   "it": "Utilizzare i sistemi di ritenuta previsti durante il trasporto sanitario. Organizzare l’assistenza in viaggio limitando gli spostamenti senza protezione.",
+   "en": "Use the designated restraints during patient transport. Plan care in transit to limit unnecessary movement without restraints."
+  }
  },
  {
   "id": "2026-10-01-gr-chur-schalung",
