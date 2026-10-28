@@ -1,7 +1,7 @@
 {
   "name": "safetyradar",
   "version": "1.0.0",
-  "description": "",
+  "description": "Safety Radar – Swiss workplace accidents, court rulings and safety jobs (static Astro site + Node fetch pipeline)",
   "main": "index.js",
   "scripts": {
     "dev": "astro dev",
@@ -23,6 +23,7 @@
     "astro": "^5.18.2"
   },
   "engines": {
-    "node": ">=20"
-  }
+    "node": ">=20 <23"
+  },
+  "private": true
 }

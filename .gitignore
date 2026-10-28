@@ -16,3 +16,4 @@ data/review.md
 data/drafts/
 data/llm-usage.jsonl
 data/cache/
+!.env.example
