@@ -1,7 +1,37 @@
-# Safety Radar (safetyradar.ch) – v0.2
+# Safety Radar (safetyradar.ch)
+
+Swiss workplace accidents, criminal court rulings on occupational safety, and occupational-safety jobs – as short fact sheets with a
+lesson, in DE/FR/IT/EN. Static Astro 5 site; content in `data/*.json`; a Node pipeline fetches candidates, a cheap LLM pre-sorts them,
+and a reviewer (human or assistant, see [docs/EDITORIAL.md](docs/EDITORIAL.md)) publishes.
+
+## Architecture
+```
+sources (RSS, Bing News, entscheidsuche.ch, job sites, police/job e-mails)
+  → scripts/fetch-sources.mjs, fetch-jobs.mjs   (robots.txt respected) → data/queue.json, data/jobs-queue.json
+  → scripts/classify*.mjs, draft-rulings.mjs    (OpenAI, gpt-6-luna, capped USD 0.50/run) → item.llm, data/drafts/rulings/
+  → scripts/queue-report.mjs                    → data/review.md
+  → reviewer edits data/accidents.json, rulings.json, jobs.json (docs/EDITORIAL.md)
+  → npm run build (astro + scripts/rebase.mjs)  → dist/ → GitHub Pages (or VPS, docs/DEPLOY-VPS.md)
+```
+
+## Quick start
+Node 20 (`.nvmrc`), `poppler-utils` for `pdftotext`. Copy `.env.example` to `.env` (all variables documented there; only
+`OPENAI_API_KEY` is needed for LLM steps; without it they are skipped).
+
+    npm ci
+    npm run build     # dist/, no API calls
+    npm run update    # full daily pipeline (fetch + LLM + build) – costs a few cents
+
+Deployment: GitHub Pages via `.github/workflows/pages.yml` (live). VPS alternative: `Dockerfile`, `docker-compose.yml`, `deploy/`
+(systemd timer, cron, Caddy, nginx) and [docs/DEPLOY-VPS.md](docs/DEPLOY-VPS.md).
+
+Committed vs. local: `data/accidents.json`, `rulings.json`, `jobs.json` are the published content (committed). Queue, review list,
+drafts, LLM usage log and text cache are regenerated working state (gitignored; copy them when moving hosts to avoid re-labelling).
+
+## Details (v0.2+)
 
 Static Astro 5 site (Node ≥ 20), four languages: `/de/ /fr/ /it/ /en/` (root `/` redirects by browser language, default DE).
-Content lives in `data/*.json` – no CMS, no database. Free hosting later on Cloudflare Pages or GitHub Pages (build `npm run build`, output `dist`).
+Content lives in `data/*.json` – no CMS, no database. Hosted on GitHub Pages (build `npm run build`, output `dist`).
 
     npm install
     npm run dev       # http://localhost:4321/de/
@@ -58,7 +88,8 @@ FR: Police VD RSS, Police GE RSS, Police FR RSS, NE "Sécurité" RSS, Police VS 
 IT: Polizia TI press page www4.ti.ch (HTML parser; unreachable from the build box – TLS reset)
 News: Bing News RSS, 15 queries DE/FR/IT/EN (Google News RSS also listed but skipped: robots.txt disallows /rss)
 Case law: entscheidsuche.ch search endpoint, all languages, last 180 days.
-Jobs: added manually from public ads (no scraping of LinkedIn / jobs.ch / jobscout24).
+Jobs: `scripts/fetch-jobs.mjs` – jobs.ch, jobup.ch, jobscout24.ch search pages and Workday career sites (Novartis, Alcon), robots.txt respected; plus job-alert e-mails. Metadata + link only.
+E-mail: police newsletters (ZH, SZ, BS, SG, AI, GL) and job alerts are read by the reviewer, not by a script.
 
 ## TODO before go-live
 Owner details (red TODO markers in imprint/privacy/about/post-a-job, all 4 languages); newsletter provider; legal review of privacy text.
