@@ -325,6 +325,19 @@
     "checked": "2026-10-28"
   },
   {
+    "id": "mpage-sst-cressier",
+    "title": "Spécialiste Santé et Sécurité",
+    "employer": "Michael Page Switzerland",
+    "location": "Cressier",
+    "canton": "NE",
+    "role": "hse",
+    "datePosted": "2026-10-14",
+    "url": "https://www.jobup.ch/fr/emplois/detail/c9f1aca2-8e08-40ef-a3d1-35027df0a804/",
+    "source": "jobup.ch",
+    "lang": "fr",
+    "checked": "2026-10-28"
+  },
+  {
     "id": "lidl-as",
     "title": "(Junior) Manager Arbeitssicherheit (m/w/d) 80–100 %",
     "employer": "Lidl Schweiz AG",
@@ -455,6 +468,19 @@
     "checked": "2026-10-28"
   },
   {
+    "id": "leister-elektrosicherheit",
+    "title": "Fachverantwortliche/r Elektrosicherheit & Brandschutz",
+    "employer": "Leister Technologies AG",
+    "location": "Sarnen",
+    "canton": "OW",
+    "role": "sibe",
+    "datePosted": "2026-10-01",
+    "url": "https://www.jobscout24.ch/de/job/6ccefd88-e231-480c-9bd6-ddec3e15421e/",
+    "source": "jobscout24.ch",
+    "lang": "de",
+    "checked": "2026-10-28"
+  },
+  {
     "id": "steeltec-leiter-asgs",
     "title": "Leiter/in Arbeitssicherheit & Gesundheitsschutz 100 % (m/w/d)",
     "employer": "Steeltec AG",
@@ -569,19 +595,6 @@
     "url": "https://www.jobs.ch/de/stellenangebote/detail/f3c3e8c9-6e31-4b77-9c81-fbe1542c32df/",
     "source": "jobs.ch",
     "lang": "de",
-    "checked": "2026-10-28"
-  },
-  {
-    "id": "watertech-ehs",
-    "title": "EHS Manager – Safety Officer (F/M/D)",
-    "employer": "Water Technologies",
-    "location": "Dübendorf",
-    "canton": "ZH",
-    "role": "hse",
-    "datePosted": "2026-09-13",
-    "url": "https://www.jobs.ch/de/stellenangebote/detail/7388a40c-3e60-42d1-898b-d8ddde427d4e/",
-    "source": "jobs.ch",
-    "lang": "en",
     "checked": "2026-10-28"
   }
 ]

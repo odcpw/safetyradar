@@ -157,6 +157,21 @@
     "name": "polizeinews.ch",
     "url": "https://www.polizeinews.ch/2026/10/27/tragoedie-auf-baustelle-architekt-52-stuerzt-von-geruest-und-stirbt-trotz-reanimation",
     "lang": "de"
+   },
+   {
+    "name": "blue News",
+    "url": "https://www.bluewin.ch/it/attualita/svizzera/tragico-infortunio-sul-lavoro-a-paradiso-muore-un-architetto-di-52-anni-li.3645284",
+    "lang": "it"
+   },
+   {
+    "name": "Corriere del Ticino",
+    "url": "https://www.cdt.ch/news/ticino/cade-da-unimpalcatura-a-paradiso-grave-un-operaio-442524",
+    "lang": "it"
+   },
+   {
+    "name": "RSI",
+    "url": "https://www.rsi.ch/info/ticino-grigioni-e-insubria/Grave-infortunio-in-un-cantiere-a-Paradiso--4185347.html",
+    "lang": "it"
    }
   ]
  },
