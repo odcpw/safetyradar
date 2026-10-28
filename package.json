@@ -13,7 +13,12 @@
     "fetch:jobs": "node scripts/fetch-jobs.mjs",
     "classify": "node scripts/classify.mjs",
     "classify:jobs": "node scripts/classify-jobs.mjs",
-    "draft:rulings": "node scripts/draft-rulings.mjs"
+    "draft:rulings": "node scripts/draft-rulings.mjs",
+    "validate": "node scripts/validate-data.mjs",
+    "intake": "node scripts/email-intake.mjs",
+    "review": "npm --prefix reviewer run review --",
+    "daily": "deploy/run-daily.sh",
+    "test": "node --test test/*.test.mjs"
   },
   "keywords": [],
   "author": "",

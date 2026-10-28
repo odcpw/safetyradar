@@ -1,17 +1,22 @@
 [Unit]
-Description=Safety Radar daily pipeline (fetch, LLM classify/draft, build)
+Description=Safety Radar daily run (stage 1 fetch/classify, e-mail intake, LLM reviewer -> review PR, publish build)
 After=network-online.target
 Wants=network-online.target
 
 [Service]
 Type=oneshot
 User=safetyradar
+Group=safetyradar
 WorkingDirectory=/opt/safetyradar
+# Secrets: /opt/safetyradar/.env (chmod 600, owner safetyradar). Never commit it.
 EnvironmentFile=/opt/safetyradar/.env
-Environment=NOINDEX=1 SITE=https://safetyradar.ch BASE=/
-ExecStart=/usr/bin/git pull --ff-only
-ExecStart=/usr/bin/npm ci --no-audit --no-fund
-ExecStart=/usr/bin/npm run update
-# Publish the fresh build atomically to the web root served by Caddy/nginx
-ExecStartPost=/usr/bin/rsync -a --delete /opt/safetyradar/dist/ /var/www/safetyradar/
-TimeoutStartSec=45min
+Environment=NOINDEX=1 SITE=https://safetyradar.ch BASE=/ PUBLISH_DIR=/var/www/safetyradar SAFETYRADAR_ENV_LOADED=1
+Environment=PATH=/usr/local/bin:/usr/bin:/bin
+ExecStart=/opt/safetyradar/deploy/run-daily.sh
+TimeoutStartSec=90min
+# Hardening: the job only needs its checkout, the web root and the network.
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/opt/safetyradar /var/www/safetyradar

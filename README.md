@@ -10,7 +10,8 @@ sources (RSS, Bing News, entscheidsuche.ch, job sites, police/job e-mails)
   → scripts/fetch-sources.mjs, fetch-jobs.mjs   (robots.txt respected) → data/queue.json, data/jobs-queue.json
   → scripts/classify*.mjs, draft-rulings.mjs    (OpenAI, gpt-6-luna, capped USD 0.50/run) → item.llm, data/drafts/rulings/
   → scripts/queue-report.mjs                    → data/review.md
-  → reviewer edits data/accidents.json, rulings.json, jobs.json (docs/EDITORIAL.md)
+  → scripts/email-intake.mjs                    (AgentMail API) → data/inbox/ (untrusted)
+  → reviewer edits data/accidents.json, rulings.json, jobs.json (docs/EDITORIAL.md; reviewer/ = Pi Durable agent → review PR)
   → npm run build (astro + scripts/rebase.mjs)  → dist/ → GitHub Pages (or VPS, docs/DEPLOY-VPS.md)
 ```
 
@@ -23,7 +24,8 @@ Node 20 (`.nvmrc`), `poppler-utils` for `pdftotext`. Copy `.env.example` to `.en
     npm run update    # full daily pipeline (fetch + LLM + build) – costs a few cents
 
 Deployment: GitHub Pages via `.github/workflows/pages.yml` (live). VPS alternative: `Dockerfile`, `docker-compose.yml`, `deploy/`
-(systemd timer, cron, Caddy, nginx) and [docs/DEPLOY-VPS.md](docs/DEPLOY-VPS.md).
+(systemd timer, cron, Caddy, nginx), the daily runner `deploy/run-daily.sh` and [docs/DEPLOY-VPS.md](docs/DEPLOY-VPS.md).
+Checks: `npm run validate` (data/house rules), `npm test` (e-mail intake against a synthetic fixture).
 
 Committed vs. local: `data/accidents.json`, `rulings.json`, `jobs.json` are the published content (committed). Queue, review list,
 drafts, LLM usage log and text cache are regenerated working state (gitignored; copy them when moving hosts to avoid re-labelling).
@@ -89,7 +91,7 @@ IT: Polizia TI press page www4.ti.ch (HTML parser; unreachable from the build bo
 News: Bing News RSS, 15 queries DE/FR/IT/EN (Google News RSS also listed but skipped: robots.txt disallows /rss)
 Case law: entscheidsuche.ch search endpoint, all languages, last 180 days.
 Jobs: `scripts/fetch-jobs.mjs` – jobs.ch, jobup.ch, jobscout24.ch search pages and Workday career sites (Novartis, Alcon), robots.txt respected; plus job-alert e-mails. Metadata + link only.
-E-mail: police newsletters (ZH, SZ, BS, SG, AI, GL) and job alerts are read by the reviewer, not by a script.
+E-mail: police newsletters (ZH, SZ, BS, SG, AI, GL) and job alerts: `scripts/email-intake.mjs` pulls them from AgentMail into `data/inbox/` (gitignored, untrusted) for the reviewer.
 
 ## TODO before go-live
 Owner details (red TODO markers in imprint/privacy/about/post-a-job, all 4 languages); newsletter provider; legal review of privacy text.

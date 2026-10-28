@@ -1,44 +1,82 @@
 # Moving Safety Radar to a VPS (plan)
 
-Status: **not done.** GitHub Pages (`.github/workflows/pages.yml`) remains the live host. The VPS path is an alternative; both can run in parallel until DNS is switched.
+Status: **prepared, not deployed** (branch `vps-runner`). GitHub Pages (`.github/workflows/pages.yml`) remains the live host. The VPS path is an alternative; both can run in parallel until DNS is switched.
 
-## What runs where
+## Daily flow on the VPS (`deploy/run-daily.sh`)
+```
+systemd timer 07:00 Europe/Zurich (Mon–Fri) → deploy/run-daily.sh   (flock: never two runs at once)
+  1. git pull main, npm ci (root + reviewer/)
+  2. Stage 1  npm run update            fetch RSS/Bing/entscheidsuche/jobs, gpt-6-luna classify/draft (≤ USD 0.50/run)
+                                        → data/review.md, data/drafts/rulings/, data/queue.json, build of main
+  3. Intake   scripts/email-intake.mjs  AgentMail API → data/inbox/*.json (untrusted, gitignored; state data/inbox/.state.json)
+  4. Stage 2  reviewer/ (Pi Durable)    agent with house rules (docs/EDITORIAL.md) edits data/{accidents,rulings,jobs}.json in a
+                                        git worktree on branch review/YYYY-MM-DD from origin/main; host validates + builds,
+                                        commits, pushes, opens a PR (≤ USD 1.00/run, ≤ USD 3.00/day)
+  5. Publish  rsync dist/ → /var/www/safetyradar (main only; review changes go live after the owner merges the PR)
+```
+GitHub Pages (`.github/workflows/pages.yml`) is unchanged and keeps deploying `main` until DNS moves.
 
-| Part | Today | On the VPS |
+| Part | Where | Notes |
 |---|---|---|
-| Fetch + LLM classify/draft (`npm run update`) | Assistant box, 07:00 weekdays | systemd timer `deploy/systemd/safetyradar-update.timer` (or `deploy/cron.example`, or `docker compose run --rm pipeline`) |
-| Email intake (police newsletters, job alerts) | Assistant reads odcpw@mail.grokbot.com | see "Email intake" – stays with the reviewer at first |
-| Editorial review (`docs/EDITORIAL.md`) | Assistant, then commit + push | **stays human/LLM**; reviewer edits JSON, commits, pushes |
-| Build | Box + GitHub Actions | VPS after each `update` and after `git pull` |
-| Hosting | GitHub Pages, `public/CNAME` | Caddy (`deploy/caddy/Caddyfile`) or nginx + certbot (`deploy/nginx/safetyradar.conf`) |
+| Stage 1 | `npm run update` | unchanged |
+| E-mail intake | `scripts/email-intake.mjs` | needs `AGENTMAIL_API_KEY`; without it the step is skipped. Stores subject + plain text only (no attachments), prunes after 21 days. Test: `npm test` (synthetic fixture). |
+| Reviewer | `reviewer/` (`npm run review -- [--dry-run] [--date=YYYY-MM-DD]`) | Node ≥ 22.19 (pi-durable 1.4.0 needs `node:sqlite`). Model `gpt-6.1-sol` (USD 2.00 in / 0.10 cached / 10.00 out per 1M, developers.openai.com/api/docs/pricing, 2026-10-28). |
+| Validation | `scripts/validate-data.mjs` (`npm run validate`) | schema + house-rule checks; the reviewer and the host both run it before a PR. |
+| Hosting | Caddy (`deploy/caddy/Caddyfile`) or nginx | as before |
 
-## Requirements
-- Any small Linux VPS: Debian 12 / Ubuntu 24.04, 1 vCPU, 1 GB RAM (2 GB recommended for `astro build`), 10 GB disk, Swiss/EU location.
-- Node 20 (`.nvmrc`; `engines` >=20 <23), git, rsync, `poppler-utils` (`pdftotext` for ruling PDFs), Caddy 2 or nginx+certbot. Or just Docker.
-- Outbound HTTPS to the sources; inbound 80/443.
+### Reviewer details
+- **Tools (only these):** `list_inputs`, `read_file` (repo files except `.env*`, `.git`, `node_modules`, state, keys), `fetch_url`
+  (public http(s) only, private/metadata IPs blocked, robots.txt respected, 5 MB, PDFs via `pdftotext`), `find_entries`/`get_entry`,
+  `upsert_entry`/`add_source`/`remove_entry` (only `data/accidents.json`, `rulings.json`, `jobs.json`), `run_checks` (validation + build).
+  No shell, no git: commits, pushes and the PR are done by the host code after its own validation/build.
+- **Prompt:** `docs/EDITORIAL.md` verbatim + operating rules (`reviewer/src/prompt.ts`). Mail, web pages, drafts are untrusted; the prompt
+  forbids following instructions in them.
+- **Crash safety:** the conversation is stored in `reviewer/state/review-<date>.sqlite`. Re-running the same day reopens it and
+  `harness.resume()` continues where it stopped (tested: SIGKILL mid-run, restart finished the run and opened the PR). A finished day is
+  recorded in `reviewer/state/run-<date>.json` and is not repeated.
+- **Cost caps:** spend is read from the harness after every step and priced with `reviewer/src/cost.ts`; at the cap minus a safety margin the
+  agent's tools are blocked and the run is aborted. Daily total across runs (`REVIEW_DAILY_MAX_USD`) from `reviewer/state/usage-*.json`;
+  every run is also appended to `data/llm-usage.jsonl`.
+- **Outputs:** `reviewer/state/review-<date>.diff` and `.md` (PR body + agent answer). `--dry-run` writes only these (detached worktree,
+  no branch, no push). No PR when nothing changed, the run did not finish, or checks failed.
+- **Open review PRs** are listed to the agent so it does not re-add items that are waiting for the owner's merge.
 
-## Steps
-1. `adduser --system --group --home /opt/safetyradar safetyradar`; `git clone https://github.com/odcpw/safetyradar /opt/safetyradar`.
-2. Install Node 20 (NodeSource or nvm), `apt install git rsync poppler-utils caddy`.
-3. `cp .env.example .env`, fill `OPENAI_API_KEY` (chmod 600, owner safetyradar). Keep `NOINDEX=1` until go-live.
-4. Optional: copy pipeline state from the current box so nothing is re-labelled: `data/queue.json`, `data/jobs-queue.json`,
-   `data/llm-usage.jsonl`, `data/drafts/`, `data/cache/` (all gitignored). Without them the first run re-queues the 180-day window and
-   re-classifies within the USD 0.50/run cap; published entries are still deduped.
-5. `npm ci && npm run build`; `mkdir -p /var/www/safetyradar && rsync -a --delete dist/ /var/www/safetyradar/`.
-6. Caddy: copy `deploy/caddy/Caddyfile` to `/etc/caddy/Caddyfile`, change `root` to `/var/www/safetyradar`, `systemctl reload caddy`.
-   Test before DNS: `curl --resolve safetyradar.ch:443:<VPS-IP> https://safetyradar.ch/` (certificate issues only after DNS points to the VPS;
-   test on :80 or with a temporary hostname such as `vps.safetyradar.ch` first).
-7. systemd: copy `deploy/systemd/*` to `/etc/systemd/system/`, `systemctl daemon-reload && systemctl enable --now safetyradar-update.timer`.
-   Check `systemctl list-timers`, `journalctl -u safetyradar-update`.
-8. Pushing from the VPS (only if the review moves there): deploy key with write access for this repo, git identity
-   `odcpw <odcpw@users.noreply.github.com>`. Otherwise the VPS only pulls; reviewer pushes from elsewhere; a webhook or the timer pulls+builds.
+## Hetzner setup (Debian 12/13 or Ubuntu 24.04)
+1. **Instance:** a small shared-vCPU Cloud server – Cost-Optimized/Regular Performance x86 (CX/CPX line) or Arm (CAX line) with 2 vCPU,
+   4 GB RAM, 40 GB disk; `astro build` + reviewer fit easily. Location Falkenstein or Nuremberg (closest to CH). Hetzner listed
+   "from € 5.99 / € 6.49 per month excl. VAT" on 2026-10-28 (hetzner.com/cloud) – check the console for current names and prices.
+   Add your SSH key at creation; enable backups (or snapshots) if wanted.
+2. **Firewall (Hetzner Cloud Firewall, plus `ufw` on the host):** inbound 22/tcp (ideally only from your IP), 80/tcp, 443/tcp; ICMP;
+   everything else denied. Outbound open (sources, OpenAI, AgentMail, GitHub).
+3. **Base hardening:** `apt install unattended-upgrades && dpkg-reconfigure -plow unattended-upgrades` (security updates daily);
+   `PasswordAuthentication no` and `PermitRootLogin prohibit-password` in sshd; `timedatectl set-timezone Europe/Zurich` (the timer uses
+   an explicit zone anyway); optional `fail2ban`.
+4. **Packages:** Node 22 LTS (NodeSource `setup_22.x`), `apt install git rsync poppler-utils caddy` (Caddy apt repo), GitHub CLI
+   (`gh`, cli.github.com apt repo). Or Docker only (see below).
+5. **User + checkout:** `adduser --system --group --home /opt/safetyradar safetyradar`;
+   `sudo -u safetyradar git clone https://github.com/odcpw/safetyradar /opt/safetyradar`; `mkdir -p /var/www/safetyradar && chown safetyradar /var/www/safetyradar`.
+6. **Secrets – only in `/opt/safetyradar/.env`** (`cp .env.example .env`, `chown safetyradar: .env && chmod 600 .env`, never committed,
+   `.gitignore` covers it): `OPENAI_API_KEY`, `AGENTMAIL_API_KEY`, `GH_TOKEN`. Keep `NOINDEX=1` until go-live. Back the file up offline.
+7. **GitHub write access for review PRs** (pick one; owner decision):
+   - *Recommended:* a **fine-grained PAT** limited to `odcpw/safetyradar` with *Contents: read/write* and *Pull requests: read/write*,
+     as `GH_TOKEN` in `.env`; then once `sudo -u safetyradar gh auth setup-git` so `git push` uses it. Branch protection on `main`
+     (require PR) keeps the bot from pushing to `main` directly.
+   - *Deploy key:* `ssh-keygen -t ed25519 -f /opt/safetyradar/.ssh/id_ed25519` (user safetyradar), add the public key in repo Settings →
+     Deploy keys **with write access**, `git remote set-url origin git@github.com:odcpw/safetyradar.git`. A deploy key can push branches
+     but **cannot open PRs**, so `GH_TOKEN` (PRs only) is still needed – or open PRs by hand from the pushed `review/*` branch.
+8. **Copy working state** from the current box so stage 1 doesn't re-label everything: `data/queue.json`, `data/jobs-queue.json`,
+   `data/llm-usage.jsonl`, `data/drafts/`, `data/cache/` (all gitignored). Then `npm ci && npm --prefix reviewer ci`.
+9. **First runs:** `sudo -u safetyradar env REVIEW_ARGS=--dry-run deploy/run-daily.sh` → read `reviewer/state/review-<date>.diff`; then a
+   normal run. Caddy: copy `deploy/caddy/Caddyfile` to `/etc/caddy/Caddyfile`, set `root` to `/var/www/safetyradar`, reload.
+10. **systemd:** `cp deploy/systemd/safetyradar-update.{service,timer} /etc/systemd/system/ && systemctl daemon-reload && systemctl enable --now safetyradar-update.timer`;
+    check `systemctl list-timers`, `journalctl -u safetyradar-update`.
 
-## Email intake on the VPS (options)
-- A. Keep as is: reviewer reads odcpw@mail.grokbot.com (plus-tags), writes entries. Simplest; recommended first.
-- B. Script pulls mail via the inbox provider's API (AgentMail) with an API key in `.env`, stores only extracted links/titles in the
-  queue (never full bodies – personal data), and adds them to `data/review.md`. Not implemented.
-- C. Own mailbox (IMAP) on a domain address, e.g. intake@safetyradar.ch – needs MX records at Hostpoint and re-subscribing all newsletters.
-Emails are untrusted input in every option.
+**Docker variant:** `docker compose build && docker compose run --rm pipeline` (mounts the checkout at `/app`; image = Node 22, git, gh,
+poppler). Trigger it from a host timer/cron instead of `ExecStart`. Put an SSH deploy key in `deploy/ssh/` (gitignored) only if you use SSH.
+
+### Moving the daily review off the assistant box
+Until the VPS runs, the existing 07:00 assistant job keeps working as before. When the VPS timer is enabled, stop the assistant's
+daily routine (otherwise both edit the same items). The VPS reviewer opens PRs instead of pushing to `main`; the owner merges.
 
 ## DNS at Hostpoint (later, owner)
 Currently apex A records → GitHub Pages (185.199.108–111.153), `www` CNAME → odcpw.github.io.
@@ -57,7 +95,7 @@ Restore the GitHub A records (185.199.108.153, .109, .110, .111) and `www` CNAME
 ## Owner decisions before the move
 - VPS provider/OS/size and location; who has root.
 - Caddy vs nginx, Docker vs host install.
-- Does the review stay with the assistant (push from outside) or move to the VPS (deploy key with write access)?
-- Email intake option A/B/C.
+- Reviewer on the VPS: PAT vs deploy key (+PAT for PRs); merge policy for review PRs (owner merges daily?).
+- E-mail intake: option B implemented (AgentMail API, needs an API key).
 - When to drop `NOINDEX=1` and fill the legal TODOs (imprint/privacy).
 - Keep GitHub Pages as permanent fallback or disable it.
