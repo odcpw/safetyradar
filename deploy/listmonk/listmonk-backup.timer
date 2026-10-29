@@ -1,0 +1,9 @@
+[Unit]
+Description=Daily Listmonk Postgres dump (02:45 Europe/Zurich)
+
+[Timer]
+OnCalendar=*-*-* 02:45:00 Europe/Zurich
+Persistent=true
+
+[Install]
+WantedBy=timers.target

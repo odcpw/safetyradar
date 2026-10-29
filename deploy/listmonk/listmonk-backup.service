@@ -1,0 +1,8 @@
+[Unit]
+Description=Listmonk Postgres dump
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/srv/listmonk/listmonk-backup.sh

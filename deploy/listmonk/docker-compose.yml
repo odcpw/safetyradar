@@ -1,0 +1,54 @@
+# Listmonk for safetyradar.ch on cx43. Secrets live in /srv/listmonk/.env (not committed).
+name: listmonk
+services:
+  db:
+    image: postgres:17-alpine
+    container_name: listmonk_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: listmonk
+      POSTGRES_DB: listmonk
+      POSTGRES_PASSWORD: ${LISTMONK_DB_PASSWORD}
+      TZ: Europe/Zurich
+    volumes:
+      - listmonk_pgdata:/var/lib/postgresql/data
+    networks: [listmonk]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U listmonk"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+
+  app:
+    image: listmonk/listmonk:v6.2.0
+    container_name: listmonk_app
+    restart: unless-stopped
+    depends_on:
+      db: { condition: service_healthy }
+    ports:
+      - "127.0.0.1:9100:9000"
+    command: [sh, -c, "./listmonk --install --idempotent --yes --config '' && ./listmonk --upgrade --yes --config '' && ./listmonk --config ''"]
+    environment:
+      TZ: Europe/Zurich
+      LISTMONK_app__address: 0.0.0.0:9000
+      LISTMONK_db__host: listmonk_db
+      LISTMONK_db__port: "5432"
+      LISTMONK_db__user: listmonk
+      LISTMONK_db__database: listmonk
+      LISTMONK_db__password: ${LISTMONK_DB_PASSWORD}
+      LISTMONK_db__ssl_mode: disable
+      LISTMONK_ADMIN_USER: ${LISTMONK_ADMIN_USER}
+      LISTMONK_ADMIN_PASSWORD: ${LISTMONK_ADMIN_PASSWORD}
+    volumes:
+      - listmonk_uploads:/listmonk/uploads
+    networks: [listmonk]
+
+networks:
+  listmonk:
+    name: listmonk
+
+volumes:
+  listmonk_pgdata:
+    name: listmonk_pgdata
+  listmonk_uploads:
+    name: listmonk_uploads
