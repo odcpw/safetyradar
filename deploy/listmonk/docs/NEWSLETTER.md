@@ -30,3 +30,11 @@ Still to add for SES and ImprovMX (values come from the SES and ImprovMX console
 
 1. In Listmonk, go to Settings → SMTP and set host `email-smtp.<region>.amazonaws.com`, port 587, STARTTLS, and the SES SMTP credentials. Then remove the placeholder block.
 2. Set up the SES bounce/complaint webhook to Listmonk (Settings → Bounces → SES).
+
+## Bounce and complaint handling (Amazon SES)
+
+- SES sends bounce and complaint notifications to an SNS topic in `eu-central-1`.
+- The topic has an HTTPS subscription to `https://news.safetyradar.ch/webhooks/service/ses`. Caddy proxies it to Listmonk, which confirms the SNS subscription automatically.
+- Listmonk settings (Settings → Bounces): `bounce.enabled = true`, `bounce.webhooks_enabled = true`, `bounce.ses_enabled = true`.
+- Actions: soft bounce, count 2 → none; hard bounce, count 1 → blocklist; complaint, count 1 → blocklist.
+- Note: `/api/settings` returns passwords masked. When you PUT settings back, send the SMTP password as an empty string to keep the stored one, or send the real value. If you send the mask back, it overwrites the stored password.
