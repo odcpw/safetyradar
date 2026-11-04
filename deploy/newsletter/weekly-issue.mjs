@@ -55,20 +55,36 @@ const old = f => { if (!baseline) return []; try { return JSON.parse(git('show',
 const fresh = f => { const before = new Set(old(f).map(x => x.id)); return read(f).filter(x => !before.has(x.id)); };
 const byDate = k => (a, b) => String(b[k] || '').localeCompare(String(a[k] || ''));
 const sev = { fatal: 0, life_threatening: 1, serious: 2, injured: 3 };
-const accidents = fresh('accidents.json').sort((a, b) => (sev[a.outcome] ?? 9) - (sev[b.outcome] ?? 9) || byDate('date')(a, b));
-const rulings = fresh('rulings.json').sort(byDate('date'));
-const jobs = fresh('jobs.json').sort(byDate('datePosted'));
+// Date rules (Oliver: items must be recent by when they HAPPENED, not when the pipeline added them).
+// An item must be new since the previous issue (not in the baseline data) AND pass its date rule; no valid date -> dropped.
+//   accidents: event date (data `date`, dateType "event") within [previous Thursday - 7 days grace, now]  (~14 days)
+//   rulings:   the data has only the decision date (`date`; no publication date field) -> decision date within the
+//              last 30 days. If a publication date field (`published`/`datePublished`) appears later, it is preferred.
+//   jobs:      `datePosted` within [previous Thursday, now] (jobs.json only holds live postings; expired ones are removed
+//              by the pipeline). Without a posting date the item is dropped.
+const ymd = ts => new Date(ts * 1000).toLocaleDateString('sv-SE', { timeZone: 'Europe/Zurich' });
+const today = ymd(Date.now() / 1000);
+const validDate = d => /^\d{4}-\d{2}-\d{2}$/.test(String(d || '')) && String(d) <= today;
+const inRange = (d, from) => validDate(d) && d >= from && d <= today;
+const accFrom = ymd(since - 7 * 86400), rulFrom = ymd(Date.now() / 1000 - 30 * 86400), jobFrom = ymd(since);
+const dropped = [];
+const keep = (list, kind, field, from) => list.filter(x => { const d = field(x); const ok = inRange(d, from); if (!ok) dropped.push({ kind, id: x.id, date: d ?? null }); return ok; });
+const accidents = keep(fresh('accidents.json'), 'accident', x => x.dateType === 'event' || !x.dateType ? x.date : null, accFrom)
+  .sort((a, b) => (sev[a.outcome] ?? 9) - (sev[b.outcome] ?? 9) || byDate('date')(a, b));
+const rulings = keep(fresh('rulings.json'), 'ruling', x => x.published || x.datePublished || x.date, rulFrom).sort(byDate('date'));
+const jobs = keep(fresh('jobs.json'), 'job', x => x.datePosted, jobFrom).sort(byDate('datePosted'));
 
 // ---- rendering
 const esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const firstSentence = s => { s = String(s || '').trim(); const m = s.match(/^.{20,220}?[.!?](\s|$)/); return (m ? m[0] : s.slice(0, 200)).trim(); };
 const link = (p, content) => esc(tagUrl(SITE + p, { campaign: issue, content }));
+const fmtDate = (d, lang) => { const [y, m, dd] = String(d).split('-'); return `${dd}.${m}.${y}`; };
 const pick = (o, lang) => (o && typeof o === 'object') ? (o[lang] || o.de || o.en || '') : (o || '');
 function item(x, kind, lang) {
   const title = pick(x.title, lang); const line = firstSentence(pick(x.lesson, lang));
   if (!title) return '';
   return `<p style="margin:0 0 14px"><a href="${link(`/${lang}/${kind}/${x.id}/`)}" style="font-weight:600">${esc(title)}</a>`
-    + `${x.canton ? ` <span style="color:#888">· ${esc(x.canton)}</span>` : ''}<br/>${esc(line)}</p>`;
+    + ` <span style="color:#888">· ${esc(fmtDate(kind === 'rulings' ? (x.published || x.datePublished || x.date) : x.date, lang))}${x.canton ? ` · ${esc(x.canton)}` : ''}</span><br/>${esc(line)}</p>`;
 }
 function build(lang) {
   const a = accidents.slice(0, MAX.accidents), r = rulings.slice(0, MAX.rulings), j = jobs.slice(0, MAX.jobs);
@@ -108,9 +124,10 @@ async function login() {
   if (r1.status >= 400) throw new Error(`listmonk login failed: HTTP ${r1.status}`);
 }
 
-const summary = { issue, since: new Date(since * 1000).toISOString(), baseline, generatedAt: new Date().toISOString(), campaigns: [] };
+const summary = { issue, rules: { accidentsFrom: accFrom, rulingsFrom: rulFrom, jobsFrom: jobFrom, to: today }, dropped, since: new Date(since * 1000).toISOString(), baseline, generatedAt: new Date().toISOString(), campaigns: [] };
 if (args['dry-run']) {
   for (const i of issues) { console.log(`[dry-run] ${i.lang}: ${i.subject} ${JSON.stringify(i.counts)}`); }
+  console.log('dropped:', JSON.stringify(dropped));
   if (args.html) fs.writeFileSync(args.html, issues.map(i => `<h1>${i.lang}</h1>${i.body}`).join('<hr/>'));
   process.exit(0);
 }

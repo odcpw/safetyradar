@@ -65,3 +65,10 @@ Still to add for SES and ImprovMX (values come from the SES and ImprovMX console
 - Timer: `safetyradar-newsletter.timer`, Thursdays 08:30 Europe/Zurich (runs with `--preview=oliver@decaro.ch`). Dry run: `node deploy/newsletter/weekly-issue.mjs --dry-run --html=/tmp/issue.html`.
 - Send after approval (on cx43, as root): `/srv/safetyradar/app/deploy/newsletter/send-week.sh [2026-w45]` schedules the 4 drafts for Thursday 15:00 Europe/Zurich of that week; add `--now` to start sending immediately. Drafts that are not in status draft are skipped.
 - The site copy names no send day ("weekly"), so the day can be A/B tested later.
+
+### Date rules (2026-11-04)
+Items must be new since the previous issue AND recent by when they happened; items without a valid date are dropped.
+- Accidents: event date within the previous Thursday minus 7 days grace up to today (~14 days).
+- Rulings: decision date within the last 30 days. The data has no publication date; if `published`/`datePublished` is added later it is preferred (rulings are often published long after the decision).
+- Jobs: `datePosted` since the previous Thursday (jobs.json only holds live postings).
+- Accidents and rulings show their date (dd.mm.yyyy) in the email. Dropped items are listed in the summary JSON (`dropped`).
