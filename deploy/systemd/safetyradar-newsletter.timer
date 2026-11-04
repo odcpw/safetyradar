@@ -1,0 +1,9 @@
+[Unit]
+Description=Safety Radar newsletter drafts (Thursdays 08:30 Europe/Zurich)
+
+[Timer]
+OnCalendar=Thu *-*-* 08:30:00 Europe/Zurich
+Persistent=true
+
+[Install]
+WantedBy=timers.target

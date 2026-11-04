@@ -57,3 +57,11 @@ Still to add for SES and ImprovMX (values come from the SES and ImprovMX console
 ## Weekly visit count
 - Caddy writes an IP-free page log for safetyradar.ch only (`deploy/caddy/access-log.snippet`, inside the `safetyradar.ch` block): `/var/log/caddy/safetyradar-access.log`, rolled weekly, rolled files kept 56 days. No IPs, no request headers except Referer, user agent reduced to a `bot` flag.
 - `deploy/stats/weekly-stats.mjs` + `deploy/systemd/safetyradar-stats.{service,timer}` (Mondays 06:30) write `/srv/safetyradar/stats/YYYY-Www.json` and `.txt` for the previous ISO week: page views (no bots/assets), top 20 pages, newsletter clicks by `utm_campaign` × `utm_content`. Manual run for a week: `node deploy/stats/weekly-stats.mjs 2026-W45`.
+
+## Weekly issue (drafts only) and sending
+- `deploy/newsletter/weekly-issue.mjs` builds one issue per language from the VPS data: everything added since the previous Thursday 08:30 Europe/Zurich (git diff of `data/*.json` against the last data commit before then). Rulings, accidents (title + first sentence of the lesson, linked to the site page) and a "new jobs" count with the top 5. "Quiet week" text when there are no new accidents/rulings. No LLM; links tagged via `scripts/lib/utm.mjs` (`utm_campaign=<yyyy>-w<nn>`).
+- Saves Listmonk campaign DRAFTS named `safetyradar-<issue>-<lang>` on lists 3 DE / 4 FR / 5 IT / 6 EN, template 1 (no tracking pixel). Re-running in the same week updates those drafts (only while status is draft). Never sends or schedules.
+- `--preview=oliver@decaro.ch` test-sends the DE and EN drafts (Listmonk test-send; the address is kept as a Listmonk subscriber with no lists so it never gets real campaigns). Summary: `/srv/safetyradar/newsletter/<issue>.json`.
+- Timer: `safetyradar-newsletter.timer`, Thursdays 08:30 Europe/Zurich (runs with `--preview=oliver@decaro.ch`). Dry run: `node deploy/newsletter/weekly-issue.mjs --dry-run --html=/tmp/issue.html`.
+- Send after approval (on cx43, as root): `/srv/safetyradar/app/deploy/newsletter/send-week.sh [2026-w45]` schedules the 4 drafts for Thursday 15:00 Europe/Zurich of that week; add `--now` to start sending immediately. Drafts that are not in status draft are skipped.
+- The site copy names no send day ("weekly"), so the day can be A/B tested later.

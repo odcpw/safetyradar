@@ -1,0 +1,15 @@
+[Unit]
+Description=Safety Radar weekly newsletter: build DE/FR/IT/EN Listmonk DRAFTS + preview to Oliver (never sends)
+After=network-online.target
+
+[Service]
+Type=oneshot
+# root only to read the Listmonk admin login in /srv/listmonk/.env (600 root); nothing is printed from it.
+WorkingDirectory=/srv/safetyradar/app
+ExecStart=/usr/bin/node /srv/safetyradar/app/deploy/newsletter/weekly-issue.mjs --preview=oliver@decaro.ch
+ExecStartPost=/bin/chown -R safetyradar:safetyradar /srv/safetyradar/newsletter
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/srv/safetyradar/newsletter

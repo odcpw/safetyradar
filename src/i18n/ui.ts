@@ -51,7 +51,7 @@ const S: Record<string, T4> = {
   'home.latest.jobs': { de: 'Aktuelle Stellen', fr: 'Offres actuelles', it: 'Offerte attuali', en: 'Current jobs' },
   'home.all': { de: 'Alle anzeigen →', fr: 'Tout afficher →', it: 'Mostra tutto →', en: 'Show all →' },
   'nl.title': { de: 'Wöchentlicher Newsletter', fr: 'Newsletter hebdomadaire', it: 'Newsletter settimanale', en: 'Weekly newsletter' },
-  'nl.pitch': { de: 'Jeden Montag: die wichtigsten Unfälle, Urteile und Stellen der Woche – in 3 Minuten gelesen.', fr: 'Chaque lundi: les accidents, jugements et offres de la semaine – lus en 3 minutes.', it: 'Ogni lunedì: infortuni, sentenze e offerte della settimana – letti in 3 minuti.', en: 'Every Monday: the week’s key accidents, rulings and jobs – a 3-minute read.' },
+  'nl.pitch': { de: 'Wöchentlich: die wichtigsten Unfälle, Urteile und Stellen – in 3 Minuten gelesen.', fr: 'Chaque semaine: les principaux accidents, jugements et offres d’emploi – lus en 3 minutes.', it: 'Ogni settimana: i principali infortuni, sentenze e offerte di lavoro – letti in 3 minuti.', en: 'Weekly: the key accidents, rulings and jobs – a 3-minute read.' },
   'nl.placeholder': { de: 'ihre.adresse@firma.ch', fr: 'votre.adresse@entreprise.ch', it: 'il.vostro.indirizzo@azienda.ch', en: 'you@company.ch' },
   'nl.button': { de: 'Abonnieren', fr: 'S’abonner', it: 'Iscriversi', en: 'Subscribe' },
   'nl.small': { de: 'Double-Opt-in; jederzeit abmeldbar.', fr: 'Double opt-in; désinscription à tout moment.', it: 'Double opt-in; disiscrizione in ogni momento.', en: 'Double opt-in; unsubscribe anytime.' },
