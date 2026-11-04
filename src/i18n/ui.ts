@@ -53,6 +53,8 @@ const S: Record<string, T4> = {
   'nl.title': { de: 'Wöchentlicher Newsletter', fr: 'Newsletter hebdomadaire', it: 'Newsletter settimanale', en: 'Weekly newsletter' },
   'nl.pitch': { de: 'Wöchentlich: die wichtigsten Unfälle, Urteile und Stellen – in 3 Minuten gelesen.', fr: 'Chaque semaine: les principaux accidents, jugements et offres d’emploi – lus en 3 minutes.', it: 'Ogni settimana: i principali infortuni, sentenze e offerte di lavoro – letti in 3 minuti.', en: 'Weekly: the key accidents, rulings and jobs – a 3-minute read.' },
   'nl.placeholder': { de: 'ihre.adresse@firma.ch', fr: 'votre.adresse@entreprise.ch', it: 'il.vostro.indirizzo@azienda.ch', en: 'you@company.ch' },
+  'nl.top': { de: 'Wöchentlicher Newsletter: Unfälle, Urteile, Stellen – gratis', fr: 'Newsletter hebdomadaire: accidents, jugements, emplois – gratuit', it: 'Newsletter settimanale: infortuni, sentenze, impieghi – gratuita', en: 'Weekly newsletter: accidents, rulings, jobs – free' },
+  'nl.topph': { de: 'Gratis-Newsletter: E-Mail', fr: 'Newsletter gratuite: e-mail', it: 'Newsletter gratuita: e-mail', en: 'Free newsletter: your email' },
   'nl.button': { de: 'Abonnieren', fr: 'S’abonner', it: 'Iscriversi', en: 'Subscribe' },
   'nl.small': { de: 'Double-Opt-in; jederzeit abmeldbar.', fr: 'Double opt-in; désinscription à tout moment.', it: 'Double opt-in; disiscrizione in ogni momento.', en: 'Double opt-in; unsubscribe anytime.' },
   'nl.email': { de: 'E-Mail-Adresse', fr: 'Adresse e-mail', it: 'Indirizzo e-mail', en: 'Email address' },

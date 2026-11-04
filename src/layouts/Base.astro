@@ -2,26 +2,49 @@
 import '../styles/global.css';
 import { t, languages, LANGS, type Lang } from '../i18n/ui';
 import NewsletterForm from '../components/NewsletterForm.astro';
-interface Props { title: string; description?: string; lang: Lang; hideFooterNl?: boolean }
+import TopSignup from '../components/TopSignup.astro';
+interface Props { title: string; description?: string; lang: Lang; hideFooterNl?: boolean; hideTopNl?: boolean; jsonld?: any; ogType?: string }
 const { title, lang } = Astro.props;
 const description = Astro.props.description ?? t(lang, 'meta.description');
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 const rest = Astro.url.pathname.replace(BASE, '').replace(/^\/(de|fr|it|en)(\/|$)/, '');
 const cur = '/' + rest.replace(/\/$/, '');
+const SITE = 'https://safetyradar.ch';
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const fullTitle = title === 'Safety Radar' ? title : `${title} · Safety Radar`;
+const OGLOC: Record<Lang, string> = { de: 'de_CH', fr: 'fr_CH', it: 'it_CH', en: 'en_GB' };
+const ORG = { '@type': 'Organization', '@id': `${SITE}/#org`, name: 'Safety Radar', url: `${SITE}/`, logo: `${SITE}/logo.png`, email: 'info@safetyradar.ch' };
+const ld = [ORG, ...(Astro.props.jsonld ? [].concat(Astro.props.jsonld) : [])];
+const feedSection = ['accidents', 'rulings', 'jobs'].find(s => rest.startsWith(s));
 const nav = [['', 'nav.home'], ['accidents', 'nav.accidents'], ['rulings', 'nav.rulings'], ['jobs', 'nav.jobs'], ['newsletter', 'nav.newsletter']];
 ---
 <!doctype html>
 <html lang={lang}>
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>{title === 'Safety Radar' ? title : `${title} · Safety Radar`}</title>
+  <title>{fullTitle}</title>
   <meta name="description" content={description} />
-  <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+  <link rel="canonical" href={canonical} />
   {LANGS.map(l => <link rel="alternate" hreflang={l} href={new URL(`/${l}/${rest}`, Astro.site)} />)}
+  <link rel="alternate" hreflang="x-default" href={new URL(`/de/${rest}`, Astro.site)} />
+  <link rel="alternate" type="application/rss+xml" title={`Safety Radar (${lang.toUpperCase()})`} href={`/${lang}/feed.xml`} />
+  {feedSection && <link rel="alternate" type="application/rss+xml" title={`Safety Radar – ${t(lang, 'nav.' + feedSection)} (${lang.toUpperCase()})`} href={`/${lang}/${feedSection}/feed.xml`} />}
+  <meta property="og:site_name" content="Safety Radar" />
+  <meta property="og:type" content={Astro.props.ogType ?? 'website'} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:locale" content={OGLOC[lang]} />
+  {LANGS.filter(l => l !== lang).map(l => <meta property="og:locale:alternate" content={OGLOC[l]} />)}
+  <meta property="og:image" content={`${SITE}/og.png`} />
+  <meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <script type="application/ld+json" set:html={JSON.stringify(ld.length === 1 ? { '@context': 'https://schema.org', ...ld[0] } : { '@context': 'https://schema.org', '@graph': ld }).replace(/</g, '\\u003c')} />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <meta name="theme-color" content="#14202b" />
 </head>
 <body>
+  {!Astro.props.hideTopNl && <TopSignup lang={lang} />}
   <header class="site"><div class="wrap">
     <a class="logo" href={`/${lang}/`}><span class="dot" aria-hidden="true"></span>Safety Radar</a>
     <nav class="langs" aria-label="Language">

@@ -3,15 +3,10 @@
 // Listmonk shows its own (multilingual) confirmation page and sends the double opt-in e-mail.
 import { t, LANGS, languages, type Lang } from '../i18n/ui';
 const { lang, compact = false } = Astro.props as { lang: Lang; compact?: boolean };
-const LISTS: Record<Lang, string> = {
-  de: '53134e4f-2ac5-4117-9c71-c40993fd7cc6',
-  fr: '75f0caa1-9b60-4cdd-9fd0-c39222734059',
-  it: '696c4a37-0996-4009-b146-3087577185b3',
-  en: '5c272cd2-1f7d-4c24-9afd-89b6262170fd',
-};
+import { NL_ACTION, NL_LISTS as LISTS } from '../newsletter';
 const id = compact ? 'nlf' : 'nlm';
 ---
-<form class:list={['nl', { compact }]} action="https://news.safetyradar.ch/subscription/form" method="post">
+<form class:list={['nl', { compact }]} action={NL_ACTION} method="post">
   <input type="hidden" name="nonce" value="" />
   <input type="email" name="email" required autocomplete="email" placeholder={t(lang, 'nl.placeholder')} aria-label={t(lang, 'nl.email')} />
   <label class="sr-only" for={`${id}-l`}>{t(lang, 'nl.lang')}</label>

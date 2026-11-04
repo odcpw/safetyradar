@@ -2,12 +2,13 @@
 import Base from '../../../layouts/Base.astro';
 import AccidentSlim from '../../../components/AccidentSlim.astro';
 import data from '../../../../data/accidents.json';
+import { articleLd } from '../../../seo';
 import { t, pick, LANGS, type Lang } from '../../../i18n/ui';
 export function getStaticPaths() { return LANGS.flatMap(lang => data.map((item: any) => ({ params: { lang, id: item.id }, props: { item } }))); }
 const lang = Astro.params.lang as Lang; const { item } = Astro.props as any;
 const title = pick(lang, item.title)!;
 ---
-<Base title={title} lang={lang} description={pick(lang, item.facts?.what) ?? undefined}>
+<Base title={title} lang={lang} ogType="article" jsonld={articleLd(item, lang, 'accidents')} description={pick(lang, item.facts?.what) ?? undefined}>
   <p class="back"><a id="backlink" href={`/${lang}/accidents/`}>{t(lang, 'back')}</a></p>
   <article class={`perma sev-${item.outcome ?? 'none'}`}>
     <h1>{title}</h1>

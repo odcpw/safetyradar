@@ -1,0 +1,16 @@
+---
+// Slim one-line newsletter signup above the header. Plain HTML POST to Listmonk (no JS, no cookies, no tracking);
+// the list is fixed to the page language (the bottom box keeps the language picker).
+import { t, type Lang } from '../i18n/ui';
+import { NL_ACTION, NL_LISTS } from '../newsletter';
+const { lang } = Astro.props as { lang: Lang };
+---
+<div class="topnl"><div class="wrap">
+  <form action={NL_ACTION} method="post">
+    <input type="hidden" name="nonce" value="" />
+    <input type="hidden" name="l" value={NL_LISTS[lang]} />
+    <label for="topnl-e"><span aria-hidden="true">✉</span> {t(lang, 'nl.top')}</label>
+    <input id="topnl-e" type="email" name="email" required autocomplete="email" placeholder={t(lang, 'nl.topph')} />
+    <button type="submit">{t(lang, 'nl.button')}</button>
+  </form>
+</div></div>

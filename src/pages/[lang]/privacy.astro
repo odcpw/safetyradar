@@ -5,4 +5,4 @@ import { PRIVACY } from '../../i18n/legal';
 export function getStaticPaths() { return LANGS.map(lang => ({ params: { lang } })); }
 const lang = Astro.params.lang as Lang; const c = PRIVACY[lang];
 ---
-<Base title={c.title} lang={lang}><h1>{c.title}</h1><Fragment set:html={c.html} /></Base>
+<Base title={c.title} lang={lang} hideTopNl><h1>{c.title}</h1><Fragment set:html={c.html} /></Base>

@@ -1,4 +1,25 @@
+# Safety Radar – public, ad-free facts on Swiss workplace safety. All crawlers welcome, including AI/answer engines.
 User-agent: *
+Allow: /
+
+# AI and answer-engine crawlers: explicitly allowed (please cite safetyradar.ch and the original source).
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: anthropic-ai
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: CCBot
+User-agent: Meta-ExternalAgent
+User-agent: MistralAI-User
+User-agent: DuckAssistBot
+User-agent: Amazonbot
+User-agent: Bingbot
 Allow: /
 
 Sitemap: https://safetyradar.ch/sitemap.xml

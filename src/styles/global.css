@@ -147,3 +147,12 @@ p.more{text-align:right;margin:8px 0 0;font-size:.9rem}
 .perma .slim p{line-height:1.6}
 form.nl select{padding:10px;border-radius:10px;border:1px solid var(--line);font-size:1rem;background:#fff}
 .footer-nl{flex:1 1 320px;max-width:460px}.footer-nl form.nl{margin:6px 0 4px}.footer-nl form.nl input[type=email],.footer-nl form.nl select,.footer-nl .btn{padding:7px 10px;font-size:.9rem}
+/* top newsletter strip (no JS) */
+.topnl{background:#0d161e;color:#cfd8e2;font-size:.85rem;border-bottom:1px solid #22313f}
+.topnl form{display:flex;align-items:center;justify-content:flex-end;gap:8px;min-height:38px;padding:4px 0}
+.topnl label{margin-right:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topnl input[type=email]{flex:0 1 240px;min-width:0;padding:5px 9px;border-radius:7px;border:1px solid #3a4b5c;background:#14202b;color:#fff;font-size:16px;line-height:1.2}
+.topnl input[type=email]::placeholder{color:#8797a7}
+.topnl button{flex:0 0 auto;padding:5px 12px;border-radius:7px;border:0;background:var(--signal,#f2c200);color:#14202b;font-weight:600;font-size:.85rem;cursor:pointer}
+.topnl button:hover,.topnl button:focus-visible{filter:brightness(1.08)}
+@media(max-width:760px){.topnl input[type=email]::placeholder{font-size:15px}.topnl label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.topnl input[type=email]{flex:1 1 auto}}
