@@ -21,5 +21,6 @@ if ! docker inspect listmonk_app >/dev/null 2>&1; then
     -e LISTMONK_db__database=listmonk -e LISTMONK_db__password="$LISTMONK_DB_PASSWORD" -e LISTMONK_db__ssl_mode=disable \
     -e LISTMONK_ADMIN_USER="$LISTMONK_ADMIN_USER" -e LISTMONK_ADMIN_PASSWORD="$LISTMONK_ADMIN_PASSWORD" \
     -v listmonk_uploads:/listmonk/uploads \
-    listmonk/listmonk:v6.2.0 sh -c "./listmonk --install --idempotent --yes --config '' && ./listmonk --upgrade --yes --config '' && ./listmonk --config ''" >/dev/null
+    -v /srv/listmonk/overrides:/listmonk/overrides:ro \
+    listmonk/listmonk:v6.2.0 sh -c "./listmonk --install --idempotent --yes --config '' && ./listmonk --upgrade --yes --config '' && ./listmonk --config '' --static-dir /listmonk/overrides/static --i18n-dir /listmonk/overrides/i18n" >/dev/null
 fi

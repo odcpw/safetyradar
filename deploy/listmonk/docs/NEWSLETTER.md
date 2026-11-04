@@ -38,3 +38,12 @@ Still to add for SES and ImprovMX (values come from the SES and ImprovMX console
 - Listmonk settings (Settings → Bounces): `bounce.enabled = true`, `bounce.webhooks_enabled = true`, `bounce.ses_enabled = true`.
 - Actions: soft bounce, count 2 → none; hard bounce, count 1 → blocklist; complaint, count 1 → blocklist.
 - Note: `/api/settings` returns passwords masked. When you PUT settings back, send the SMTP password as an empty string to keep the stored one, or send the real value. If you send the mask back, it overwrites the stored password.
+
+## Branding and language overrides
+
+- Listmonk runs with `--static-dir /listmonk/overrides/static --i18n-dir /listmonk/overrides/i18n`; `/srv/listmonk/overrides` is mounted read-only (see `run.sh` / `docker-compose.yml`).
+- `deploy/listmonk/overrides/` holds only the changed files; `overrides/install.sh` rebuilds the full directory from upstream v6.2.0 plus these files. After changes: `docker rm -f listmonk_app && /srv/listmonk/run.sh`.
+- Changes: "Powered by listmonk" removed from emails (`base.html`) and public pages (`index.html`, footer links to safetyradar.ch); listmonk logo/favicon replaced; opt-in email (`subscriber-optin.html`) is DE/FR/IT/EN with no name greeting.
+- `i18n/en.json` (app language is `en`): opt-in subject is "Bitte bestätigen / Confirmez / Confermate / Please confirm – Safety Radar"; all `public.*` strings are "DE / FR / IT / EN", generated from upstream de/fr/it/en.json.
+- Don't add "if you did not sign up, ignore this e-mail" type wording to the opt-in mail: the grokbot test inbox silently drops it.
+- No settings were changed for this; don't PUT `/api/settings` (masked passwords).

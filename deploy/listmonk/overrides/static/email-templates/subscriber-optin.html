@@ -1,0 +1,24 @@
+{{ define "subscriber-optin" }}
+{{ template "header" . }}
+<h2>Safety Radar</h2>
+<p>Hallo / Bonjour / Ciao / Hello</p>
+<p><strong>DE</strong> &ndash; Bitte bestätigen Sie Ihr Abonnement des Safety-Radar-Newsletters mit einem Klick auf die Schaltfläche unten.</p>
+<p><strong>FR</strong> &ndash; Veuillez confirmer votre abonnement à la newsletter Safety Radar en cliquant sur le bouton ci-dessous.</p>
+<p><strong>IT</strong> &ndash; Vi preghiamo di confermare l'iscrizione alla newsletter Safety Radar cliccando sul pulsante qui sotto.</p>
+<p><strong>EN</strong> &ndash; Please confirm your subscription to the Safety Radar newsletter by clicking the button below.</p>
+<ul>
+    {{ range $i, $l := .Lists }}
+        {{ if eq .Type "public" }}
+            <li>{{ .Name }}</li>
+        {{ else }}
+            <li>{{ L.Ts "email.optin.privateList" }}</li>
+        {{ end }}
+    {{ end }}
+</ul>
+<p>
+    <a href="{{ .OptinURL }}" class="button">Bestätigen / Confirmer / Confermare / Confirm</a>
+</p>
+<a href="{{ .UnsubURL }}?manage=true">Abmelden / Se désabonner / Disiscriviti / Unsubscribe</a>
+
+{{ template "footer" }}
+{{ end }}

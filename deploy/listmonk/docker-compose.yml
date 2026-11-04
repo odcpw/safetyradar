@@ -27,7 +27,7 @@ services:
       db: { condition: service_healthy }
     ports:
       - "127.0.0.1:9100:9000"
-    command: [sh, -c, "./listmonk --install --idempotent --yes --config '' && ./listmonk --upgrade --yes --config '' && ./listmonk --config ''"]
+    command: [sh, -c, "./listmonk --install --idempotent --yes --config '' && ./listmonk --upgrade --yes --config '' && ./listmonk --config '' --static-dir /listmonk/overrides/static --i18n-dir /listmonk/overrides/i18n"]
     environment:
       TZ: Europe/Zurich
       LISTMONK_app__address: 0.0.0.0:9000
@@ -41,6 +41,7 @@ services:
       LISTMONK_ADMIN_PASSWORD: ${LISTMONK_ADMIN_PASSWORD}
     volumes:
       - listmonk_uploads:/listmonk/uploads
+      - ./overrides:/listmonk/overrides:ro
     networks: [listmonk]
 
 networks:
