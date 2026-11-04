@@ -66,6 +66,11 @@ for (const e of accidents) { const id = common('accidents.json', e, seen); event
 seen = new Set();
 for (const e of rulings) {
   const f = 'rulings.json', id = common(f, e, seen); event(f, e, id);
+  if (e.published != null && !isDate(e.published)) err(f, id, 'published must be YYYY-MM-DD or null');
+  if (e.published != null && !e.publishedSource) err(f, id, 'publishedSource missing (where the release date comes from)');
+  if (e.firstSeen != null && !isDate(e.firstSeen)) err(f, id, 'firstSeen must be YYYY-MM-DD or null');
+  if (isDate(e.published) && isDate(e.date) && e.published < e.date) err(f, id, 'published before decision date');
+  if (e.published == null && e.firstSeen == null) warn(f, id, 'neither published nor firstSeen – the newsletter skips it');
   if (e.accidentDate != null && !isDate(e.accidentDate)) err(f, id, 'accidentDate must be YYYY-MM[-DD] or null');
   for (const k of ['court', 'appeal', 'employerRole', 'why']) t4(f, id, k, e[k]);
   if (e.final != null && typeof e.final !== 'boolean') err(f, id, 'final must be true/false/null');

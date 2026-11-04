@@ -98,7 +98,7 @@ Owner details (red TODO markers in imprint/privacy/about/post-a-job, all 4 langu
 
 ## v3 notes
 - Hazard categories are hidden in the UI (cards, filters, detail pages); `hazard` stays in the JSON for later use. Severity (`outcome`), industry and canton remain.
-- Rulings: `accidentDate`, `date` (ruling), `final`, `appeal`, `employerRole`, `defendants[]` (role, charge, verdict `convicted|acquitted`, reasoning, `sanction{dailyUnits, dailyAmount, suspended, probationYears, fineCHF, custodial, costs, compensation, bail, other}`). `null` = "not reported".
+- Rulings: `accidentDate`, `date` (decision), `published` (release date the source shows: bger.ch "Neue Entscheide" day, or the news article's publication date; `null` if the source shows none – never guessed), `publishedSource`, `firstSeen` (day Safety Radar first fetched it – fallback only, not a release date), `final`, `appeal`, `employerRole`, `defendants[]` (role, charge, verdict `convicted|acquitted`, reasoning, `sanction{dailyUnits, dailyAmount, suspended, probationYears, fineCHF, custodial, costs, compensation, bail, other}`). `null` = "not reported".
 - Every accident and ruling has a stable `caseId`; rulings have `linkedAccidentId` (id of a published accident when it is the same event; otherwise null). No UI for following cases yet.
 - Seeds: `scripts/seed/accidents.py` then `scripts/seed/accidents_v3.py`; `scripts/seed/rulings.py`.
 

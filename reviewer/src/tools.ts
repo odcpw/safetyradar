@@ -193,6 +193,13 @@ export function createTools(roots: Roots) {
 			if (JSON.stringify(e).includes('"_draft"')) return text("remove the _draft marker before publishing", true);
 			const { items, indent } = loadData(roots, args.file);
 			const i = items.findIndex((x) => x.id === e.id);
+			if (args.file === "rulings.json") {
+				// Release dates come from the draft/source only; firstSeen is the fallback "first fetched" day, set once.
+				const old = i >= 0 ? items[i] : {};
+				if (e.published == null && old.published) { e.published = old.published; e.publishedSource = old.publishedSource ?? null; }
+				e.published ??= null; e.publishedSource ??= null;
+				e.firstSeen ??= old.firstSeen ?? new Date().toLocaleDateString("sv-SE", { timeZone: "Europe/Zurich" });
+			}
 			if (i >= 0) items[i] = e; else items.push(e);
 			saveData(roots, args.file, items, indent);
 			return text(`${i >= 0 ? "replaced" : "added"} ${e.id} in ${args.file}; run run_checks when done`);

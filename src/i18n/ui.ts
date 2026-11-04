@@ -83,6 +83,7 @@ const S: Record<string, T4> = {
   'details': { de: 'Details →', fr: 'Détails →', it: 'Dettagli →', en: 'Details →' },
   'back': { de: '← Zurück zur Übersicht', fr: '← Retour à la liste', it: '← Torna all’elenco', en: '← Back to list' },
   'nr': { de: 'nicht gemeldet', fr: 'non communiqué', it: 'non comunicato', en: 'not reported' },
+  'r.published': { de: 'publiziert', fr: 'publié le', it: 'pubblicata il', en: 'published' },
   'f.rulingDate': { de: 'Datum des Entscheids', fr: 'Date de la décision', it: 'Data della decisione', en: 'Date of ruling' },
   'f.accidentDate': { de: 'Datum des Unfalls', fr: 'Date de l’accident', it: 'Data dell’incidente', en: 'Date of accident' },
   'f.appeal': { de: 'Instanzenzug / Rechtsmittel', fr: 'Instances / recours', it: 'Istanze / ricorsi', en: 'Appeals / instances' },

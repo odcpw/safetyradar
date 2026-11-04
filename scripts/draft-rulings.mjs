@@ -7,6 +7,7 @@
 import fs from 'node:fs';
 import { extract, flush, available, hash, LlmCapReached, LlmUnavailable } from './lib/llm.mjs';
 import { getText } from './lib/fetch-text.mjs';
+import { findPublished } from './lib/published.mjs';
 
 const D = new URL('../data/', import.meta.url), OUT = new URL('drafts/rulings/', D);
 if (!available()) { console.warn('draft:rulings: OPENAI_API_KEY missing – skipping.'); process.exit(0); }
@@ -68,8 +69,14 @@ try {
     const cn = (d.caseNumber || '').split(/[,;]|\s(?:et|und|e)\s/)[0].trim().toLowerCase().replace(/[^a-z0-9]+/g, '-');
     const cant = d.canton?.toLowerCase();
     const id = (fed ? [d.date, 'bger', cn, cant, d.slug] : [d.date, cant, courtAbbr(d.court?.de), cn, d.slug]).filter(Boolean).join('-').replace(/-+/g, '-');
-    const { slug, ...rest } = d;
-    const entry = { id, caseId: `case-${d.accidentDate || d.date}-${d.canton?.toLowerCase()}-${d.slug}`, ...rest, linkedAccidentId: null,
+    const { slug, date, ...rest } = d;
+    // published: release date shown by the source (bger.ch day list / article metadata / RSS pubDate), else null.
+    // firstSeen: the day we first fetched the item – a separate fallback, never a publication date.
+    const pub = await findPublished({ ...d, source: { url: x.url } });
+    if (!pub.published && x.published && !/entscheidsuche/.test(x.source || '')) Object.assign(pub, { published: x.published, publishedSource: 'feed pubDate' });
+    const firstSeen = new Date(x.fetchedAt || Date.now()).toLocaleDateString('sv-SE', { timeZone: 'Europe/Zurich' });
+    const entry = { id, date, published: pub.published, publishedSource: pub.publishedSource, firstSeen,
+      caseId: `case-${d.accidentDate || d.date}-${d.canton?.toLowerCase()}-${d.slug}`, ...rest, linkedAccidentId: null,
       source: { name: new URL(x.url).hostname.replace(/^www\./, ''), url: x.url, lang: x.lang === 'multi' ? null : x.lang }, extraSources: [],
       _draft: { model: MODEL, effort: process.env.LLM_EFFORT_DRAFT || 'medium', at: new Date().toISOString(), queueKey: hash(x.url), dedupeHint: x.llm.dupOf || null, note: 'LLM draft – verify every fact against the source before publishing; remove _draft.' } };
     const file = new URL(`${id}.json`, OUT);

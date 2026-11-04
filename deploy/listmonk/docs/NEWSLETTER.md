@@ -69,6 +69,7 @@ Still to add for SES and ImprovMX (values come from the SES and ImprovMX console
 ### Date rules (2026-11-04)
 Items must be new since the previous issue AND recent by when they happened; items without a valid date are dropped.
 - Accidents: event date within the previous Thursday minus 7 days grace up to today (~14 days).
-- Rulings: decision date within the last 30 days. The data has no publication date; if `published`/`datePublished` is added later it is preferred (rulings are often published long after the decision).
+- Rulings: by release, never by decision date. `published` (the date the source shows: bger.ch "Neue Entscheide" day list, or the news article's publication date) within the previous Thursday minus 23 days up to today (~30 days). If `published` is null, the separate fallback `firstSeen` (day the pipeline first fetched the ruling) is used. Neither -> dropped. The email shows "publiziert dd.mm.yyyy" (or "erfasst" for the fallback) plus the decision date.
+- How `published` is filled: `scripts/lib/published.mjs` (used by `draft-rulings.mjs`; news items also carry the feed pubDate from `fetch-sources.mjs`). Court portals (entscheidsuche, cantonal portals) show no release date -> null. The reviewer keeps these fields; `firstSeen` is set once on first publish.
 - Jobs: `datePosted` since the previous Thursday (jobs.json only holds live postings).
 - Accidents and rulings show their date (dd.mm.yyyy) in the email. Dropped items are listed in the summary JSON (`dropped`).

@@ -143,6 +143,8 @@ async function main() {
           if (same) { (same.alsoReportedBy ??= []).push({ url, title: i.title, source: s.id, lang }); row.merged++; continue; } }
         c.keep ? row.kept++ : row.dropped++;
         queue.push({ url, title: i.title, date: i.date ? new Date(i.date).toISOString().slice(0, 10) : null, kind: c.kind, lang,
+          // `published`: the source's own release date (RSS pubDate of a news report); entscheidsuche gives only the decision date.
+          published: s.type === 'entscheidsuche' || !i.date ? null : new Date(i.date).toLocaleDateString('sv-SE', { timeZone: 'Europe/Zurich' }),
           source: s.id, sourceName: i.sourceName || new URL(url).hostname.replace(/^www\./, ''), reference: i.reference,
           status: c.keep ? 'draft' : 'dropped', reason: c.reason, score: c.score,
           draft: c.keep ? { canton: i.canton || c.canton, industry: c.industry, hazard: c.hazard, outcome: c.outcome,

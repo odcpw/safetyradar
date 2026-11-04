@@ -39,7 +39,9 @@ ${editorial}
   Day-fines: sanction.dailyUnits (count) and sanction.dailyAmount (CHF per unit), never a combined text.
   Rulings: facts.what = what happened; "why"/defendant reasoning = what the court decided and why; defendants[].short =
   one short outcome line per person. Start rulings from the draft (data/drafts/rulings/<id>.json) when one exists, check
-  every fact against the ruling text and remove "_draft".
+  every fact against the ruling text and remove "_draft". Keep the draft's "published", "publishedSource" and "firstSeen"
+  as they are: "published" is the release date the source shows (bger.ch list, article date) – never set it to the decision
+  date or guess it; leave null when unknown ("firstSeen" is filled automatically).
 - Match the shape of existing entries exactly (look at one with get_entry first). Allowed keys only (else null):
   industry: construction|forestry|chemicals|logistics|energy|agriculture|transport|cleaning|industry;
   hazard: fall|struck|crane|machinery|vehicle|hazmat|explosion; outcome: fatal|life_threatening|serious|injured|property;

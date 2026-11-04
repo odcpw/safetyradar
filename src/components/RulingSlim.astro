@@ -4,7 +4,7 @@ import { fmtDate, sanctionText } from '../lib';
 import { t, tax, pick, type Lang } from '../i18n/ui';
 const { item, lang, permalink = false } = Astro.props as { item: any; lang: Lang; permalink?: boolean };
 const tt = (k: string) => t(lang, k); const pk = (v: any) => pick(lang, v);
-const meta = [fmtDate(item.date, lang), pk(item.court), item.place ? `${item.place} (${item.canton})` : item.canton, tax(lang, 'outcome', item.outcome)].filter(Boolean);
+const meta = [fmtDate(item.date, lang), item.published ? `${t(lang, 'r.published')} ${fmtDate(item.published, lang)}` : null, pk(item.court), item.place ? `${item.place} (${item.canton})` : item.canton, tax(lang, 'outcome', item.outcome)].filter(Boolean);
 const why = pk(item.why) ?? (item.defendants?.length === 1 ? null : null);
 const line = (d: any) => {
   const charge = (pk(d.charge) || '').replace(/\s*\(Art\.[^)]*\)|\s*\(art\.[^)]*\)/g, '');
