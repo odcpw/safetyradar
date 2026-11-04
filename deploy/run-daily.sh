@@ -19,7 +19,7 @@ flock -n 9 || { log "another run is in progress – exiting"; exit 0; }
 
 # .env is optional here: systemd passes it via EnvironmentFile, compose via env_file. Never echo its contents.
 if [[ -f .env && -z "${SAFETYRADAR_ENV_LOADED:-}" ]]; then set -a; . ./.env; set +a; export SAFETYRADAR_ENV_LOADED=1; fi
-export TZ=Europe/Zurich NOINDEX="${NOINDEX:-1}" GIT_PUSH="${GIT_PUSH:-0}"
+export TZ=Europe/Zurich GIT_PUSH="${GIT_PUSH:-0}"
 
 node -e 'const [a,b]=process.versions.node.split(".").map(Number); process.exit(a>22||(a===22&&b>=19)?0:1)' \
   || { log "Node >= 22.19 required (have $(node -v))"; exit 1; }
@@ -75,7 +75,7 @@ publish() {
 if [[ -n "${PUBLISH_DIR:-}" ]]; then
   if [[ "$GIT_PUSH" == 1 && -z "${SKIP_PULL:-}" ]]; then git pull --ff-only --quiet || { log "WARNING: pull after review failed"; status=1; }; fi
   rm -rf dist
-  NOINDEX="$NOINDEX" npm run --silent build || { log "ERROR: build failed – not publishing"; exit 1; }
+  npm run --silent build || { log "ERROR: build failed – not publishing"; exit 1; }
   [[ -f dist/index.html ]] || { log "ERROR: dist/index.html missing – not publishing"; exit 1; }
   publish
 fi

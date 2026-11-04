@@ -9,7 +9,7 @@ User=safetyradar
 Group=safetyradar
 WorkingDirectory=/srv/safetyradar/app
 # Secrets + mode: /srv/safetyradar/.env (600, safetyradar; app/.env symlinks to it): GIT_PUSH=0, PUBLISH_DIR=/srv/safetyradar/www,
-# NOINDEX=1, SITE/BASE. Values are taken from .env only (no Environment= overrides), so .env is the single switch.
+# SITE/BASE. Values are taken from .env only (no Environment= overrides), so .env is the single switch.
 EnvironmentFile=/srv/safetyradar/.env
 Environment=SAFETYRADAR_ENV_LOADED=1 HOME=/srv/safetyradar
 Environment=PATH=/usr/local/bin:/usr/bin:/bin

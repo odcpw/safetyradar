@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  && echo "deb [signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" > /etc/apt/sources.list.d/github-cli.list \
  && apt-get update && apt-get install -y --no-install-recommends gh \
  && rm -rf /var/lib/apt/lists/*
-ENV TZ=Europe/Zurich NOINDEX=1 SITE=https://safetyradar.ch BASE=/
+ENV TZ=Europe/Zurich SITE=https://safetyradar.ch BASE=/
 # node user (uid 1000) owns the mounted checkout on the host; git must accept it.
 RUN git config --system --add safe.directory /app
 USER node

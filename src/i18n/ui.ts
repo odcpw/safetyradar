@@ -41,7 +41,6 @@ const S: Record<string, T4> = {
   'nav.jobs': { de: 'Jobs', fr: 'Emplois', it: 'Lavoro', en: 'Jobs' },
   'nav.newsletter': { de: 'Newsletter', fr: 'Newsletter', it: 'Newsletter', en: 'Newsletter' },
   'nav.about': { de: 'Über uns', fr: 'À propos', it: 'Chi siamo', en: 'About' },
-  'nav.imprint': { de: 'Impressum', fr: 'Mentions légales', it: 'Colophon', en: 'Legal notice' },
   'nav.privacy': { de: 'Datenschutz', fr: 'Protection des données', it: 'Protezione dei dati', en: 'Privacy' },
   'nav.postjob': { de: 'Stelle inserieren', fr: 'Publier une offre', it: 'Pubblicare un annuncio', en: 'Post a job' },
   'meta.description': { de: 'Safety Radar – Arbeitsunfälle, Urteile und Stellen für Arbeitssicherheit in der Schweiz.', fr: 'Safety Radar – accidents du travail, jugements et emplois en sécurité au travail en Suisse.', it: 'Safety Radar – infortuni sul lavoro, sentenze e impieghi nella sicurezza sul lavoro in Svizzera.', en: 'Safety Radar – workplace accidents, court rulings and jobs in occupational safety in Switzerland.' },
@@ -56,9 +55,9 @@ const S: Record<string, T4> = {
   'nl.pitch': { de: 'Jeden Montag: die wichtigsten Unfälle, Urteile und Stellen der Woche – in 3 Minuten gelesen.', fr: 'Chaque lundi: les accidents, jugements et offres de la semaine – lus en 3 minutes.', it: 'Ogni lunedì: infortuni, sentenze e offerte della settimana – letti in 3 minuti.', en: 'Every Monday: the week’s key accidents, rulings and jobs – a 3-minute read.' },
   'nl.placeholder': { de: 'ihre.adresse@firma.ch', fr: 'votre.adresse@entreprise.ch', it: 'il.vostro.indirizzo@azienda.ch', en: 'you@company.ch' },
   'nl.button': { de: 'Abonnieren', fr: 'S’abonner', it: 'Iscriversi', en: 'Subscribe' },
-  'nl.thanks': { de: 'Danke! Der Newsletter startet in Kürze – die Anmeldung ist noch nicht aktiv, es wurden keine Daten gespeichert.', fr: 'Merci! La newsletter démarre bientôt – l’inscription n’est pas encore active, aucune donnée n’a été enregistrée.', it: 'Grazie! La newsletter partirà a breve – l’iscrizione non è ancora attiva, nessun dato è stato salvato.', en: 'Thanks! The newsletter launches soon – sign-up is not active yet and no data was stored.' },
-  'nl.small': { de: 'Wöchentlich, kostenlos, jederzeit abbestellbar. Double-Opt-in.', fr: 'Hebdomadaire, gratuite, résiliable à tout moment. Double opt-in.', it: 'Settimanale, gratuita, disdicibile in ogni momento. Double opt-in.', en: 'Weekly, free, unsubscribe any time. Double opt-in.' },
-  'nl.notice': { de: 'Hinweis: Der Versand ist noch nicht eingerichtet. Das Formular speichert derzeit keine Daten.', fr: 'Remarque: l’envoi n’est pas encore configuré. Le formulaire n’enregistre aucune donnée.', it: 'Nota: l’invio non è ancora configurato. Il modulo non salva alcun dato.', en: 'Note: sending is not set up yet. The form currently stores no data.' },
+  'nl.small': { de: 'Double-Opt-in; jederzeit abmeldbar.', fr: 'Double opt-in; désinscription à tout moment.', it: 'Double opt-in; disiscrizione in ogni momento.', en: 'Double opt-in; unsubscribe anytime.' },
+  'nl.email': { de: 'E-Mail-Adresse', fr: 'Adresse e-mail', it: 'Indirizzo e-mail', en: 'Email address' },
+  'nl.lang': { de: 'Sprache des Newsletters', fr: 'Langue de la newsletter', it: 'Lingua della newsletter', en: 'Newsletter language' },
   'acc.title': { de: 'Arbeitsunfälle in der Schweiz', fr: 'Accidents du travail en Suisse', it: 'Infortuni sul lavoro in Svizzera', en: 'Workplace accidents in Switzerland' },
   'acc.lead': { de: 'Gemeldete Arbeitsunfälle aus Polizei- und Medienmeldungen in allen Landesteilen – mit Faktenblatt, Quelle und einer Lehre für die Prävention.', fr: 'Accidents du travail signalés par la police et les médias dans toutes les régions – avec fiche de faits, source et enseignement pour la prévention.', it: 'Infortuni sul lavoro segnalati da polizia e media in tutte le regioni – con scheda dei fatti, fonte e insegnamento per la prevenzione.', en: 'Workplace accidents reported by police and media across all language regions – with a fact sheet, the source and a prevention lesson.' },
   'rul.title': { de: 'Urteile & Strafbefehle nach Arbeitsunfällen', fr: 'Jugements et ordonnances pénales après des accidents du travail', it: 'Sentenze e decreti d’accusa dopo infortuni sul lavoro', en: 'Court rulings & penalty orders after workplace accidents' },
@@ -135,7 +134,6 @@ const S: Record<string, T4> = {
   'postjob.b3': { de: 'Viersprachig: DE, FR, IT, EN. Preise werden beim Start kommuniziert.', fr: 'Quadrilingue: DE, FR, IT, EN. Les prix seront communiqués au lancement.', it: 'Quadrilingue: DE, FR, IT, EN. I prezzi saranno comunicati al lancio.', en: 'Four languages: DE, FR, IT, EN. Pricing announced at launch.' },
   'postjob.contact': { de: 'Interesse? Schreiben Sie an', fr: 'Intéressé? Écrivez à', it: 'Interessati? Scrivete a', en: 'Interested? Email' },
   'postjob.free': { de: 'Bis dahin listen wir öffentliche Inserate kostenlos mit Link aufs Original. Korrektur oder Entfernung? Kurze Nachricht genügt.', fr: 'D’ici là, nous listons gratuitement des annonces publiques avec lien vers l’original. Correction ou retrait? Un message suffit.', it: 'Nel frattempo elenchiamo gratuitamente annunci pubblici con link all’originale. Correzione o rimozione? Basta un messaggio.', en: 'Until then we list public ads free of charge with a link to the original. Correction or removal? Just send a note.' },
-  'todo.email': { de: 'TODO: E-Mail-Adresse', fr: 'TODO: adresse e-mail', it: 'TODO: indirizzo e-mail', en: 'TODO: email address' },
 };
 
 export const TAX: Record<string, Record<string, T4>> = {

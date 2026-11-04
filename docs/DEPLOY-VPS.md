@@ -2,7 +2,7 @@
 
 ## VPS local mode (cx43, from 2026-10-28)
 The VPS builds and serves the site itself; there are **no daily GitHub pushes and no GitHub login on the VPS**.
-- `.env` (`/srv/safetyradar/.env`): `GIT_PUSH=0`, `PUBLISH_DIR=/srv/safetyradar/www`, `SITE=https://safetyradar.ch`, `BASE=/`, `NOINDEX=1`.
+- `.env` (`/srv/safetyradar/.env`): `GIT_PUSH=0`, `PUBLISH_DIR=/srv/safetyradar/www`, `SITE=https://safetyradar.ch`, `BASE=/`. (`NOINDEX` is no longer used; the site is indexable since go-live.)
   The systemd unit takes these from `.env` only. Switching back to GitHub Pages: `GIT_PUSH=1`, `PUBLISH_DIR=` and push credentials.
 - **Data vs code ownership:** data (`data/accidents.json`, `rulings.json`, `jobs.json`) is changed **only on the VPS** from now on and kept
   as local commits on the VPS `main` (history); code is changed **only on GitHub**. Do not commit data on GitHub any more (stop the
@@ -83,7 +83,7 @@ GitHub Pages (`.github/workflows/pages.yml`) is unchanged and keeps deploying `m
 5. **User + checkout:** `adduser --system --group --home /opt/safetyradar safetyradar`;
    `sudo -u safetyradar git clone https://github.com/odcpw/safetyradar /opt/safetyradar`; `mkdir -p /var/www/safetyradar && chown safetyradar /var/www/safetyradar`.
 6. **Secrets – only in `/opt/safetyradar/.env`** (`cp .env.example .env`, `chown safetyradar: .env && chmod 600 .env`, never committed,
-   `.gitignore` covers it): `OPENAI_API_KEY`, `AGENTMAIL_API_KEY`, `GH_TOKEN` (push only). Keep `NOINDEX=1` until go-live. Back the file up offline.
+   `.gitignore` covers it): `OPENAI_API_KEY`, `AGENTMAIL_API_KEY`, `GH_TOKEN` (push only). Back the file up offline.
 7. **GitHub push access to `main`** (the reviewer pushes directly; no PRs, so no PR scope and no "require PR" branch protection):
    - *PAT:* a **fine-grained PAT** limited to `odcpw/safetyradar` with only *Contents: read/write*, as `GH_TOKEN` in `.env`; then once
      `sudo -u safetyradar gh auth setup-git` so `git push` uses it.
@@ -123,5 +123,10 @@ Restore the GitHub A records (185.199.108.153, .109, .110, .111) and `www` CNAME
 - Caddy vs nginx, Docker vs host install.
 - Reviewer on the VPS: PAT (Contents RW) vs deploy key. Decided 2026-10-28: no PRs, the reviewer pushes to main.
 - E-mail intake: option B implemented (AgentMail API, needs an API key).
-- When to drop `NOINDEX=1` and fill the legal TODOs (imprint/privacy).
+- Imprint: intentionally none for now (owner decision); privacy page is live.
 - Keep GitHub Pages as permanent fallback or disable it.
+
+## Go-live (2026-11-04)
+- Code reaches the VPS only through `deploy/run-daily.sh` (`git pull --rebase` from the public repo, then build + atomic publish to `/srv/safetyradar/www`). To ship code outside the timer: `sudo -u safetyradar env SKIP_STAGE1=1 SKIP_REVIEW=1 /srv/safetyradar/app/deploy/run-daily.sh` (with the .env loaded, as the systemd unit does).
+- noindex removed (meta, robots.txt, Caddy `X-Robots-Tag`); robots.txt allows all and points to sitemap.xml; Caddy serves /404.html for 404s.
+- Newsletter form: plain HTML POST to https://news.safetyradar.ch/subscription/form (list UUIDs in `src/components/NewsletterForm.astro`); Listmonk shows its own confirmation page.

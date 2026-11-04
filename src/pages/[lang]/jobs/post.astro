@@ -8,5 +8,5 @@ const lang = Astro.params.lang as Lang;
   <h1>{t(lang,'postjob.title')}</h1>
   <p class="lead">{t(lang,'postjob.lead')}</p>
   <div class="grid cols-3">{['postjob.b1','postjob.b2','postjob.b3'].map(k => <div class="card"><p>{t(lang,k)}</p></div>)}</div>
-  <p class="notice" style="margin-top:16px">{t(lang,'postjob.contact')} <span class="todo">{t(lang,'todo.email')}</span>. {t(lang,'postjob.free')}</p>
+  <p class="notice" style="margin-top:16px">{t(lang,'postjob.contact')} <a href="mailto:info@safetyradar.ch">info@safetyradar.ch</a>. {t(lang,'postjob.free')}</p>
 </Base>

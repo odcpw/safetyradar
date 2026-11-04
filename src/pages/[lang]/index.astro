@@ -21,7 +21,7 @@ const r = [...rulings].sort(byDateDesc('date')).slice(0, 5);
 const a = [...accidents].sort(byDateDesc('date')).slice(0, 6);
 const j = [...jobs].sort(byDateDesc('datePosted')).slice(0, 4);
 ---
-<Base title="Safety Radar" lang={lang}>
+<Base title="Safety Radar" lang={lang} hideFooterNl>
   <section class="intro">
     <div class="intro-text">
       <h1 class="sr-only">Safety Radar</h1>

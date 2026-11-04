@@ -145,3 +145,5 @@ p.more{text-align:right;margin:8px 0 0;font-size:.9rem}
 .list>.item{position:relative}
 .perma h1{font-size:1.6rem;line-height:1.25;margin:.2em 0 .4em}
 .perma .slim p{line-height:1.6}
+form.nl select{padding:10px;border-radius:10px;border:1px solid var(--line);font-size:1rem;background:#fff}
+.footer-nl{flex:1 1 320px;max-width:460px}.footer-nl form.nl{margin:6px 0 4px}.footer-nl form.nl input[type=email],.footer-nl form.nl select,.footer-nl .btn{padding:7px 10px;font-size:.9rem}

@@ -1,11 +1,23 @@
 ---
-// Placeholder: no provider wired yet. TODO: connect provider and set form action.
-import { t, type Lang } from '../i18n/ui';
-const { lang } = Astro.props as { lang: Lang };
+// Plain HTML form POST to the Listmonk public subscription form (no JS, no cross-origin fetch).
+// Listmonk shows its own (multilingual) confirmation page and sends the double opt-in e-mail.
+import { t, LANGS, languages, type Lang } from '../i18n/ui';
+const { lang, compact = false } = Astro.props as { lang: Lang; compact?: boolean };
+const LISTS: Record<Lang, string> = {
+  de: '53134e4f-2ac5-4117-9c71-c40993fd7cc6',
+  fr: '75f0caa1-9b60-4cdd-9fd0-c39222734059',
+  it: '696c4a37-0996-4009-b146-3087577185b3',
+  en: '5c272cd2-1f7d-4c24-9afd-89b6262170fd',
+};
+const id = compact ? 'nlf' : 'nlm';
 ---
-<form class="nl" action="#" method="post" onsubmit="event.preventDefault();this.querySelector('.nl-msg').hidden=false;">
-  <input type="email" name="email" required placeholder={t(lang, 'nl.placeholder')} aria-label="E-Mail" />
+<form class:list={['nl', { compact }]} action="https://news.safetyradar.ch/subscription/form" method="post">
+  <input type="hidden" name="nonce" value="" />
+  <input type="email" name="email" required autocomplete="email" placeholder={t(lang, 'nl.placeholder')} aria-label={t(lang, 'nl.email')} />
+  <label class="sr-only" for={`${id}-l`}>{t(lang, 'nl.lang')}</label>
+  <select name="l" id={`${id}-l`} aria-label={t(lang, 'nl.lang')}>
+    {LANGS.map(l => <option value={LISTS[l]} selected={l === lang}>{languages[l]}</option>)}
+  </select>
   <button class="btn" type="submit">{t(lang, 'nl.button')}</button>
-  <p class="nl-msg src" hidden>{t(lang, 'nl.thanks')}</p>
 </form>
-<p class="src">{t(lang, 'nl.small')} <a href={`/${lang}/privacy/`}>{t(lang, 'nav.privacy')}</a>.</p>
+<p class="src">{t(lang, 'nl.small')} <a href={`/${lang}/privacy/`}>{t(lang, 'nav.privacy')}</a></p>

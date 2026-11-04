@@ -8,8 +8,6 @@ www.safetyradar.ch {
 safetyradar.ch {
 	root * /srv/safetyradar/www
 	encode zstd gzip
-	# remove at go-live together with NOINDEX=1
-	header X-Robots-Tag "noindex, nofollow"
 	header Cache-Control "public, max-age=300, must-revalidate"
 	header /_astro/* Cache-Control "public, max-age=31536000, immutable"
 	header {
@@ -17,8 +15,9 @@ safetyradar.ch {
 		Referrer-Policy strict-origin-when-cross-origin
 		-Server
 	}
-	# The Astro build has no 404.html yet, so Caddy returns its plain 404. Once src/pages/404.astro exists, add:
-	#   handle_errors 404 { rewrite * /404.html
-	#                       file_server }
+	handle_errors 404 {
+		rewrite * /404.html
+		file_server
+	}
 	file_server
 }

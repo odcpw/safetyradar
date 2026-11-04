@@ -24,7 +24,6 @@ jobs:
         env:
           SITE: https://safetyradar.ch
           BASE: /
-          NOINDEX: '1'
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
