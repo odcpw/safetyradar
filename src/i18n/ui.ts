@@ -40,7 +40,6 @@ const S: Record<string, T4> = {
   'nav.rulings': { de: 'Urteile', fr: 'Jugements', it: 'Sentenze', en: 'Rulings' },
   'nav.jobs': { de: 'Jobs', fr: 'Emplois', it: 'Lavoro', en: 'Jobs' },
   'nav.newsletter': { de: 'Newsletter', fr: 'Newsletter', it: 'Newsletter', en: 'Newsletter' },
-  'nav.about': { de: 'Über uns', fr: 'À propos', it: 'Chi siamo', en: 'About' },
   'nav.privacy': { de: 'Datenschutz', fr: 'Protection des données', it: 'Protezione dei dati', en: 'Privacy' },
   'nav.postjob': { de: 'Stelle inserieren', fr: 'Publier une offre', it: 'Pubblicare un annuncio', en: 'Post a job' },
   'meta.description': { de: 'Safety Radar – Arbeitsunfälle, Urteile und Stellen für Arbeitssicherheit in der Schweiz.', fr: 'Safety Radar – accidents du travail, jugements et emplois en sécurité au travail en Suisse.', it: 'Safety Radar – infortuni sul lavoro, sentenze e impieghi nella sicurezza sul lavoro in Svizzera.', en: 'Safety Radar – workplace accidents, court rulings and jobs in occupational safety in Switzerland.' },

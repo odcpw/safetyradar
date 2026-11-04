@@ -47,3 +47,13 @@ Still to add for SES and ImprovMX (values come from the SES and ImprovMX console
 - `i18n/en.json` (app language is `en`): opt-in subject is "Bitte bestätigen / Confirmez / Confermate / Please confirm – Safety Radar"; all `public.*` strings are "DE / FR / IT / EN", generated from upstream de/fr/it/en.json.
 - Don't add "if you did not sign up, ignore this e-mail" type wording to the opt-in mail: the grokbot test inbox silently drops it.
 - No settings were changed for this; don't PUT `/api/settings` (masked passwords).
+
+## Tracking and newsletter links
+- Open tracking: `{{ TrackView }}` removed from the default campaign template (id 1) on 2026-11-04; the archive template never had it. Don't re-add it (privacy page says there is no open tracking). The unused "Sample visual template" still contains it – don't use that template.
+- Every link to safetyradar.ch in an issue must carry `utm_source=newsletter&utm_medium=email&utm_campaign=<issue>` (issue = ISO week, e.g. `2026-w45`), optionally `utm_content=a|b` for A/B variants.
+- Helper: `scripts/lib/utm.mjs` – `issueId(date)`, `tagUrl(url, {campaign, content})`, `tagHtml(html, {campaign, content})`; CLI `node scripts/lib/utm.mjs issue.html 2026-w45 a > tagged.html`. Only safetyradar.ch links are changed. Tests: `test/utm.test.mjs`.
+- A/B: send variant A with `content: 'a'` and B with `content: 'b'` (e.g. two campaigns to split lists); the weekly stats break clicks down by campaign and content. No test is set up yet.
+
+## Weekly visit count
+- Caddy writes an IP-free page log for safetyradar.ch only (`deploy/caddy/access-log.snippet`, inside the `safetyradar.ch` block): `/var/log/caddy/safetyradar-access.log`, rolled weekly, rolled files kept 56 days. No IPs, no request headers except Referer, user agent reduced to a `bot` flag.
+- `deploy/stats/weekly-stats.mjs` + `deploy/systemd/safetyradar-stats.{service,timer}` (Mondays 06:30) write `/srv/safetyradar/stats/YYYY-Www.json` and `.txt` for the previous ISO week: page views (no bots/assets), top 20 pages, newsletter clicks by `utm_campaign` × `utm_content`. Manual run for a week: `node deploy/stats/weekly-stats.mjs 2026-W45`.

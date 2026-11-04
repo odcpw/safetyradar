@@ -1,0 +1,14 @@
+[Unit]
+Description=Safety Radar weekly page-view count from the IP-free Caddy log -> /srv/safetyradar/stats
+
+[Service]
+Type=oneshot
+# root only to read /var/log/caddy (files are 0600 caddy); output is chowned to safetyradar.
+ExecStart=/usr/bin/node /srv/safetyradar/app/deploy/stats/weekly-stats.mjs
+ExecStartPost=/bin/chown -R safetyradar:safetyradar /srv/safetyradar/stats
+Nice=10
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/srv/safetyradar/stats

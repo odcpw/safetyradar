@@ -8,7 +8,7 @@ const description = Astro.props.description ?? t(lang, 'meta.description');
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 const rest = Astro.url.pathname.replace(BASE, '').replace(/^\/(de|fr|it|en)(\/|$)/, '');
 const cur = '/' + rest.replace(/\/$/, '');
-const nav = [['', 'nav.home'], ['accidents', 'nav.accidents'], ['rulings', 'nav.rulings'], ['jobs', 'nav.jobs'], ['newsletter', 'nav.newsletter'], ['about', 'nav.about']];
+const nav = [['', 'nav.home'], ['accidents', 'nav.accidents'], ['rulings', 'nav.rulings'], ['jobs', 'nav.jobs'], ['newsletter', 'nav.newsletter']];
 ---
 <!doctype html>
 <html lang={lang}>
@@ -36,7 +36,7 @@ const nav = [['', 'nav.home'], ['accidents', 'nav.accidents'], ['rulings', 'nav.
   <footer class="site"><div class="wrap">
     <div><strong>Safety Radar</strong> · safetyradar.ch<br/>{t(lang, 'footer.note')}<br/><a href="mailto:info@safetyradar.ch">info@safetyradar.ch</a></div>
     {!Astro.props.hideFooterNl && <div class="footer-nl"><strong>{t(lang, 'nl.title')}</strong><NewsletterForm lang={lang} compact /></div>}
-    <div><a href={`/${lang}/privacy/`}>{t(lang, 'nav.privacy')}</a> · <a href={`/${lang}/jobs/post/`}>{t(lang, 'nav.postjob')}</a> · <a href={`/${lang}/about/`}>{t(lang, 'nav.about')}</a></div>
+    <div><a href={`/${lang}/privacy/`}>{t(lang, 'nav.privacy')}</a> · <a href={`/${lang}/jobs/post/`}>{t(lang, 'nav.postjob')}</a></div>
   </div></footer>
 </body>
 </html>
