@@ -92,11 +92,24 @@ function item(x, kind, lang) {
   return `<p style="margin:0 0 14px"><a href="${link(`/${lang}/${kind}/${x.id}/`)}" style="font-weight:600">${esc(title)}</a>`
     + ` <span style="color:#888">· ${esc(kind === 'rulings' ? rulDates(x, lang) : fmtDate(x.date, lang))}${x.canton ? ` · ${esc(x.canton)}` : ''}</span><br/>${esc(line)}</p>`;
 }
+// Subject (Oliver): short factual counts, never an item title (no fatal/death wording, no names), zero counts skipped.
+//   DE "Safety Radar KW 45: 4 Arbeitsunfälle, 18 neue Stellen"
+const SUBJ = {
+  accidents: { de: n => n === 1 ? '1 Arbeitsunfall' : `${n} Arbeitsunfälle`, fr: n => n === 1 ? '1 accident' : `${n} accidents`,
+    it: n => n === 1 ? '1 infortunio' : `${n} infortuni`, en: n => n === 1 ? '1 workplace accident' : `${n} workplace accidents` },
+  rulings: { de: n => n === 1 ? '1 Urteil' : `${n} Urteile`, fr: n => n === 1 ? '1 jugement' : `${n} jugements`, it: n => n === 1 ? '1 sentenza' : `${n} sentenze`, en: n => n === 1 ? '1 ruling' : `${n} rulings` },
+  jobs: { de: n => n === 1 ? '1 neue Stelle' : `${n} neue Stellen`, fr: n => n === 1 ? '1 offre d’emploi' : `${n} offres d’emploi`,
+    it: n => n === 1 ? '1 nuova offerta' : `${n} nuove offerte`, en: n => n === 1 ? '1 new job' : `${n} new jobs` },
+};
+function subjectFor(lang) {
+  const parts = [['accidents', accidents.length], ['rulings', rulings.length], ['jobs', jobs.length]].filter(([, n]) => n > 0).map(([k, n]) => SUBJ[k][lang](n));
+  const colon = lang === 'fr' ? ' : ' : ': ';
+  return `Safety Radar ${L.week[lang]} ${wn}${colon}${parts.length ? parts.join(', ') : L.quietSubj[lang]}`;
+}
 function build(lang) {
   const a = accidents.slice(0, MAX.accidents), r = rulings.slice(0, MAX.rulings), j = jobs.slice(0, MAX.jobs);
   const quiet = !accidents.length && !rulings.length;
-  const key = [...r, ...a].map(x => pick(x.title, lang)).filter(Boolean).slice(0, 1);
-  const subject = `Safety Radar – ${L.week[lang]} ${wn}: ${quiet ? L.quietSubj[lang] : key[0]}`.slice(0, 140);
+  const subject = subjectFor(lang);
   let h = `<h2 style="margin-top:0">Safety Radar – ${L.week[lang]} ${wn}</h2><p>${L.intro[lang]}</p>`;
   if (quiet) h += `<p>${L.quiet[lang]}</p>`;
   if (r.length) h += `<h3>${L.rulings[lang]} (${rulings.length})</h3>` + r.map(x => item(x, 'rulings', lang)).join('');
