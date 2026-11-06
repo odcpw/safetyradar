@@ -9,7 +9,7 @@ import { allegationText } from '../scripts/lib/legal-display.mjs';
 import { applyFeedback } from '../scripts/lib/review-feedback.mjs';
 const L = s => ({de:s,fr:s,it:s,en:s});
 const article = (code, number) => ({code,article:number,paragraph:null,letter:null});
-const base = {id:'case',caseStatus:'resolved',outcome:'serious',lesson:null,title:L('Workplace injury'),facts:{what:L('A workplace injury'),injuries:L('Hand injury')},defendants:[{id:'d1',role:L('Trainer'),verdict:'convicted',allegations:[{status:'convicted',offence:L('Negligent injury'),articles:[article('StGB','125')]},{status:'alternative_charge',offence:L('Accident Insurance Act offence'),articles:[article('UVG','112')]}],sanction:null,sanctionHistory:[]}]};
+const base = {id:'case',accidentDate:null,judgmentDate:null,caseStatus:'resolved',outcome:'serious',lesson:null,title:L('Workplace injury'),facts:{what:L('A workplace injury'),injuries:L('Hand injury')},defendants:[{id:'d1',role:L('Trainer'),verdict:'convicted',allegations:[{status:'convicted',offence:L('Negligent injury'),articles:[article('StGB','125')]},{status:'alternative_charge',offence:L('Accident Insurance Act offence'),articles:[article('UVG','112')]}],sanction:null,sanctionHistory:[]}]};
 const source={url:'https://example.org/decision',text:'The trainer was convicted of negligent injury under Art. 125 StGB. Art. 112 UVG was charged only in the alternative.'};
 const evidence=[0,1].map(j=>({path:`/defendants/0/allegations/${j}`,personId:'d1',sourcePerson:'A (trainer)',section:'Facts A/B',sourceUrl:source.url,sourceHash:fingerprint(source.text),quotes:[source.text]}));
 test('Fräse: conviction and eventualiter remain separately labelled, including Fedlex article text',()=>{
@@ -31,7 +31,7 @@ test('open case cannot display a current conviction sanction; contested orders a
  assert.deepEqual(structuralErrors(e,'rulings'),[]);
 });
 test('nonfatal English electrocution and conflicting casualty counts fail deterministically',()=>{
- const e={id:'shock',outcome:'injured',title:L('Worker electrocuted'),facts:{}};
+ const e={id:'shock',accidentDate:null,outcome:'injured',title:L('Worker electrocuted'),facts:{}};
  assert.ok(structuralErrors(e,'accidents').length);
  e.title=L('Worker suffers electric shock');assert.deepEqual(structuralErrors(e,'accidents'),[]);
  assert.ok(structuralErrors({...e,casualties:{fatal:1,injured:0,checked:0}},'accidents').length);
@@ -45,11 +45,11 @@ test('source unavailable, uncertainty and API errors preserve old data and exclu
  }
 });
 test('missing independent answers cannot approve a record, even when extractor approves',async()=>{
- const result=await verifyContent({kind:'accidents',entry:{id:'one',outcome:'injured'},sources:[source],extractor:async()=>({status:'supported',issues:[],evidence:['facts','outcomes','dates'].map(topic=>({path:'/facts',topic,sourceIndex:0,paragraphIds:[0],personId:null,sourcePerson:null,section:'report'}))}),decider:async()=>({facts:{choice:'supported'}})});
+ const result=await verifyContent({kind:'accidents',entry:{id:'one',accidentDate:null,outcome:'injured'},sources:[source],extractor:async()=>({status:'supported',issues:[],evidence:['facts','outcomes','dates'].map(topic=>({path:'/facts',topic,sourceIndex:0,paragraphIds:[0],personId:null,sourcePerson:null,section:'report'}))}),decider:async()=>({facts:{choice:'supported'}})});
  assert.equal(result.state,'held');assert.ok(result.issues.some(x=>x.includes('outcomes')));
 });
 test('forged or out-of-range paragraph IDs cannot become verified evidence',async()=>{
- const result=await verifyContent({kind:'accidents',entry:{id:'one',outcome:'injured'},sources:[source],extractor:async()=>({status:'supported',issues:[],evidence:['facts','outcomes','dates'].map(topic=>({path:'/facts',topic,sourceIndex:0,paragraphIds:[999],personId:null,sourcePerson:null,section:'report'}))}),decider:async()=>{throw Error('must not reach semantic approval');}});
+ const result=await verifyContent({kind:'accidents',entry:{id:'one',accidentDate:null,outcome:'injured'},sources:[source],extractor:async()=>({status:'supported',issues:[],evidence:['facts','outcomes','dates'].map(topic=>({path:'/facts',topic,sourceIndex:0,paragraphIds:[999],personId:null,sourcePerson:null,section:'report'}))}),decider:async()=>{throw Error('must not reach semantic approval');}});
  assert.equal(result.state,'held');assert.ok(result.issues.some(x=>x.includes('evidence')));
 });
 test('changed/new unreviewed records block publication; unchanged legacy is explicitly not verified',()=>{
@@ -94,7 +94,7 @@ test('real published-data validator exits nonzero for an ungated edit',async()=>
 });
 
 test('source evidence must explicitly cover dates, not merely facts and outcomes',async()=>{
- const result=await verifyContent({kind:'accidents',entry:{id:'one',outcome:'injured'},sources:[source],extractor:async()=>({status:'supported',issues:[],evidence:['facts','outcomes'].map(topic=>({path:'/facts',topic,sourceIndex:0,paragraphIds:[0],personId:null,sourcePerson:null,section:'report'}))}),decider:async()=>{throw Error('must not bypass missing date evidence');}});
+ const result=await verifyContent({kind:'accidents',entry:{id:'one',accidentDate:null,outcome:'injured'},sources:[source],extractor:async()=>({status:'supported',issues:[],evidence:['facts','outcomes'].map(topic=>({path:'/facts',topic,sourceIndex:0,paragraphIds:[0],personId:null,sourcePerson:null,section:'report'}))}),decider:async()=>{throw Error('must not bypass missing date evidence');}});
  assert.equal(result.state,'held');assert.ok(result.issues.includes('missing dates evidence'));
 });
 

@@ -1,14 +1,17 @@
 ---
 // List entry: news-style, title links to the permalink page.
 import { CANTONS, fmtDate } from '../lib';
-import { tax, pick, type Lang } from '../i18n/ui';
+import { t, tax, pick, type Lang } from '../i18n/ui';
 const { item, lang, kind } = Astro.props as { item: any; lang: Lang; kind: 'accidents' | 'rulings' };
 const meta = kind === 'rulings' ? [pick(lang, item.court), tax(lang, 'outcome', item.outcome)] : [item.place, tax(lang, 'industry', item.industry), tax(lang, 'outcome', item.outcome)];
+const eventDate = kind === 'rulings' ? item.judgmentDate : item.accidentDate;
+const shownDate = eventDate || item.published;
+const dateLabel = eventDate ? t(lang, kind === 'rulings' ? 'r.judgmentDate' : 'r.accidentDate') : t(lang,'r.published');
 const href = `/${lang}/${kind}/${item.id}/`;
 ---
 <article class={`item sev-${item.outcome ?? 'none'}`} id={item.caseId} data-canton={item.canton} data-outcome={item.outcome ?? ''} data-industry={item.industry ?? ''} data-lang={item.source.lang} data-year={item.date.slice(0, 4)} data-month={item.date.slice(5, 7)}>
   <div class="row">
-    <div class="gutter"><time datetime={item.date}>{fmtDate(item.date, lang)}</time><span class="gc" title={CANTONS[item.canton]}>{item.canton}</span></div>
+    <div class="gutter">{shownDate && <time datetime={shownDate}>{dateLabel}<br/>{fmtDate(shownDate, lang)}</time>}<span class="gc" title={CANTONS[item.canton]}>{item.canton}</span></div>
     <div class="body">
       <h3><a href={href}>{pick(lang, item.title)}</a></h3>
       <div class="meta2">{meta.filter(Boolean).map(m => <span>{m}</span>)}</div>

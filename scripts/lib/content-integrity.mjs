@@ -23,6 +23,9 @@ export function validDate(value) {
 export function structuralErrors(entry, kind) {
   const errors = [];
   if (entry.outcome !== 'fatal' && /\belectrocut(?:ed|ion)\b/i.test([entry.title?.en, ...Object.values(entry.facts || {}).map(v => v?.en)].join(' '))) errors.push('nonfatal electric shock translated as fatal electrocution');
+  if (!Object.hasOwn(entry,'accidentDate')) errors.push('explicit accidentDate or null required; never infer from record date');
+  if (entry.judgmentDate != null && !validDate(entry.judgmentDate)) errors.push('invalid judgment date');
+  if (kind === 'rulings' && !Object.hasOwn(entry,'judgmentDate')) errors.push('explicit judgmentDate or null required');
   if (entry.accidentDate != null && !validDate(entry.accidentDate)) errors.push('invalid accident date');
   if (entry.casualties != null) {
     for (const k of ['fatal', 'injured', 'checked']) if (entry.casualties[k] != null && (!Number.isInteger(entry.casualties[k]) || entry.casualties[k] < 0)) errors.push(`invalid casualty count ${k}`);

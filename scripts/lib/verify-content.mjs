@@ -23,7 +23,7 @@ export async function verifyContent({ entry, kind, sources, publicationEvidence 
   if (publicationEvidence?.status === 'hold') return { state: 'held', issues: ['publication provenance: ' + publicationEvidence.reason], publicationEvidence };
   // Operational identifiers/ingestion dates are not claims made by the original event source.
   const reviewEntry = { ...entry };
-  for (const key of ['id', 'caseId', 'firstSeen', 'linkedAccidentId', 'publishedSource']) delete reviewEntry[key];
+  for (const key of ['id', 'caseId', 'firstSeen', 'linkedAccidentId', 'publishedSource', 'date']) delete reviewEntry[key];
   catalog = applicabilityCatalog(catalog);
   if (entry.lesson?.refs?.some(ref => !catalog.find(r => r.id === ref.id)?.requiredSourceFacts)) return { state: 'held', issues: ['lesson has no reviewed applicability prerequisites'] };
   const documents = sources.map((s, index) => ({ index, url: s.url, paragraphs: s.text.split(/\n+/).map(s => s.trim()).filter(Boolean).map((text, id) => ({ id, text })) }));

@@ -18,11 +18,11 @@ test('reviewer decisions mark stage-1 queue items published / rejected', () => {
   fs.writeFileSync(path.join(d, 'jobs-queue.json'), JSON.stringify([{ url: 'https://jobs.ch/1', status: 'new' }, { url: 'https://jobs.ch/2', status: 'new' }]));
   const ch = { 'accidents.json': { added: ['a1'], removed: [], changed: [] }, 'jobs.json': { added: ['j1'], removed: [], changed: [] } };
   const sum = { skipped: [{ item: 'https://crash.ch/d', reason: 'road traffic' }, { item: 'Title only', reason: 'unverifiable' }] };
-  assert.deepEqual(applyFeedback(d, sum, ch, '2026-10-28', { dry: true })['queue.json'], { published: 2, rejected: 2 });
+  assert.deepEqual(applyFeedback(d, sum, ch, '2026-10-28', { dry: true })['queue.json'], { published: 2, rejected: 1, held: 1 });
   assert.equal(JSON.parse(fs.readFileSync(path.join(d, 'queue.json')))[0].status, 'draft'); // dry run writes nothing
   applyFeedback(d, sum, ch, '2026-10-28');
   const q = JSON.parse(fs.readFileSync(path.join(d, 'queue.json')));
-  assert.deepEqual(q.map((x) => x.status), ['published', 'published', 'rejected', 'rejected', 'draft']);
+  assert.deepEqual(q.map((x) => x.status), ['published', 'published', 'rejected', 'held', 'draft']);
   assert.equal(q[0].review.id, 'a1');
   assert.deepEqual(JSON.parse(fs.readFileSync(path.join(d, 'jobs-queue.json'))).map((x) => x.status), ['published', 'new']);
 });

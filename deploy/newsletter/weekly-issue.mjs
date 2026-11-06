@@ -62,7 +62,7 @@ const relDate = x => x.published || x.firstSeen || null;
 const sev = { fatal: 0, life_threatening: 1, serious: 2, injured: 3 };
 // Date rules (Oliver: items must be recent by when they HAPPENED, not when the pipeline added them).
 // An item must be new since the previous issue (not in the baseline data) AND pass its date rule; no valid date -> dropped.
-//   accidents: event date (data `date`, dateType "event") within [previous Thursday - 7 days grace, now]  (~14 days)
+//   accidents: source-confirmed event date (`accidentDate`; partial/unknown dates excluded) within [previous Thursday - 7 days grace, now]  (~14 days)
 //   rulings:   by RELEASE, never by decision date: `published` (date the source shows: bger.ch "Neue Entscheide" day,
 //              news article date), else the separate fallback `firstSeen` (day we first fetched it), within
 //              [previous Thursday - 23 days grace, now] (~30 days). Neither -> dropped.
@@ -75,7 +75,7 @@ const inRange = (d, from) => validDate(d) && d >= from && d <= today;
 const accFrom = ymd(since - 7 * 86400), rulFrom = ymd(since - 23 * 86400), jobFrom = ymd(since);
 const dropped = [];
 const keep = (list, kind, field, from) => list.filter(x => { const d = field(x); const ok = inRange(d, from); if (!ok) dropped.push({ kind, id: x.id, date: d ?? null }); return ok; });
-const accidents = keep(fresh('accidents.json'), 'accident', x => x.dateType === 'event' || !x.dateType ? x.date : null, accFrom)
+const accidents = keep(fresh('accidents.json'), 'accident', x => x.accidentDate, accFrom)
   .sort((a, b) => (sev[a.outcome] ?? 9) - (sev[b.outcome] ?? 9) || byDate('date')(a, b));
 const rulings = keep(fresh('rulings.json'), 'ruling', relDate, rulFrom).sort((a, b) => String(relDate(b)).localeCompare(String(relDate(a))));
 const jobs = keep(fresh('jobs.json'), 'job', x => x.datePosted, jobFrom).sort(byDate('datePosted'));
@@ -84,17 +84,17 @@ const jobs = keep(fresh('jobs.json'), 'job', x => x.datePosted, jobFrom).sort(by
 const esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const firstSentence = s => { s = String(s || '').trim(); const m = s.match(/^.{20,220}?[.!?](\s|$)/); return (m ? m[0] : s.slice(0, 200)).trim(); };
 const link = (p, content) => esc(tagUrl(SITE + p, { campaign: issue, content }));
-const fmtDate = (d, lang) => { const [y, m, dd] = String(d).split('-'); return `${dd}.${m}.${y}`; };
+const fmtDate = (d, lang) => { return String(d).split('-').reverse().join('.'); };
 const pick = (o, lang) => (o && typeof o === 'object') ? (o[lang] || o.de || o.en || '') : (o || '');
 const DL = { pub: { de: 'publiziert', fr: 'publié le', it: 'pubblicata il', en: 'published' }, seen: { de: 'erfasst', fr: 'repéré le', it: 'rilevata il', en: 'first seen' },
   dec: { de: 'Entscheid', fr: 'décision du', it: 'decisione del', en: 'decided' } };
 const rulDates = (x, lang) => `${x.published ? DL.pub[lang] : DL.seen[lang]} ${fmtDate(relDate(x), lang)}`
-  + (x.date && x.date !== relDate(x) ? ` · ${DL.dec[lang]} ${fmtDate(x.date, lang)}` : '');
+  + (x.judgmentDate && x.judgmentDate !== relDate(x) ? ` · ${DL.dec[lang]} ${fmtDate(x.judgmentDate, lang)}` : '');
 function item(x, kind, lang) {
   const title = pick(x.title, lang); const line = firstSentence(pick(x.lesson, lang));
   if (!title) return '';
   return `<p style="margin:0 0 14px"><a href="${link(`/${lang}/${kind}/${x.id}/`)}" style="font-weight:600">${esc(title)}</a>`
-    + ` <span style="color:#888">· ${esc(kind === 'rulings' ? rulDates(x, lang) : fmtDate(x.date, lang))}${x.canton ? ` · ${esc(x.canton)}` : ''}</span><br/>${esc(line)}</p>`;
+    + ` <span style="color:#888">· ${esc(kind === 'rulings' ? rulDates(x, lang) : fmtDate(x.accidentDate, lang))}${x.canton ? ` · ${esc(x.canton)}` : ''}</span><br/>${esc(line)}</p>`;
 }
 // Subject (Oliver): short factual counts, never an item title (no fatal/death wording, no names), zero counts skipped.
 //   DE "Safety Radar KW 45: 4 Arbeitsunfälle, 18 neue Stellen"

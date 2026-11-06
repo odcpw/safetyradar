@@ -24,7 +24,7 @@ const SCHEMA = obj({
   industry: { type: 'string', enum: ['construction', 'industry', 'agriculture', 'transport', 'forestry', 'logistics', 'energy', 'services', 'other'] },
   hazard: { type: 'string', enum: ['fall', 'crane', 'struck', 'machinery', 'vehicle', 'electrical', 'explosion', 'hazmat', 'other'] },
   outcome: { type: 'string', enum: ['injured', 'serious', 'life_threatening', 'fatal'] },
-  court: nul(L), caseNumber: nul({ type: 'string' }), final: nul({ type: 'boolean' }), appeal: nul(L), employerRole: nul(L),
+  judgmentDate: nul({type:'string'}), court: nul(L), caseNumber: nul({ type: 'string' }), final: nul({ type: 'boolean' }), appeal: nul(L), employerRole: nul(L),
   caseStatus: CASE_STATUS,
   defendants: { type: 'array', items: DEFENDANT },
   title: L, facts: obj({ activity: nul(L), what: L, injuries: nul(L) }), why: nul(L),
@@ -41,6 +41,7 @@ Return one ruling entry from the decision text. House rules:
   Day-fines: dailyUnits = number of day-fines, dailyAmount = CHF per day-fine; suspended + probationYears if stated. fineCHF = additional fine (Busse). sanction only for a current conviction. sanctionHistory [{stage,date,sanction}] explicitly distinguishes contested_penalty_order, quashed_judgment and superseded_judgment; an appealed penalty order is not a prior conviction. Never infer an unknown stage. why must state the accepted decisive reason, not a rejected appeal ground. Hold a draft with contradictory essential source facts for editorial review.
 - employerRole: which firms were involved and whether they were charged.
 - Do not write a prevention lesson or catalog ref for rulings. Title/facts describe what happened and the court outcome.
+- judgmentDate: actual court judgment date, YYYY-MM-DD, YYYY-MM or YYYY only when that precision is stated; null if not established. Never substitute an article publication date. accidentDate likewise retains only source-supported precision. date remains the existing record/sorting date.
 - court: the court name (e.g. Bundesgericht / Tribunal fédéral / Tribunale federale / Federal Supreme Court). final: true if no further appeal possible (Federal Court) or stated as final.`;
 
 const COURTS = [[/obergericht/i, 'og'], [/kantonsgericht/i, 'kg'], [/bezirksgericht/i, 'bezg'], [/regionalgericht/i, 'rg'], [/strafgericht/i, 'strafg'],

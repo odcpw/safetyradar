@@ -36,7 +36,7 @@ ${lessonRefs}
   them. Electrical safety / fire protection roles count as safety jobs. A possible repost of an existing ad is acceptable;
   don't hold a job back for that.
 - Publish only what you could verify in a fetched source text. If the source cannot be fetched (robots, paywall,
-  error), do not publish; list it under "skipped" with the reason. LLM labels in review.md are hints, not facts.
+  error), do not publish; list it under "held" with the reason. LLM labels in review.md are hints, not facts.
 - Writing: short factual sentences in your own words in all four languages (same facts in each); never copy or closely
   paraphrase article sentences. No names of private persons (victims, workers, defendants, small-firm owners); ages and
   roles are fine. Unknown -> null (omit), never guess. Leave uncertain facts out. Hazard key stays in the data but is
@@ -56,6 +56,7 @@ ${lessonRefs}
   Do not repeatedly rewrite already reviewed entries. Held candidates in data/drafts/held need source clarification, not cosmetic rewording.
   facts.injuries: short source-supported injury/casualty phrase. casualties: {fatal,injured,checked}, counts only if explicit;
   checked-only people are not injuries, and the same person is not counted twice. Nonfatal shock in EN is "electric shock", never "electrocuted".
+  Explicit accidentDate is YYYY-MM-DD, YYYY-MM or YYYY only at source precision, otherwise null. Rulings also require judgmentDate at source precision or null; never substitute a media publication/legacy record date. Accidents may store source-confirmed published separately.
   Match lesson activity AND prerequisites to the source, never just a hazard. Installation does not imply maintenance.
   defendants[].short = one short outcome line per person. Start rulings from the draft (data/drafts/rulings/<id>.json) when one exists, check every fact against
   the ruling text and remove "_draft". Keep the draft's "published", "publishedSource" and "firstSeen" as they are:
@@ -74,12 +75,12 @@ ${lessonRefs}
   find_entries/get_entry), and stop when the list is done. Doing nothing is a correct outcome when everything is
   already published or unverifiable.
 - Source-unavailable or uncertain candidates must remain held, not be permanently rejected as noise.
-- List EVERY review.md / inbox candidate you did not publish under "skipped" with its url: skipped items are marked
-  rejected and are not offered again, so the list must be complete.
+- List EVERY unhandled candidate with its url: "held" for source unavailable/uncertain/unsupported, "skipped" ONLY for confirmed duplicates or out-of-scope items (reasonCode duplicate|out_of_scope|closed_job). Held items stay in the review queue; never reject uncertainty.
 - Final answer: ONLY a JSON object, no prose around it:
   {"added":[{"file":"accidents.json","id":"...","source":"url"}],"merged":[{"file":"...","id":"...","source":"url"}],
    "removed":[{"file":"jobs.json","id":"...","reason":"..."}],"updated":[{"file":"...","id":"...","what":"..."}],
-   "skipped":[{"item":"title","url":"the item's source url","reason":"duplicate of <id> | not workplace | unverifiable | ..."}],
+   "held":[{"url":"source url","reason":"source unavailable or clarification needed"}],
+   "skipped":[{"reasonCode":"duplicate|out_of_scope|closed_job","item":"title","url":"the item's source url","reason":"duplicate of <id> | not workplace | unverifiable | ..."}],
    "notes":"anything the owner should check"}
 </operating_rules>`;
 }

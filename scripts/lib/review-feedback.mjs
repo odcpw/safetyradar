@@ -36,22 +36,32 @@ export function applyFeedback(dataDir, summary, changes, date, opts = {}) {
     if (entry && urlsOfEntry(entry).some(u => normUrl(u) === normUrl(x.source))) published.set(normUrl(x.source), x.id);
   }
   const held = new Set((opts.heldUrls || []).filter(Boolean).map(normUrl));
+  const heldReasons = new Map(), heldTitles = new Map();
+  for (const s of summary?.held || []) if (normUrl(s.url)) { held.add(normUrl(s.url)); heldReasons.set(normUrl(s.url), String(s.reason || 'source clarification needed')); }
   const rejected = new Map(), rejectedTitles = new Map();
   for (const s of summary?.skipped || []) {
     const reason = String(s?.reason ?? 'skipped by reviewer');
     const urls = [s?.url, ...String(s?.item ?? '').matchAll(URL_RE)].map((m) => (Array.isArray(m) ? m[0] : m)).filter(Boolean);
-    for (const u of urls) if (normUrl(u)) rejected.set(normUrl(u), reason);
-    if (!urls.length && s?.item) rejectedTitles.set(String(s.item).trim().toLowerCase(), reason);
+    const terminal = ['duplicate','out_of_scope','closed_job'].includes(s.reasonCode) || /^(duplicate|not workplace|out of scope|road traffic|closed job|expired job)\b/i.test(reason);
+    if (terminal) {
+      for (const u of urls) if (normUrl(u)) rejected.set(normUrl(u), reason);
+      if (!urls.length && s?.item) rejectedTitles.set(String(s.item).trim().toLowerCase(), reason);
+    } else {
+      for (const u of urls) if (normUrl(u)) { held.add(normUrl(u)); heldReasons.set(normUrl(u), reason); }
+      if (!urls.length && s?.item) heldTitles.set(String(s.item).trim().toLowerCase(), reason);
+    }
   }
   const stats = {};
   for (const file of ['queue.json', 'jobs-queue.json']) {
     const f = path.join(dataDir, file);
     if (!fs.existsSync(f)) continue;
     const q = readJson(f, []);
-    let pub = 0, rej = 0;
+    let pub = 0, rej = 0, heldCount = 0;
     for (const item of q) {
       const us = urlsOfQueueItem(item);
-      if (us.some(u => held.has(u))) { if (!opts.dry) { item.status = 'held'; item.review = { date, decision: 'held', reason: 'source integrity gate; see data/drafts/held' }; } continue; }
+      const heldUrl = us.find(u => held.has(u));
+      const heldReason = heldUrl ? heldReasons.get(heldUrl) || 'source integrity gate; see data/drafts/held' : heldTitles.get(String(item.title ?? '').trim().toLowerCase());
+      if (heldReason) { if(item.status!=='held')heldCount++; item.status = 'held'; item.review = { date, decision: 'held', reason: heldReason }; continue; }
       const hit = us.find((u) => published.has(u));
       if (hit) { if (item.status !== 'published') pub++; item.status = 'published'; item.review = { date, decision: 'published', id: published.get(hit) }; continue; }
       if (item.status === 'published') continue;
@@ -59,8 +69,8 @@ export function applyFeedback(dataDir, summary, changes, date, opts = {}) {
       const reason = ru ? rejected.get(ru) : rejectedTitles.get(String(item.title ?? '').trim().toLowerCase());
       if (reason) { if (item.status !== 'rejected') rej++; item.status = 'rejected'; item.review = { date, decision: 'rejected', reason }; }
     }
-    stats[file] = { published: pub, rejected: rej };
-    if (!opts.dry && (pub || rej || held.size)) fs.writeFileSync(f, JSON.stringify(q, null, 2));
+    stats[file] = { published: pub, rejected: rej, held: heldCount };
+    if (!opts.dry && (pub || rej || heldCount)) fs.writeFileSync(f, JSON.stringify(q, null, 2));
   }
   return stats;
 }

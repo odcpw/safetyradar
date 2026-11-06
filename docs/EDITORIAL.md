@@ -106,3 +106,5 @@ stay unresolved; no fabricated precision. Existing publication-date provenance i
 Only accidents may carry a curated prevention reference. Check the actual activity and prerequisites against the source,
 not just a shared hazard. Installing a crane alone does not establish maintenance. No match -> null. A reference does not
 assert that a legal duty was breached in that event.
+
+Dates: `accidentDate` and (rulings) `judgmentDate` are explicit source-supported dates, partial YYYY / YYYY-MM allowed, otherwise null. The legacy `date` sorts records; never relabel an article publication date as a judgment date. `final` concerns appealability of that decision, not disposal of a remanded case (`caseStatus`). Unavailable/uncertain sources stay held, never terminally rejected.
