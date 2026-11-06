@@ -2,7 +2,7 @@
 //   decide()  -> POST /v1/decisions  (gpt-6-luna; predicate/choice/score answers; input-only billing)
 //   extract() -> POST /v1/responses  (structured output via JSON schema)
 // Per-run hard caps (env): LLM_MAX_CALLS (300), LLM_MAX_TOKENS (1_000_000), LLM_MAX_USD (0.50).
-// Usage is appended to data/llm-usage.jsonl on flush(). The API key is read from process.env only and never logged.
+// Every attempt/result/error is fsynced to data/llm-requests.jsonl before continuation; flush() also writes a run summary. No keys or source content are journaled.
 import fs from 'node:fs';
 import { randomUUID } from 'node:crypto';
 
