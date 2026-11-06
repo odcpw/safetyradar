@@ -4,6 +4,7 @@
 // Usage: node scripts/validate-data.mjs [dataDir]   (default: ./data)
 import fs from 'node:fs';
 import path from 'node:path';
+import { lessonErrors } from './lib/lesson-refs.mjs';
 
 const dir = path.resolve(process.argv[2] || 'data');
 const LANGS = ['de', 'fr', 'it', 'en'];
@@ -55,9 +56,24 @@ function event(f, e, id) {
   const urls = [e.source?.url, ...(e.extraSources || []).map(s => s.url)];
   if (new Set(urls).size !== urls.length) err(f, id, 'same URL listed twice in source/extraSources');
   t4(f, id, 'title', e.title, { required: true });
-  t4(f, id, 'lesson', e.lesson, { required: true });
+  for (const message of lessonErrors(e.lesson, lessonRefs)) err(f, id, message);
   for (const [k, v] of Object.entries(e.facts || {})) t4(f, id, `facts.${k}`, v);
   for (const l of LANGS) if (/^\s*(lesson|lehre|leçon|lezione)\s*[:–-]/i.test(e.lesson?.[l] || '')) err(f, id, `lesson.${l} starts with a heading`);
+}
+
+const lessonRefs = load('lesson-refs.json');
+const refIds = new Set();
+for (const ref of lessonRefs) {
+  const f = 'lesson-refs.json', id = common(f, ref, refIds);
+  if (!['bauav', 'vuv', 'arg', 'uvg', 'suva', 'lwr'].includes(ref.source)) err(f, id, 'source must be bauav|vuv|arg|uvg|suva|lwr');
+  if (typeof ref.label !== 'string' || !ref.label.trim()) err(f, id, 'label missing');
+  const host = ['suva', 'lwr'].includes(ref.source) ? 'www.suva.ch' : 'www.fedlex.admin.ch';
+  try {
+    const url = new URL(ref.url);
+    if (url.protocol !== 'https:' || url.hostname !== host || url.username || url.password || url.port) throw new Error();
+  } catch { err(f, id, `url must be an official https://${host} document`); }
+  t4(f, id, 'text', ref.text, { required: true });
+  if (ref.keywords != null && (!Array.isArray(ref.keywords) || ref.keywords.some(k => typeof k !== 'string' || !k.trim()))) err(f, id, 'keywords must be nonempty strings');
 }
 
 const accidents = load('accidents.json'), rulings = load('rulings.json'), jobs = load('jobs.json');

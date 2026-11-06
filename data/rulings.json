@@ -107,10 +107,17 @@
    }
   },
   "lesson": {
-   "de": "Absturzsicherung auf drei von vier Seiten reicht nicht. Wer Sicherheitsmassnahmen freigibt, haftet – auch aus dem Büro.",
-   "fr": "Une protection sur trois côtés sur quatre ne suffit pas. Qui valide les mesures en répond, même depuis le bureau.",
-   "it": "Una protezione su tre lati su quattro non basta. Chi approva le misure ne risponde, anche dall’ufficio.",
-   "en": "Edge protection on three of four sides is not enough. Whoever signs off the measures is liable, even from the office."
+   "de": "Laut BauAV Art. 41 sind an Dachrändern grundsätzlich ab mehr als 2 m Absturzhöhe geeignete Absturzsicherungen nötig; für Arbeiten von geringem Umfang gelten die besonderen Vorgaben von Art. 46.",
+   "fr": "Selon l’art. 41 OTConst, des protections appropriées sont en principe nécessaires au bord des toits dès que la hauteur de chute dépasse 2 m; les travaux de peu d’ampleur relèvent des dispositions particulières de l’art. 46.",
+   "it": "Secondo l’art. 41 OLCostr, ai bordi dei tetti occorrono di regola protezioni adeguate oltre 2 m di altezza di caduta; per i lavori di esigua entità valgono le disposizioni particolari dell’art. 46.",
+   "en": "Under BauAV Art. 41, roof edges generally require suitable fall protection where the fall height exceeds 2 m; minor work is subject to the special provisions of Art. 46.",
+   "refs": [
+    {
+     "id": "bauav-art41-roof-edge",
+     "label": "BauAV Art. 41",
+     "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_41"
+    }
+   ]
   },
   "why": null
  },
@@ -287,10 +294,17 @@
    "en": "The worker stayed near the moving load and had 1.36–1.72 g/kg of alcohol in his blood. As nobody had briefed him for unloading, his fault was minor. The lower court had ruled out contributory fault because safety rules exist to guard against such carelessness; the Federal Court disagreed and set it at 20%."
   },
   "lesson": {
-   "de": "Wer den Kran ohne Sicht auf Last und Haken bedient, braucht einen instruierten Einweiser – nicht jemanden, der nebenbei den Verkehr regelt. Helfer beim Abladen vorher instruieren: weg aus dem Schwenkbereich, solange die Last sich bewegt.",
-   "fr": "Qui manœuvre une grue sans voir la charge ni le crochet a besoin d’un guide formé, pas de quelqu’un qui règle la circulation en parallèle. Instruire les aides avant le déchargement: hors de la zone de rotation tant que la charge bouge.",
-   "it": "Chi manovra la gru senza vedere carico e gancio ha bisogno di un segnalatore istruito, non di qualcuno che intanto regola il traffico. Istruire prima chi aiuta allo scarico: fuori dal raggio di rotazione finché il carico si muove.",
-   "en": "If you cannot see the load or hook, you need a trained signaller, not someone directing traffic on the side. Brief everyone helping to unload beforehand: out of the slewing zone while the load moves."
+   "de": "Laut VUV Art. 41 sind Gegenstände und Materialien so zu transportieren und zu lagern, dass sie nicht gefährlich umstürzen, herabfallen oder abrutschen können.",
+   "fr": "Selon l’art. 41 OPA, les objets et matériaux doivent être transportés et entreposés de manière à ne pas se renverser, tomber ou glisser dangereusement.",
+   "it": "Secondo l’art. 41 OPI, oggetti e materiali devono essere trasportati e immagazzinati in modo da non ribaltarsi, cadere o scivolare pericolosamente.",
+   "en": "Under VUV Art. 41, objects and materials must be transported and stored so that they cannot dangerously overturn, fall or slide.",
+   "refs": [
+    {
+     "id": "vuv-art41-loads",
+     "label": "VUV Art. 41",
+     "url": "https://www.fedlex.admin.ch/eli/cc/1983/1968_1968_1968/de#art_41"
+    }
+   ]
   }
  },
  {
@@ -480,10 +494,17 @@
    }
   },
   "lesson": {
-   "de": "Abbruchmaterial nie werfen: Schuttrutsche oder Kran, Fallzone absperren. Bauführung und Sicherheitsverantwortliche haften mit.",
-   "fr": "Ne jamais jeter les matériaux: goulotte ou grue, zone de chute balisée. Direction de chantier et responsable sécurité en répondent aussi.",
-   "it": "Mai lanciare il materiale: scivolo o gru, zona di caduta sbarrata. Ne rispondono anche capocantiere e responsabile della sicurezza.",
-   "en": "Never throw material down: use a chute or crane and fence the drop zone. Site management and the safety officer share liability."
+   "de": "Laut BauAV Art. 18 dürfen Gegenstände und Materialien nur abgeworfen werden, wenn der Gefahrenbereich abgesperrt ist oder geschlossene Kanäle oder vergleichbare Einrichtungen verwendet werden.",
+   "fr": "Selon l’art. 18 OTConst, les objets et matériaux ne peuvent être jetés que si la zone dangereuse est barricadée ou si des canaux fermés ou dispositifs analogues sont utilisés.",
+   "it": "Secondo l’art. 18 OLCostr, oggetti e materiali possono essere gettati solo se la zona pericolosa è sbarrata o se si usano canali chiusi o dispositivi analoghi.",
+   "en": "Under BauAV Art. 18, objects and materials may only be thrown down with the danger zone cordoned off or using enclosed chutes or equivalent equipment.",
+   "refs": [
+    {
+     "id": "bauav-art18-dropped-material",
+     "label": "BauAV Art. 18",
+     "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_18"
+    }
+   ]
   },
   "why": {
    "de": "Der Sicherheitsplan sicherte die Zone, in der das durch den Liftschacht geworfene Material ankam, nicht wirksam ab; es fehlte die Gewissheit, dass sich dort niemand aufhält, bis die Würfe beendet sind – etwa mit eindeutigen Lichtsignalen, die vorgesehen, aber verworfen worden waren. Mit diesen Massnahmen wäre der Tod vermeidbar gewesen.",
@@ -613,10 +634,17 @@
    "en": "The Federal Court upheld the injured worker's appeal (on the indictment principle) and sent it back; the High Court must rule again."
   },
   "lesson": {
-   "de": "Auch 2,5 m können schwer verletzen: nicht tragfähige Dachflächen nur mit Laufstegen oder Netzen.",
-   "fr": "Même 2,5 m peuvent blesser gravement: surfaces non porteuses seulement avec passerelles ou filets.",
-   "it": "Anche 2,5 m possono ferire gravemente: superfici non portanti solo con passerelle o reti.",
-   "en": "Even 2.5 m can cause serious injury: non-load-bearing roofs only with crawling boards or nets."
+   "de": "Laut BauAV Art. 44 ist vor Arbeitsbeginn die Durchbruchsicherheit des Dachs abzuklären. Ist sie nicht nachgewiesen, gilt die Dachfläche als nicht durchbruchsicher.",
+   "fr": "Selon l’art. 44 OTConst, la résistance à la rupture du toit doit être vérifiée avant les travaux. Si elle n’est pas prouvée, la surface est considérée comme non résistante à la rupture.",
+   "it": "Secondo l’art. 44 OLCostr, prima dei lavori va verificata la resistenza alla rottura del tetto. Se non è dimostrata, la superficie è considerata non resistente alla rottura.",
+   "en": "Under BauAV Art. 44, roof resistance to break-through must be checked before work starts. If it cannot be demonstrated, the roof must be treated as fragile.",
+   "refs": [
+    {
+     "id": "bauav-art44-roof-fragility",
+     "label": "BauAV Art. 44",
+     "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_44"
+    }
+   ]
   }
  },
  {
@@ -732,10 +760,17 @@
    }
   },
   "lesson": {
-   "de": "Vor dem Wegfahren: alle Anschlagpunkte sichtbar frei? Niemand neben abgesetzten heissen Lasten, bis der Kran weg ist.",
-   "fr": "Avant de repartir: tous les points d’élingage visiblement libres? Personne à côté d’une charge brûlante tant que la grue n’est pas dégagée.",
-   "it": "Prima di ripartire: tutti i punti di aggancio visibilmente liberi? Nessuno accanto a carichi roventi finché la gru non si è allontanata.",
-   "en": "Before moving off: are all hook points visibly free? Nobody next to a hot load until the crane is clear."
+   "de": "Laut VUV Art. 41 sind Gegenstände und Materialien so zu transportieren und zu lagern, dass sie nicht gefährlich umstürzen, herabfallen oder abrutschen können.",
+   "fr": "Selon l’art. 41 OPA, les objets et matériaux doivent être transportés et entreposés de manière à ne pas se renverser, tomber ou glisser dangereusement.",
+   "it": "Secondo l’art. 41 OPI, oggetti e materiali devono essere trasportati e immagazzinati in modo da non ribaltarsi, cadere o scivolare pericolosamente.",
+   "en": "Under VUV Art. 41, objects and materials must be transported and stored so that they cannot dangerously overturn, fall or slide.",
+   "refs": [
+    {
+     "id": "vuv-art41-loads",
+     "label": "VUV Art. 41",
+     "url": "https://www.fedlex.admin.ch/eli/cc/1983/1968_1968_1968/de#art_41"
+    }
+   ]
   },
   "why": null
  },
@@ -813,10 +848,17 @@
    "en": "Suva’s accident report says the work was done without fall-arrest PPE although the safety plan required it and the devices were installed; the planned barrier around the fall zone was also missing. Whether those responsible supervised and checked enough must be investigated – even experienced workers need a minimum of oversight. The worker’s own mistake does not rule out others’ responsibility."
   },
   "lesson": {
-   "de": "Ein Sicherheitskonzept auf Papier genügt nicht: Wer Höhensicherungsgeräte montiert, muss auch kontrollieren, dass sie benutzt werden – gerade bei «nur schnell»-Handgriffen und bei Temporärpersonal.",
-   "fr": "Un concept de sécurité sur papier ne suffit pas: qui installe des antichutes doit aussi contrôler qu’ils sont utilisés, surtout pour les gestes «vite fait» et le personnel temporaire.",
-   "it": "Un piano di sicurezza sulla carta non basta: chi monta i dispositivi anticaduta deve anche controllare che vengano usati, soprattutto per i gesti «al volo» e con il personale interinale.",
-   "en": "A safety plan on paper is not enough: if you install fall-arrest devices, check they are used – especially for quick jobs and with temp staff."
+   "de": "Laut BauAV Art. 41 sind an Dachrändern grundsätzlich ab mehr als 2 m Absturzhöhe geeignete Absturzsicherungen nötig; für Arbeiten von geringem Umfang gelten die besonderen Vorgaben von Art. 46.",
+   "fr": "Selon l’art. 41 OTConst, des protections appropriées sont en principe nécessaires au bord des toits dès que la hauteur de chute dépasse 2 m; les travaux de peu d’ampleur relèvent des dispositions particulières de l’art. 46.",
+   "it": "Secondo l’art. 41 OLCostr, ai bordi dei tetti occorrono di regola protezioni adeguate oltre 2 m di altezza di caduta; per i lavori di esigua entità valgono le disposizioni particolari dell’art. 46.",
+   "en": "Under BauAV Art. 41, roof edges generally require suitable fall protection where the fall height exceeds 2 m; minor work is subject to the special provisions of Art. 46.",
+   "refs": [
+    {
+     "id": "bauav-art41-roof-edge",
+     "label": "BauAV Art. 41",
+     "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_41"
+    }
+   ]
   }
  },
  {
@@ -910,12 +952,7 @@
    "it": "La riapertura richiede fatti o prove nuovi, non già agli atti, che rendano concretamente ipotizzabile una responsabilità penale. Il presunto colloquio con l’ispettore non era né datato né provato e rifletteva solo la sua opinione su rapporti noti. Il ferito avrebbe inoltre potuto chiederne l’audizione già nella prima procedura.",
    "en": "Reopening requires new facts or evidence not already on file that make criminal liability concretely possible. The alleged talk with the inspector was neither dated nor documented and only reflected his personal view of known reports. The worker could also have asked for the inspector to be heard in the first proceedings."
   },
-  "lesson": {
-   "de": "Rollgerüste nie mit Personen darauf verschieben und gekoppelte Gerüste nur nach Herstellerangaben bewegen. Fahrverkehr mit Hubwagen braucht Abstand zu Gerüsten. Nach einem Unfall sofort Zeugen und Hergang festhalten – sonst bleibt die Verantwortung oft ungeklärt.",
-   "fr": "Ne jamais déplacer un échafaudage roulant avec des personnes dessus et ne déplacer des échafaudages couplés que selon le fabricant. Les transpalettes doivent rester à distance des échafaudages. Après un accident, consigner aussitôt témoins et déroulement – sinon la responsabilité reste souvent floue.",
-   "it": "Mai spostare un ponteggio mobile con persone sopra e muovere ponteggi collegati solo secondo il fabbricante. I transpallet devono stare a distanza dai ponteggi. Dopo un infortunio, registrare subito testimoni e dinamica – altrimenti la responsabilità resta spesso incerta.",
-   "en": "Never move a mobile scaffold with people on it, and move linked scaffolds only as the manufacturer specifies. Keep pallet trucks clear of scaffolds. After an accident, record witnesses and the sequence at once – otherwise responsibility often stays unresolved."
-  },
+  "lesson": null,
   "linkedAccidentId": null,
   "source": {
    "name": "entscheidsuche.ch",
@@ -1053,10 +1090,22 @@
    }
   },
   "lesson": {
-   "de": "Jugendliche an gefährlichen Maschinen brauchen ständige Aufsicht durch eine Fachperson. Wer abwesend ist, organisiert eine Vertretung oder lässt die Maschine stehen.",
-   "fr": "Les jeunes sur des machines dangereuses doivent être surveillés en permanence par un professionnel. En cas d’absence: un remplaçant, ou la machine reste à l’arrêt.",
-   "it": "I giovani su macchine pericolose vanno sorvegliati costantemente da un professionista. Se si è assenti: un sostituto, oppure la macchina resta ferma.",
-   "en": "Young workers on dangerous machines need constant supervision by a skilled person. If you are away, arrange a stand-in or the machine stays off."
+   "de": "Laut VUV Art. 6 muss der Arbeitgeber über tätigkeitsbezogene Gefahren und Schutzmassnahmen informieren, die Beschäftigten anleiten und für die Einhaltung der Massnahmen sorgen. Laut VUV Art. 28 müssen Schutzeinrichtungen verhindern, dass Beschäftigte in den Gefahrenbereich bewegter Maschinenteile treten oder greifen können.",
+   "fr": "Selon l’art. 6 OPA, l’employeur doit informer et instruire le personnel sur les dangers liés aux activités et les mesures de sécurité, puis veiller à leur respect. Selon l’art. 28 OPA, des dispositifs de protection doivent empêcher le personnel de pénétrer ou de mettre la main dans la zone dangereuse des éléments mobiles des machines.",
+   "it": "Secondo l’art. 6 OPI, il datore di lavoro deve informare e istruire il personale sui pericoli delle attività e sulle misure di sicurezza e vigilare sul loro rispetto. Secondo l’art. 28 OPI, dispositivi di protezione devono impedire al personale di entrare o introdurre le mani nella zona pericolosa delle parti mobili delle macchine.",
+   "en": "Under VUV Art. 6, employers must inform and instruct workers about activity-related hazards and safety measures and ensure those measures are followed. Under VUV Art. 28, safeguards must prevent workers from entering or reaching into the danger zone of moving machinery parts.",
+   "refs": [
+    {
+     "id": "vuv-art6-instruction",
+     "label": "VUV Art. 6",
+     "url": "https://www.fedlex.admin.ch/eli/cc/1983/1968_1968_1968/de#art_6"
+    },
+    {
+     "id": "vuv-art28-moving-parts",
+     "label": "VUV Art. 28",
+     "url": "https://www.fedlex.admin.ch/eli/cc/1983/1968_1968_1968/de#art_28"
+    }
+   ]
   },
   "why": {
    "de": "Der Jugendarbeitsschutz verlangt bei Lernenden an gefährlichen Maschinen eine ständige Überwachung durch eine Fachperson. Der Unfall war für den Ausbildner vorhersehbar; das Mitverschulden des Lernenden (Handschuhe an der drehenden Maschine) entlastet ihn nicht.",
@@ -1238,10 +1287,17 @@
    "en": "The Federal Court upheld both appeals and sent the case back; the Cantonal Court must rule again."
   },
   "lesson": {
-   "de": "Dachleitern allein schützen nicht vor Durchbruch: Auffangnetze oder Laufstege über die ganze Fläche.",
-   "fr": "Les échelles de toit seules ne protègent pas contre la rupture: filets ou passerelles sur toute la surface.",
-   "it": "Le scale da tetto da sole non proteggono dallo sfondamento: reti o passerelle su tutta la superficie.",
-   "en": "Roof ladders alone don't stop break-throughs: nets or crawling boards over the whole area."
+   "de": "Laut BauAV Art. 44 ist vor Arbeitsbeginn die Durchbruchsicherheit des Dachs abzuklären. Ist sie nicht nachgewiesen, gilt die Dachfläche als nicht durchbruchsicher.",
+   "fr": "Selon l’art. 44 OTConst, la résistance à la rupture du toit doit être vérifiée avant les travaux. Si elle n’est pas prouvée, la surface est considérée comme non résistante à la rupture.",
+   "it": "Secondo l’art. 44 OLCostr, prima dei lavori va verificata la resistenza alla rottura del tetto. Se non è dimostrata, la superficie è considerata non resistente alla rottura.",
+   "en": "Under BauAV Art. 44, roof resistance to break-through must be checked before work starts. If it cannot be demonstrated, the roof must be treated as fragile.",
+   "refs": [
+    {
+     "id": "bauav-art44-roof-fragility",
+     "label": "BauAV Art. 44",
+     "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_44"
+    }
+   ]
   }
  },
  {
@@ -1348,10 +1404,17 @@
    }
   },
   "lesson": {
-   "de": "Beim Rückbau mit Greifer: niemand im Schwenk- und Fallbereich der Last. Der Maschinenführer stoppt, solange jemand im Gefahrenbereich ist.",
-   "fr": "En démolition au grappin, personne dans la zone de rotation et de chute. Le conducteur s’arrête tant que quelqu’un s’y trouve.",
-   "it": "Nella demolizione con pinza nessuno nella zona di rotazione e caduta. Il manovratore si ferma finché qualcuno vi si trova.",
-   "en": "In grab demolition nobody may be in the swing or drop zone. The operator stops while anyone is in the danger area."
+   "de": "Laut BauAV Art. 17 sind Arbeitsplätze und Verkehrswege gegen einstürzende Bauteile sowie herabfallende, abrutschende oder wegrollende Gegenstände und Materialien zu schützen.",
+   "fr": "Selon l’art. 17 OTConst, les postes de travail et les passages doivent être protégés contre l’écroulement d’éléments et la chute, le glissement ou le roulement d’objets et de matériaux.",
+   "it": "Secondo l’art. 17 OLCostr, posti di lavoro e passaggi vanno protetti dal crollo di elementi e dalla caduta, dallo scivolamento o dal rotolamento di oggetti e materiali.",
+   "en": "Under BauAV Art. 17, workplaces and access routes must be protected against collapsing components and falling, sliding or rolling objects and materials.",
+   "refs": [
+    {
+     "id": "bauav-art17-falling-material",
+     "label": "BauAV Art. 17",
+     "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_17"
+    }
+   ]
   },
   "why": null
  },
@@ -1493,10 +1556,17 @@
    "en": "The court believed the foreman had checked the danger zone before moving and could then look ahead. The worker knew Suva’s rule “enter a machine’s danger zone only with eye contact”, had no task by the wall and had drunk a beer despite a zero-tolerance policy. His conduct was so unusual that it would overshadow any fault by the foreman."
   },
   "lesson": {
-   "de": "Den Gefahrenbereich einer Baumaschine nur mit Blickkontakt und Okay des Maschinisten betreten – auch «nur schnell vorbei». Enge Stellen zwischen Maschine und Mauer absperren oder von einer Hilfsperson überwachen lassen.",
-   "fr": "N’entrer dans la zone dangereuse d’un engin qu’avec contact visuel et accord du machiniste, même pour «passer vite». Barrer les passages étroits entre engin et mur ou les faire surveiller par une personne.",
-   "it": "Entrare nella zona di pericolo di una macchina solo con contatto visivo e via libera del macchinista, anche per «passare al volo». Sbarrare i passaggi stretti tra macchina e muro o farli sorvegliare da una persona.",
-   "en": "Enter a machine’s danger zone only with eye contact and the operator’s OK, even just to slip past. Block off tight gaps between machine and wall or have a banksman watch them."
+   "de": "Laut BauAV Art. 19 dürfen sich keine Personen im Gefahrenbereich von Baumaschinen aufhalten. Ist dies unerlässlich, braucht es technische Schutzmittel oder eine Überwachung durch eine Person ausserhalb des Gefahrenbereichs.",
+   "fr": "Selon l’art. 19 OTConst, personne ne doit se trouver dans la zone dangereuse des engins. Si cela est indispensable, des moyens techniques ou un signaleur situé hors de cette zone sont nécessaires.",
+   "it": "Secondo l’art. 19 OLCostr, nessuno deve sostare nella zona pericolosa delle macchine. Se indispensabile, occorrono mezzi tecnici o un sorvegliante situato fuori da tale zona.",
+   "en": "Under BauAV Art. 19, people must be kept out of construction machinery danger zones. If their presence is essential, technical safeguards or a signaller outside the danger zone are required.",
+   "refs": [
+    {
+     "id": "bauav-art19-machine-zone",
+     "label": "BauAV Art. 19",
+     "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_19"
+    }
+   ]
   }
  },
  {
@@ -1706,10 +1776,17 @@
    "en": "Responsibility lay with the supervisors who had to coordinate work and order safety measures. The subcontractor's responsibility does not relieve the main contractor's foreman."
   },
   "lesson": {
-   "de": "Erst Absturzsicherung, dann ausschalen. Wer Schalung entfernt, sperrt und meldet die Zone – allen Gewerken.",
-   "fr": "D’abord la protection antichute, ensuite le décoffrage. Qui décoffre ferme et annonce la zone à tous les corps de métier.",
-   "it": "Prima la protezione anticaduta, poi il disarmo. Chi disarma chiude e segnala la zona a tutti.",
-   "en": "Edge protection first, then strip. Whoever strips formwork closes the zone and tells every trade."
+   "de": "Laut BauAV Art. 12 ist unbeabsichtigtes Betreten nicht durchbruchsicherer Flächen zu verhindern; nötigenfalls sind feste Abdeckungen oder Laufstege anzubringen.",
+   "fr": "Selon l’art. 12 OTConst, l’accès involontaire aux surfaces non résistantes à la rupture doit être empêché; une protection solide ou une passerelle est à prévoir si nécessaire.",
+   "it": "Secondo l’art. 12 OLCostr, occorre impedire l’accesso involontario alle superfici non resistenti alla rottura; se necessario vanno installate coperture solide o passerelle.",
+   "en": "Under BauAV Art. 12, inadvertent access to fragile surfaces must be prevented; solid covers or walkways must be provided where necessary.",
+   "refs": [
+    {
+     "id": "bauav-art12-fragile",
+     "label": "BauAV Art. 12",
+     "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_12"
+    }
+   ]
   }
  },
  {
@@ -1819,10 +1896,17 @@
    }
   },
   "lesson": {
-   "de": "Niemand im Arbeitsbereich von Schaufel oder Löffel, solange der Bagger arbeitet – Sichtkontakt und klare Zeichen vereinbaren.",
-   "fr": "Personne dans la zone du godet tant que la pelle travaille – contact visuel et signes convenus.",
-   "it": "Nessuno nel raggio della benna mentre l’escavatore lavora – contatto visivo e segnali concordati.",
-   "en": "Nobody within reach of the bucket while the excavator works – agree on eye contact and clear signals."
+   "de": "Laut BauAV Art. 19 dürfen sich keine Personen im Gefahrenbereich von Baumaschinen aufhalten. Ist dies unerlässlich, braucht es technische Schutzmittel oder eine Überwachung durch eine Person ausserhalb des Gefahrenbereichs.",
+   "fr": "Selon l’art. 19 OTConst, personne ne doit se trouver dans la zone dangereuse des engins. Si cela est indispensable, des moyens techniques ou un signaleur situé hors de cette zone sont nécessaires.",
+   "it": "Secondo l’art. 19 OLCostr, nessuno deve sostare nella zona pericolosa delle macchine. Se indispensabile, occorrono mezzi tecnici o un sorvegliante situato fuori da tale zona.",
+   "en": "Under BauAV Art. 19, people must be kept out of construction machinery danger zones. If their presence is essential, technical safeguards or a signaller outside the danger zone are required.",
+   "refs": [
+    {
+     "id": "bauav-art19-machine-zone",
+     "label": "BauAV Art. 19",
+     "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_19"
+    }
+   ]
   },
   "why": null
  },
@@ -1945,10 +2029,17 @@
    "en": "Openings need side protection or a fixed, unbreakable cover. Whoever has a cover moved must first set up collective protection."
   },
   "lesson": {
-   "de": "Abdeckungen über Öffnungen festschrauben und beschriften. Wird eine geöffnet: zuerst Geländer.",
-   "fr": "Visser et marquer les couvercles de trémies. Si on en ouvre un: d’abord le garde-corps.",
-   "it": "Avvitare e segnalare le coperture delle aperture. Se se ne apre una: prima il parapetto.",
-   "en": "Screw down and label covers over openings. If one is opened: guardrail first."
+   "de": "Laut BauAV Art. 25 sind Bodenöffnungen mit Absturz- oder Hineintretgefahr durch Seitenschutz oder eine durchbruchsichere, unverrückbare Abdeckung zu sichern.",
+   "fr": "Selon l’art. 25 OTConst, les ouvertures dans les sols présentant un risque de chute ou de faux pas doivent être protégées par un garde-corps ou une couverture résistante et solidement fixée.",
+   "it": "Secondo l’art. 25 OLCostr, le aperture nei pavimenti con pericolo di caduta o inciampo vanno protette con una protezione laterale o una copertura resistente alla rottura e inamovibile.",
+   "en": "Under BauAV Art. 25, floor openings that people could fall or step into must have side protection or a securely fixed, load-bearing cover.",
+   "refs": [
+    {
+     "id": "bauav-art25-floor-opening",
+     "label": "BauAV Art. 25",
+     "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_25"
+    }
+   ]
   }
  },
  {
@@ -2119,10 +2210,17 @@
    }
   },
   "lesson": {
-   "de": "Rotierende Schnecken brauchen den Schutz aus der Betriebsanleitung – fehlt er, wird nicht gebohrt. Keine offene Kleidung an drehenden Teilen.",
-   "fr": "Une vis rotative doit avoir la protection prévue par le manuel – sinon on ne fore pas. Pas de vêtements ouverts près de pièces en rotation.",
-   "it": "Una coclea rotante deve avere la protezione prevista dal manuale – altrimenti non si trivella. Niente abiti aperti vicino a parti rotanti.",
-   "en": "A rotating auger needs the guard the manual specifies – without it, no drilling. No loose clothing near rotating parts."
+   "de": "Laut VUV Art. 28 müssen Schutzeinrichtungen verhindern, dass Beschäftigte in den Gefahrenbereich bewegter Maschinenteile treten oder greifen können.",
+   "fr": "Selon l’art. 28 OPA, des dispositifs de protection doivent empêcher le personnel de pénétrer ou de mettre la main dans la zone dangereuse des éléments mobiles des machines.",
+   "it": "Secondo l’art. 28 OPI, dispositivi di protezione devono impedire al personale di entrare o introdurre le mani nella zona pericolosa delle parti mobili delle macchine.",
+   "en": "Under VUV Art. 28, safeguards must prevent workers from entering or reaching into the danger zone of moving machinery parts.",
+   "refs": [
+    {
+     "id": "vuv-art28-moving-parts",
+     "label": "VUV Art. 28",
+     "url": "https://www.fedlex.admin.ch/eli/cc/1983/1968_1968_1968/de#art_28"
+    }
+   ]
   },
   "why": {
    "de": "Die Betriebsanleitung verbot Arbeiten neben dem ungeschützten, laufenden Bohrer. Der Arbeitgeber wusste das und liess trotzdem arbeiten; der Bediener bohrte trotz Person in der Nähe. Bemühungen nach dem Unfall mildern die Strafe nicht.",
@@ -2299,10 +2397,22 @@
    "en": "Workers had not been trained on edge protection or the danger zone under suspended loads. The victim's own fault does not clear the managers, because the missing instruction encouraged it."
   },
   "lesson": {
-   "de": "Nie unter schwebenden Lasten. Wer Sicherheit delegiert, muss kontrollieren, ob sie umgesetzt wird.",
-   "fr": "Jamais sous une charge suspendue. Qui délègue la sécurité doit contrôler qu’elle est appliquée.",
-   "it": "Mai sotto carichi sospesi. Chi delega la sicurezza deve controllare che sia applicata.",
-   "en": "Never under a suspended load. If you delegate safety, check that it is actually done."
+   "de": "Laut VUV Art. 41 sind Gegenstände und Materialien so zu transportieren und zu lagern, dass sie nicht gefährlich umstürzen, herabfallen oder abrutschen können. Die Suva-Checkliste 67017 verlangt, vor dem Anschlagen Gewicht, Schwerpunkt und Anschlagpunkte der Last zu kennen.",
+   "fr": "Selon l’art. 41 OPA, les objets et matériaux doivent être transportés et entreposés de manière à ne pas se renverser, tomber ou glisser dangereusement. La liste Suva 67017 demande de connaître le poids, le centre de gravité et les points d’ancrage de la charge avant l’élingage.",
+   "it": "Secondo l’art. 41 OPI, oggetti e materiali devono essere trasportati e immagazzinati in modo da non ribaltarsi, cadere o scivolare pericolosamente. La lista Suva 67017 richiede di conoscere peso, baricentro e punti di aggancio del carico prima dell’imbracatura.",
+   "en": "Under VUV Art. 41, objects and materials must be transported and stored so that they cannot dangerously overturn, fall or slide. Suva checklist 67017 calls for the load’s weight, centre of gravity and lifting points to be known before slinging.",
+   "refs": [
+    {
+     "id": "vuv-art41-loads",
+     "label": "VUV Art. 41",
+     "url": "https://www.fedlex.admin.ch/eli/cc/1983/1968_1968_1968/de#art_41"
+    },
+    {
+     "id": "suva-67017-q07-full",
+     "label": "Suva 67017.F · Q7",
+     "url": "https://www.suva.ch/fr-ch/download/listes-de-controle/elingues--67017.F"
+    }
+   ]
   }
  },
  {
@@ -2403,10 +2513,17 @@
    "injuries": null
   },
   "lesson": {
-   "de": "Absturzsicherung gehört vor Arbeitsbeginn ins Sicherheitskonzept – und jemand muss dafür zuständig sein.",
-   "fr": "La protection antichute doit figurer dans le concept de sécurité avant le début des travaux, avec un responsable désigné.",
-   "it": "La protezione anticaduta va nel piano di sicurezza prima dell’inizio dei lavori, con un responsabile designato.",
-   "en": "Fall protection belongs in the safety plan before work starts, with someone named responsible."
+   "de": "Laut BauAV Art. 41 sind an Dachrändern grundsätzlich ab mehr als 2 m Absturzhöhe geeignete Absturzsicherungen nötig; für Arbeiten von geringem Umfang gelten die besonderen Vorgaben von Art. 46.",
+   "fr": "Selon l’art. 41 OTConst, des protections appropriées sont en principe nécessaires au bord des toits dès que la hauteur de chute dépasse 2 m; les travaux de peu d’ampleur relèvent des dispositions particulières de l’art. 46.",
+   "it": "Secondo l’art. 41 OLCostr, ai bordi dei tetti occorrono di regola protezioni adeguate oltre 2 m di altezza di caduta; per i lavori di esigua entità valgono le disposizioni particolari dell’art. 46.",
+   "en": "Under BauAV Art. 41, roof edges generally require suitable fall protection where the fall height exceeds 2 m; minor work is subject to the special provisions of Art. 46.",
+   "refs": [
+    {
+     "id": "bauav-art41-roof-edge",
+     "label": "BauAV Art. 41",
+     "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_41"
+    }
+   ]
   },
   "why": null
  },
@@ -2530,10 +2647,17 @@
    "en": "The non-compliant mobile scaffold put workers in concrete danger, whatever the victim did. The homicide acquittal was not reviewed because the Federal Court did not hear the appeal."
   },
   "lesson": {
-   "de": "Keine Leiter auf ein Rollgerüst stellen. Rollgerüste nur mit Seitenschutz und ausgefahrenen Stützen.",
-   "fr": "Jamais d’échelle sur un pont roulant. Pont roulant uniquement avec garde-corps et béquilles déployées.",
-   "it": "Mai una scala su un ponte mobile. Ponte mobile solo con parapetti e stabilizzatori aperti.",
-   "en": "Never put a ladder on a mobile scaffold. Use mobile scaffolds only with guardrails and outriggers deployed."
+   "de": "Die Suva-Checkliste 67150 verlangt, Rollgerüste nach den Vorgaben des Herstellers gegen Umkippen zu sichern.",
+   "fr": "La liste Suva 67150 demande d’assurer la stabilité des échafaudages roulants selon les instructions du fabricant.",
+   "it": "La lista Suva 67150 richiede di assicurare la stabilità dei ponteggi mobili secondo le istruzioni del fabbricante.",
+   "en": "Suva checklist 67150 calls for mobile scaffold stability to be secured in accordance with the manufacturer’s instructions.",
+   "refs": [
+    {
+     "id": "suva-67150-q09-full",
+     "label": "Suva 67150.F · Q9",
+     "url": "https://www.suva.ch/fr-ch/download/listes-de-controle/echafaudages-roulants/echafaudages-roulants--67150.F"
+    }
+   ]
   }
  },
  {
@@ -2634,10 +2758,17 @@
    }
   },
   "lesson": {
-   "de": "Der tote Winkel vor der Lkw-Kabine ist gross: getrennte Fusswege, Frontkameras oder Spiegel – und erst Blickkontakt, dann losfahren.",
-   "fr": "L’angle mort devant un camion est grand: cheminements piétons séparés, caméras ou miroirs frontaux – et contact visuel avant de démarrer.",
-   "it": "L’angolo cieco davanti al camion è ampio: percorsi pedonali separati, telecamere o specchi frontali – e contatto visivo prima di partire.",
-   "en": "The blind spot in front of a truck cab is large: separate walkways, front cameras or mirrors – and eye contact before moving off."
+   "de": "Die Suva-Checkliste 67005 verlangt Massnahmen, die Zusammenstösse zwischen Fussgängern und Fahrzeugen auf betrieblichen Verkehrswegen verhindern.",
+   "fr": "La liste Suva 67005 demande des mesures pour prévenir les collisions entre piétons et véhicules sur les voies de circulation de l’entreprise.",
+   "it": "La lista Suva 67005 richiede misure per prevenire collisioni tra pedoni e veicoli sulle vie di circolazione aziendali.",
+   "en": "Suva checklist 67005 calls for measures to prevent collisions between pedestrians and vehicles on workplace traffic routes.",
+   "refs": [
+    {
+     "id": "suva-67005-q08-full",
+     "label": "Suva 67005.F · Q8",
+     "url": "https://www.suva.ch/fr-ch/download/listes-de-controle/voies-de-circulation-pour-vehicules/voies-de-circulation-pour-vehicules--67005.f"
+    }
+   ]
   },
   "why": null
  },
@@ -2809,10 +2940,17 @@
    "en": "If you cannot see the hook you need one clearly identifiable signaller, as the manual requires. The employer remained responsible for his workers' safety during unloading."
   },
   "lesson": {
-   "de": "Nie heben ohne Sicht auf die Last oder klaren Einweiser. Niemand auf der Ladefläche, wenn der Kran zieht.",
-   "fr": "Jamais de levage sans vue sur la charge ou sans guide. Personne sur le plateau quand la grue tire.",
-   "it": "Mai sollevare senza vista sul carico o senza segnalatore. Nessuno sul pianale quando la gru tira.",
-   "en": "Never lift without sight of the load or a clear signaller. Nobody on the deck while the crane pulls."
+   "de": "Laut VUV Art. 41 sind Gegenstände und Materialien so zu transportieren und zu lagern, dass sie nicht gefährlich umstürzen, herabfallen oder abrutschen können.",
+   "fr": "Selon l’art. 41 OPA, les objets et matériaux doivent être transportés et entreposés de manière à ne pas se renverser, tomber ou glisser dangereusement.",
+   "it": "Secondo l’art. 41 OPI, oggetti e materiali devono essere trasportati e immagazzinati in modo da non ribaltarsi, cadere o scivolare pericolosamente.",
+   "en": "Under VUV Art. 41, objects and materials must be transported and stored so that they cannot dangerously overturn, fall or slide.",
+   "refs": [
+    {
+     "id": "vuv-art41-loads",
+     "label": "VUV Art. 41",
+     "url": "https://www.fedlex.admin.ch/eli/cc/1983/1968_1968_1968/de#art_41"
+    }
+   ]
   }
  },
  {
@@ -3027,10 +3165,17 @@
    "en": "Many people used this improvised access. Whoever organises safety on a large site must appoint competent people and check their areas."
   },
   "lesson": {
-   "de": "Improvisierte Durchgänge sind Warnsignale. Öffnungen sofort sichern – und für Sicherheit eine fachkundige Person benennen.",
-   "fr": "Les passages improvisés sont des signaux d’alarme. Protéger les ouvertures tout de suite et nommer une personne compétente pour la sécurité.",
-   "it": "I passaggi improvvisati sono segnali d’allarme. Proteggere subito le aperture e nominare una persona competente per la sicurezza.",
-   "en": "Improvised routes are warning signs. Protect openings at once and name a competent person for safety."
+   "de": "Laut BauAV Art. 25 sind Bodenöffnungen mit Absturz- oder Hineintretgefahr durch Seitenschutz oder eine durchbruchsichere, unverrückbare Abdeckung zu sichern.",
+   "fr": "Selon l’art. 25 OTConst, les ouvertures dans les sols présentant un risque de chute ou de faux pas doivent être protégées par un garde-corps ou une couverture résistante et solidement fixée.",
+   "it": "Secondo l’art. 25 OLCostr, le aperture nei pavimenti con pericolo di caduta o inciampo vanno protette con una protezione laterale o una copertura resistente alla rottura e inamovibile.",
+   "en": "Under BauAV Art. 25, floor openings that people could fall or step into must have side protection or a securely fixed, load-bearing cover.",
+   "refs": [
+    {
+     "id": "bauav-art25-floor-opening",
+     "label": "BauAV Art. 25",
+     "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_25"
+    }
+   ]
   }
  },
  {
@@ -3201,10 +3346,17 @@
    "en": "Both had a duty to ensure the scaffold was safely erected and checked; the works director could not simply rely on the scaffolding firm."
   },
   "lesson": {
-   "de": "Gerüst vor der Nutzung abnehmen: Beläge gesichert, Bordbretter fest? Auch der Bauleiter des Hauptunternehmers ist verantwortlich.",
-   "fr": "Réceptionner l’échafaudage avant usage: plateaux bloqués, plinthes fixées? Le directeur des travaux de l’entreprise générale répond aussi.",
-   "it": "Collaudare il ponteggio prima dell’uso: piani bloccati, fermapiede fissati? Risponde anche il direttore dei lavori dell’impresa generale.",
-   "en": "Inspect scaffolds before use: decks locked, toe boards fixed? The main contractor's works director is responsible too."
+   "de": "Die Suva-Checkliste 67038 verlangt gesicherte Gerüstbeläge, die sich nicht verschieben können.",
+   "fr": "La liste Suva 67038 demande que les platelages soient fixés pour empêcher leur déplacement.",
+   "it": "La lista Suva 67038 richiede che gli impalcati siano fissati contro gli spostamenti.",
+   "en": "Suva checklist 67038 calls for scaffold platforms to be secured against displacement.",
+   "refs": [
+    {
+     "id": "suva-67038-q09-full",
+     "label": "Suva 67038.F · Q9",
+     "url": "https://www.suva.ch/fr-ch/download/listes-de-controle/echafaudages-de-facade/echafaudages-de-facade--67038.f"
+    }
+   ]
   }
  },
  {
@@ -3326,10 +3478,17 @@
    "en": "He had been warned repeatedly and knew the danger. The sentence also covers a separate road-traffic offence."
   },
   "lesson": {
-   "de": "Faserzementdächer sind nicht durchbruchsicher: Laufstege, Auffangnetze oder Arbeit von unten. Ändert sich der Arbeitsablauf, Massnahmen neu beurteilen.",
-   "fr": "Les toits en fibrociment ne résistent pas à la rupture: passerelles, filets ou travail par-dessous. Si la méthode change, réévaluer les mesures.",
-   "it": "I tetti in fibrocemento non sono resistenti: passerelle, reti o lavoro da sotto. Se cambia il metodo, rivalutare le misure.",
-   "en": "Fibre-cement roofs are not walk-safe: crawling boards, nets, or work from below. If the method changes, re-assess the measures."
+   "de": "Laut BauAV Art. 44 ist vor Arbeitsbeginn die Durchbruchsicherheit des Dachs abzuklären. Ist sie nicht nachgewiesen, gilt die Dachfläche als nicht durchbruchsicher.",
+   "fr": "Selon l’art. 44 OTConst, la résistance à la rupture du toit doit être vérifiée avant les travaux. Si elle n’est pas prouvée, la surface est considérée comme non résistante à la rupture.",
+   "it": "Secondo l’art. 44 OLCostr, prima dei lavori va verificata la resistenza alla rottura del tetto. Se non è dimostrata, la superficie è considerata non resistente alla rottura.",
+   "en": "Under BauAV Art. 44, roof resistance to break-through must be checked before work starts. If it cannot be demonstrated, the roof must be treated as fragile.",
+   "refs": [
+    {
+     "id": "bauav-art44-roof-fragility",
+     "label": "BauAV Art. 44",
+     "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_44"
+    }
+   ]
   }
  },
  {
@@ -3451,10 +3610,17 @@
    "en": "A plank you can step round is not a barrier. The site manager knew about the visit and had to mark the danger clearly or block access."
   },
   "lesson": {
-   "de": "Nicht tragfähige Böden fest absperren und beschriften – besonders wenn externe Fachleute kommen.",
-   "fr": "Barrer solidement et signaler les sols non porteurs – surtout quand viennent des intervenants externes.",
-   "it": "Sbarrare saldamente e segnalare i pavimenti non portanti – soprattutto quando arrivano esterni.",
-   "en": "Firmly block and label floors that won't bear weight – especially when outside specialists come."
+   "de": "Laut BauAV Art. 12 ist unbeabsichtigtes Betreten nicht durchbruchsicherer Flächen zu verhindern; nötigenfalls sind feste Abdeckungen oder Laufstege anzubringen.",
+   "fr": "Selon l’art. 12 OTConst, l’accès involontaire aux surfaces non résistantes à la rupture doit être empêché; une protection solide ou une passerelle est à prévoir si nécessaire.",
+   "it": "Secondo l’art. 12 OLCostr, occorre impedire l’accesso involontario alle superfici non resistenti alla rottura; se necessario vanno installate coperture solide o passerelle.",
+   "en": "Under BauAV Art. 12, inadvertent access to fragile surfaces must be prevented; solid covers or walkways must be provided where necessary.",
+   "refs": [
+    {
+     "id": "bauav-art12-fragile",
+     "label": "BauAV Art. 12",
+     "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_12"
+    }
+   ]
   }
  },
  {
@@ -3580,11 +3746,6 @@
    "it": "Conosceva il pericolo da avvertimenti concreti e ha comunque scelto un fissaggio provvisorio. È stato assolto solo dall’accusa relativa ai dispositivi di protezione.",
    "en": "He knew the danger from concrete warnings and still chose a provisional fix. He was acquitted only on the protective-device charge."
   },
-  "lesson": {
-   "de": "Gitterroste und Abdeckungen sofort definitiv befestigen. Ein Beinahe-Unfall am Morgen ist ein Stoppsignal.",
-   "fr": "Fixer définitivement caillebotis et couvercles tout de suite. Un presque-accident le matin est un signal d’arrêt.",
-   "it": "Fissare subito in modo definitivo grigliati e coperture. Un quasi-incidente al mattino è un segnale di stop.",
-   "en": "Fix gratings and covers properly straight away. A near miss that morning is a stop signal."
-  }
+  "lesson": null
  }
 ]

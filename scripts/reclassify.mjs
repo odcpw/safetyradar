@@ -10,6 +10,6 @@ for (const x of q) {
   const c = classify({ title: x.title, url: x.url, lang: x.lang, kind: x.kind, sourceCanton: x.draft?.canton, trusted: x.source === 'polizeinews-arbeitsunfaelle', sourceType: x.source === 'entscheidsuche' ? 'entscheidsuche' : 'rss' });
   if (c.keep && c.kind === 'accident' && same(c.canton, x.date)) { c.keep = false; c.reason = 'probably already published (same canton ±2 days)'; }
   x.status = c.keep ? 'draft' : 'dropped'; x.reason = c.reason;
-  x.draft = c.keep ? { ...(x.draft || {}), canton: x.draft?.canton ?? c.canton, industry: c.industry, hazard: c.hazard, outcome: c.outcome, title: null, facts: null, lesson: null, needs: ['verify facts from source', 'write facts + lesson in DE/FR/IT/EN'] } : undefined;
+  x.draft = c.keep ? { ...(x.draft || {}), canton: x.draft?.canton ?? c.canton, industry: c.industry, hazard: c.hazard, outcome: c.outcome, title: null, facts: null, lesson: null, needs: ['verify facts from source', 'write factual summary in DE/FR/IT/EN; choose 1–2 lesson-refs catalog ids or leave lesson null'] } : undefined;
 }
 fs.writeFileSync(f, JSON.stringify(q, null, 2));

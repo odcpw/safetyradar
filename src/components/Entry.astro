@@ -12,7 +12,7 @@ const href = `/${lang}/${kind}/${item.id}/`;
     <div class="body">
       <h3><a href={href}>{pick(lang, item.title)}</a></h3>
       <div class="meta2">{meta.filter(Boolean).map(m => <span>{m}</span>)}</div>
-      {pick(lang, item.lesson) && <p class="teaser">{pick(lang, item.lesson)}</p>}
+      {pick(lang, item.facts?.what) && <p class="teaser">{pick(lang, item.facts?.what)}</p>}
     </div>
   </div>
 </article>

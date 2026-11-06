@@ -44,7 +44,7 @@ Content lives in `data/*.json` – no CMS, no database. Hosted on GitHub Pages (
 
 ## Data model
 - `data/accidents.json` – per item: `id` (= URL slug), `date` (event), `canton`, `place`, `industry`/`hazard`/`outcome` (keys, translated in `src/i18n/ui.ts`),
-  `source {name,url,lang}` (original source language), optional `extraSources`, `title`, `facts {activity, what, equipment, injuries, emergency, investigation}` and `lesson` – each text field as `{de,fr,it,en}`. `null` = rendered as "not reported".
+  `source {name,url,lang}` (original source language), optional `extraSources`, `title`, `facts {activity, what, equipment, injuries, emergency, investigation}` and `lesson`. Text fields use `{de,fr,it,en}`; `lesson` is null (omitted) or `{de,fr,it,en,refs:[{id,label,url}]}` with exact text and links from `data/lesson-refs.json` (1–2 refs). See `docs/EDITORIAL.md`.
 - `data/rulings.json` – same plus `court`, `caseNumber`, `charge`, `verdict`, `sanction`, `final` (true/false/null).
 - `data/jobs.json` – link + title/employer/location/date as published; `role` key.
 - Seed generators with the reviewed texts: `scripts/seed/accidents.py`, `scripts/seed/rulings.py`.
@@ -108,7 +108,7 @@ Live site: https://safetyradar.ch is served by Caddy on the VPS (see docs/DEPLOY
 `scripts/rebase.mjs` writes sitemap.xml (and would prefix links if a non-root BASE were set). A normal `npm run build` targets safetyradar.ch at `/`.
 
 ## v4 (2026-10-26)
-- Design C: stats strip, canton tile map, chronological list (date/canton gutter, severity edge, 2-line lesson teaser). No design switcher.
+- Design C: stats strip, canton tile map, chronological list (date/canton gutter, severity edge, 2-line factual teaser). No design switcher.
 - List items expand in place (`<details>`, works without JS) to a slim view; permalink pages keep the same slim content.
 - Accidents: one meta line, 1–2 sentence "what happened", lesson, source. Rulings: what happened / decision / why, one line per person, lesson, source.
 - Year + month chips with counts, combinable with the canton map and the selects; state lives in the URL (`?canton=BE&year=2025&month=03`, `&open=<caseId>` expands an item).

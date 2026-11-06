@@ -1,0 +1,627 @@
+[
+  {
+    "id": "bauav-art12-fragile",
+    "source": "bauav",
+    "label": "BauAV Art. 12",
+    "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_12",
+    "text": {
+      "de": "Laut BauAV Art. 12 ist unbeabsichtigtes Betreten nicht durchbruchsicherer Flächen zu verhindern; nötigenfalls sind feste Abdeckungen oder Laufstege anzubringen.",
+      "fr": "Selon l’art. 12 OTConst, l’accès involontaire aux surfaces non résistantes à la rupture doit être empêché; une protection solide ou une passerelle est à prévoir si nécessaire.",
+      "it": "Secondo l’art. 12 OLCostr, occorre impedire l’accesso involontario alle superfici non resistenti alla rottura; se necessario vanno installate coperture solide o passerelle.",
+      "en": "Under BauAV Art. 12, inadvertent access to fragile surfaces must be prevented; solid covers or walkways must be provided where necessary."
+    },
+    "keywords": [
+      "zwischendecke",
+      "nicht tragfähig",
+      "fragile",
+      "faux-plafond"
+    ],
+    "sourceId": "otconst-832-311-141",
+    "verifiedAt": "2026-11-06"
+  },
+  {
+    "id": "bauav-art17-falling-material",
+    "source": "bauav",
+    "label": "BauAV Art. 17",
+    "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_17",
+    "text": {
+      "de": "Laut BauAV Art. 17 sind Arbeitsplätze und Verkehrswege gegen einstürzende Bauteile sowie herabfallende, abrutschende oder wegrollende Gegenstände und Materialien zu schützen.",
+      "fr": "Selon l’art. 17 OTConst, les postes de travail et les passages doivent être protégés contre l’écroulement d’éléments et la chute, le glissement ou le roulement d’objets et de matériaux.",
+      "it": "Secondo l’art. 17 OLCostr, posti di lavoro e passaggi vanno protetti dal crollo di elementi e dalla caduta, dallo scivolamento o dal rotolamento di oggetti e materiali.",
+      "en": "Under BauAV Art. 17, workplaces and access routes must be protected against collapsing components and falling, sliding or rolling objects and materials."
+    },
+    "keywords": [
+      "blech",
+      "bauteil",
+      "herabfallend",
+      "falling material",
+      "demolition"
+    ],
+    "sourceId": "otconst-832-311-141",
+    "verifiedAt": "2026-11-06"
+  },
+  {
+    "id": "bauav-art18-dropped-material",
+    "source": "bauav",
+    "label": "BauAV Art. 18",
+    "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_18",
+    "text": {
+      "de": "Laut BauAV Art. 18 dürfen Gegenstände und Materialien nur abgeworfen werden, wenn der Gefahrenbereich abgesperrt ist oder geschlossene Kanäle oder vergleichbare Einrichtungen verwendet werden.",
+      "fr": "Selon l’art. 18 OTConst, les objets et matériaux ne peuvent être jetés que si la zone dangereuse est barricadée ou si des canaux fermés ou dispositifs analogues sont utilisés.",
+      "it": "Secondo l’art. 18 OLCostr, oggetti e materiali possono essere gettati solo se la zona pericolosa è sbarrata o se si usano canali chiusi o dispositivi analoghi.",
+      "en": "Under BauAV Art. 18, objects and materials may only be thrown down with the danger zone cordoned off or using enclosed chutes or equivalent equipment."
+    },
+    "keywords": [
+      "hinuntergeworfen",
+      "abwerfen",
+      "jeté",
+      "thrown"
+    ],
+    "sourceId": "otconst-832-311-141",
+    "verifiedAt": "2026-11-06"
+  },
+  {
+    "id": "bauav-art19-machine-zone",
+    "source": "bauav",
+    "label": "BauAV Art. 19",
+    "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_19",
+    "text": {
+      "de": "Laut BauAV Art. 19 dürfen sich keine Personen im Gefahrenbereich von Baumaschinen aufhalten. Ist dies unerlässlich, braucht es technische Schutzmittel oder eine Überwachung durch eine Person ausserhalb des Gefahrenbereichs.",
+      "fr": "Selon l’art. 19 OTConst, personne ne doit se trouver dans la zone dangereuse des engins. Si cela est indispensable, des moyens techniques ou un signaleur situé hors de cette zone sont nécessaires.",
+      "it": "Secondo l’art. 19 OLCostr, nessuno deve sostare nella zona pericolosa delle macchine. Se indispensabile, occorrono mezzi tecnici o un sorvegliante situato fuori da tale zona.",
+      "en": "Under BauAV Art. 19, people must be kept out of construction machinery danger zones. If their presence is essential, technical safeguards or a signaller outside the danger zone are required."
+    },
+    "keywords": [
+      "bagger",
+      "baumaschine",
+      "excavator",
+      "pelle",
+      "eingeklemmt"
+    ],
+    "sourceId": "otconst-832-311-141",
+    "verifiedAt": "2026-11-06"
+  },
+  {
+    "id": "bauav-art20-ladder",
+    "source": "bauav",
+    "label": "BauAV Art. 20",
+    "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_20",
+    "text": {
+      "de": "Laut BauAV Art. 20 müssen Leitern auf einer tragfähigen Unterlage stehen und gegen Wegrutschen, Drehen und Kippen gesichert sein.",
+      "fr": "Selon l’art. 20 OTConst, les échelles doivent reposer sur une surface résistante et être assurées contre le glissement, le renversement et le basculement.",
+      "it": "Secondo l’art. 20 OLCostr, le scale devono poggiare su una base resistente ed essere assicurate contro lo scivolamento, la rotazione e il ribaltamento.",
+      "en": "Under BauAV Art. 20, ladders must stand on a load-bearing base and be secured against slipping, turning and tipping."
+    },
+    "keywords": [
+      "leiter",
+      "échelle",
+      "ladder",
+      "scala"
+    ],
+    "sourceId": "otconst-832-311-141",
+    "verifiedAt": "2026-11-06"
+  },
+  {
+    "id": "bauav-art25-floor-opening",
+    "source": "bauav",
+    "label": "BauAV Art. 25",
+    "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_25",
+    "text": {
+      "de": "Laut BauAV Art. 25 sind Bodenöffnungen mit Absturz- oder Hineintretgefahr durch Seitenschutz oder eine durchbruchsichere, unverrückbare Abdeckung zu sichern.",
+      "fr": "Selon l’art. 25 OTConst, les ouvertures dans les sols présentant un risque de chute ou de faux pas doivent être protégées par un garde-corps ou une couverture résistante et solidement fixée.",
+      "it": "Secondo l’art. 25 OLCostr, le aperture nei pavimenti con pericolo di caduta o inciampo vanno protette con una protezione laterale o una copertura resistente alla rottura e inamovibile.",
+      "en": "Under BauAV Art. 25, floor openings that people could fall or step into must have side protection or a securely fixed, load-bearing cover."
+    },
+    "keywords": [
+      "öffnung",
+      "treppenloch",
+      "schacht",
+      "opening",
+      "ouverture"
+    ],
+    "sourceId": "otconst-832-311-141",
+    "verifiedAt": "2026-11-06"
+  },
+  {
+    "id": "bauav-art41-roof-edge",
+    "source": "bauav",
+    "label": "BauAV Art. 41",
+    "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_41",
+    "text": {
+      "de": "Laut BauAV Art. 41 sind an Dachrändern grundsätzlich ab mehr als 2 m Absturzhöhe geeignete Absturzsicherungen nötig; für Arbeiten von geringem Umfang gelten die besonderen Vorgaben von Art. 46.",
+      "fr": "Selon l’art. 41 OTConst, des protections appropriées sont en principe nécessaires au bord des toits dès que la hauteur de chute dépasse 2 m; les travaux de peu d’ampleur relèvent des dispositions particulières de l’art. 46.",
+      "it": "Secondo l’art. 41 OLCostr, ai bordi dei tetti occorrono di regola protezioni adeguate oltre 2 m di altezza di caduta; per i lavori di esigua entità valgono le disposizioni particolari dell’art. 46.",
+      "en": "Under BauAV Art. 41, roof edges generally require suitable fall protection where the fall height exceeds 2 m; minor work is subject to the special provisions of Art. 46."
+    },
+    "keywords": [
+      "dachkante",
+      "dachrand",
+      "roof edge",
+      "toit",
+      "dach"
+    ],
+    "sourceId": "otconst-832-311-141",
+    "verifiedAt": "2026-11-06"
+  },
+  {
+    "id": "bauav-art44-roof-fragility",
+    "source": "bauav",
+    "label": "BauAV Art. 44",
+    "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_44",
+    "text": {
+      "de": "Laut BauAV Art. 44 ist vor Arbeitsbeginn die Durchbruchsicherheit des Dachs abzuklären. Ist sie nicht nachgewiesen, gilt die Dachfläche als nicht durchbruchsicher.",
+      "fr": "Selon l’art. 44 OTConst, la résistance à la rupture du toit doit être vérifiée avant les travaux. Si elle n’est pas prouvée, la surface est considérée comme non résistante à la rupture.",
+      "it": "Secondo l’art. 44 OLCostr, prima dei lavori va verificata la resistenza alla rottura del tetto. Se non è dimostrata, la superficie è considerata non resistente alla rottura.",
+      "en": "Under BauAV Art. 44, roof resistance to break-through must be checked before work starts. If it cannot be demonstrated, the roof must be treated as fragile."
+    },
+    "keywords": [
+      "durchgebrochen",
+      "faserzement",
+      "dachplatte",
+      "fragile roof",
+      "durch das dach"
+    ],
+    "sourceId": "otconst-832-311-141",
+    "verifiedAt": "2026-11-06"
+  },
+  {
+    "id": "bauav-art68-excavation",
+    "source": "bauav",
+    "label": "BauAV Art. 68",
+    "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_68",
+    "text": {
+      "de": "Laut BauAV Art. 68 sind Gräben und Baugruben gegen gefährdenden Materialeinbruch zu sichern. Bei mehr als 1,5 m Tiefe braucht es eine Spriessung, eine Böschung nach Art. 75 oder andere geeignete Massnahmen.",
+      "fr": "Selon l’art. 68 OTConst, les fouilles doivent être protégées contre les éboulements dangereux. Au-delà de 1,5 m de profondeur, il faut un étayage, un talutage selon l’art. 75 ou d’autres mesures adéquates.",
+      "it": "Secondo l’art. 68 OLCostr, scavi e trincee vanno protetti da pericolosi franamenti. Oltre 1,5 m di profondità occorrono puntellature, scarpate secondo l’art. 75 o altre misure adeguate.",
+      "en": "Under BauAV Art. 68, excavations must be protected against dangerous material collapse. Beyond 1.5 m depth, shoring, slopes complying with Art. 75 or other suitable measures are required."
+    },
+    "keywords": [
+      "graben",
+      "baugrube",
+      "excavation",
+      "fouille",
+      "trench"
+    ],
+    "sourceId": "otconst-832-311-141",
+    "verifiedAt": "2026-11-06"
+  },
+  {
+    "id": "suva-67038-q09-full",
+    "source": "suva",
+    "label": "Suva 67038.F · Q9",
+    "url": "https://www.suva.ch/fr-ch/download/listes-de-controle/echafaudages-de-facade/echafaudages-de-facade--67038.f",
+    "text": {
+      "de": "Die Suva-Checkliste 67038 verlangt gesicherte Gerüstbeläge, die sich nicht verschieben können.",
+      "fr": "La liste Suva 67038 demande que les platelages soient fixés pour empêcher leur déplacement.",
+      "it": "La lista Suva 67038 richiede che gli impalcati siano fissati contro gli spostamenti.",
+      "en": "Suva checklist 67038 calls for scaffold platforms to be secured against displacement."
+    },
+    "keywords": [
+      "gerüstbelag",
+      "gitterrost",
+      "platelage",
+      "scaffold platform"
+    ],
+    "sourceId": "suva-67038-f",
+    "topic": "scaffolds",
+    "edition": "2022-02",
+    "verifiedAt": "2026-11-06"
+  },
+  {
+    "id": "suva-67038-q12-full",
+    "source": "suva",
+    "label": "Suva 67038.F · Q12",
+    "url": "https://www.suva.ch/fr-ch/download/listes-de-controle/echafaudages-de-facade/echafaudages-de-facade--67038.f",
+    "text": {
+      "de": "Die Suva-Checkliste 67038 sieht an allen Aussenrändern des Fassadengerüsts einen Seitenschutz vor.",
+      "fr": "La liste Suva 67038 prévoit une protection latérale sur tous les bords extérieurs de l’échafaudage de façade.",
+      "it": "La lista Suva 67038 prevede una protezione laterale su tutti i bordi esterni del ponteggio di facciata.",
+      "en": "Suva checklist 67038 calls for side protection along all outer edges of façade scaffolding."
+    },
+    "keywords": [
+      "gerüst",
+      "ponteggio",
+      "échafaudage",
+      "scaffold"
+    ],
+    "sourceId": "suva-67038-f",
+    "topic": "scaffolds",
+    "edition": "2022-02",
+    "verifiedAt": "2026-11-06"
+  },
+  {
+    "id": "suva-67150-q09-full",
+    "source": "suva",
+    "label": "Suva 67150.F · Q9",
+    "url": "https://www.suva.ch/fr-ch/download/listes-de-controle/echafaudages-roulants/echafaudages-roulants--67150.F",
+    "text": {
+      "de": "Die Suva-Checkliste 67150 verlangt, Rollgerüste nach den Vorgaben des Herstellers gegen Umkippen zu sichern.",
+      "fr": "La liste Suva 67150 demande d’assurer la stabilité des échafaudages roulants selon les instructions du fabricant.",
+      "it": "La lista Suva 67150 richiede di assicurare la stabilità dei ponteggi mobili secondo le istruzioni del fabbricante.",
+      "en": "Suva checklist 67150 calls for mobile scaffold stability to be secured in accordance with the manufacturer’s instructions."
+    },
+    "keywords": [
+      "rollgerüst",
+      "échafaudage roulant",
+      "mobile scaffold",
+      "ponteggio mobile"
+    ],
+    "sourceId": "suva-67150-f",
+    "topic": "scaffolds",
+    "edition": "2026-09",
+    "verifiedAt": "2026-11-06"
+  },
+  {
+    "id": "suva-67150-q13-full",
+    "source": "suva",
+    "label": "Suva 67150.F · Q13",
+    "url": "https://www.suva.ch/fr-ch/download/listes-de-controle/echafaudages-roulants/echafaudages-roulants--67150.F",
+    "text": {
+      "de": "Die Suva-Checkliste 67150 sieht vor, Rollgerüste nur ohne Personen darauf zu verschieben.",
+      "fr": "La liste Suva 67150 prévoit de déplacer les échafaudages roulants uniquement sans occupants.",
+      "it": "La lista Suva 67150 prevede di spostare i ponteggi mobili solo senza persone a bordo.",
+      "en": "Suva checklist 67150 calls for mobile scaffolds to be moved only when unoccupied."
+    },
+    "keywords": [
+      "rollgerüst verschieben",
+      "déplacer",
+      "move scaffold"
+    ],
+    "sourceId": "suva-67150-f",
+    "topic": "scaffolds",
+    "edition": "2026-09",
+    "verifiedAt": "2026-11-06"
+  },
+  {
+    "id": "suva-67028-q08-full",
+    "source": "suva",
+    "label": "Suva 67028.F · Q8",
+    "url": "https://www.suva.ch/fr-ch/download/listes-de-controle/echelles-portables-et-escabeaux/echelles-portables-et-escabeaux--67028.F",
+    "text": {
+      "de": "Die Suva-Checkliste 67028 verlangt, tragbare Leitern gegen Wegrutschen, Drehen und Kippen zu sichern.",
+      "fr": "La liste Suva 67028 demande d’assurer les échelles portables contre le glissement, le pivotement et le basculement.",
+      "it": "La lista Suva 67028 richiede di assicurare le scale portatili contro lo scivolamento, la rotazione e il ribaltamento.",
+      "en": "Suva checklist 67028 calls for portable ladders to be secured against slipping, turning and tipping."
+    },
+    "keywords": [
+      "leiter",
+      "échelle",
+      "ladder",
+      "scala"
+    ],
+    "sourceId": "suva-67028-f",
+    "topic": "ladders",
+    "edition": "2023-10",
+    "verifiedAt": "2026-11-06"
+  },
+  {
+    "id": "suva-67148-q20-full",
+    "source": "suva",
+    "label": "Suva 67148.F · Q20",
+    "url": "https://www.suva.ch/fr-ch/download/listes-de-controle/fouilles-et-terrassements/fouilles-et-terrassements--67148.F",
+    "text": {
+      "de": "Die Suva-Checkliste 67148 verlangt bei mehr als 1,5 m tiefen Gräben und Baugruben eine Spriessung, Böschung oder andere geeignete Sicherung.",
+      "fr": "La liste Suva 67148 demande un étayage, un talutage ou une autre protection adéquate pour les fouilles de plus de 1,5 m de profondeur.",
+      "it": "La lista Suva 67148 richiede puntellature, scarpate o altre protezioni adeguate per scavi e trincee profondi più di 1,5 m.",
+      "en": "Suva checklist 67148 calls for shoring, sloping or other suitable protection for excavations deeper than 1.5 m."
+    },
+    "keywords": [
+      "graben",
+      "baugrube",
+      "excavation",
+      "fouille"
+    ],
+    "sourceId": "suva-67148-f",
+    "topic": "excavations",
+    "edition": "2024-11",
+    "verifiedAt": "2026-11-06"
+  },
+  {
+    "id": "suva-67008-q03-full",
+    "source": "suva",
+    "label": "Suva 67008.F · Q3",
+    "url": "https://www.suva.ch/fr-ch/download/listes-de-controle/liste-de-controle--ouvertures-dans-les-planchers/liste-de-controle--ouvertures-dans-les-planchers--67008.f",
+    "text": {
+      "de": "Die Suva-Checkliste 67008 verlangt tragfähige Abdeckungen von Bodenöffnungen, die keine zusätzliche Gefahr schaffen.",
+      "fr": "La liste Suva 67008 demande des couvertures résistantes pour les ouvertures dans les planchers, sans danger supplémentaire.",
+      "it": "La lista Suva 67008 richiede coperture resistenti per le aperture nei pavimenti, senza creare ulteriori pericoli.",
+      "en": "Suva checklist 67008 calls for load-bearing floor-opening covers that do not introduce additional hazards."
+    },
+    "keywords": [
+      "öffnung",
+      "opening",
+      "ouverture",
+      "apertura"
+    ],
+    "sourceId": "suva-67008-f",
+    "topic": "height",
+    "edition": "2024-09",
+    "verifiedAt": "2026-11-06"
+  },
+  {
+    "id": "suva-67001-q02-full",
+    "source": "suva",
+    "label": "Suva 67001.F · Q2",
+    "url": "https://www.suva.ch/fr-ch/download/listes-de-controle/voies-de-circulation-pour-pietons--67001.F",
+    "text": {
+      "de": "Die Suva-Checkliste 67001 sieht Fusswege ohne Stolperhindernisse und rutschige Verunreinigungen vor.",
+      "fr": "La liste Suva 67001 prévoit des cheminements piétons sans obstacles ni souillures glissantes.",
+      "it": "La lista Suva 67001 prevede percorsi pedonali privi di ostacoli e sostanze scivolose.",
+      "en": "Suva checklist 67001 calls for pedestrian routes without trip obstacles or slippery contamination."
+    },
+    "keywords": [
+      "stolpern",
+      "fussweg",
+      "pedestrian route",
+      "glissant"
+    ],
+    "sourceId": "suva-67001-f",
+    "topic": "housekeeping",
+    "edition": "2007-04",
+    "verifiedAt": "2026-11-06"
+  },
+  {
+    "id": "suva-67005-q08-full",
+    "source": "suva",
+    "label": "Suva 67005.F · Q8",
+    "url": "https://www.suva.ch/fr-ch/download/listes-de-controle/voies-de-circulation-pour-vehicules/voies-de-circulation-pour-vehicules--67005.f",
+    "text": {
+      "de": "Die Suva-Checkliste 67005 verlangt Massnahmen, die Zusammenstösse zwischen Fussgängern und Fahrzeugen auf betrieblichen Verkehrswegen verhindern.",
+      "fr": "La liste Suva 67005 demande des mesures pour prévenir les collisions entre piétons et véhicules sur les voies de circulation de l’entreprise.",
+      "it": "La lista Suva 67005 richiede misure per prevenire collisioni tra pedoni e veicoli sulle vie di circolazione aziendali.",
+      "en": "Suva checklist 67005 calls for measures to prevent collisions between pedestrians and vehicles on workplace traffic routes."
+    },
+    "keywords": [
+      "lastwagen",
+      "überrollt",
+      "verkehrsweg",
+      "vehicle",
+      "piéton"
+    ],
+    "sourceId": "suva-67005-f",
+    "topic": "traffic",
+    "edition": "2018-11",
+    "verifiedAt": "2026-11-06"
+  },
+  {
+    "id": "suva-67081-q07-full",
+    "source": "suva",
+    "label": "Suva 67081.F · Q7",
+    "url": "https://www.suva.ch/fr-ch/download/listes-de-controle/electricite-sur-les-chantiers--67081.F",
+    "text": {
+      "de": "Die Suva-Checkliste 67081 verlangt intakte Baustellenkabel, die nicht gequetscht oder eingeklemmt werden.",
+      "fr": "La liste Suva 67081 demande des câbles de chantier intacts, qui ne soient ni écrasés ni coincés.",
+      "it": "La lista Suva 67081 richiede cavi di cantiere integri, non schiacciati né incastrati.",
+      "en": "Suva checklist 67081 calls for intact site cables protected against crushing and trapping."
+    },
+    "keywords": [
+      "kabel",
+      "câble",
+      "cable",
+      "elektrizität"
+    ],
+    "sourceId": "suva-67081-f",
+    "topic": "electricity",
+    "edition": "2023-12",
+    "verifiedAt": "2026-11-06"
+  },
+  {
+    "id": "suva-67017-q07-full",
+    "source": "suva",
+    "label": "Suva 67017.F · Q7",
+    "url": "https://www.suva.ch/fr-ch/download/listes-de-controle/elingues--67017.F",
+    "text": {
+      "de": "Die Suva-Checkliste 67017 verlangt, vor dem Anschlagen Gewicht, Schwerpunkt und Anschlagpunkte der Last zu kennen.",
+      "fr": "La liste Suva 67017 demande de connaître le poids, le centre de gravité et les points d’ancrage de la charge avant l’élingage.",
+      "it": "La lista Suva 67017 richiede di conoscere peso, baricentro e punti di aggancio del carico prima dell’imbracatura.",
+      "en": "Suva checklist 67017 calls for the load’s weight, centre of gravity and lifting points to be known before slinging."
+    },
+    "keywords": [
+      "anschlagen",
+      "élingue",
+      "sling",
+      "lifting",
+      "kranlast"
+    ],
+    "sourceId": "suva-67017-f",
+    "topic": "lifting",
+    "edition": "2025-08",
+    "verifiedAt": "2026-11-06"
+  },
+  {
+    "id": "vuv-art6-instruction",
+    "source": "vuv",
+    "label": "VUV Art. 6",
+    "url": "https://www.fedlex.admin.ch/eli/cc/1983/1968_1968_1968/de#art_6",
+    "text": {
+      "de": "Laut VUV Art. 6 muss der Arbeitgeber über tätigkeitsbezogene Gefahren und Schutzmassnahmen informieren, die Beschäftigten anleiten und für die Einhaltung der Massnahmen sorgen.",
+      "fr": "Selon l’art. 6 OPA, l’employeur doit informer et instruire le personnel sur les dangers liés aux activités et les mesures de sécurité, puis veiller à leur respect.",
+      "it": "Secondo l’art. 6 OPI, il datore di lavoro deve informare e istruire il personale sui pericoli delle attività e sulle misure di sicurezza e vigilare sul loro rispetto.",
+      "en": "Under VUV Art. 6, employers must inform and instruct workers about activity-related hazards and safety measures and ensure those measures are followed."
+    },
+    "keywords": [
+      "instruktion",
+      "lernender",
+      "ausbildung",
+      "apprenti",
+      "instruction"
+    ],
+    "verifiedAt": "2026-11-06"
+  },
+  {
+    "id": "vuv-art8-special-hazards",
+    "source": "vuv",
+    "label": "VUV Art. 8",
+    "url": "https://www.fedlex.admin.ch/eli/cc/1983/1968_1968_1968/de#art_8",
+    "text": {
+      "de": "Laut VUV Art. 8 dürfen Arbeiten mit besonderen Gefahren nur entsprechend ausgebildeten Beschäftigten übertragen werden; wer solche Arbeiten allein ausführt, muss überwacht werden.",
+      "fr": "Selon l’art. 8 OPA, les travaux comportant des dangers particuliers ne peuvent être confiés qu’à du personnel formé; une personne qui les exécute seule doit être surveillée.",
+      "it": "Secondo l’art. 8 OPI, i lavori con pericoli particolari possono essere affidati solo a personale formato; chi li svolge da solo deve essere sorvegliato.",
+      "en": "Under VUV Art. 8, work involving particular hazards may only be assigned to suitably trained workers; anyone performing such work alone must be monitored."
+    },
+    "keywords": [
+      "alleinarbeit",
+      "gefährliche arbeit",
+      "working alone",
+      "formation"
+    ],
+    "verifiedAt": "2026-11-06"
+  },
+  {
+    "id": "vuv-art28-moving-parts",
+    "source": "vuv",
+    "label": "VUV Art. 28",
+    "url": "https://www.fedlex.admin.ch/eli/cc/1983/1968_1968_1968/de#art_28",
+    "text": {
+      "de": "Laut VUV Art. 28 müssen Schutzeinrichtungen verhindern, dass Beschäftigte in den Gefahrenbereich bewegter Maschinenteile treten oder greifen können.",
+      "fr": "Selon l’art. 28 OPA, des dispositifs de protection doivent empêcher le personnel de pénétrer ou de mettre la main dans la zone dangereuse des éléments mobiles des machines.",
+      "it": "Secondo l’art. 28 OPI, dispositivi di protezione devono impedire al personale di entrare o introdurre le mani nella zona pericolosa delle parti mobili delle macchine.",
+      "en": "Under VUV Art. 28, safeguards must prevent workers from entering or reaching into the danger zone of moving machinery parts."
+    },
+    "keywords": [
+      "fräse",
+      "bohrschnecke",
+      "greifzange",
+      "moving parts",
+      "maschine"
+    ],
+    "verifiedAt": "2026-11-06"
+  },
+  {
+    "id": "vuv-art32a-intended-use",
+    "source": "vuv",
+    "label": "VUV Art. 32a",
+    "url": "https://www.fedlex.admin.ch/eli/cc/1983/1968_1968_1968/de",
+    "text": {
+      "de": "Laut VUV Art. 32a dürfen Arbeitsmittel nur bestimmungsgemäss sowie für geeignete Arbeiten und Einsatzorte verwendet werden; die Herstellervorgaben sind zu berücksichtigen.",
+      "fr": "Selon l’art. 32a OPA, les équipements doivent être utilisés conformément à leur destination, pour des travaux et dans des lieux adaptés, en tenant compte des instructions du fabricant.",
+      "it": "Secondo l’art. 32a OPI, le attrezzature devono essere utilizzate conformemente alla loro destinazione, per lavori e in luoghi adatti, tenendo conto delle istruzioni del fabbricante.",
+      "en": "Under VUV Art. 32a, work equipment must be used as intended, for suitable tasks and locations, taking the manufacturer’s instructions into account."
+    },
+    "keywords": [
+      "stapler",
+      "plattform",
+      "bohrgerät",
+      "hersteller",
+      "equipment"
+    ],
+    "verifiedAt": "2026-11-06"
+  },
+  {
+    "id": "vuv-art41-loads",
+    "source": "vuv",
+    "label": "VUV Art. 41",
+    "url": "https://www.fedlex.admin.ch/eli/cc/1983/1968_1968_1968/de#art_41",
+    "text": {
+      "de": "Laut VUV Art. 41 sind Gegenstände und Materialien so zu transportieren und zu lagern, dass sie nicht gefährlich umstürzen, herabfallen oder abrutschen können.",
+      "fr": "Selon l’art. 41 OPA, les objets et matériaux doivent être transportés et entreposés de manière à ne pas se renverser, tomber ou glisser dangereusement.",
+      "it": "Secondo l’art. 41 OPI, oggetti e materiali devono essere trasportati e immagazzinati in modo da non ribaltarsi, cadere o scivolare pericolosamente.",
+      "en": "Under VUV Art. 41, objects and materials must be transported and stored so that they cannot dangerously overturn, fall or slide."
+    },
+    "keywords": [
+      "last",
+      "palette",
+      "kran",
+      "transport",
+      "load",
+      "charge"
+    ],
+    "verifiedAt": "2026-11-06"
+  },
+  {
+    "id": "vuv-art43-maintenance",
+    "source": "vuv",
+    "label": "VUV Art. 43",
+    "url": "https://www.fedlex.admin.ch/eli/cc/1983/1968_1968_1968/de#art_43",
+    "text": {
+      "de": "Laut VUV Art. 43 sind Arbeitsmittel vor Reinigung, Störungsbehebung und Instandhaltung in einen nicht gefährdenden Zustand zu versetzen.",
+      "fr": "Selon l’art. 43 OPA, les équipements doivent être mis dans un état non dangereux avant le nettoyage, le dépannage ou l’entretien.",
+      "it": "Secondo l’art. 43 OPI, le attrezzature devono essere portate in uno stato non pericoloso prima della pulizia, dell’eliminazione di guasti o della manutenzione.",
+      "en": "Under VUV Art. 43, work equipment must be put into a safe state before cleaning, troubleshooting or maintenance."
+    },
+    "keywords": [
+      "reparatur",
+      "wartung",
+      "instandhaltung",
+      "maintenance",
+      "entretien"
+    ],
+    "verifiedAt": "2026-11-06"
+  },
+  {
+    "id": "vuv-art33-air",
+    "source": "vuv",
+    "label": "VUV Art. 33",
+    "url": "https://www.fedlex.admin.ch/eli/cc/1983/1968_1968_1968/de#art_33",
+    "text": {
+      "de": "Laut VUV Art. 33 darf die Luft am Arbeitsplatz die Gesundheit nicht gefährden; andernfalls braucht es ausreichende Lüftung und nötigenfalls weitere technische Massnahmen.",
+      "fr": "Selon l’art. 33 OPA, l’air au poste de travail ne doit pas mettre la santé en danger; sinon, une ventilation suffisante et, si nécessaire, d’autres mesures techniques sont requises.",
+      "it": "Secondo l’art. 33 OPI, l’aria sul posto di lavoro non deve mettere in pericolo la salute; altrimenti occorrono una ventilazione sufficiente e, se necessario, altre misure tecniche.",
+      "en": "Under VUV Art. 33, workplace air must not endanger health; otherwise sufficient ventilation and, where necessary, further technical measures are required."
+    },
+    "keywords": [
+      "gas",
+      "gase",
+      "dämpfe",
+      "ventilation",
+      "fumes"
+    ],
+    "verifiedAt": "2026-11-06"
+  },
+  {
+    "id": "arg-art6-health",
+    "source": "arg",
+    "label": "ArG Art. 6",
+    "url": "https://www.fedlex.admin.ch/eli/cc/1966/57_57_57/de#art_6",
+    "text": {
+      "de": "Laut ArG Art. 6 sind Einrichtungen und Arbeitsabläufe so zu gestalten, dass Gesundheitsgefährdungen und Überbeanspruchungen möglichst vermieden werden.",
+      "fr": "Selon l’art. 6 LTr, les installations et l’organisation du travail doivent éviter autant que possible les risques pour la santé et le surmenage.",
+      "it": "Secondo l’art. 6 LL, impianti e processi lavorativi devono essere organizzati in modo da evitare per quanto possibile pericoli per la salute e sovraffaticamento.",
+      "en": "Under ArG Art. 6, facilities and work processes must be designed to avoid health hazards and excessive strain as far as possible."
+    },
+    "keywords": [
+      "gesundheitsschutz",
+      "überbeanspruchung",
+      "health",
+      "surmenage"
+    ],
+    "verifiedAt": "2026-11-06"
+  },
+  {
+    "id": "uvg-art82-prevention",
+    "source": "uvg",
+    "label": "UVG Art. 82",
+    "url": "https://www.fedlex.admin.ch/eli/cc/1982/1676_1676_1676/de#art_82",
+    "text": {
+      "de": "Laut UVG Art. 82 muss der Arbeitgeber die erfahrungsgemäss notwendigen, technisch anwendbaren und den Verhältnissen angemessenen Massnahmen gegen Berufsunfälle und Berufskrankheiten treffen.",
+      "fr": "Selon l’art. 82 LAA, l’employeur doit prendre les mesures de prévention des accidents et maladies professionnels nécessaires d’après l’expérience, applicables selon la technique et adaptées aux circonstances.",
+      "it": "Secondo l’art. 82 LAINF, il datore di lavoro deve adottare le misure contro infortuni e malattie professionali necessarie secondo l’esperienza, tecnicamente applicabili e adeguate alle circostanze.",
+      "en": "Under UVG Art. 82, employers must take measures against occupational accidents and diseases that experience shows to be necessary, technically feasible and appropriate to the circumstances."
+    },
+    "keywords": [
+      "prävention",
+      "arbeitgeberpflicht",
+      "prevention"
+    ],
+    "verifiedAt": "2026-11-06"
+  },
+  {
+    "id": "lwr-stop",
+    "source": "lwr",
+    "label": "Suva · Lebenswichtige Regeln",
+    "url": "https://www.suva.ch/de-ch/praevention/lebenswichtige-regeln-und-bestimmungen/lebenswichtige-regeln-am-arbeitsplatz",
+    "text": {
+      "de": "Nach den lebenswichtigen Regeln der Suva gilt: Bei Regelverletzung die Arbeit stoppen und erst weiterarbeiten, wenn die Gefahr beseitigt ist.",
+      "fr": "Selon les règles vitales de la Suva, il faut arrêter le travail lorsqu’une règle est enfreinte et ne reprendre qu’une fois le danger éliminé.",
+      "it": "Secondo le regole vitali della Suva, quando una regola viene violata occorre fermare il lavoro e riprenderlo solo dopo aver eliminato il pericolo.",
+      "en": "Suva’s lifesaving rules call for work to stop when a rule is breached and to resume only once the danger has been removed."
+    },
+    "keywords": [
+      "stopp",
+      "regelverletzung",
+      "stop",
+      "règle vitale"
+    ],
+    "verifiedAt": "2026-11-06"
+  }
+]

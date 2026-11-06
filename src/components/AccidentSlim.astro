@@ -8,7 +8,7 @@ const meta = [fmtDate(item.date, lang), item.place ? `${item.place} (${item.cant
 <div class="slim">
   <p class="mline">{meta.join(' · ')}</p>
   {pick(lang, item.facts?.what) && <p>{pick(lang, item.facts.what)}</p>}
-  <Lesson text={pick(lang, item.lesson)} />
+  <Lesson lesson={item.lesson} lang={lang} />
   <p class="srcline">{t(lang, 'source')}: <a href={item.source.url} target="_blank" rel="noopener">{item.source.name}</a> ({item.source.lang.toUpperCase()}){item.extraSources?.map((s: any) => <> · <a href={s.url} target="_blank" rel="noopener">{s.name}</a> ({s.lang.toUpperCase()})</>)}
   {permalink && <> · <a class="plink" href={`/${lang}/accidents/${item.id}/`}>{t(lang, 'permalink')}</a></>}</p>
 </div>

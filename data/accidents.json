@@ -57,12 +57,7 @@
     "en": "Cantonal police (GL) investigating."
    }
   },
-  "lesson": {
-   "de": "Auf schmalen Baustellenwegen braucht es Ausweichstellen und klare Vortrittsregeln für Baumaschinen. Überrollschutz und Sicherheitsgurt verhindern, dass der Fahrer aus der Kabine geschleudert wird.",
-   "fr": "Sur les pistes étroites, prévoir des zones d’évitement et des règles de priorité claires entre engins. Arceau de sécurité et ceinture empêchent le conducteur d’être éjecté.",
-   "it": "Sulle piste strette servono piazzole di scambio e regole di precedenza chiare tra macchine. Telaio di protezione e cintura evitano che il conducente venga sbalzato fuori.",
-   "en": "Narrow site roads need passing places and clear right-of-way rules between machines. A rollover protective structure and seatbelt keep the driver from being thrown out."
-  },
+  "lesson": null,
   "caseId": "case-2026-10-22-gl-muehlehorn-walze",
   "extraSources": [
    {
@@ -130,12 +125,7 @@
     "en": "Cause under investigation"
    }
   },
-  "lesson": {
-   "de": "Gerüste schützen nur, wenn sie vollständig sind: Seitenschutz, Beläge und Zugänge täglich prüfen. Auch Planer und Bauleitung gehören bei Begehungen zum geschützten Personenkreis.",
-   "fr": "Un échafaudage ne protège que s’il est complet: contrôler chaque jour garde-corps, planchers et accès. Architectes et direction des travaux doivent aussi être protégés lors des visites.",
-   "it": "Un ponteggio protegge solo se completo: controllare ogni giorno parapetti, impalcati e accessi. Anche progettisti e direzione lavori vanno protetti durante i sopralluoghi.",
-   "en": "Scaffolding only protects when complete: check guardrails, decking and access daily. Designers and site managers on inspections need the same protection."
-  },
+  "lesson": null,
   "caseId": "case-2026-10-22-ti-paradiso-ponteggio",
   "extraSources": [
    {
@@ -233,12 +223,7 @@
     "en": "Chur city police investigating."
    }
   },
-  "lesson": {
-   "de": "Auf schmalen Bergstrassen vor dem Einsatz prüfen, ob der Rand trägt, und Abstand zur Kante halten. Abspringen von einer kippenden Maschine ist Glückssache – sicherer sind Überrollschutz und angelegter Gurt.",
-   "fr": "Sur les routes de montagne étroites, vérifier avant l’engagement que le bord porte et garder ses distances. Sauter d’un engin qui bascule relève de la chance: arceau de sécurité et ceinture bouclée protègent mieux.",
-   "it": "Sulle strade di montagna strette verificare prima che il bordo regga e tenersi a distanza. Saltare da una macchina che si ribalta è questione di fortuna: telaio di protezione e cintura allacciata proteggono meglio.",
-   "en": "On narrow mountain roads, check that the edge will bear the load and keep away from it. Jumping off a tipping machine is luck; a rollover structure and a fastened seatbelt are safer."
-  },
+  "lesson": null,
   "caseId": "case-2026-10-22-gr-praden-walze"
  },
  {
@@ -300,10 +285,17 @@
    }
   },
   "lesson": {
-   "de": "Wer an oder unter alten Dächern arbeitet, prüft zuerst, was sich lösen kann, und sichert oder entfernt lose Teile von oben nach unten. Für die Rettung vom Gerüst gehört ein Notfallplan dazu.",
-   "fr": "Avant de travailler sous ou contre une vieille toiture, repérer ce qui peut se détacher et sécuriser ou retirer les éléments lâches de haut en bas. Prévoir aussi un plan de sauvetage depuis l’échafaudage.",
-   "it": "Prima di lavorare sotto o accanto a vecchie coperture, individuare ciò che può staccarsi e fissare o rimuovere le parti instabili dall’alto verso il basso. Serve anche un piano di soccorso dal ponteggio.",
-   "en": "Before working on or under old roofs, check what could come loose and secure or remove loose parts from the top down. Plan how to rescue someone from the scaffold."
+   "de": "Laut BauAV Art. 17 sind Arbeitsplätze und Verkehrswege gegen einstürzende Bauteile sowie herabfallende, abrutschende oder wegrollende Gegenstände und Materialien zu schützen.",
+   "fr": "Selon l’art. 17 OTConst, les postes de travail et les passages doivent être protégés contre l’écroulement d’éléments et la chute, le glissement ou le roulement d’objets et de matériaux.",
+   "it": "Secondo l’art. 17 OLCostr, posti di lavoro e passaggi vanno protetti dal crollo di elementi e dalla caduta, dallo scivolamento o dal rotolamento di oggetti e materiali.",
+   "en": "Under BauAV Art. 17, workplaces and access routes must be protected against collapsing components and falling, sliding or rolling objects and materials.",
+   "refs": [
+    {
+     "id": "bauav-art17-falling-material",
+     "label": "BauAV Art. 17",
+     "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_17"
+    }
+   ]
   },
   "caseId": "case-2026-10-22-ti-cadro-lamiera"
  },
@@ -365,12 +357,7 @@
     "en": "Cantonal police (SG) investigating."
    }
   },
-  "lesson": {
-   "de": "Staplerplattformen sind nur zulässig, wenn sie dafür gebaut, gesichert und mit Seitenschutz versehen sind. Für Arbeiten in der Höhe ist eine Hubarbeitsbühne meist die sichere Wahl.",
-   "fr": "Une plateforme sur chariot n’est admise que si elle est conçue à cet effet, verrouillée et munie de garde-corps. Pour travailler en hauteur, une nacelle élévatrice est en général le bon choix.",
-   "it": "Le piattaforme su carrello sono ammesse solo se concepite allo scopo, bloccate e con parapetto. Per lavori in quota una piattaforma aerea è di norma la scelta sicura.",
-   "en": "Forklift platforms are only acceptable if purpose-built, locked on and fitted with guardrails. For work at height a mobile elevating work platform is usually the safe choice."
-  },
+  "lesson": null,
   "caseId": "case-2026-10-21-sg-diepoldsau-plattform"
  },
  {
@@ -431,12 +418,7 @@
     "en": "Public prosecutor has opened an investigation"
    }
   },
-  "lesson": {
-   "de": "Holzerei nie allein: Wer allein arbeitet, wird im Notfall zu spät gefunden. Mindestens Ruf- oder Sichtverbindung, Notfallplan und ein Alarmgerät (Totmannmelder) gehören dazu.",
-   "fr": "Ne jamais abattre seul: en cas d’accident, on est retrouvé trop tard. Contact visuel ou vocal, plan d’urgence et appareil d’alarme pour travailleur isolé sont indispensables.",
-   "it": "Mai abbattere alberi da soli: in caso d’incidente si viene trovati troppo tardi. Servono contatto visivo o vocale, piano d’emergenza e un dispositivo d’allarme uomo a terra.",
-   "en": "Never fell trees alone: if something goes wrong, help comes too late. Keep visual or voice contact, have an emergency plan and use a lone-worker alarm."
-  },
+  "lesson": null,
   "caseId": "case-2026-10-10-vs-mund-holzerei",
   "extraSources": [
    {
@@ -494,12 +476,7 @@
     "en": "Cantonal police (BE) investigating."
    }
   },
-  "lesson": {
-   "de": "Ein Kranunfall ohne Verletzte ist ein Beinahe-Unfall mit grossem Lernpotenzial. Standsicherheit, Untergrund, Montage und Windgrenzen gehören vor jedem Einsatz geprüft und dokumentiert.",
-   "fr": "Une chute de grue sans blessé est un quasi-accident riche d’enseignements. Stabilité, sol, montage et limites de vent doivent être vérifiés et documentés avant chaque utilisation.",
-   "it": "Il crollo di una gru senza feriti è un quasi-incidente da cui imparare molto. Stabilità, terreno, montaggio e limiti di vento vanno verificati e documentati prima dell’uso.",
-   "en": "A crane collapse without injuries is a near miss with a lot to learn from. Stability, ground, erection and wind limits must be checked and documented before use."
-  },
+  "lesson": null,
   "caseId": "case-2026-10-06-be-ipsach-kran"
  },
  {
@@ -561,10 +538,22 @@
    }
   },
   "lesson": {
-   "de": "Schalungselemente erst lösen, wenn sie am Kran hängen oder gegen Kippen abgestützt sind. Anschlagen von einer Leiter aus ist heikel – besser eine Arbeitsbühne oder Anschlagpunkte, die vom Boden erreichbar sind.",
-   "fr": "Ne détacher un élément de coffrage que s’il est accroché à la grue ou étayé contre le basculement. Élinguer depuis une échelle est risqué: préférer une plateforme ou des points d’accroche accessibles du sol.",
-   "it": "Sganciare gli elementi di cassaforma solo se appesi alla gru o puntellati contro il ribaltamento. Imbracare da una scala è rischioso: meglio una piattaforma o punti d’aggancio raggiungibili da terra.",
-   "en": "Only release formwork panels once they hang on the crane or are propped against tipping. Slinging from a ladder is risky; use a platform or lifting points reachable from the ground."
+   "de": "Laut VUV Art. 41 sind Gegenstände und Materialien so zu transportieren und zu lagern, dass sie nicht gefährlich umstürzen, herabfallen oder abrutschen können. Die Suva-Checkliste 67017 verlangt, vor dem Anschlagen Gewicht, Schwerpunkt und Anschlagpunkte der Last zu kennen.",
+   "fr": "Selon l’art. 41 OPA, les objets et matériaux doivent être transportés et entreposés de manière à ne pas se renverser, tomber ou glisser dangereusement. La liste Suva 67017 demande de connaître le poids, le centre de gravité et les points d’ancrage de la charge avant l’élingage.",
+   "it": "Secondo l’art. 41 OPI, oggetti e materiali devono essere trasportati e immagazzinati in modo da non ribaltarsi, cadere o scivolare pericolosamente. La lista Suva 67017 richiede di conoscere peso, baricentro e punti di aggancio del carico prima dell’imbracatura.",
+   "en": "Under VUV Art. 41, objects and materials must be transported and stored so that they cannot dangerously overturn, fall or slide. Suva checklist 67017 calls for the load’s weight, centre of gravity and lifting points to be known before slinging.",
+   "refs": [
+    {
+     "id": "vuv-art41-loads",
+     "label": "VUV Art. 41",
+     "url": "https://www.fedlex.admin.ch/eli/cc/1983/1968_1968_1968/de#art_41"
+    },
+    {
+     "id": "suva-67017-q07-full",
+     "label": "Suva 67017.F · Q7",
+     "url": "https://www.suva.ch/fr-ch/download/listes-de-controle/elingues--67017.F"
+    }
+   ]
   },
   "caseId": "case-2026-10-01-gr-chur-schalung"
  },
@@ -627,10 +616,17 @@
    }
   },
   "lesson": {
-   "de": "Nicht jedes Dach ist begehbar: Lichtbänder, Faserzementplatten und alte Eindeckungen brechen ohne Vorwarnung. Vor Arbeitsbeginn Durchsturzstellen abdecken oder Auffangnetze montieren.",
-   "fr": "Tous les toits ne sont pas praticables: bandes lumineuses, plaques en fibrociment et anciennes couvertures cèdent sans prévenir. Couvrir les zones fragiles ou poser des filets avant de commencer.",
-   "it": "Non tutti i tetti sono calpestabili: lucernari, lastre in fibrocemento e coperture vecchie cedono senza preavviso. Coprire i punti fragili o montare reti prima di iniziare.",
-   "en": "Not every roof can bear a person: skylights, fibre-cement sheets and old coverings give way without warning. Cover fragile areas or install safety nets before work starts."
+   "de": "Laut BauAV Art. 44 ist vor Arbeitsbeginn die Durchbruchsicherheit des Dachs abzuklären. Ist sie nicht nachgewiesen, gilt die Dachfläche als nicht durchbruchsicher.",
+   "fr": "Selon l’art. 44 OTConst, la résistance à la rupture du toit doit être vérifiée avant les travaux. Si elle n’est pas prouvée, la surface est considérée comme non résistante à la rupture.",
+   "it": "Secondo l’art. 44 OLCostr, prima dei lavori va verificata la resistenza alla rottura del tetto. Se non è dimostrata, la superficie è considerata non resistente alla rottura.",
+   "en": "Under BauAV Art. 44, roof resistance to break-through must be checked before work starts. If it cannot be demonstrated, the roof must be treated as fragile.",
+   "refs": [
+    {
+     "id": "bauav-art44-roof-fragility",
+     "label": "BauAV Art. 44",
+     "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_44"
+    }
+   ]
   },
   "caseId": "case-2026-09-28-tg-eschlikon-dach"
  },
@@ -693,10 +689,17 @@
    }
   },
   "lesson": {
-   "de": "Wer anschlägt oder einweist, steht nie im Schwenk- oder Fallbereich der Last. Bagger als Hebegerät nur mit Lasthaken, Zulassung und Sichtkontakt zwischen Fahrer und Einweiser einsetzen.",
-   "fr": "Celui qui élingue ou guide ne se tient jamais dans la zone de rotation ou de chute de la charge. Une pelle ne sert d’engin de levage qu’avec crochet, autorisation et contact visuel avec le guide.",
-   "it": "Chi imbraca o guida non sta mai nella zona di rotazione o caduta del carico. L’escavatore va usato per sollevare solo con gancio, omologazione e contatto visivo con chi guida.",
-   "en": "Whoever slings or signals never stands in the swing or drop zone of the load. Use an excavator for lifting only with a load hook, approval and eye contact between operator and signaller."
+   "de": "Laut VUV Art. 41 sind Gegenstände und Materialien so zu transportieren und zu lagern, dass sie nicht gefährlich umstürzen, herabfallen oder abrutschen können.",
+   "fr": "Selon l’art. 41 OPA, les objets et matériaux doivent être transportés et entreposés de manière à ne pas se renverser, tomber ou glisser dangereusement.",
+   "it": "Secondo l’art. 41 OPI, oggetti e materiali devono essere trasportati e immagazzinati in modo da non ribaltarsi, cadere o scivolare pericolosamente.",
+   "en": "Under VUV Art. 41, objects and materials must be transported and stored so that they cannot dangerously overturn, fall or slide.",
+   "refs": [
+    {
+     "id": "vuv-art41-loads",
+     "label": "VUV Art. 41",
+     "url": "https://www.fedlex.admin.ch/eli/cc/1983/1968_1968_1968/de#art_41"
+    }
+   ]
   },
   "caseId": "case-2026-09-28-sg-pfaefers-abladen",
   "extraSources": [
@@ -765,12 +768,7 @@
     "en": "Cause under investigation"
    }
   },
-  "lesson": {
-   "de": "Auch Routinetätigkeiten wie Probenahmen brauchen eine Gefährdungsbeurteilung, geeignete PSA und eingeübte Notfallabläufe. Ein funktionierender Abzug ist kein Ersatz für das Wissen, was im Gefäss ist.",
-   "fr": "Même un geste routinier comme un prélèvement exige une analyse des risques, des EPI adaptés et des procédures d’urgence exercées. Une hotte ne remplace pas la connaissance du contenu.",
-   "it": "Anche un prelievo di routine richiede valutazione dei rischi, DPI adeguati e procedure d’emergenza esercitate. Una cappa non sostituisce la conoscenza del contenuto.",
-   "en": "Even routine sampling needs a risk assessment, suitable PPE and practised emergency procedures. A fume cupboard is no substitute for knowing what is in the container."
-  },
+  "lesson": null,
   "caseId": "case-2026-09-24-bl-reinach-labor"
  },
  {
@@ -831,12 +829,7 @@
     "en": "Cantonal police TG with Bischofszell prosecutor"
    }
   },
-  "lesson": {
-   "de": "Kippende Stapler töten meist Fahrer, die nicht angegurtet sind und abspringen wollen. Rückhaltesystem benutzen, im Fahrzeug bleiben, Fahrwege mit Abstand zu Böschungen markieren.",
-   "fr": "Les chariots qui basculent tuent surtout des conducteurs non attachés qui tentent de sauter. Utiliser le système de retenue, rester dans la cabine et tracer les voies loin des talus.",
-   "it": "I carrelli che si ribaltano uccidono soprattutto conducenti senza cintura che cercano di saltare. Usare il sistema di ritenuta, restare a bordo e tracciare i percorsi lontano dalle scarpate.",
-   "en": "Tipping forklifts mostly kill unbelted drivers who try to jump clear. Use the restraint, stay in the cab and mark routes well away from banks."
-  },
+  "lesson": null,
   "caseId": "case-2026-09-21-tg-buhwil-stapler",
   "extraSources": [
    {
@@ -904,12 +897,7 @@
     "en": "Zurich city police with prosecutor"
    }
   },
-  "lesson": {
-   "de": "Bauaufzüge sind Maschinen mit Prüfpflicht: Verankerung am Gerüst, Montage nach Herstellerangaben und Abnahme durch eine befähigte Person sind Pflicht – auch bei Umbau und Versetzen.",
-   "fr": "Les monte-charges sont des machines soumises à contrôle: ancrage à l’échafaudage, montage selon le fabricant et réception par une personne compétente, aussi après chaque modification.",
-   "it": "I montacarichi sono macchine soggette a verifica: ancoraggio al ponteggio, montaggio secondo il fabbricante e collaudo da parte di una persona competente, anche dopo ogni modifica.",
-   "en": "Construction hoists are machines subject to inspection: anchorage to the scaffold, installation per the manufacturer and sign-off by a competent person – also after every change."
-  },
+  "lesson": null,
   "extraSources": [
    {
     "name": "20 minutes",
@@ -977,12 +965,7 @@
     "en": "Cantonal police SG on behalf of prosecutor"
    }
   },
-  "lesson": {
-   "de": "Jugendliche dürfen gefährliche Arbeiten nur gemäss Bildungsplan und unter Aufsicht ausführen. Dacharbeiten ohne kollektiven Absturzschutz sind für sie tabu.",
-   "fr": "Les jeunes ne peuvent effectuer des travaux dangereux que selon leur plan de formation et sous surveillance. Travailler sur un toit sans protection collective leur est interdit.",
-   "it": "I giovani possono svolgere lavori pericolosi solo secondo il piano di formazione e sotto sorveglianza. Lavorare su un tetto senza protezione collettiva è per loro escluso.",
-   "en": "Young workers may only do hazardous work under their training plan and supervision. Roof work without collective fall protection is off-limits for them."
-  },
+  "lesson": null,
   "caseId": "case-2026-09-10-sg-widnau-dach"
  },
  {
@@ -1043,12 +1026,7 @@
     "en": "Investigation ongoing"
    }
   },
-  "lesson": {
-   "de": "Arbeiten in alten oder stillgelegten Anlagen bergen unbekannte Restenergien, Gase und Stoffe. Vor Beginn: Gefährdungsermittlung, Freischalten, Freimessen und eine schriftliche Arbeitsfreigabe.",
-   "fr": "Les installations anciennes ou désaffectées cachent énergies résiduelles, gaz et substances inconnus. Avant de commencer: analyse des dangers, consignation, mesures d’atmosphère et permis de travail écrit.",
-   "it": "Gli impianti vecchi o dismessi nascondono energie residue, gas e sostanze ignote. Prima di iniziare: analisi dei pericoli, messa in sicurezza, misurazioni e permesso di lavoro scritto.",
-   "en": "Old or decommissioned plants hide residual energy, gases and unknown substances. Before work: hazard analysis, isolation, gas testing and a written permit to work."
-  },
+  "lesson": null,
   "caseId": "case-2026-09-09-ti-piotta-ritom",
   "extraSources": [
    {
@@ -1127,10 +1105,17 @@
    }
   },
   "lesson": {
-   "de": "Greifer nie von Hand führen oder richten, solange der Kran bewegt werden kann. Wer allein arbeitet, braucht ein Notfallkonzept – hier konnte der Verletzte zum Glück selbst alarmieren.",
-   "fr": "Ne jamais guider ou ajuster une pince à la main tant que la grue peut bouger. Le travail isolé exige un concept d’urgence – ici, le blessé a heureusement pu alerter lui-même.",
-   "it": "Mai guidare o sistemare la pinza a mano finché la gru può muoversi. Chi lavora da solo ha bisogno di un piano d’emergenza – qui per fortuna il ferito ha potuto dare l’allarme.",
-   "en": "Never guide or adjust a grab by hand while the crane can move. Lone work needs an emergency plan – luckily here the injured man could raise the alarm himself."
+   "de": "Laut VUV Art. 28 müssen Schutzeinrichtungen verhindern, dass Beschäftigte in den Gefahrenbereich bewegter Maschinenteile treten oder greifen können.",
+   "fr": "Selon l’art. 28 OPA, des dispositifs de protection doivent empêcher le personnel de pénétrer ou de mettre la main dans la zone dangereuse des éléments mobiles des machines.",
+   "it": "Secondo l’art. 28 OPI, dispositivi di protezione devono impedire al personale di entrare o introdurre le mani nella zona pericolosa delle parti mobili delle macchine.",
+   "en": "Under VUV Art. 28, safeguards must prevent workers from entering or reaching into the danger zone of moving machinery parts.",
+   "refs": [
+    {
+     "id": "vuv-art28-moving-parts",
+     "label": "VUV Art. 28",
+     "url": "https://www.fedlex.admin.ch/eli/cc/1983/1968_1968_1968/de#art_28"
+    }
+   ]
   },
   "caseId": "case-2026-09-08-gr-pragg-jenaz-kran"
  },
@@ -1193,10 +1178,17 @@
    }
   },
   "lesson": {
-   "de": "Montage und Demontage von Anbaugeräten sind Sonderarbeiten: Herstellerangaben befolgen, Teile vor dem Lösen abstützen und den Gefahrenbereich unter schweren Bauteilen nie betreten.",
-   "fr": "Monter ou démonter un équipement est un travail particulier: suivre le fabricant, étayer les pièces avant de les libérer et ne jamais se placer sous une charge lourde.",
-   "it": "Montare o smontare un’attrezzatura è un lavoro speciale: seguire il fabbricante, puntellare i pezzi prima di sganciarli e non sostare mai sotto parti pesanti.",
-   "en": "Fitting and removing attachments is non-routine work: follow the manufacturer, prop parts before releasing them and never stand beneath heavy components."
+   "de": "Laut VUV Art. 43 sind Arbeitsmittel vor Reinigung, Störungsbehebung und Instandhaltung in einen nicht gefährdenden Zustand zu versetzen.",
+   "fr": "Selon l’art. 43 OPA, les équipements doivent être mis dans un état non dangereux avant le nettoyage, le dépannage ou l’entretien.",
+   "it": "Secondo l’art. 43 OPI, le attrezzature devono essere portate in uno stato non pericoloso prima della pulizia, dell’eliminazione di guasti o della manutenzione.",
+   "en": "Under VUV Art. 43, work equipment must be put into a safe state before cleaning, troubleshooting or maintenance.",
+   "refs": [
+    {
+     "id": "vuv-art43-maintenance",
+     "label": "VUV Art. 43",
+     "url": "https://www.fedlex.admin.ch/eli/cc/1983/1968_1968_1968/de#art_43"
+    }
+   ]
   },
   "caseId": "case-2026-09-02-vs-le-chable-grue"
  },
@@ -1258,12 +1250,7 @@
     "en": "Investigation ongoing"
    }
   },
-  "lesson": {
-   "de": "Rückwärtsfahren an Geländekanten ist eine der häufigsten Ursachen für Überschläge. Abstand zur Kante markieren, Einweiser einsetzen und immer angegurtet fahren.",
-   "fr": "La marche arrière près d’un bord est une cause fréquente de renversement. Marquer une distance de sécurité, utiliser un guide et toujours boucler la ceinture.",
-   "it": "La retromarcia vicino a un bordo è una causa frequente di ribaltamento. Segnare una distanza di sicurezza, usare un moviere e allacciare sempre la cintura.",
-   "en": "Reversing near an edge is one of the commonest causes of rollovers. Mark a safe distance, use a banksman and always wear the seatbelt."
-  },
+  "lesson": null,
   "caseId": "case-2026-08-08-fr-belfaux-engin"
  },
  {
@@ -1325,10 +1312,17 @@
    }
   },
   "lesson": {
-   "de": "Auch die Traufkante ist eine Absturzkante: Ab 3 m Absturzhöhe auf Dächern braucht es Seitenschutz oder Gerüst mit Dachfangwand – vom ersten bis zum letzten Arbeitstag.",
-   "fr": "Le bord de l’avant-toit est aussi un bord de chute: dès 3 m sur les toits, il faut garde-corps ou échafaudage avec paroi de protection – du premier au dernier jour.",
-   "it": "Anche la gronda è un bordo di caduta: sui tetti da 3 m servono parapetto o ponteggio con parete di protezione – dal primo all’ultimo giorno.",
-   "en": "The eaves are a fall edge too: from 3 m on roofs you need edge protection or scaffolding with a catch barrier – from the first to the last day."
+   "de": "Laut BauAV Art. 41 sind an Dachrändern grundsätzlich ab mehr als 2 m Absturzhöhe geeignete Absturzsicherungen nötig; für Arbeiten von geringem Umfang gelten die besonderen Vorgaben von Art. 46.",
+   "fr": "Selon l’art. 41 OTConst, des protections appropriées sont en principe nécessaires au bord des toits dès que la hauteur de chute dépasse 2 m; les travaux de peu d’ampleur relèvent des dispositions particulières de l’art. 46.",
+   "it": "Secondo l’art. 41 OLCostr, ai bordi dei tetti occorrono di regola protezioni adeguate oltre 2 m di altezza di caduta; per i lavori di esigua entità valgono le disposizioni particolari dell’art. 46.",
+   "en": "Under BauAV Art. 41, roof edges generally require suitable fall protection where the fall height exceeds 2 m; minor work is subject to the special provisions of Art. 46.",
+   "refs": [
+    {
+     "id": "bauav-art41-roof-edge",
+     "label": "BauAV Art. 41",
+     "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_41"
+    }
+   ]
   },
   "caseId": "case-2026-07-23-vd-diablerets-toit"
  },
@@ -1391,10 +1385,17 @@
    }
   },
   "lesson": {
-   "de": "Beim Schmelzen von Metall entstehen giftige Dämpfe: nur mit wirksamer Absaugung oder im Freien, Gaswarner und zweiter Fluchtweg.",
-   "fr": "La fusion de métal dégage des fumées toxiques: aspiration efficace ou plein air, détecteur de gaz et seconde issue.",
-   "it": "La fusione di metallo produce fumi tossici: aspirazione efficace o all’aperto, rilevatore di gas e seconda via di fuga.",
-   "en": "Melting metal gives off toxic fumes: use effective extraction or work outdoors, a gas detector and a second exit."
+   "de": "Laut VUV Art. 33 darf die Luft am Arbeitsplatz die Gesundheit nicht gefährden; andernfalls braucht es ausreichende Lüftung und nötigenfalls weitere technische Massnahmen.",
+   "fr": "Selon l’art. 33 OPA, l’air au poste de travail ne doit pas mettre la santé en danger; sinon, une ventilation suffisante et, si nécessaire, d’autres mesures techniques sont requises.",
+   "it": "Secondo l’art. 33 OPI, l’aria sul posto di lavoro non deve mettere in pericolo la salute; altrimenti occorrono una ventilazione sufficiente e, se necessario, altre misure tecniche.",
+   "en": "Under VUV Art. 33, workplace air must not endanger health; otherwise sufficient ventilation and, where necessary, further technical measures are required.",
+   "refs": [
+    {
+     "id": "vuv-art33-air",
+     "label": "VUV Art. 33",
+     "url": "https://www.fedlex.admin.ch/eli/cc/1983/1968_1968_1968/de#art_33"
+    }
+   ]
   },
   "caseId": "case-2026-06-26-vs-champery-gaz",
   "extraSources": [
@@ -1469,10 +1470,17 @@
    }
   },
   "lesson": {
-   "de": "Boden- und Schachtöffnungen sind durchbruchsicher abzudecken und zu befestigen oder mit Seitenschutz zu sichern – besonders für Nachfolgegewerke wie Reinigung, die den Bau weniger gut kennen.",
-   "fr": "Les ouvertures dans les sols doivent être couvertes et fixées de façon résistante ou protégées par un garde-corps – surtout pour les corps de métier suivants, comme le nettoyage.",
-   "it": "Le aperture nei pavimenti vanno coperte in modo resistente e fissate o protette con parapetti – soprattutto per le ditte che arrivano dopo, come le pulizie.",
-   "en": "Floor and shaft openings must be covered with secured, load-bearing covers or guarded – especially for later trades such as cleaners who know the site less well."
+   "de": "Laut BauAV Art. 25 sind Bodenöffnungen mit Absturz- oder Hineintretgefahr durch Seitenschutz oder eine durchbruchsichere, unverrückbare Abdeckung zu sichern.",
+   "fr": "Selon l’art. 25 OTConst, les ouvertures dans les sols présentant un risque de chute ou de faux pas doivent être protégées par un garde-corps ou une couverture résistante et solidement fixée.",
+   "it": "Secondo l’art. 25 OLCostr, le aperture nei pavimenti con pericolo di caduta o inciampo vanno protette con una protezione laterale o una copertura resistente alla rottura e inamovibile.",
+   "en": "Under BauAV Art. 25, floor openings that people could fall or step into must have side protection or a securely fixed, load-bearing cover.",
+   "refs": [
+    {
+     "id": "bauav-art25-floor-opening",
+     "label": "BauAV Art. 25",
+     "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_25"
+    }
+   ]
   },
   "caseId": "case-2026-06-15-vd-chavannes-chantier"
  },
@@ -1535,10 +1543,17 @@
    }
   },
   "lesson": {
-   "de": "Beim Heben gilt: niemand im Gefahrenbereich der Last, Lasten sicher anschlagen und mit Leitseilen führen statt von Hand. Der Kranführer hebt erst, wenn der Bereich frei ist.",
-   "fr": "Lors d’un levage: personne dans la zone dangereuse de la charge, élingage sûr et guidage par cordes plutôt qu’à la main. Le grutier ne lève que quand la zone est dégagée.",
-   "it": "Durante il sollevamento: nessuno nella zona di pericolo del carico, imbracatura sicura e guida con funi invece che a mano. Il gruista solleva solo a zona libera.",
-   "en": "When lifting: nobody in the load’s danger zone, sling it securely and guide it with tag lines, not by hand. Only lift once the area is clear."
+   "de": "Laut VUV Art. 41 sind Gegenstände und Materialien so zu transportieren und zu lagern, dass sie nicht gefährlich umstürzen, herabfallen oder abrutschen können.",
+   "fr": "Selon l’art. 41 OPA, les objets et matériaux doivent être transportés et entreposés de manière à ne pas se renverser, tomber ou glisser dangereusement.",
+   "it": "Secondo l’art. 41 OPI, oggetti e materiali devono essere trasportati e immagazzinati in modo da non ribaltarsi, cadere o scivolare pericolosamente.",
+   "en": "Under VUV Art. 41, objects and materials must be transported and stored so that they cannot dangerously overturn, fall or slide.",
+   "refs": [
+    {
+     "id": "vuv-art41-loads",
+     "label": "VUV Art. 41",
+     "url": "https://www.fedlex.admin.ch/eli/cc/1983/1968_1968_1968/de#art_41"
+    }
+   ]
   },
   "caseId": "case-2026-06-12-ow-a8-tunnel"
  },
@@ -1588,12 +1603,7 @@
     "en": "The labour inspectorate attended to establish the cause of the fall."
    }
   },
-  "lesson": {
-   "de": "Gerüste in engen Innenstadtlagen brauchen vollständigen Seitenschutz auf allen Belagsebenen – auch dort, wo der Platz knapp ist. Jede Lücke beim Umbauen sofort schliessen.",
-   "fr": "En ville, même à l’étroit, un échafaudage doit avoir une protection latérale complète à chaque niveau. Toute lacune lors des transformations se referme immédiatement.",
-   "it": "In centro città, anche negli spazi stretti, il ponteggio richiede protezioni laterali complete su ogni piano. Ogni varco aperto durante le modifiche va richiuso subito.",
-   "en": "Scaffolds in tight city-centre spots still need full edge protection on every working level. Close any gap left during alterations immediately."
-  },
+  "lesson": null,
   "caseId": "case-2026-04-02-ge-geneve-echafaudage"
  },
  {
@@ -1654,12 +1664,7 @@
     "en": "Criminal investigation opened by the prosecutor"
    }
   },
-  "lesson": {
-   "de": "Vor Arbeiten an Freileitungen: freischalten, erden, Masten gegen Umfallen sichern – und Kranausleger aus dem Fallbereich.",
-   "fr": "Avant de travailler sur une ligne: mise hors tension, mise à terre, poteau assuré contre la chute – flèche de grue hors de la zone de chute.",
-   "it": "Prima di lavorare su una linea: disinserire, mettere a terra, assicurare il palo – braccio della gru fuori dalla zona di caduta.",
-   "en": "Before line work: de-energise, earth, secure poles against falling – keep crane booms out of the fall zone."
-  },
+  "lesson": null,
   "caseId": "case-2026-03-16-fr-le-mouret-poteau",
   "extraSources": [
    {
@@ -1739,12 +1744,7 @@
     "en": "Zurich cantonal police and the See/Oberland prosecutor are investigating; the crane truck was seized. Suva attended."
    }
   },
-  "lesson": {
-   "de": "Unter Ausleger und Last hat niemand etwas zu suchen – auch nicht bei routinemässigem Material-Heben. Ladekrane brauchen die periodische Prüfung und vor jedem Einsatz eine Sichtkontrolle auf Risse und Verformungen.",
-   "fr": "Personne ne doit se trouver sous la flèche ou la charge, même pour un levage de routine. Les grues de chargement exigent un contrôle périodique et, avant chaque utilisation, un contrôle visuel des fissures et déformations.",
-   "it": "Nessuno deve stare sotto il braccio o il carico, nemmeno durante un sollevamento di routine. Le gru di carico richiedono il controllo periodico e, prima di ogni impiego, un controllo visivo di crepe e deformazioni.",
-   "en": "Nobody belongs under the boom or the load, even for a routine lift. Loader cranes need their periodic inspection and a visual check for cracks and deformation before every use."
-  },
+  "lesson": null,
   "caseId": "case-2025-12-15-zh-egg-kranarm"
  },
  {
@@ -1806,10 +1806,17 @@
    }
   },
   "lesson": {
-   "de": "Beim Abladen mit Ladekran hat niemand etwas unter oder neben der schwebenden Last zu suchen – auch nicht auf der Ladefläche. Jugendliche dürfen solche gefährlichen Arbeiten nur mit Ausbildung und enger Aufsicht ausführen.",
-   "fr": "Lors d’un déchargement à la grue, personne sous ou à côté de la charge suspendue, ni sur le pont du camion. Les jeunes ne font ce type de travail dangereux qu’avec formation et surveillance étroite.",
-   "it": "Nello scarico con gru nessuno deve stare sotto o accanto al carico sospeso, nemmeno sul pianale. I giovani svolgono lavori pericolosi solo se formati e strettamente sorvegliati.",
-   "en": "When unloading with a loader crane, nobody stands under or beside the suspended load, including on the lorry bed. Young workers do such dangerous work only with training and close supervision."
+   "de": "Laut VUV Art. 41 sind Gegenstände und Materialien so zu transportieren und zu lagern, dass sie nicht gefährlich umstürzen, herabfallen oder abrutschen können.",
+   "fr": "Selon l’art. 41 OPA, les objets et matériaux doivent être transportés et entreposés de manière à ne pas se renverser, tomber ou glisser dangereusement.",
+   "it": "Secondo l’art. 41 OPI, oggetti e materiali devono essere trasportati e immagazzinati in modo da non ribaltarsi, cadere o scivolare pericolosamente.",
+   "en": "Under VUV Art. 41, objects and materials must be transported and stored so that they cannot dangerously overturn, fall or slide.",
+   "refs": [
+    {
+     "id": "vuv-art41-loads",
+     "label": "VUV Art. 41",
+     "url": "https://www.fedlex.admin.ch/eli/cc/1983/1968_1968_1968/de#art_41"
+    }
+   ]
   },
   "caseId": "case-2025-12-11-vd-bex-palette"
  },
@@ -1858,10 +1865,17 @@
    }
   },
   "lesson": {
-   "de": "Lasten an der Fassade nicht von der Leiter aus lösen – Hubarbeitsbühne oder Gerüst verwenden.",
-   "fr": "Ne pas démonter de charges en façade depuis une échelle – utiliser une nacelle ou un échafaudage.",
-   "it": "Non smontare carichi in facciata da una scala – usare una piattaforma o un ponteggio.",
-   "en": "Don't remove loads from a façade off a ladder – use a lift or scaffold."
+   "de": "Die Suva-Checkliste 67028 verlangt, tragbare Leitern gegen Wegrutschen, Drehen und Kippen zu sichern.",
+   "fr": "La liste Suva 67028 demande d’assurer les échelles portables contre le glissement, le pivotement et le basculement.",
+   "it": "La lista Suva 67028 richiede di assicurare le scale portatili contro lo scivolamento, la rotazione e il ribaltamento.",
+   "en": "Suva checklist 67028 calls for portable ladders to be secured against slipping, turning and tipping.",
+   "refs": [
+    {
+     "id": "suva-67028-q08-full",
+     "label": "Suva 67028.F · Q8",
+     "url": "https://www.suva.ch/fr-ch/download/listes-de-controle/echelles-portables-et-escabeaux/echelles-portables-et-escabeaux--67028.F"
+    }
+   ]
   }
  },
  {
@@ -1908,12 +1922,7 @@
     "en": "Criminal investigation opened by the prosecutor"
    }
   },
-  "lesson": {
-   "de": "Fällbereich klar markieren und absperren, Rückweiche vorbereiten, Funk- oder Sichtkontakt im Team halten.",
-   "fr": "Délimiter et fermer la zone d’abattage, préparer la voie de retraite, garder le contact radio ou visuel.",
-   "it": "Delimitare e chiudere la zona di abbattimento, preparare la via di fuga, mantenere il contatto radio o visivo.",
-   "en": "Mark and close the felling zone, prepare an escape route, keep radio or visual contact in the team."
-  }
+  "lesson": null
  },
  {
   "id": "2025-03-26-be-ostermundigen-sturz",
@@ -1959,12 +1968,7 @@
     "en": "Criminal investigation opened by the prosecutor"
    }
   },
-  "lesson": {
-   "de": "Ab 2 m Absturzhöhe braucht es Seitenschutz oder Auffangsysteme – auch für kurze Arbeiten.",
-   "fr": "Dès 2 m de hauteur de chute: protection latérale ou dispositif de retenue, même pour des travaux courts.",
-   "it": "Da 2 m di altezza di caduta: protezione laterale o sistemi di arresto, anche per lavori brevi.",
-   "en": "From 2 m fall height you need edge protection or fall-arrest – even for short jobs."
-  }
+  "lesson": null
  },
  {
   "id": "2025-03-18-be-ittigen-sattelzug",
@@ -2011,10 +2015,17 @@
    }
   },
   "lesson": {
-   "de": "Fahrzeuge in der Werkstatt gegen Wegrollen und unbeabsichtigtes Starten sichern; niemand zwischen Fahrzeug und festen Einrichtungen, wenn es bewegt wird.",
-   "fr": "En atelier, caler les véhicules et empêcher tout démarrage involontaire; personne entre un véhicule et un équipement fixe pendant une manœuvre.",
-   "it": "In officina bloccare i veicoli contro il movimento e l’avvio involontario; nessuno tra veicolo e attrezzature fisse durante le manovre.",
-   "en": "In workshops, secure vehicles against rolling and unintended starts; nobody between a vehicle and fixed equipment while it moves."
+   "de": "Laut VUV Art. 43 sind Arbeitsmittel vor Reinigung, Störungsbehebung und Instandhaltung in einen nicht gefährdenden Zustand zu versetzen.",
+   "fr": "Selon l’art. 43 OPA, les équipements doivent être mis dans un état non dangereux avant le nettoyage, le dépannage ou l’entretien.",
+   "it": "Secondo l’art. 43 OPI, le attrezzature devono essere portate in uno stato non pericoloso prima della pulizia, dell’eliminazione di guasti o della manutenzione.",
+   "en": "Under VUV Art. 43, work equipment must be put into a safe state before cleaning, troubleshooting or maintenance.",
+   "refs": [
+    {
+     "id": "vuv-art43-maintenance",
+     "label": "VUV Art. 43",
+     "url": "https://www.fedlex.admin.ch/eli/cc/1983/1968_1968_1968/de#art_43"
+    }
+   ]
   }
  },
  {
@@ -2061,12 +2072,7 @@
     "en": "Criminal investigation opened by the prosecutor"
    }
   },
-  "lesson": {
-   "de": "Gefahrenbereich bei Fäll- und Rückearbeiten (doppelte Baumlänge) konsequent freihalten; rollende und rutschende Stämme am Hang einplanen.",
-   "fr": "Garder libre la zone dangereuse lors de l’abattage et du débardage (deux fois la hauteur de l’arbre); prévoir les troncs qui roulent ou glissent en pente.",
-   "it": "Tenere libera la zona di pericolo durante abbattimento ed esbosco (due volte l’altezza dell’albero); prevedere tronchi che rotolano o scivolano in pendio.",
-   "en": "Keep the danger zone clear during felling and skidding (twice the tree length); plan for logs rolling or sliding on slopes."
-  }
+  "lesson": null
  },
  {
   "id": "2025-02-06-fr-posat-mast",
@@ -2112,12 +2118,7 @@
     "en": "Criminal investigation opened by the prosecutor"
    }
   },
-  "lesson": {
-   "de": "Vor dem Besteigen eines Holzmasts dessen Standfestigkeit prüfen (Fäulnis am Boden) – im Zweifel sichern oder Hubarbeitsbühne nutzen. Lernende nie als Erste auf ungeprüfte Masten.",
-   "fr": "Avant de grimper sur un poteau en bois, contrôler sa solidité (pourriture au pied) – en cas de doute, haubaner ou utiliser une nacelle. Jamais un apprenti en premier sur un poteau non contrôlé.",
-   "it": "Prima di salire su un palo di legno verificarne la stabilità (marciume alla base) – nel dubbio ancorarlo o usare una piattaforma. Mai un apprendista per primo su un palo non verificato.",
-   "en": "Before climbing a wooden pole, check it is sound (rot at the base) – if in doubt, brace it or use a lift. Never send an apprentice first up an unchecked pole."
-  }
+  "lesson": null
  },
  {
   "id": "2025-02-04-vd-blonay-foreuse",
@@ -2177,12 +2178,7 @@
     "en": "Criminal investigation opened by the prosecutor"
    }
   },
-  "lesson": {
-   "de": "Bohrgeräte am Hang: Standsicherheit vorab prüfen, Mast nur auf tragfähigem, ebenem Grund aufstellen – und niemand im Kippbereich.",
-   "fr": "Foreuse en pente: vérifier la stabilité avant, mât levé seulement sur sol porteur et plan – personne dans la zone de basculement.",
-   "it": "Trivelle in pendio: verificare prima la stabilità, montante alzato solo su terreno portante e piano – nessuno nella zona di ribaltamento.",
-   "en": "Rigs on slopes: check stability first, raise the mast only on firm level ground – nobody in the tip-over zone."
-  },
+  "lesson": null,
   "caseId": "case-2025-02-04-vd-blonay-foreuse"
  },
  {
@@ -2229,12 +2225,7 @@
     "en": "Criminal investigation opened by the prosecutor"
    }
   },
-  "lesson": {
-   "de": "Ein- und Aussteigen nur bei Stillstand; auch Personal ist beim Verlassen eines Zuges im Gleisbereich gefährdet.",
-   "fr": "Monter et descendre seulement à l’arrêt complet; le personnel aussi est exposé en quittant un train.",
-   "it": "Salire e scendere solo a treno fermo; anche il personale è esposto scendendo dal treno.",
-   "en": "Board and alight only when fully stopped; staff are exposed too when leaving a train."
-  }
+  "lesson": null
  },
  {
   "id": "2024-01-22-ti-cavergno-strom",
@@ -2280,11 +2271,6 @@
     "en": "Criminal investigation opened by the prosecutor"
    }
   },
-  "lesson": {
-   "de": "Vor Arbeiten an elektrischen Anlagen: freischalten, gegen Wiedereinschalten sichern, Spannungsfreiheit prüfen, erden.",
-   "fr": "Avant toute intervention électrique: déclencher, condamner, vérifier l’absence de tension, mettre à terre.",
-   "it": "Prima di lavori elettrici: disinserire, bloccare, verificare l’assenza di tensione, mettere a terra.",
-   "en": "Before electrical work: switch off, lock out, verify no voltage, earth."
-  }
+  "lesson": null
  }
 ]

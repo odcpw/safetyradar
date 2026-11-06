@@ -148,7 +148,7 @@ async function main() {
           source: s.id, sourceName: i.sourceName || new URL(url).hostname.replace(/^www\./, ''), reference: i.reference,
           status: c.keep ? 'draft' : 'dropped', reason: c.reason, score: c.score,
           draft: c.keep ? { canton: i.canton || c.canton, industry: c.industry, hazard: c.hazard, outcome: c.outcome,
-            title: null, facts: null, lesson: null, needs: ['verify facts from source', 'write facts + lesson in DE/FR/IT/EN'] } : undefined,
+            title: null, facts: null, lesson: null, needs: ['verify facts from source', 'write factual summary in DE/FR/IT/EN; choose 1–2 lesson-refs catalog ids or leave lesson null'] } : undefined,
           fetchedAt: new Date().toISOString() });
       }
     } catch (e) { row.note = 'ERROR ' + (e.cause?.code || e.message); }

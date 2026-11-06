@@ -20,7 +20,7 @@ const line = (d: any) => {
   {pk(item.appeal) && <p><span class="lbl">{tt('r.decided')}</span> {pk(item.appeal)}</p>}
   {why && <p><span class="lbl">{tt('r.why')}</span> {why}</p>}
   {item.defendants?.length > 0 && <ul class="people">{item.defendants.map((d: any) => { const l = line(d); return <li class={`v-${d.verdict}`}><b>{l.role}:</b> {l.text} {l.reason && <span class="why">{l.reason}</span>}</li>; })}</ul>}
-  <Lesson text={pk(item.lesson)} />
+  <Lesson lesson={item.lesson} lang={lang} />
   <p class="srcline">{tt('source')}: <a href={item.source.url} target="_blank" rel="noopener">{item.source.name}</a> ({item.source.lang.toUpperCase()}){item.extraSources?.map((s: any) => <> · <a href={s.url} target="_blank" rel="noopener">{s.name}</a> ({s.lang.toUpperCase()})</>)}
   </p>
 </div>
