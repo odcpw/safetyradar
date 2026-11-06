@@ -16,9 +16,9 @@ def replace_site(text,host,fn):
  return text[:m.start()]+fn(text[m.start():end])+text[end:]
 
 def main_site(block):
- if '# BEGIN SR aggregate routes' in block:return block
  start=block.rfind('\n',0,block.index('# IP-free page log'))+1;end=block.index('\n\tencode ',start)+1
  block=block[:start]+(ROOT/'deploy/caddy/access-log.snippet').read_text()+block[end:]
+ if '# BEGIN SR aggregate routes' in block:return block
  marker='\n\tfile_server\n}'
  if marker not in block:raise RuntimeError('expected static server boundary missing')
  return block.replace(marker,'''\n\t# BEGIN SR aggregate routes

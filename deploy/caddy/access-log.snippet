@@ -6,7 +6,10 @@
 	vars @sr_test sr_bot 1
 	@sr_page {
 		path_regexp sr_page ^/(de|fr|it|en)/([a-z0-9/-]*)$
-		file {path}index.html
+		file {
+			root /srv/safetyradar/www
+			try_files {path}index.html
+		}
 	}
 	vars @sr_page sr_page {http.request.uri.path}
 	log_append page {http.vars.sr_page}
