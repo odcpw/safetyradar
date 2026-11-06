@@ -24,3 +24,5 @@ reviewer/*.log
 
 # Internal source excerpts, audits and host attestations are never pushed with public code.
 editorial/
+
+data/llm-requests.jsonl

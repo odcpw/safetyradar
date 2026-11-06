@@ -4,6 +4,7 @@
 // Per-run hard caps (env): LLM_MAX_CALLS (300), LLM_MAX_TOKENS (1_000_000), LLM_MAX_USD (0.50).
 // Usage is appended to data/llm-usage.jsonl on flush(). The API key is read from process.env only and never logged.
 import fs from 'node:fs';
+import { randomUUID } from 'node:crypto';
 
 const ROOT = new URL('../../', import.meta.url);
 const USAGE_FILE = new URL('data/llm-usage.jsonl', ROOT);
@@ -12,12 +13,15 @@ const USAGE_FILE = new URL('data/llm-usage.jsonl', ROOT);
 export const PRICES = {
   'decisions:gpt-6-luna': { in: 0.10, cached: 0.01, write: 0.125, out: 0 },
   'gpt-6-luna':    { in: 0.10, cached: 0.01, write: 0.125, out: 0.50 },
-  'gpt-6.1-terra': { in: 1.00, cached: 0.05, write: 1.25, out: 5.00 },
-  'gpt-6.1-sol':   { in: 2.00, cached: 0.10, write: 2.50, out: 10.00 },
+
 };
 const USD_CHF = Number(process.env.LLM_USD_CHF || 0.80);
 const CAPS = { calls: Number(process.env.LLM_MAX_CALLS || 300), tokens: Number(process.env.LLM_MAX_TOKENS || 1_000_000), usd: Number(process.env.LLM_MAX_USD || 0.5) };
 export const DEFAULT_MODEL = process.env.LLM_MODEL || 'gpt-6-luna';
+export function assertAllowedModel(model) { if(model!=='gpt-6-luna')throw new Error('Only gpt-6-luna is permitted; refusing '+model); }
+const JOURNAL=process.env.LLM_JOURNAL_FILE || new URL('data/llm-requests.jsonl',ROOT);
+const runId=randomUUID();
+export function journal(event) { const fd=fs.openSync(JOURNAL,'a');try{fs.writeSync(fd,JSON.stringify({at:new Date().toISOString(),runId,script:process.argv[1]?.split('/').pop(),...event})+'\n');fs.fsyncSync(fd);}finally{fs.closeSync(fd);} }
 
 export class LlmUnavailable extends Error {}
 export class LlmCapReached extends Error {}
@@ -27,7 +31,7 @@ export const usage = () => ({ ...run, chf: +(run.usd * USD_CHF).toFixed(5) });
 export const available = () => !!process.env.OPENAI_API_KEY;
 
 function cost(key, u) {
-  const p = PRICES[key] || PRICES['gpt-6.1-sol'];
+  const p = PRICES[key]; if(!p)throw new Error('Unapproved model price: '+key);
   const cached = u.input_tokens_details?.cached_tokens || 0, write = u.input_tokens_details?.cache_write_tokens || 0;
   const fresh = (u.input_tokens || 0) - cached - write;
   return (fresh * p.in + cached * p.cached + write * p.write + (u.output_tokens || 0) * p.out) / 1e6;
@@ -44,42 +48,39 @@ function checkCaps() {
   if (run.usd >= CAPS.usd) throw new LlmCapReached(`cost cap $${CAPS.usd} reached`);
 }
 
-async function post(path, body, tries = 4) {
+async function post(path, body) {
+  assertAllowedModel(body.model);
+  for(const key of ['LLM_MODEL','LLM_AUDIT_MODEL','LLM_VERIFY_MODEL','LLM_VERIFY_REVIEW_MODEL','LLM_DRAFT_MODEL'])if(process.env[key])assertAllowedModel(process.env[key]);
   if (!available()) throw new LlmUnavailable('OPENAI_API_KEY not set');
-  checkCaps();
-  run.calls++;
-  for (let i = 0; ; i++) {
-    let res;
-    try {
-      res = await fetch('https://api.openai.com/v1/' + path, {
-        method: 'POST', body: JSON.stringify(body), signal: AbortSignal.timeout(180000),
-        headers: { Authorization: `Bearer ${process.env.OPENAI_API_KEY}`, 'Content-Type': 'application/json' },
-      });
-    } catch (e) { res = null; if (i >= tries - 1) { run.errors++; throw e; } }
-    if (res?.ok) return await res.json();
-    if (res) {
-      const msg = `${path} HTTP ${res.status}: ${(await res.text()).slice(0, 300)}`;
-      if ([401, 403].includes(res.status)) { run.errors++; throw new LlmUnavailable(msg); }
-      if (![408, 409, 429].includes(res.status) && res.status < 500 || i >= tries - 1) { run.errors++; throw new Error(msg); }
-    }
-    await new Promise(r => setTimeout(r, 1000 * 2 ** i + Math.random() * 500));
-  }
+  checkCaps();run.calls++;
+  const requestId=randomUUID(), key=path==='decisions'?'decisions:gpt-6-luna':body.model;
+  const meta={requestId,model:body.model,endpoint:'/v1/'+path,attempt:1};
+  journal({...meta,event:'started'});
+  let res;
+  try {res=await fetch('https://api.openai.com/v1/'+path,{method:'POST',body:JSON.stringify(body),signal:AbortSignal.timeout(120000),headers:{Authorization:`Bearer ${process.env.OPENAI_API_KEY}`,'Content-Type':'application/json'}});}
+  catch(e){run.errors++;journal({...meta,event:'transport_error',errorType:e.name,usageKnown:false});throw e;}
+  if(!res.ok){run.errors++;journal({...meta,event:'http_error',status:res.status,usageKnown:false});await res.body?.cancel();const msg=path+' HTTP '+res.status;if([401,403].includes(res.status))throw new LlmUnavailable(msg);throw new Error(msg);}
+  let j;try{j=await res.json();}catch(e){run.errors++;journal({...meta,event:'response_parse_error',usageKnown:false});throw e;}
+  account(key,j.usage||{});
+  journal({...meta,event:'response',providerResponseId:j.id||null,usageKnown:!!j.usage,usage:j.usage||null,estimatedUsd:cost(key,j.usage||{})});
+  return j;
 }
 
 /** Decisions API. questions: [{type:'predicate'|'choice'|'score', name, instructions, choices?|levels?}] -> {name: answer} */
 export async function decide({ input, questions }) {
   const j = await post('decisions', { model: 'gpt-6-luna', input, questions });
-  account('decisions:gpt-6-luna', j.usage);
+
   return Object.fromEntries((j.answers || []).map(a => [a.name, a]));
 }
 
 /** Responses API with strict JSON schema. Returns parsed object. */
 export async function extract({ system, input, schema, name = 'result', model = DEFAULT_MODEL, effort }) {
-  const body = { model, input: [{ role: 'developer', content: system }, { role: 'user', content: input }],
+  assertAllowedModel(model);
+  const body = { model, reasoning:{effort:'high'}, input: [{ role: 'developer', content: system }, { role: 'user', content: input }],
     text: { format: { type: 'json_schema', name, strict: true, schema } } };
-  if (effort) body.reasoning = { effort };
+
   const j = await post('responses', body);
-  account(model, j.usage);
+
   const msg = (j.output || []).find(o => o.type === 'message');
   const txt = msg?.content?.find(c => c.type === 'output_text')?.text;
   if (!txt) throw new Error(`no output_text (status ${j.status})`);

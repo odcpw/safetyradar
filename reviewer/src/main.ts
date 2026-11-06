@@ -35,8 +35,9 @@ const args = new Map(process.argv.slice(2).map((a) => { const [k, v] = a.replace
 const DRY = args.has("dry-run");
 const DATE = args.get("date") ?? new Intl.DateTimeFormat("sv-SE", { timeZone: "Europe/Zurich" }).format(new Date());
 const env = (k: string, d: string) => process.env[k] || d;
-const MODEL = env("REVIEW_MODEL", "gpt-6.1-sol");
-const THINKING = env("REVIEW_THINKING", "medium") as any;
+const MODEL = env("REVIEW_MODEL", "gpt-6-luna");
+const THINKING = "high";
+if(MODEL!=="gpt-6-luna")throw new Error("Only gpt-6-luna is permitted for the reviewer");
 const MAX_USD = Number(env("REVIEW_MAX_USD", "1.00"));
 const DAILY_MAX_USD = Number(env("REVIEW_DAILY_MAX_USD", "3.00"));
 const MAX_TOOL_CALLS = Number(env("REVIEW_MAX_TOOL_CALLS", "80")); // pi-durable 1.4.0 has no maxTurns yet
