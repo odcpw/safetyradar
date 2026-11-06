@@ -1,18 +1,15 @@
 ---
 // Plain HTML form POST to the Listmonk public subscription form (no JS, no cross-origin fetch).
 // Listmonk shows its own (multilingual) confirmation page and sends the double opt-in e-mail.
-import { t, LANGS, languages, type Lang } from '../i18n/ui';
+// List is fixed to the page language (no language selector).
+import { t, type Lang } from '../i18n/ui';
 const { lang, compact = false } = Astro.props as { lang: Lang; compact?: boolean };
-import { NL_ACTION, NL_LISTS as LISTS } from '../newsletter';
-const id = compact ? 'nlf' : 'nlm';
+import { NL_ACTION, NL_LISTS } from '../newsletter';
 ---
 <form class:list={['nl', { compact }]} action={NL_ACTION} method="post">
   <input type="hidden" name="nonce" value="" />
+  <input type="hidden" name="l" value={NL_LISTS[lang]} />
   <input type="email" name="email" required autocomplete="email" placeholder={t(lang, 'nl.placeholder')} aria-label={t(lang, 'nl.email')} />
-  <label class="sr-only" for={`${id}-l`}>{t(lang, 'nl.lang')}</label>
-  <select name="l" id={`${id}-l`} aria-label={t(lang, 'nl.lang')}>
-    {LANGS.map(l => <option value={LISTS[l]} selected={l === lang}>{languages[l]}</option>)}
-  </select>
   <button class="btn" type="submit">{t(lang, 'nl.button')}</button>
 </form>
 <p class="src">{t(lang, 'nl.small')} <a href={`/${lang}/privacy/`}>{t(lang, 'nav.privacy')}</a></p>

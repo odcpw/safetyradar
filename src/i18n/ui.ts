@@ -56,7 +56,7 @@ const S: Record<string, T4> = {
   'nl.top': { de: 'Wöchentlicher Newsletter: Unfälle, Urteile, Stellen – gratis', fr: 'Newsletter hebdomadaire: accidents, jugements, emplois – gratuit', it: 'Newsletter settimanale: infortuni, sentenze, impieghi – gratuita', en: 'Weekly newsletter: accidents, rulings, jobs – free' },
   'nl.topph': { de: 'Gratis-Newsletter: E-Mail', fr: 'Newsletter gratuite: e-mail', it: 'Newsletter gratuita: e-mail', en: 'Free newsletter: your email' },
   'nl.button': { de: 'Abonnieren', fr: 'S’abonner', it: 'Iscriversi', en: 'Subscribe' },
-  'nl.small': { de: 'Double-Opt-in; jederzeit abmeldbar.', fr: 'Double opt-in; désinscription à tout moment.', it: 'Double opt-in; disiscrizione in ogni momento.', en: 'Double opt-in; unsubscribe anytime.' },
+  'nl.small': { de: 'Jederzeit abmeldbar.', fr: 'Désinscription à tout moment.', it: 'Disiscrizione in ogni momento.', en: 'Unsubscribe anytime.' },
   'nl.email': { de: 'E-Mail-Adresse', fr: 'Adresse e-mail', it: 'Indirizzo e-mail', en: 'Email address' },
   'nl.lang': { de: 'Sprache des Newsletters', fr: 'Langue de la newsletter', it: 'Lingua della newsletter', en: 'Newsletter language' },
   'acc.title': { de: 'Arbeitsunfälle in der Schweiz', fr: 'Accidents du travail en Suisse', it: 'Infortuni sul lavoro in Svizzera', en: 'Workplace accidents in Switzerland' },
