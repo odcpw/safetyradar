@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { fingerprint, structuralErrors, evidenceErrors, gateCollection, ledgerErrors, validDate } from '../scripts/lib/content-integrity.mjs';
-import { verifyContent } from '../scripts/lib/verify-content.mjs';
+import { verifyContent, sourceParagraphs } from '../scripts/lib/verify-content.mjs';
 import { allegationText } from '../scripts/lib/legal-display.mjs';
 import { applyFeedback } from '../scripts/lib/review-feedback.mjs';
 const L = s => ({de:s,fr:s,it:s,en:s});
@@ -110,4 +110,10 @@ test('all curated references have explicit activity/prerequisite thresholds',asy
  const {LESSON_REQUIREMENTS}=await import('../scripts/lib/lesson-applicability.mjs');
  const catalog=JSON.parse(fs.readFileSync(new URL('../data/lesson-refs.json',import.meta.url)));
  for(const r of catalog)assert.ok(LESSON_REQUIREMENTS[r.id],r.id);
+});
+
+test('long minified court/news text is segmented without dropping source material',()=>{
+ const source=('Art. 125 concerns the first defendant. The other person faced a separate allegation. ').repeat(100);
+ const parts=sourceParagraphs(source);assert.ok(parts.length>1);
+ assert.ok(parts.every(p=>p.text.length<=1200));assert.equal(parts.map(p=>p.text).join(' ').replace(/\s+/g,' ').trim(),source.replace(/\s+/g,' ').trim());
 });
