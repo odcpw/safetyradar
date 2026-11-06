@@ -15,7 +15,7 @@ export function fedlexUrl(code: string, artNum: string, lang: Lang = 'de'): stri
   return `https://www.fedlex.admin.ch/eli/${c.eli}/${path}#art_${artNum}`;
 }
 
-const ART_RE = /((?:Art\.|art\.)\s*(\d+[a-z]?)((?:\s*(?:Abs\.|al\.)\s*\d+[a-z]?(?:\s*(?:und|,|et|e|–|-)\s*\d+[a-z]?)*)?)?\s*(StGB|CP|SCC|UVG|LAA|LAINF|BauAV|OTConst|OLCostr|VuV|VUV|OPA|ArG|LTr))/gi;
+const ART_RE = /((?:Art\.|art\.)\s*(\d+[a-z]?)((?:\s*(?:Abs\.|al\.|cpv\.|para\.)\s*\d+[a-z]?(?:\s*(?:und|,|et|e|–|-)\s*\d+[a-z]?)*)?(?:\s*(?:lit\.|let\.|litt\.)\s*[a-z])?)?\s*(StGB|CP|SCC|UVG|LAA|LAINF|BauAV|OTConst|OLCostr|VuV|VUV|OPA|ArG|LTr))/gi;
 
 export type ChargePart = { type: 'text' | 'link'; value: string; href?: string };
 

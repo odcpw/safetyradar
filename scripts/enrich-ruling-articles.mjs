@@ -1,14 +1,13 @@
 #!/usr/bin/env node
-// Enrich rulings defendants[].charge with Art./art. numbers the judgment actually applies,
-// using a Decisions API loop over a fixed provision catalog (same idea as safetysuiteconstruction
-// checklist routing). Then Absätze are filled from the source text when present.
+// Enrich rulings defendants[].charge with Art./art. numbers from Anklage + Schuldspruch,
+// using Decisions over a fixed provision catalog (safetysuiteconstruction-style loop).
+// BGer pages often fail TLS here → fall back to entscheidsuche when caseNumber looks like 6B_…/7B_….
 //
 // Usage: node scripts/enrich-ruling-articles.mjs [--dry-run] [--only=<id-substring>]
-// Needs OPENAI_API_KEY. Writes data/rulings.json (lesson stays null).
 import fs from 'node:fs';
 import { getText } from './lib/fetch-text.mjs';
 import { decide, flush, available } from './lib/llm.mjs';
-import { CHARGE_CATALOG, ART_RE, CODES } from './lib/fedlex.mjs';
+import { CHARGE_CATALOG, CODES } from './lib/fedlex.mjs';
 
 const DRY = process.argv.includes('--dry-run');
 const ONLY = (process.argv.find(a => a.startsWith('--only=')) || '').slice(7);
@@ -18,46 +17,85 @@ const rulings = JSON.parse(fs.readFileSync(PATH, 'utf8'));
 if (!available()) { console.error('OPENAI_API_KEY missing'); process.exit(1); }
 
 const choices = [
-  { value: 'charge_basis', description: 'This provision is a legal basis of the charge or conviction for a defendant in this workplace case (Schuldspruch, Anklage, Strafbefehl for the safety offence). Include it even if eventualiter was not needed for the final conviction when it was a charged alternative that stayed live — prefer the provision(s) of the actual Schuldspruch when clear.' },
-  { value: 'mentioned_only', description: 'Mentioned only in passing: procedure (BGG/BV), definitions (e.g. Art. 12 StGB negligence), citations of other cases, or an eventualiter charge the court did not rely on for the Schuldspruch.' },
+  { value: 'charge_basis', description: 'Named in the Anklage / Strafbefehl / Schuldspruch as an offence the defendant was charged with or convicted of (including eventualiter / hilfsweise alternatives that were actually charged). Show these on the site.' },
+  { value: 'mentioned_only', description: 'Only procedural (BGG/BV), a definition (e.g. Art. 12 StGB), a cite of another case, or background — not a charge or conviction for a defendant in THIS case.' },
   { value: 'absent', description: 'Not present in this decision text for this case.' },
 ];
 
+/** Map BGer eurospider / caseNumber → entscheidsuche HTML when possible. */
+function entscheidsucheUrls(entry) {
+  const out = [];
+  const cn = entry.caseNumber || '';
+  // 7B_1323/2024 or 6B_784/2025
+  const m = cn.match(/\b([6-8]B)_(\d+)\/(\d{4})\b/i) || (entry.id || '').match(/bger-([6-8]b)-(\d+)-(\d{4})/i);
+  if (m) {
+    const chamber = m[1].toUpperCase().replace('B', 'B'); // 7B
+    const num = m[2], year = m[3];
+    // date from entry.date YYYY-MM-DD
+    const d = entry.date; // 2026-07-03
+    if (d) {
+      const chamberPad = `00${chamber.replace('B','')}`.slice(-1) === chamber[0]
+        ? `00${['','6','7','8'].indexOf(chamber[0])}` : null;
+      // Pattern used on entscheidsuche: CH_BGer_007_7B-1323-2024_2026-07-03.html
+      const code = chamber[0]; // 6,7,8
+      const pad = `00${code}`;
+      out.push(`https://entscheidsuche.ch/docs/CH_BGer/CH_BGer_${pad}_${chamber}-${num}-${year}_${d}.html`);
+    }
+  }
+  // Also try any existing entscheidsuche extra
+  for (const s of entry.extraSources || []) if (/entscheidsuche\.ch/.test(s.url)) out.push(s.url);
+  if (/entscheidsuche\.ch/.test(entry.source?.url || '')) out.push(entry.source.url);
+  return [...new Set(out)];
+}
+
+async function bestText(entry) {
+  const urls = [
+    ...entscheidsucheUrls(entry),
+    entry.source?.url,
+    ...(entry.extraSources || []).map(s => s.url),
+  ].filter(Boolean);
+  let best = '';
+  const tried = [];
+  for (const u of [...new Set(urls)]) {
+    tried.push(u);
+    try {
+      const t = await getText(u);
+      if (t && t.length > best.length) best = t;
+    } catch {}
+  }
+  return { text: best, tried };
+}
+
 function absFromText(text, art, code) {
-  // Prefer "Art. 125 Abs. 2 StGB" near Schuldspruch / Anklage wording
-  const re = new RegExp(String.raw`Art\.\s*${art}(\s*Abs\.\s*\d+[a-z]?(?:\s*(?:und|,)\s*\d+[a-z]?)*)?\s*${code}`, 'gi');
-  const hits = [...text.matchAll(re)].map(m => m[0].replace(/\s+/g, ' ').trim());
-  // Prefer hits that include Abs.
-  const withAbs = hits.find(h => /Abs\./i.test(h));
+  // Capture Abs. / lit. before the code: Art. 112 Abs. 1 lit. d UVG
+  const re = new RegExp(String.raw`Art\.\s*${art}((?:\s*Abs\.\s*\d+[a-z]?(?:\s*(?:und|,)\s*\d+[a-z]?)*)?(?:\s*lit\.\s*[a-z])?)\s*${code}`, 'gi');
+  const hits = [...text.matchAll(re)].map(m => (`Art. ${art}${m[1] || ''} ${code}`).replace(/\s+/g, ' ').trim());
+  const withAbs = hits.find(h => /Abs\.|lit\./i.test(h));
   return withAbs || hits[0] || `Art. ${art} ${code}`;
 }
 
 function labelForLang(deLabel, lang) {
-  // deLabel like "Art. 125 Abs. 2 StGB"
-  const m = deLabel.match(/Art\.\s*(\d+[a-z]?)((?:\s*Abs\.\s*\d+[a-z]?(?:\s*(?:und|,)\s*\d+[a-z]?)*)?)?\s*(StGB|UVG|BauAV|VuV|VUV|ArG)/i);
+  const m = deLabel.match(/Art\.\s*(\d+[a-z]?)((?:\s*Abs\.\s*\d+[a-z]?(?:\s*(?:und|,)\s*\d+[a-z]?)*)?(?:\s*lit\.\s*[a-z])?)?\s*(StGB|UVG|BauAV|VuV|VUV|ArG)/i);
   if (!m) return deLabel;
   const [, art, abs = '', code] = m;
   const c = CODES[code] || CODES.StGB;
   if (lang === 'de') return `Art. ${art}${abs || ''} ${c.de}`.replace(/\s+/g, ' ').trim();
   if (lang === 'fr') {
-    const al = (abs || '').replace(/Abs\./g, 'al.');
+    let al = (abs || '').replace(/Abs\./g, 'al.').replace(/lit\./g, 'let.');
     return `art. ${art}${al} ${c.fr}`.replace(/\s+/g, ' ').trim();
   }
   if (lang === 'it') {
-    const al = (abs || '').replace(/Abs\./g, 'cpv.');
+    let al = (abs || '').replace(/Abs\./g, 'cpv.').replace(/lit\./g, 'lett.');
     return `art. ${art}${al} ${c.it}`.replace(/\s+/g, ' ').trim();
   }
-  const para = (abs || '').replace(/Abs\./g, 'para.');
+  let para = (abs || '').replace(/Abs\./g, 'para.').replace(/lit\./g, 'lit.');
   return `Art. ${art}${para} ${c.en}`.replace(/\s+/g, ' ').trim();
 }
 
 function withCite(charge, deLabels) {
   if (!charge || !deLabels.length) return charge;
-  // Strip any existing Art./art. parentheticals, then append confirmed ones
   const strip = (s) => (s || '').replace(/\s*\((?:[^)]*(?:Art\.|art\.)[^)]*)\)\s*/g, ' ').replace(/\s{2,}/g, ' ').trim();
-  const base = {
-    de: strip(charge.de), fr: strip(charge.fr), it: strip(charge.it), en: strip(charge.en),
-  };
+  const base = { de: strip(charge.de), fr: strip(charge.fr), it: strip(charge.it), en: strip(charge.en) };
   if (!base.de) return charge;
   const cite = {
     de: deLabels.map(l => labelForLang(l, 'de')).join('; '),
@@ -77,21 +115,13 @@ let updated = 0, skipped = 0, failed = [];
 for (const e of rulings) {
   if (ONLY && !e.id.includes(ONLY)) continue;
   e.lesson = null;
-  const urls = [e.source?.url, ...(e.extraSources || []).map(s => s.url)].filter(Boolean);
-  let text = '';
-  for (const u of urls) {
-    try {
-      const t = await getText(u);
-      if (t && t.length > (text?.length || 0)) text = t;
-    } catch {}
-  }
+  const { text, tried } = await bestText(e);
   if (!text || text.length < 800) {
-    failed.push({ id: e.id, reason: 'no-text' });
+    failed.push({ id: e.id, reason: 'no-text', tried });
     skipped++;
     continue;
   }
 
-  // Cheap prefilter: only ask Decisions about catalog entries that appear in the text
   const mentioned = CHARGE_CATALOG.filter(c => new RegExp(String.raw`(?:Art\.|art\.)\s*${c.art}\b`, 'i').test(text));
   if (!mentioned.length) {
     failed.push({ id: e.id, reason: 'no-catalog-hit' });
@@ -101,37 +131,38 @@ for (const e of rulings) {
 
   const answers = await decide({
     input: [{ role: 'user', content: [
-      { type: 'input_text', text: 'Swiss criminal / workplace-safety court decision. For each provision, decide whether it is a charge/conviction basis for a defendant in THIS case. Ignore BGG/BV procedure and Art. 12 StGB (negligence definition). Prefer Schuldspruch provisions over unused eventualiter alternatives when the text is clear.' },
+      { type: 'input_text', text: 'Swiss criminal / workplace-safety court decision. For each provision, mark charge_basis if it appears in the Anklage, Strafbefehl or Schuldspruch as an offence a defendant was charged with or convicted of — including eventualiter/hilfsweise alternatives that were charged. Mark mentioned_only for procedure (BGG/BV), Art. 12 StGB negligence definition, or other background cites. The site should list every charged offence provision.' },
       { type: 'input_json', data: { id: e.id, title: e.title?.de || '', text: text.slice(0, 50000) } },
     ] }],
     questions: mentioned.map(c => ({
       type: 'choice',
       name: c.id,
-      instructions: `${c.label} (${c.hint}). Is this a charge_basis, mentioned_only, or absent for this decision?`,
+      instructions: `${c.label} (${c.hint}). charge_basis, mentioned_only, or absent?`,
       choices,
     })),
   });
 
   const basis = mentioned.filter(c => answers[c.id]?.choice === 'charge_basis');
   if (!basis.length) {
-    failed.push({ id: e.id, reason: 'no-charge-basis', mentioned: mentioned.map(c => c.id) });
+    failed.push({ id: e.id, reason: 'no-charge-basis', mentioned: mentioned.map(c => c.id), answers: Object.fromEntries(mentioned.map(c => [c.id, answers[c.id]?.choice])) });
     skipped++;
     continue;
   }
 
   const deLabels = basis.map(c => absFromText(text, c.art, c.code));
-  // Apply the same cite set to every defendant that has a non-empty charge
-  // (multi-defendant cases with different charges are rare; refine later if needed)
   for (const d of e.defendants || []) {
     if (!d.charge?.de?.trim()) continue;
     d.charge = withCite(d.charge, deLabels);
+  }
+  // Persist entscheidsuche mirror when we used it and source was bger
+  const mirror = entscheidsucheUrls(e).find(u => /entscheidsuche/.test(u));
+  if (mirror && /bger\.ch/.test(e.source?.url || '') && !(e.extraSources || []).some(s => s.url === mirror)) {
+    e.extraSources = [...(e.extraSources || []), { name: 'entscheidsuche.ch', url: mirror, lang: 'de' }];
   }
   updated++;
   console.log(`  ${e.id}: ${deLabels.join('; ')}`);
 }
 
-if (!DRY) {
-  fs.writeFileSync(PATH, JSON.stringify(rulings, null, 1) + '\n');
-}
+if (!DRY) fs.writeFileSync(PATH, JSON.stringify(rulings, null, 1) + '\n');
 flush({ script: 'enrich-ruling-articles', dry: DRY, updated, skipped });
 console.log(JSON.stringify({ dry: DRY, updated, skipped, failed }, null, 2));

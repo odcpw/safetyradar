@@ -28,7 +28,7 @@ export function fedlexUrl(code, artNum, lang = 'de') {
 }
 
 /** Match Art./art. … Code in DE/FR/IT/EN charge text. */
-export const ART_RE = /((?:Art\.|art\.)\s*(\d+[a-z]?)((?:\s*(?:Abs\.|al\.)\s*\d+[a-z]?(?:\s*(?:und|,|et|e|–|-)\s*\d+[a-z]?)*)?)?\s*(StGB|CP|SCC|UVG|LAA|LAINF|BauAV|OTConst|OLCostr|VuV|VUV|OPA|ArG|LTr))/gi;
+export const ART_RE = /((?:Art\.|art\.)\s*(\d+[a-z]?)((?:\s*(?:Abs\.|al\.|cpv\.|para\.)\s*\d+[a-z]?(?:\s*(?:und|,|et|e|–|-)\s*\d+[a-z]?)*)?(?:\s*(?:lit\.|let\.|litt\.)\s*[a-z])?)?\s*(StGB|CP|SCC|UVG|LAA|LAINF|BauAV|OTConst|OLCostr|VuV|VUV|OPA|ArG|LTr))/gi;
 
 /**
  * Split text into plain + link parts for Astro.
