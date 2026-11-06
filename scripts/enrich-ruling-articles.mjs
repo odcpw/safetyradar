@@ -100,9 +100,10 @@ for (const e of rulings) {
   }
 
   const answers = await decide({
-    input: [
-      { type: 'input_text', text: `Swiss criminal / workplace-safety court decision. Decide for each provision whether it is a charge/conviction basis for a defendant in THIS case. Ignore BGG/BV procedure and Art. 12 StGB negligence definition. Prefer the Schuldspruch provisions over unused eventualiter alternatives when the text is clear.\n\nCase id: ${e.id}\nTitle: ${e.title?.de || ''}\n\nDecision text:\n${text.slice(0, 50000)}` },
-    ],
+    input: [{ role: 'user', content: [
+      { type: 'input_text', text: 'Swiss criminal / workplace-safety court decision. For each provision, decide whether it is a charge/conviction basis for a defendant in THIS case. Ignore BGG/BV procedure and Art. 12 StGB (negligence definition). Prefer Schuldspruch provisions over unused eventualiter alternatives when the text is clear.' },
+      { type: 'input_json', data: { id: e.id, title: e.title?.de || '', text: text.slice(0, 50000) } },
+    ] }],
     questions: mentioned.map(c => ({
       type: 'choice',
       name: c.id,
