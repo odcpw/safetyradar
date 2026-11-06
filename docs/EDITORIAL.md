@@ -16,7 +16,7 @@ The pipeline only proposes; **nothing reaches `accidents.json` / `rulings.json` 
    - omit unknown fields (`null`);
    - hazard tags hidden (keep severity, industry);
    - title/facts briefly describe what happened (and the court outcome for rulings), never the prevention lesson;
-   - lesson has no heading and must follow the curated-corpus contract below;
+   - accidents only: lesson has no heading and must follow the curated-corpus contract below; rulings always use `lesson: null` and put the court’s provisions in `defendants[].charge` (Art./art. as named in the judgment);
    - day-fines stored as count and rate (`dailyUnits`, `dailyAmount`);
    - rulings = what happened, what the court decided and why, short per-person outcomes;
    - leave uncertain facts out;
@@ -33,18 +33,23 @@ The pipeline only proposes; **nothing reaches `accidents.json` / `rulings.json` 
 6. Mark what was decided in the stage-1 state (`data/queue.json`, `data/jobs-queue.json`: status `published` / `rejected`) so it
    does not reappear in `data/review.md`; the reviewer (`reviewer/`) does this automatically after a successful push.
 
-## Corpus-backed rules
+## Corpus-backed rules (accidents only)
 
-`data/lesson-refs.json` is the only source of lesson text and links. A lesson is either
-`null` or `{de,fr,it,en,refs:[{id,label,url}]}`. Choose **1–2 distinct catalog ids** whose
-scope clearly fits the verified facts. Copy their `text` in all four languages, joining
-two entries with one space in refs order, and copy their exact id/label/url into refs.
-No clean match → `lesson: null` (the UI omits it). Do not substitute a generic duty as filler.
-Never invent a legal rule, a prevention tip, an article number or a checklist link.
-The validator rejects unreferenced lessons, unknown ids, changed links and text not in
-the selected corpus entries. Improve wording in the curated catalog after checking the
-official source, not independently in a news entry. Rebuild affected lessons when catalog
-text changes, using `lessonFromRefs` in `scripts/lib/lesson-refs.mjs`.
+`data/lesson-refs.json` is the only source of **accident** lesson text and links. Rulings
+must keep `lesson: null`; cite the provisions the court actually applied in
+`defendants[].charge` (and `why` when needed), with Art./art. numbers only when the
+judgment or official source names them — never a guessed BauAV/Suva checklist.
+
+For accidents, a lesson is either `null` or `{de,fr,it,en,refs:[{id,label,url}]}`.
+Choose **1–2 distinct catalog ids** whose scope clearly fits the verified facts. Copy
+their `text` in all four languages, joining two entries with one space in refs order,
+and copy their exact id/label/url into refs. No clean match → `lesson: null` (the UI
+omits it). Do not substitute a generic duty as filler. Never invent a legal rule, a
+prevention tip, an article number or a checklist link. The validator rejects
+unreferenced lessons, unknown ids, changed links and text not in the selected corpus
+entries. Improve wording in the curated catalog after checking the official source, not
+independently in a news entry. Rebuild affected lessons when catalog text changes, using
+`lessonFromRefs` in `scripts/lib/lesson-refs.mjs`.
 
 These are short factual paraphrases, not quotations or legal advice. A rule relevant to
 an event does **not** establish a breach, fault, causation or the historical law applied

@@ -5,7 +5,6 @@
 // Env: LLM_DRAFT_MODEL (gpt-6-luna), DRAFT_MAX (5 per run), DRAFT_INCLUDE_PUBLISHED=1 (also redraft items already
 // published, for evaluation), DRAFT_ONLY=<substring of url/title>. Skips cleanly without OPENAI_API_KEY.
 import fs from 'node:fs';
-import { lessonFromRefs } from './lib/lesson-refs.mjs';
 import { extract, flush, available, hash, LlmCapReached, LlmUnavailable } from './lib/llm.mjs';
 import { getText } from './lib/fetch-text.mjs';
 import { findPublished } from './lib/published.mjs';
@@ -16,8 +15,6 @@ if (!fs.existsSync(new URL('queue.json', D))) process.exit(0);
 const queue = JSON.parse(fs.readFileSync(new URL('queue.json', D)));
 const rulings = JSON.parse(fs.readFileSync(new URL('rulings.json', D)));
 const MODEL = process.env.LLM_DRAFT_MODEL || 'gpt-6-luna', MAX = Number(process.env.DRAFT_MAX || 5);
-
-const lessonRefs = JSON.parse(fs.readFileSync(new URL('lesson-refs.json', D), 'utf8'));
 
 const nul = s => ({ anyOf: [s, { type: 'null' }] });
 const L = { type: 'object', additionalProperties: false, required: ['de', 'fr', 'it', 'en'], properties: { de: { type: 'string' }, fr: { type: 'string' }, it: { type: 'string' }, en: { type: 'string' } } };
@@ -34,7 +31,7 @@ const SCHEMA = obj({
   court: nul(L), caseNumber: nul({ type: 'string' }), final: nul({ type: 'boolean' }), appeal: nul(L), employerRole: nul(L),
   defendants: { type: 'array', items: obj({ role: L, charge: nul(L), verdict: { type: 'string', enum: ['convicted', 'acquitted', 'open', 'dismissed'] },
     reasoning: nul(L), sanction: nul(SANCTION), priorSanction: nul(SANCTION), short: nul(L) }) },
-  title: L, facts: obj({ activity: nul(L), what: L, injuries: nul(L) }), why: nul(L), lessonRefIds: nul({ type: 'array', maxItems: 2, items: { type: 'string', enum: lessonRefs.map(ref => ref.id) } }),
+  title: L, facts: obj({ activity: nul(L), what: L, injuries: nul(L) }), why: nul(L),
 });
 const SYS = `You draft entries for Safety Radar (safetyradar.ch), a Swiss site on workplace accidents and the court rulings that follow.
 Return one ruling entry from the decision text. House rules:
@@ -44,12 +41,10 @@ Return one ruling entry from the decision text. House rules:
 - Every text field in German (de, Swiss spelling with ss), French, Italian and English, same content in each.
 - title: what happened + what the court decided, max ~90 characters. facts.what: 1-3 sentences on the accident. facts.injuries: the injuries.
 - appeal: the procedural path (lower courts with dates, what this court did). why: the court's key reasoning in 2-4 sentences.
-- defendants: one per accused person: role, charge (offence + article, e.g. "Fahrlässige schwere Körperverletzung (Art. 125 StGB)"), verdict, reasoning (why convicted/acquitted), sanction, short (one line).
+- defendants: one per accused person: role, charge (offence + the article numbers the decision names, e.g. "Fahrlässige schwere Körperverletzung (Art. 125 StGB)"; include BauAV/VUV/UVG/ArG articles only when the judgment cites them), verdict, reasoning, sanction, short (one line). If the source does not name an article, omit the parenthetical — never guess.
   Day-fines: dailyUnits = number of day-fines, dailyAmount = CHF per day-fine; suspended + probationYears if stated. fineCHF = additional fine (Busse). priorSanction = lower-court sanction if this court changed it.
 - employerRole: which firms were involved and whether they were charged.
-- lessonRefIds: pick 1–2 distinct ids from the curated catalog below only when they clearly fit the verified facts; otherwise null. Never invent prevention advice, legal rules, ids or URLs. The host copies the catalog text and links; do not write lesson text. Title/facts describe what happened, not a lesson. A matching rule is guidance, not proof of a violation or a statement of the law applicable at the accident date.
-Curated catalog:
-${JSON.stringify(lessonRefs)}
+- Do not write a prevention lesson or catalog ref for rulings. Title/facts describe what happened and the court outcome.
 - court: the court name (e.g. Bundesgericht / Tribunal fédéral / Tribunale federale / Federal Supreme Court). final: true if no further appeal possible (Federal Court) or stated as final.`;
 
 const COURTS = [[/obergericht/i, 'og'], [/kantonsgericht/i, 'kg'], [/bezirksgericht/i, 'bezg'], [/regionalgericht/i, 'rg'], [/strafgericht/i, 'strafg'],
@@ -74,8 +69,8 @@ try {
     const cn = (d.caseNumber || '').split(/[,;]|\s(?:et|und|e)\s/)[0].trim().toLowerCase().replace(/[^a-z0-9]+/g, '-');
     const cant = d.canton?.toLowerCase();
     const id = (fed ? [d.date, 'bger', cn, cant, d.slug] : [d.date, cant, courtAbbr(d.court?.de), cn, d.slug]).filter(Boolean).join('-').replace(/-+/g, '-');
-    const { slug, date, lessonRefIds, ...rest } = d;
-    const lesson = lessonFromRefs(lessonRefs, lessonRefIds);
+    const { slug, date, ...rest } = d;
+    const lesson = null;
     // published: release date shown by the source (bger.ch day list / article metadata / RSS pubDate), else null.
     // firstSeen: the day we first fetched the item – a separate fallback, never a publication date.
     const pub = await findPublished({ ...d, source: { url: x.url } });

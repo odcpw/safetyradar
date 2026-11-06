@@ -41,16 +41,18 @@ ${lessonRefs}
   paraphrase article sentences. No names of private persons (victims, workers, defendants, small-firm owners); ages and
   roles are fine. Unknown -> null (omit), never guess. Leave uncertain facts out. Hazard key stays in the data but is
   not shown; set industry and outcome keys. Title/facts are short factual summaries of what happened, never lessons.
-  Lessons: choose 1–2 distinct ids from lesson_catalog only if they fit the verified facts, otherwise lesson: null.
-  Copy their text verbatim for each language (join with one space in refs order) and refs: [{id,label,url}] exactly
-  from the catalog. No headings, freeform prevention tips, invented rules or links. Do not infer a violation from an
-  accident or present today's guidance as the legal basis of an older judgment. Never use generic rules as filler.
+  Accidents only — lessons: choose 1–2 distinct ids from lesson_catalog only if they fit the verified facts,
+  otherwise lesson: null. Copy their text verbatim for each language (join with one space in refs order) and
+  refs: [{id,label,url}] exactly from the catalog. No headings, freeform prevention tips, invented rules or links.
+  Never use generic rules as filler. Do not infer a violation from an accident.
   Day-fines: sanction.dailyUnits (count) and sanction.dailyAmount (CHF per unit), never a combined text.
-  Rulings: facts.what = what happened; "why"/defendant reasoning = what the court decided and why; defendants[].short =
-  one short outcome line per person. Start rulings from the draft (data/drafts/rulings/<id>.json) when one exists, check
-  every fact against the ruling text and remove "_draft". Keep the draft's "published", "publishedSource" and "firstSeen"
-  as they are: "published" is the release date the source shows (bger.ch list, article date) – never set it to the decision
-  date or guess it; leave null when unknown ("firstSeen" is filled automatically).
+  Rulings: lesson must be null. facts.what = what happened; "why"/defendant reasoning = what the court decided and why;
+  defendants[].charge must include the Art./art. numbers the judgment names (StGB/CP, BauAV, VUV, UVG, ArG, …) and omit
+  any article not stated in the source — never guess BauAV/Suva from the facts. defendants[].short = one short outcome
+  line per person. Start rulings from the draft (data/drafts/rulings/<id>.json) when one exists, check every fact against
+  the ruling text and remove "_draft". Keep the draft's "published", "publishedSource" and "firstSeen" as they are:
+  "published" is the release date the source shows (bger.ch list, article date) – never set it to the decision date or
+  guess it; leave null when unknown ("firstSeen" is filled automatically).
 - Match the shape of existing entries exactly (look at one with get_entry first). Allowed keys only (else null):
   industry: construction|forestry|chemicals|logistics|energy|agriculture|transport|cleaning|industry;
   hazard: fall|struck|crane|machinery|vehicle|hazmat|explosion; outcome: fatal|life_threatening|serious|injured|property;

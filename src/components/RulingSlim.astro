@@ -7,7 +7,7 @@ const tt = (k: string) => t(lang, k); const pk = (v: any) => pick(lang, v);
 const meta = [fmtDate(item.date, lang), item.published ? `${t(lang, 'r.published')} ${fmtDate(item.published, lang)}` : null, pk(item.court), item.place ? `${item.place} (${item.canton})` : item.canton, tax(lang, 'outcome', item.outcome)].filter(Boolean);
 const why = pk(item.why) ?? (item.defendants?.length === 1 ? null : null);
 const line = (d: any) => {
-  const charge = (pk(d.charge) || '').replace(/\s*\(Art\.[^)]*\)|\s*\(art\.[^)]*\)/g, '');
+  const charge = (pk(d.charge) || '');
   const head = d.verdict === 'convicted' ? `${tt('w.convicted')} ${charge.charAt(0).toLowerCase() + charge.slice(1)}` : d.verdict === 'acquitted' ? `${tt('w.acquitted')} ${charge.charAt(0).toLowerCase() + charge.slice(1)}` : d.verdict === 'dismissed' ? `${tt('w.dismissed')} ${charge}` : `${tt('w.open')} ${charge}`;
   const sanc = d.verdict === 'convicted' ? (sanctionText(d.sanction, lang, tt, pk) || '') : d.priorSanction ? `${tt('w.prior')}: ${sanctionText(d.priorSanction, lang, tt, pk)}` : '';
   const reason = pk(d.short) ?? pk(d.reasoning);

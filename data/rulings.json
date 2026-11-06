@@ -106,19 +106,7 @@
     "en": "Broken hand bone, heel injury (surgery)"
    }
   },
-  "lesson": {
-   "de": "Laut BauAV Art. 41 sind an Dachrändern grundsätzlich ab mehr als 2 m Absturzhöhe geeignete Absturzsicherungen nötig; für Arbeiten von geringem Umfang gelten die besonderen Vorgaben von Art. 46.",
-   "fr": "Selon l’art. 41 OTConst, des protections appropriées sont en principe nécessaires au bord des toits dès que la hauteur de chute dépasse 2 m; les travaux de peu d’ampleur relèvent des dispositions particulières de l’art. 46.",
-   "it": "Secondo l’art. 41 OLCostr, ai bordi dei tetti occorrono di regola protezioni adeguate oltre 2 m di altezza di caduta; per i lavori di esigua entità valgono le disposizioni particolari dell’art. 46.",
-   "en": "Under BauAV Art. 41, roof edges generally require suitable fall protection where the fall height exceeds 2 m; minor work is subject to the special provisions of Art. 46.",
-   "refs": [
-    {
-     "id": "bauav-art41-roof-edge",
-     "label": "BauAV Art. 41",
-     "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_41"
-    }
-   ]
-  },
+  "lesson": null,
   "why": null
  },
  {
@@ -293,19 +281,7 @@
    "it": "La vittima è rimasta vicino al carico nonostante la manovra e aveva 1,36–1,72 g/kg di alcol nel sangue. Non essendo stata istruita per lo scarico, la sua colpa è lieve. L’istanza cantonale aveva escluso ogni colpa concorrente perché le regole di sicurezza mirano proprio a tali imprudenze; il TF non l’ha seguita e ha fissato il 20 %.",
    "en": "The worker stayed near the moving load and had 1.36–1.72 g/kg of alcohol in his blood. As nobody had briefed him for unloading, his fault was minor. The lower court had ruled out contributory fault because safety rules exist to guard against such carelessness; the Federal Court disagreed and set it at 20%."
   },
-  "lesson": {
-   "de": "Laut VUV Art. 41 sind Gegenstände und Materialien so zu transportieren und zu lagern, dass sie nicht gefährlich umstürzen, herabfallen oder abrutschen können.",
-   "fr": "Selon l’art. 41 OPA, les objets et matériaux doivent être transportés et entreposés de manière à ne pas se renverser, tomber ou glisser dangereusement.",
-   "it": "Secondo l’art. 41 OPI, oggetti e materiali devono essere trasportati e immagazzinati in modo da non ribaltarsi, cadere o scivolare pericolosamente.",
-   "en": "Under VUV Art. 41, objects and materials must be transported and stored so that they cannot dangerously overturn, fall or slide.",
-   "refs": [
-    {
-     "id": "vuv-art41-loads",
-     "label": "VUV Art. 41",
-     "url": "https://www.fedlex.admin.ch/eli/cc/1983/1968_1968_1968/de#art_41"
-    }
-   ]
-  }
+  "lesson": null
  },
  {
   "id": "2026-09-02-ti-paradiso-du-lac",
@@ -493,19 +469,7 @@
     "en": "Fatal"
    }
   },
-  "lesson": {
-   "de": "Laut BauAV Art. 18 dürfen Gegenstände und Materialien nur abgeworfen werden, wenn der Gefahrenbereich abgesperrt ist oder geschlossene Kanäle oder vergleichbare Einrichtungen verwendet werden.",
-   "fr": "Selon l’art. 18 OTConst, les objets et matériaux ne peuvent être jetés que si la zone dangereuse est barricadée ou si des canaux fermés ou dispositifs analogues sont utilisés.",
-   "it": "Secondo l’art. 18 OLCostr, oggetti e materiali possono essere gettati solo se la zona pericolosa è sbarrata o se si usano canali chiusi o dispositivi analoghi.",
-   "en": "Under BauAV Art. 18, objects and materials may only be thrown down with the danger zone cordoned off or using enclosed chutes or equivalent equipment.",
-   "refs": [
-    {
-     "id": "bauav-art18-dropped-material",
-     "label": "BauAV Art. 18",
-     "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_18"
-    }
-   ]
-  },
+  "lesson": null,
   "why": {
    "de": "Der Sicherheitsplan sicherte die Zone, in der das durch den Liftschacht geworfene Material ankam, nicht wirksam ab; es fehlte die Gewissheit, dass sich dort niemand aufhält, bis die Würfe beendet sind – etwa mit eindeutigen Lichtsignalen, die vorgesehen, aber verworfen worden waren. Mit diesen Massnahmen wäre der Tod vermeidbar gewesen.",
    "fr": "Le plan de sécurité ne protégeait pas efficacement la zone d’arrivée du matériel jeté par la cage d’ascenseur; rien ne garantissait que personne ne s’y trouve avant la fin des lancers – par exemple avec des signaux lumineux clairs, envisagés puis écartés. Avec ces mesures, le décès aurait été évitable.",
@@ -555,10 +519,10 @@
      "en": "Site foreman"
     },
     "charge": {
-     "de": "Fahrlässige schwere Körperverletzung",
-     "fr": "Lésions corporelles graves par négligence",
-     "it": "Lesioni gravi colpose",
-     "en": "Serious bodily harm by negligence"
+     "de": "Fahrlässige schwere Körperverletzung (Art. 125 Abs. 2 StGB)",
+     "fr": "Lésions corporelles graves par négligence (art. 125 al. 2 CP)",
+     "it": "Lesioni gravi colpose (art. 125 al. 2 CP)",
+     "en": "Serious bodily harm by negligence (Art. 125 Abs. 2 SCC)"
     },
     "verdict": "open",
     "reasoning": {
@@ -633,19 +597,7 @@
    "it": "Il TF ha accolto il ricorso della vittima (censura sul principio accusatorio) e rinviato il caso; il Tribunale superiore deve rigiudicare.",
    "en": "The Federal Court upheld the injured worker's appeal (on the indictment principle) and sent it back; the High Court must rule again."
   },
-  "lesson": {
-   "de": "Laut BauAV Art. 44 ist vor Arbeitsbeginn die Durchbruchsicherheit des Dachs abzuklären. Ist sie nicht nachgewiesen, gilt die Dachfläche als nicht durchbruchsicher.",
-   "fr": "Selon l’art. 44 OTConst, la résistance à la rupture du toit doit être vérifiée avant les travaux. Si elle n’est pas prouvée, la surface est considérée comme non résistante à la rupture.",
-   "it": "Secondo l’art. 44 OLCostr, prima dei lavori va verificata la resistenza alla rottura del tetto. Se non è dimostrata, la superficie è considerata non resistente alla rottura.",
-   "en": "Under BauAV Art. 44, roof resistance to break-through must be checked before work starts. If it cannot be demonstrated, the roof must be treated as fragile.",
-   "refs": [
-    {
-     "id": "bauav-art44-roof-fragility",
-     "label": "BauAV Art. 44",
-     "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_44"
-    }
-   ]
-  }
+  "lesson": null
  },
  {
   "id": "2026-07-28-tg-frauenfeld-verzinkerei",
@@ -759,19 +711,7 @@
     "en": "Third-degree burns to back, shoulders, arm and leg; surgery"
    }
   },
-  "lesson": {
-   "de": "Laut VUV Art. 41 sind Gegenstände und Materialien so zu transportieren und zu lagern, dass sie nicht gefährlich umstürzen, herabfallen oder abrutschen können.",
-   "fr": "Selon l’art. 41 OPA, les objets et matériaux doivent être transportés et entreposés de manière à ne pas se renverser, tomber ou glisser dangereusement.",
-   "it": "Secondo l’art. 41 OPI, oggetti e materiali devono essere trasportati e immagazzinati in modo da non ribaltarsi, cadere o scivolare pericolosamente.",
-   "en": "Under VUV Art. 41, objects and materials must be transported and stored so that they cannot dangerously overturn, fall or slide.",
-   "refs": [
-    {
-     "id": "vuv-art41-loads",
-     "label": "VUV Art. 41",
-     "url": "https://www.fedlex.admin.ch/eli/cc/1983/1968_1968_1968/de#art_41"
-    }
-   ]
-  },
+  "lesson": null,
   "why": null
  },
  {
@@ -847,19 +787,7 @@
    "it": "Secondo il rapporto Suva si lavorava senza DPI anticaduta, benché previsti dal piano di sicurezza e con dispositivi già montati; mancava anche la delimitazione prevista della zona a rischio. Va chiarito se i responsabili hanno vigilato e controllato a sufficienza: anche i lavoratori esperti richiedono un minimo di controllo. La colpa del ferito non esclude la responsabilità di altri.",
    "en": "Suva’s accident report says the work was done without fall-arrest PPE although the safety plan required it and the devices were installed; the planned barrier around the fall zone was also missing. Whether those responsible supervised and checked enough must be investigated – even experienced workers need a minimum of oversight. The worker’s own mistake does not rule out others’ responsibility."
   },
-  "lesson": {
-   "de": "Laut BauAV Art. 41 sind an Dachrändern grundsätzlich ab mehr als 2 m Absturzhöhe geeignete Absturzsicherungen nötig; für Arbeiten von geringem Umfang gelten die besonderen Vorgaben von Art. 46.",
-   "fr": "Selon l’art. 41 OTConst, des protections appropriées sont en principe nécessaires au bord des toits dès que la hauteur de chute dépasse 2 m; les travaux de peu d’ampleur relèvent des dispositions particulières de l’art. 46.",
-   "it": "Secondo l’art. 41 OLCostr, ai bordi dei tetti occorrono di regola protezioni adeguate oltre 2 m di altezza di caduta; per i lavori di esigua entità valgono le disposizioni particolari dell’art. 46.",
-   "en": "Under BauAV Art. 41, roof edges generally require suitable fall protection where the fall height exceeds 2 m; minor work is subject to the special provisions of Art. 46.",
-   "refs": [
-    {
-     "id": "bauav-art41-roof-edge",
-     "label": "BauAV Art. 41",
-     "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_41"
-    }
-   ]
-  }
+  "lesson": null
  },
  {
   "id": "2026-07-21-ge-cj-p-11093-2021-rollgeruest",
@@ -1089,24 +1017,7 @@
     "en": "Severe left hand and forearm injuries"
    }
   },
-  "lesson": {
-   "de": "Laut VUV Art. 6 muss der Arbeitgeber über tätigkeitsbezogene Gefahren und Schutzmassnahmen informieren, die Beschäftigten anleiten und für die Einhaltung der Massnahmen sorgen. Laut VUV Art. 28 müssen Schutzeinrichtungen verhindern, dass Beschäftigte in den Gefahrenbereich bewegter Maschinenteile treten oder greifen können.",
-   "fr": "Selon l’art. 6 OPA, l’employeur doit informer et instruire le personnel sur les dangers liés aux activités et les mesures de sécurité, puis veiller à leur respect. Selon l’art. 28 OPA, des dispositifs de protection doivent empêcher le personnel de pénétrer ou de mettre la main dans la zone dangereuse des éléments mobiles des machines.",
-   "it": "Secondo l’art. 6 OPI, il datore di lavoro deve informare e istruire il personale sui pericoli delle attività e sulle misure di sicurezza e vigilare sul loro rispetto. Secondo l’art. 28 OPI, dispositivi di protezione devono impedire al personale di entrare o introdurre le mani nella zona pericolosa delle parti mobili delle macchine.",
-   "en": "Under VUV Art. 6, employers must inform and instruct workers about activity-related hazards and safety measures and ensure those measures are followed. Under VUV Art. 28, safeguards must prevent workers from entering or reaching into the danger zone of moving machinery parts.",
-   "refs": [
-    {
-     "id": "vuv-art6-instruction",
-     "label": "VUV Art. 6",
-     "url": "https://www.fedlex.admin.ch/eli/cc/1983/1968_1968_1968/de#art_6"
-    },
-    {
-     "id": "vuv-art28-moving-parts",
-     "label": "VUV Art. 28",
-     "url": "https://www.fedlex.admin.ch/eli/cc/1983/1968_1968_1968/de#art_28"
-    }
-   ]
-  },
+  "lesson": null,
   "why": {
    "de": "Der Jugendarbeitsschutz verlangt bei Lernenden an gefährlichen Maschinen eine ständige Überwachung durch eine Fachperson. Der Unfall war für den Ausbildner vorhersehbar; das Mitverschulden des Lernenden (Handschuhe an der drehenden Maschine) entlastet ihn nicht.",
    "fr": "La protection des jeunes travailleurs exige une surveillance permanente par un professionnel sur les machines dangereuses. L’accident était prévisible pour le formateur; la faute de l’apprenti (gants sur machine rotative) ne l’exonère pas.",
@@ -1156,10 +1067,10 @@
      "en": "Managing director"
     },
     "charge": {
-     "de": "Vorsätzliche Gefährdung durch Verletzung der Regeln der Baukunde",
-     "fr": "Violation intentionnelle des règles de l’art de construire",
-     "it": "Violazione intenzionale delle regole dell’arte edilizia",
-     "en": "Intentional breach of building rules"
+     "de": "Vorsätzliche Gefährdung durch Verletzung der Regeln der Baukunde (Art. 229 Abs. 1 StGB)",
+     "fr": "Violation intentionnelle des règles de l’art de construire (art. 229 al. 1 CP)",
+     "it": "Violazione intenzionale delle regole dell’arte edilizia (art. 229 al. 1 CP)",
+     "en": "Intentional breach of building rules (Art. 229 Abs. 1 SCC)"
     },
     "verdict": "open",
     "reasoning": {
@@ -1207,10 +1118,10 @@
      "en": "Foreman"
     },
     "charge": {
-     "de": "Vorsätzliche Gefährdung durch Verletzung der Regeln der Baukunde",
-     "fr": "Violation intentionnelle des règles de l’art de construire",
-     "it": "Violazione intenzionale delle regole dell’arte edilizia",
-     "en": "Intentional breach of building rules"
+     "de": "Vorsätzliche Gefährdung durch Verletzung der Regeln der Baukunde (Art. 229 Abs. 1 StGB)",
+     "fr": "Violation intentionnelle des règles de l’art de construire (art. 229 al. 1 CP)",
+     "it": "Violazione intenzionale delle regole dell’arte edilizia (art. 229 al. 1 CP)",
+     "en": "Intentional breach of building rules (Art. 229 Abs. 1 SCC)"
     },
     "verdict": "open",
     "reasoning": {
@@ -1286,19 +1197,7 @@
    "it": "Il TF ha accolto i ricorsi dei due condannati e rinviato il caso; il Tribunale cantonale deve rigiudicare.",
    "en": "The Federal Court upheld both appeals and sent the case back; the Cantonal Court must rule again."
   },
-  "lesson": {
-   "de": "Laut BauAV Art. 44 ist vor Arbeitsbeginn die Durchbruchsicherheit des Dachs abzuklären. Ist sie nicht nachgewiesen, gilt die Dachfläche als nicht durchbruchsicher.",
-   "fr": "Selon l’art. 44 OTConst, la résistance à la rupture du toit doit être vérifiée avant les travaux. Si elle n’est pas prouvée, la surface est considérée comme non résistante à la rupture.",
-   "it": "Secondo l’art. 44 OLCostr, prima dei lavori va verificata la resistenza alla rottura del tetto. Se non è dimostrata, la superficie è considerata non resistente alla rottura.",
-   "en": "Under BauAV Art. 44, roof resistance to break-through must be checked before work starts. If it cannot be demonstrated, the roof must be treated as fragile.",
-   "refs": [
-    {
-     "id": "bauav-art44-roof-fragility",
-     "label": "BauAV Art. 44",
-     "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_44"
-    }
-   ]
-  }
+  "lesson": null
  },
  {
   "id": "2026-06-17-sg-wildhaus-bagger",
@@ -1403,19 +1302,7 @@
     "en": "Multiple leg fractures, seven operations"
    }
   },
-  "lesson": {
-   "de": "Laut BauAV Art. 17 sind Arbeitsplätze und Verkehrswege gegen einstürzende Bauteile sowie herabfallende, abrutschende oder wegrollende Gegenstände und Materialien zu schützen.",
-   "fr": "Selon l’art. 17 OTConst, les postes de travail et les passages doivent être protégés contre l’écroulement d’éléments et la chute, le glissement ou le roulement d’objets et de matériaux.",
-   "it": "Secondo l’art. 17 OLCostr, posti di lavoro e passaggi vanno protetti dal crollo di elementi e dalla caduta, dallo scivolamento o dal rotolamento di oggetti e materiali.",
-   "en": "Under BauAV Art. 17, workplaces and access routes must be protected against collapsing components and falling, sliding or rolling objects and materials.",
-   "refs": [
-    {
-     "id": "bauav-art17-falling-material",
-     "label": "BauAV Art. 17",
-     "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_17"
-    }
-   ]
-  },
+  "lesson": null,
   "why": null
  },
  {
@@ -1455,10 +1342,10 @@
      "en": "Foreman driving the wheeled excavator"
     },
     "charge": {
-     "de": "Fahrlässige schwere, evtl. einfache Körperverletzung; Widerhandlung gegen das UVG",
-     "fr": "Lésions corporelles graves, subsidiairement simples, par négligence; infraction à la LAA",
-     "it": "Lesioni gravi, subordinatamente semplici, colpose; infrazione alla LAINF",
-     "en": "Serious, alternatively simple, bodily harm by negligence; breach of the Accident Insurance Act"
+     "de": "Fahrlässige schwere, evtl. einfache Körperverletzung; Widerhandlung gegen das UVG (Art. 125 Abs. 2 StGB)",
+     "fr": "Lésions corporelles graves, subsidiairement simples, par négligence; infraction à la LAA (art. 125 al. 2 CP)",
+     "it": "Lesioni gravi, subordinatamente semplici, colpose; infrazione alla LAINF (art. 125 al. 2 CP)",
+     "en": "Serious, alternatively simple, bodily harm by negligence; breach of the Accident Insurance Act (Art. 125 Abs. 2 SCC)"
     },
     "verdict": "dismissed",
     "reasoning": {
@@ -1555,19 +1442,7 @@
    "it": "La Corte ha creduto al capocantiere, che aveva controllato la zona di pericolo prima di partire e poteva poi guardare avanti. L’operaio conosceva la regola Suva «nella zona di pericolo solo con contatto visivo», non aveva nulla da fare presso il muro e aveva bevuto una birra nonostante la tolleranza zero. Il suo comportamento era così straordinario da relegare in secondo piano un eventuale errore del capocantiere.",
    "en": "The court believed the foreman had checked the danger zone before moving and could then look ahead. The worker knew Suva’s rule “enter a machine’s danger zone only with eye contact”, had no task by the wall and had drunk a beer despite a zero-tolerance policy. His conduct was so unusual that it would overshadow any fault by the foreman."
   },
-  "lesson": {
-   "de": "Laut BauAV Art. 19 dürfen sich keine Personen im Gefahrenbereich von Baumaschinen aufhalten. Ist dies unerlässlich, braucht es technische Schutzmittel oder eine Überwachung durch eine Person ausserhalb des Gefahrenbereichs.",
-   "fr": "Selon l’art. 19 OTConst, personne ne doit se trouver dans la zone dangereuse des engins. Si cela est indispensable, des moyens techniques ou un signaleur situé hors de cette zone sont nécessaires.",
-   "it": "Secondo l’art. 19 OLCostr, nessuno deve sostare nella zona pericolosa delle macchine. Se indispensabile, occorrono mezzi tecnici o un sorvegliante situato fuori da tale zona.",
-   "en": "Under BauAV Art. 19, people must be kept out of construction machinery danger zones. If their presence is essential, technical safeguards or a signaller outside the danger zone are required.",
-   "refs": [
-    {
-     "id": "bauav-art19-machine-zone",
-     "label": "BauAV Art. 19",
-     "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_19"
-    }
-   ]
-  }
+  "lesson": null
  },
  {
   "id": "2026-05-22-bger-6b-940-2024-vd-decoffrage",
@@ -1611,10 +1486,10 @@
      "en": "Site foreman, main contractor"
     },
     "charge": {
-     "de": "Fahrlässige schwere Körperverletzung und Verletzung der Regeln der Baukunde",
-     "fr": "Lésions corporelles graves par négligence et violation des règles de l’art de construire",
-     "it": "Lesioni gravi colpose e violazione delle regole dell’arte edilizia",
-     "en": "Serious bodily harm by negligence and breach of building rules"
+     "de": "Fahrlässige schwere Körperverletzung und Verletzung der Regeln der Baukunde (Art. 125 StGB; Art. 229 StGB)",
+     "fr": "Lésions corporelles graves par négligence et violation des règles de l’art de construire (art. 125 CP; art. 229 CP)",
+     "it": "Lesioni gravi colpose e violazione delle regole dell’arte edilizia (art. 125 CP; art. 229 CP)",
+     "en": "Serious bodily harm by negligence and breach of building rules (Art. 125 SCC; Art. 229 SCC)"
     },
     "verdict": "convicted",
     "reasoning": {
@@ -1660,10 +1535,10 @@
      "en": "Formwork foreman, subcontractor"
     },
     "charge": {
-     "de": "Fahrlässige schwere Körperverletzung und Verletzung der Regeln der Baukunde",
-     "fr": "Lésions corporelles graves par négligence et violation des règles de l’art de construire",
-     "it": "Lesioni gravi colpose e violazione delle regole dell’arte edilizia",
-     "en": "Serious bodily harm by negligence and breach of building rules"
+     "de": "Fahrlässige schwere Körperverletzung und Verletzung der Regeln der Baukunde (Art. 125 StGB; Art. 229 StGB)",
+     "fr": "Lésions corporelles graves par négligence et violation des règles de l’art de construire (art. 125 CP; art. 229 CP)",
+     "it": "Lesioni gravi colpose e violazione delle regole dell’arte edilizia (art. 125 CP; art. 229 CP)",
+     "en": "Serious bodily harm by negligence and breach of building rules (Art. 125 SCC; Art. 229 SCC)"
     },
     "verdict": "convicted",
     "reasoning": {
@@ -1709,10 +1584,10 @@
      "en": "Formworkers (2 people)"
     },
     "charge": {
-     "de": "Fahrlässige schwere Körperverletzung und Verletzung der Regeln der Baukunde",
-     "fr": "Lésions corporelles graves par négligence et violation des règles de l’art de construire",
-     "it": "Lesioni gravi colpose e violazione delle regole dell’arte edilizia",
-     "en": "Serious bodily harm by negligence and breach of building rules"
+     "de": "Fahrlässige schwere Körperverletzung und Verletzung der Regeln der Baukunde (Art. 125 StGB; Art. 229 StGB)",
+     "fr": "Lésions corporelles graves par négligence et violation des règles de l’art de construire (art. 125 CP; art. 229 CP)",
+     "it": "Lesioni gravi colpose e violazione delle regole dell’arte edilizia (art. 125 CP; art. 229 CP)",
+     "en": "Serious bodily harm by negligence and breach of building rules (Art. 125 SCC; Art. 229 SCC)"
     },
     "verdict": "acquitted",
     "reasoning": {
@@ -1775,19 +1650,7 @@
    "it": "La responsabilità era dei superiori, che dovevano coordinare i lavori e disporre la sicurezza. Quella del subappaltatore non scarica il capocantiere dell’impresa generale.",
    "en": "Responsibility lay with the supervisors who had to coordinate work and order safety measures. The subcontractor's responsibility does not relieve the main contractor's foreman."
   },
-  "lesson": {
-   "de": "Laut BauAV Art. 12 ist unbeabsichtigtes Betreten nicht durchbruchsicherer Flächen zu verhindern; nötigenfalls sind feste Abdeckungen oder Laufstege anzubringen.",
-   "fr": "Selon l’art. 12 OTConst, l’accès involontaire aux surfaces non résistantes à la rupture doit être empêché; une protection solide ou une passerelle est à prévoir si nécessaire.",
-   "it": "Secondo l’art. 12 OLCostr, occorre impedire l’accesso involontario alle superfici non resistenti alla rottura; se necessario vanno installate coperture solide o passerelle.",
-   "en": "Under BauAV Art. 12, inadvertent access to fragile surfaces must be prevented; solid covers or walkways must be provided where necessary.",
-   "refs": [
-    {
-     "id": "bauav-art12-fragile",
-     "label": "BauAV Art. 12",
-     "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_12"
-    }
-   ]
-  }
+  "lesson": null
  },
  {
   "id": "2026-03-03-fr-dompierre-pelle",
@@ -1895,19 +1758,7 @@
     "en": "Permanent disability"
    }
   },
-  "lesson": {
-   "de": "Laut BauAV Art. 19 dürfen sich keine Personen im Gefahrenbereich von Baumaschinen aufhalten. Ist dies unerlässlich, braucht es technische Schutzmittel oder eine Überwachung durch eine Person ausserhalb des Gefahrenbereichs.",
-   "fr": "Selon l’art. 19 OTConst, personne ne doit se trouver dans la zone dangereuse des engins. Si cela est indispensable, des moyens techniques ou un signaleur situé hors de cette zone sont nécessaires.",
-   "it": "Secondo l’art. 19 OLCostr, nessuno deve sostare nella zona pericolosa delle macchine. Se indispensabile, occorrono mezzi tecnici o un sorvegliante situato fuori da tale zona.",
-   "en": "Under BauAV Art. 19, people must be kept out of construction machinery danger zones. If their presence is essential, technical safeguards or a signaller outside the danger zone are required.",
-   "refs": [
-    {
-     "id": "bauav-art19-machine-zone",
-     "label": "BauAV Art. 19",
-     "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_19"
-    }
-   ]
-  },
+  "lesson": null,
   "why": null
  },
  {
@@ -1952,10 +1803,10 @@
      "en": "Mason and slab foreman"
     },
     "charge": {
-     "de": "Fahrlässige Tötung",
-     "fr": "Homicide par négligence",
-     "it": "Omicidio colposo",
-     "en": "Negligent homicide"
+     "de": "Fahrlässige Tötung (Art. 117 StGB)",
+     "fr": "Homicide par négligence (art. 117 CP)",
+     "it": "Omicidio colposo (art. 117 CP)",
+     "en": "Negligent homicide (Art. 117 SCC)"
     },
     "verdict": "convicted",
     "reasoning": {
@@ -2028,19 +1879,7 @@
    "it": "Le aperture devono avere una protezione laterale o una copertura fissata e resistente. Chi fa spostare una copertura deve prima installare una protezione collettiva.",
    "en": "Openings need side protection or a fixed, unbreakable cover. Whoever has a cover moved must first set up collective protection."
   },
-  "lesson": {
-   "de": "Laut BauAV Art. 25 sind Bodenöffnungen mit Absturz- oder Hineintretgefahr durch Seitenschutz oder eine durchbruchsichere, unverrückbare Abdeckung zu sichern.",
-   "fr": "Selon l’art. 25 OTConst, les ouvertures dans les sols présentant un risque de chute ou de faux pas doivent être protégées par un garde-corps ou une couverture résistante et solidement fixée.",
-   "it": "Secondo l’art. 25 OLCostr, le aperture nei pavimenti con pericolo di caduta o inciampo vanno protette con una protezione laterale o una copertura resistente alla rottura e inamovibile.",
-   "en": "Under BauAV Art. 25, floor openings that people could fall or step into must have side protection or a securely fixed, load-bearing cover.",
-   "refs": [
-    {
-     "id": "bauav-art25-floor-opening",
-     "label": "BauAV Art. 25",
-     "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_25"
-    }
-   ]
-  }
+  "lesson": null
  },
  {
   "id": "2025-11-14-bger-6b-365-2025-ge-vigne",
@@ -2209,19 +2048,7 @@
     "en": "Right arm and part of an ear torn off"
    }
   },
-  "lesson": {
-   "de": "Laut VUV Art. 28 müssen Schutzeinrichtungen verhindern, dass Beschäftigte in den Gefahrenbereich bewegter Maschinenteile treten oder greifen können.",
-   "fr": "Selon l’art. 28 OPA, des dispositifs de protection doivent empêcher le personnel de pénétrer ou de mettre la main dans la zone dangereuse des éléments mobiles des machines.",
-   "it": "Secondo l’art. 28 OPI, dispositivi di protezione devono impedire al personale di entrare o introdurre le mani nella zona pericolosa delle parti mobili delle macchine.",
-   "en": "Under VUV Art. 28, safeguards must prevent workers from entering or reaching into the danger zone of moving machinery parts.",
-   "refs": [
-    {
-     "id": "vuv-art28-moving-parts",
-     "label": "VUV Art. 28",
-     "url": "https://www.fedlex.admin.ch/eli/cc/1983/1968_1968_1968/de#art_28"
-    }
-   ]
-  },
+  "lesson": null,
   "why": {
    "de": "Die Betriebsanleitung verbot Arbeiten neben dem ungeschützten, laufenden Bohrer. Der Arbeitgeber wusste das und liess trotzdem arbeiten; der Bediener bohrte trotz Person in der Nähe. Bemühungen nach dem Unfall mildern die Strafe nicht.",
    "fr": "Le manuel interdisait de travailler à côté de la tarière non protégée en marche. L’employeur le savait et a laissé faire; l’opérateur a foré alors qu’une personne était proche. Les efforts après l’accident ne réduisent pas la peine.",
@@ -2271,10 +2098,10 @@
      "en": "Safety officer"
     },
     "charge": {
-     "de": "Fahrlässige Tötung",
-     "fr": "Homicide par négligence",
-     "it": "Omicidio colposo",
-     "en": "Negligent homicide"
+     "de": "Fahrlässige Tötung (Art. 117 StGB)",
+     "fr": "Homicide par négligence (art. 117 CP)",
+     "it": "Omicidio colposo (art. 117 CP)",
+     "en": "Negligent homicide (Art. 117 SCC)"
     },
     "verdict": "convicted",
     "reasoning": {
@@ -2320,10 +2147,10 @@
      "en": "Managing director / board chair"
     },
     "charge": {
-     "de": "Fahrlässige Tötung",
-     "fr": "Homicide par négligence",
-     "it": "Omicidio colposo",
-     "en": "Negligent homicide"
+     "de": "Fahrlässige Tötung (Art. 117 StGB)",
+     "fr": "Homicide par négligence (art. 117 CP)",
+     "it": "Omicidio colposo (art. 117 CP)",
+     "en": "Negligent homicide (Art. 117 SCC)"
     },
     "verdict": "convicted",
     "reasoning": {
@@ -2396,24 +2223,7 @@
    "it": "Gli operai non erano formati né sulla protezione dei bordi né sulla zona di pericolo sotto i carichi sospesi. La colpa della vittima non scagiona i superiori, perché favorita dalla mancata istruzione.",
    "en": "Workers had not been trained on edge protection or the danger zone under suspended loads. The victim's own fault does not clear the managers, because the missing instruction encouraged it."
   },
-  "lesson": {
-   "de": "Laut VUV Art. 41 sind Gegenstände und Materialien so zu transportieren und zu lagern, dass sie nicht gefährlich umstürzen, herabfallen oder abrutschen können. Die Suva-Checkliste 67017 verlangt, vor dem Anschlagen Gewicht, Schwerpunkt und Anschlagpunkte der Last zu kennen.",
-   "fr": "Selon l’art. 41 OPA, les objets et matériaux doivent être transportés et entreposés de manière à ne pas se renverser, tomber ou glisser dangereusement. La liste Suva 67017 demande de connaître le poids, le centre de gravité et les points d’ancrage de la charge avant l’élingage.",
-   "it": "Secondo l’art. 41 OPI, oggetti e materiali devono essere trasportati e immagazzinati in modo da non ribaltarsi, cadere o scivolare pericolosamente. La lista Suva 67017 richiede di conoscere peso, baricentro e punti di aggancio del carico prima dell’imbracatura.",
-   "en": "Under VUV Art. 41, objects and materials must be transported and stored so that they cannot dangerously overturn, fall or slide. Suva checklist 67017 calls for the load’s weight, centre of gravity and lifting points to be known before slinging.",
-   "refs": [
-    {
-     "id": "vuv-art41-loads",
-     "label": "VUV Art. 41",
-     "url": "https://www.fedlex.admin.ch/eli/cc/1983/1968_1968_1968/de#art_41"
-    },
-    {
-     "id": "suva-67017-q07-full",
-     "label": "Suva 67017.F · Q7",
-     "url": "https://www.suva.ch/fr-ch/download/listes-de-controle/elingues--67017.F"
-    }
-   ]
-  }
+  "lesson": null
  },
  {
   "id": "2025-11-02-be-projektleiter-dach",
@@ -2512,19 +2322,7 @@
    },
    "injuries": null
   },
-  "lesson": {
-   "de": "Laut BauAV Art. 41 sind an Dachrändern grundsätzlich ab mehr als 2 m Absturzhöhe geeignete Absturzsicherungen nötig; für Arbeiten von geringem Umfang gelten die besonderen Vorgaben von Art. 46.",
-   "fr": "Selon l’art. 41 OTConst, des protections appropriées sont en principe nécessaires au bord des toits dès que la hauteur de chute dépasse 2 m; les travaux de peu d’ampleur relèvent des dispositions particulières de l’art. 46.",
-   "it": "Secondo l’art. 41 OLCostr, ai bordi dei tetti occorrono di regola protezioni adeguate oltre 2 m di altezza di caduta; per i lavori di esigua entità valgono le disposizioni particolari dell’art. 46.",
-   "en": "Under BauAV Art. 41, roof edges generally require suitable fall protection where the fall height exceeds 2 m; minor work is subject to the special provisions of Art. 46.",
-   "refs": [
-    {
-     "id": "bauav-art41-roof-edge",
-     "label": "BauAV Art. 41",
-     "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_41"
-    }
-   ]
-  },
+  "lesson": null,
   "why": null
  },
  {
@@ -2569,10 +2367,10 @@
      "en": "Technical manager running the site"
     },
     "charge": {
-     "de": "Fahrlässige Verletzung der Regeln der Baukunde",
-     "fr": "Violation par négligence des règles de l’art de construire",
-     "it": "Violazione colposa delle regole dell’arte edilizia",
-     "en": "Negligent breach of building rules"
+     "de": "Fahrlässige Verletzung der Regeln der Baukunde (Art. 229 StGB)",
+     "fr": "Violation par négligence des règles de l’art de construire (art. 229 al. 2 CP)",
+     "it": "Violazione colposa delle regole dell’arte edilizia (art. 229 al. 2 CP)",
+     "en": "Negligent breach of building rules (Art. 229 SCC)"
     },
     "verdict": "convicted",
     "reasoning": {
@@ -2646,19 +2444,7 @@
    "it": "Il ponte mobile non conforme metteva concretamente in pericolo gli operai, indipendentemente dal comportamento della vittima. L’assoluzione per omicidio non è stata riesaminata, il TF non essendo entrato nel merito.",
    "en": "The non-compliant mobile scaffold put workers in concrete danger, whatever the victim did. The homicide acquittal was not reviewed because the Federal Court did not hear the appeal."
   },
-  "lesson": {
-   "de": "Die Suva-Checkliste 67150 verlangt, Rollgerüste nach den Vorgaben des Herstellers gegen Umkippen zu sichern.",
-   "fr": "La liste Suva 67150 demande d’assurer la stabilité des échafaudages roulants selon les instructions du fabricant.",
-   "it": "La lista Suva 67150 richiede di assicurare la stabilità dei ponteggi mobili secondo le istruzioni del fabbricante.",
-   "en": "Suva checklist 67150 calls for mobile scaffold stability to be secured in accordance with the manufacturer’s instructions.",
-   "refs": [
-    {
-     "id": "suva-67150-q09-full",
-     "label": "Suva 67150.F · Q9",
-     "url": "https://www.suva.ch/fr-ch/download/listes-de-controle/echafaudages-roulants/echafaudages-roulants--67150.F"
-    }
-   ]
-  }
+  "lesson": null
  },
  {
   "id": "2025-06-30-fr-chatillon-decharge",
@@ -2757,19 +2543,7 @@
     "en": "Fatal"
    }
   },
-  "lesson": {
-   "de": "Die Suva-Checkliste 67005 verlangt Massnahmen, die Zusammenstösse zwischen Fussgängern und Fahrzeugen auf betrieblichen Verkehrswegen verhindern.",
-   "fr": "La liste Suva 67005 demande des mesures pour prévenir les collisions entre piétons et véhicules sur les voies de circulation de l’entreprise.",
-   "it": "La lista Suva 67005 richiede misure per prevenire collisioni tra pedoni e veicoli sulle vie di circolazione aziendali.",
-   "en": "Suva checklist 67005 calls for measures to prevent collisions between pedestrians and vehicles on workplace traffic routes.",
-   "refs": [
-    {
-     "id": "suva-67005-q08-full",
-     "label": "Suva 67005.F · Q8",
-     "url": "https://www.suva.ch/fr-ch/download/listes-de-controle/voies-de-circulation-pour-vehicules/voies-de-circulation-pour-vehicules--67005.f"
-    }
-   ]
-  },
+  "lesson": null,
   "why": null
  },
  {
@@ -2814,10 +2588,10 @@
      "en": "Supplier's driver and crane operator"
     },
     "charge": {
-     "de": "Fahrlässige schwere Körperverletzung",
-     "fr": "Lésions corporelles graves par négligence",
-     "it": "Lesioni gravi colpose",
-     "en": "Serious bodily harm by negligence"
+     "de": "Fahrlässige schwere Körperverletzung (Art. 125 StGB)",
+     "fr": "Lésions corporelles graves par négligence (art. 125 al. 1 et 2 CP)",
+     "it": "Lesioni gravi colpose (art. 125 al. 1 et 2 CP)",
+     "en": "Serious bodily harm by negligence (Art. 125 SCC)"
     },
     "verdict": "convicted",
     "reasoning": {
@@ -2863,10 +2637,10 @@
      "en": "Head of the employer"
     },
     "charge": {
-     "de": "Fahrlässige schwere Körperverletzung",
-     "fr": "Lésions corporelles graves par négligence",
-     "it": "Lesioni gravi colpose",
-     "en": "Serious bodily harm by negligence"
+     "de": "Fahrlässige schwere Körperverletzung (Art. 125 StGB)",
+     "fr": "Lésions corporelles graves par négligence (art. 125 al. 1 et 2 CP)",
+     "it": "Lesioni gravi colpose (art. 125 al. 1 et 2 CP)",
+     "en": "Serious bodily harm by negligence (Art. 125 SCC)"
     },
     "verdict": "convicted",
     "reasoning": {
@@ -2939,19 +2713,7 @@
    "it": "Chi non vede il gancio deve essere guidato da una sola persona ben riconoscibile, come chiede il manuale. Il datore di lavoro restava responsabile della sicurezza dei suoi operai allo scarico.",
    "en": "If you cannot see the hook you need one clearly identifiable signaller, as the manual requires. The employer remained responsible for his workers' safety during unloading."
   },
-  "lesson": {
-   "de": "Laut VUV Art. 41 sind Gegenstände und Materialien so zu transportieren und zu lagern, dass sie nicht gefährlich umstürzen, herabfallen oder abrutschen können.",
-   "fr": "Selon l’art. 41 OPA, les objets et matériaux doivent être transportés et entreposés de manière à ne pas se renverser, tomber ou glisser dangereusement.",
-   "it": "Secondo l’art. 41 OPI, oggetti e materiali devono essere trasportati e immagazzinati in modo da non ribaltarsi, cadere o scivolare pericolosamente.",
-   "en": "Under VUV Art. 41, objects and materials must be transported and stored so that they cannot dangerously overturn, fall or slide.",
-   "refs": [
-    {
-     "id": "vuv-art41-loads",
-     "label": "VUV Art. 41",
-     "url": "https://www.fedlex.admin.ch/eli/cc/1983/1968_1968_1968/de#art_41"
-    }
-   ]
-  }
+  "lesson": null
  },
  {
   "id": "2024-09-11-bger-7b-14-2023-vd-hotel",
@@ -2995,10 +2757,10 @@
      "en": "Client's project director"
     },
     "charge": {
-     "de": "Fahrlässige schwere Körperverletzung",
-     "fr": "Lésions corporelles graves par négligence",
-     "it": "Lesioni gravi colpose",
-     "en": "Serious bodily harm by negligence"
+     "de": "Fahrlässige schwere Körperverletzung (Art. 125 StGB)",
+     "fr": "Lésions corporelles graves par négligence (art. 125 al. 2 CP)",
+     "it": "Lesioni gravi colpose (art. 125 al. 2 CP)",
+     "en": "Serious bodily harm by negligence (Art. 125 SCC)"
     },
     "verdict": "convicted",
     "reasoning": {
@@ -3044,10 +2806,10 @@
      "en": "Works manager (spa area)"
     },
     "charge": {
-     "de": "Fahrlässige schwere Körperverletzung",
-     "fr": "Lésions corporelles graves par négligence",
-     "it": "Lesioni gravi colpose",
-     "en": "Serious bodily harm by negligence"
+     "de": "Fahrlässige schwere Körperverletzung (Art. 125 StGB)",
+     "fr": "Lésions corporelles graves par négligence (art. 125 al. 2 CP)",
+     "it": "Lesioni gravi colpose (art. 125 al. 2 CP)",
+     "en": "Serious bodily harm by negligence (Art. 125 SCC)"
     },
     "verdict": "convicted",
     "reasoning": {
@@ -3088,10 +2850,10 @@
      "en": "Partner of the site-management firm (overall supervision)"
     },
     "charge": {
-     "de": "Fahrlässige schwere Körperverletzung",
-     "fr": "Lésions corporelles graves par négligence",
-     "it": "Lesioni gravi colpose",
-     "en": "Serious bodily harm by negligence"
+     "de": "Fahrlässige schwere Körperverletzung (Art. 125 StGB)",
+     "fr": "Lésions corporelles graves par négligence (art. 125 al. 2 CP)",
+     "it": "Lesioni gravi colpose (art. 125 al. 2 CP)",
+     "en": "Serious bodily harm by negligence (Art. 125 SCC)"
     },
     "verdict": "convicted",
     "reasoning": {
@@ -3164,19 +2926,7 @@
    "it": "Molti usavano questo passaggio improvvisato. Chi organizza la sicurezza di un grande cantiere deve nominare persone competenti e controllare i propri settori.",
    "en": "Many people used this improvised access. Whoever organises safety on a large site must appoint competent people and check their areas."
   },
-  "lesson": {
-   "de": "Laut BauAV Art. 25 sind Bodenöffnungen mit Absturz- oder Hineintretgefahr durch Seitenschutz oder eine durchbruchsichere, unverrückbare Abdeckung zu sichern.",
-   "fr": "Selon l’art. 25 OTConst, les ouvertures dans les sols présentant un risque de chute ou de faux pas doivent être protégées par un garde-corps ou une couverture résistante et solidement fixée.",
-   "it": "Secondo l’art. 25 OLCostr, le aperture nei pavimenti con pericolo di caduta o inciampo vanno protette con una protezione laterale o una copertura resistente alla rottura e inamovibile.",
-   "en": "Under BauAV Art. 25, floor openings that people could fall or step into must have side protection or a securely fixed, load-bearing cover.",
-   "refs": [
-    {
-     "id": "bauav-art25-floor-opening",
-     "label": "BauAV Art. 25",
-     "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_25"
-    }
-   ]
-  }
+  "lesson": null
  },
  {
   "id": "2024-09-04-bger-6b-1190-2023-vd-geruest",
@@ -3220,10 +2970,10 @@
      "en": "Works director, general contractor"
     },
     "charge": {
-     "de": "Fahrlässige schwere Körperverletzung",
-     "fr": "Lésions corporelles graves par négligence",
-     "it": "Lesioni gravi colpose",
-     "en": "Serious bodily harm by negligence"
+     "de": "Fahrlässige schwere Körperverletzung (Art. 125 StGB)",
+     "fr": "Lésions corporelles graves par négligence (art. 125 al. 1 CP)",
+     "it": "Lesioni gravi colpose (art. 125 al. 1 CP)",
+     "en": "Serious bodily harm by negligence (Art. 125 SCC)"
     },
     "verdict": "convicted",
     "reasoning": {
@@ -3269,10 +3019,10 @@
      "en": "Technical director, scaffolding firm"
     },
     "charge": {
-     "de": "Fahrlässige schwere Körperverletzung",
-     "fr": "Lésions corporelles graves par négligence",
-     "it": "Lesioni gravi colpose",
-     "en": "Serious bodily harm by negligence"
+     "de": "Fahrlässige schwere Körperverletzung (Art. 125 StGB)",
+     "fr": "Lésions corporelles graves par négligence (art. 125 al. 1 CP)",
+     "it": "Lesioni gravi colpose (art. 125 al. 1 CP)",
+     "en": "Serious bodily harm by negligence (Art. 125 SCC)"
     },
     "verdict": "convicted",
     "reasoning": {
@@ -3345,19 +3095,7 @@
    "it": "Entrambi dovevano garantire montaggio e controllo sicuri del ponteggio; il direttore dei lavori non poteva affidarsi alla sola ditta di ponteggi.",
    "en": "Both had a duty to ensure the scaffold was safely erected and checked; the works director could not simply rely on the scaffolding firm."
   },
-  "lesson": {
-   "de": "Die Suva-Checkliste 67038 verlangt gesicherte Gerüstbeläge, die sich nicht verschieben können.",
-   "fr": "La liste Suva 67038 demande que les platelages soient fixés pour empêcher leur déplacement.",
-   "it": "La lista Suva 67038 richiede che gli impalcati siano fissati contro gli spostamenti.",
-   "en": "Suva checklist 67038 calls for scaffold platforms to be secured against displacement.",
-   "refs": [
-    {
-     "id": "suva-67038-q09-full",
-     "label": "Suva 67038.F · Q9",
-     "url": "https://www.suva.ch/fr-ch/download/listes-de-controle/echafaudages-de-facade/echafaudages-de-facade--67038.f"
-    }
-   ]
-  }
+  "lesson": null
  },
  {
   "id": "2024-06-07-bger-7b-62-2023-vd-faserzement",
@@ -3401,10 +3139,10 @@
      "en": "Company director"
     },
     "charge": {
-     "de": "Fahrlässige Tötung, vorsätzliche Verletzung der Regeln der Baukunde (und ein separates Strassenverkehrsdelikt)",
-     "fr": "Homicide par négligence, violation intentionnelle des règles de l’art de construire (et une infraction routière distincte)",
-     "it": "Omicidio colposo, violazione intenzionale delle regole edilizie (e un’infrazione stradale distinta)",
-     "en": "Negligent homicide, intentional breach of building rules (and a separate road-traffic offence)"
+     "de": "Fahrlässige Tötung, vorsätzliche Verletzung der Regeln der Baukunde (und ein separates Strassenverkehrsdelikt) (Art. 117 StGB; Art. 229 StGB)",
+     "fr": "Homicide par négligence, violation intentionnelle des règles de l’art de construire (et une infraction routière distincte) (art. 117 CP; art. 229 al. 1 CP)",
+     "it": "Omicidio colposo, violazione intenzionale delle regole edilizie (e un’infrazione stradale distinta) (art. 117 CP; art. 229 al. 1 CP)",
+     "en": "Negligent homicide, intentional breach of building rules (and a separate road-traffic offence) (Art. 117 SCC; Art. 229 SCC)"
     },
     "verdict": "convicted",
     "reasoning": {
@@ -3477,19 +3215,7 @@
    "it": "Era stato avvertito più volte e conosceva il pericolo. La pena copre anche un’infrazione stradale distinta.",
    "en": "He had been warned repeatedly and knew the danger. The sentence also covers a separate road-traffic offence."
   },
-  "lesson": {
-   "de": "Laut BauAV Art. 44 ist vor Arbeitsbeginn die Durchbruchsicherheit des Dachs abzuklären. Ist sie nicht nachgewiesen, gilt die Dachfläche als nicht durchbruchsicher.",
-   "fr": "Selon l’art. 44 OTConst, la résistance à la rupture du toit doit être vérifiée avant les travaux. Si elle n’est pas prouvée, la surface est considérée comme non résistante à la rupture.",
-   "it": "Secondo l’art. 44 OLCostr, prima dei lavori va verificata la resistenza alla rottura del tetto. Se non è dimostrata, la superficie è considerata non resistente alla rottura.",
-   "en": "Under BauAV Art. 44, roof resistance to break-through must be checked before work starts. If it cannot be demonstrated, the roof must be treated as fragile.",
-   "refs": [
-    {
-     "id": "bauav-art44-roof-fragility",
-     "label": "BauAV Art. 44",
-     "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_44"
-    }
-   ]
-  }
+  "lesson": null
  },
  {
   "id": "2024-02-14-bger-7b-744-2023-ne-faux-plafond",
@@ -3533,10 +3259,10 @@
      "en": "Site manager (civil engineer)"
     },
     "charge": {
-     "de": "Fahrlässige schwere Körperverletzung",
-     "fr": "Lésions corporelles graves par négligence",
-     "it": "Lesioni gravi colpose",
-     "en": "Serious bodily harm by negligence"
+     "de": "Fahrlässige schwere Körperverletzung (Art. 125 StGB)",
+     "fr": "Lésions corporelles graves par négligence (art. 125 al. 2 CP)",
+     "it": "Lesioni gravi colpose (art. 125 al. 2 CP)",
+     "en": "Serious bodily harm by negligence (Art. 125 SCC)"
     },
     "verdict": "convicted",
     "reasoning": {
@@ -3609,19 +3335,7 @@
    "it": "Un’asse facilmente aggirabile non è una barriera sufficiente. Il direttore dei lavori sapeva dell’intervento e doveva segnalare chiaramente il pericolo o impedire l’accesso.",
    "en": "A plank you can step round is not a barrier. The site manager knew about the visit and had to mark the danger clearly or block access."
   },
-  "lesson": {
-   "de": "Laut BauAV Art. 12 ist unbeabsichtigtes Betreten nicht durchbruchsicherer Flächen zu verhindern; nötigenfalls sind feste Abdeckungen oder Laufstege anzubringen.",
-   "fr": "Selon l’art. 12 OTConst, l’accès involontaire aux surfaces non résistantes à la rupture doit être empêché; une protection solide ou une passerelle est à prévoir si nécessaire.",
-   "it": "Secondo l’art. 12 OLCostr, occorre impedire l’accesso involontario alle superfici non resistenti alla rottura; se necessario vanno installate coperture solide o passerelle.",
-   "en": "Under BauAV Art. 12, inadvertent access to fragile surfaces must be prevented; solid covers or walkways must be provided where necessary.",
-   "refs": [
-    {
-     "id": "bauav-art12-fragile",
-     "label": "BauAV Art. 12",
-     "url": "https://www.fedlex.admin.ch/eli/cc/2021/384/de#art_12"
-    }
-   ]
-  }
+  "lesson": null
  },
  {
   "id": "2023-03-16-bger-6b-1386-2021-vd-gitterrost",
@@ -3665,10 +3379,10 @@
      "en": "Sole director, in charge of the works"
     },
     "charge": {
-     "de": "Fahrlässige Tötung",
-     "fr": "Homicide par négligence",
-     "it": "Omicidio colposo",
-     "en": "Negligent homicide"
+     "de": "Fahrlässige Tötung (Art. 117 StGB)",
+     "fr": "Homicide par négligence (art. 117 CP)",
+     "it": "Omicidio colposo (art. 117 CP)",
+     "en": "Negligent homicide (Art. 117 SCC)"
     },
     "verdict": "convicted",
     "reasoning": {
