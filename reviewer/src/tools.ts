@@ -18,7 +18,7 @@ const run = promisify(execFile);
 export const DATA_FILES = ["accidents.json", "rulings.json", "jobs.json"] as const;
 type DataFile = (typeof DATA_FILES)[number];
 const INPUT_PREFIXES = ["data/review.md", "data/drafts/", "data/inbox/", "data/jobs-queue-summary.md", "data/queue-report.md", "docs/"];
-const DENY = [/^\.env/, /(^|\/)\.env/, /^\.git(\/|$)/, /node_modules/, /^reviewer\/state/, /\.(pem|key)$/, /llm-usage/, /^data\/inbox\/\.state/];
+const DENY = [/^editorial(\/|$)/, /^\.env/, /(^|\/)\.env/, /^\.git(\/|$)/, /node_modules/, /^reviewer\/state/, /\.(pem|key)$/, /llm-usage/, /^data\/inbox\/\.state/];
 const MAX_FETCH_BYTES = 5_000_000;
 const MAX_TEXT_CHARS = 30_000;
 

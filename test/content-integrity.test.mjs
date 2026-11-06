@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { fingerprint, structuralErrors, evidenceErrors, gateCollection, ledgerErrors, validDate } from '../scripts/lib/content-integrity.mjs';
+import { internalFieldPaths, fingerprint, structuralErrors, evidenceErrors, gateCollection, ledgerErrors, validDate } from '../scripts/lib/content-integrity.mjs';
 import { verifyContent, sourceParagraphs } from '../scripts/lib/verify-content.mjs';
 import { allegationText, publicCaseStatus } from '../scripts/lib/legal-display.mjs';
 import { applyFeedback } from '../scripts/lib/review-feedback.mjs';
@@ -94,7 +94,7 @@ test('real published-data validator exits nonzero for an ungated edit',async()=>
 });
 
 test('source evidence must explicitly cover dates, not merely facts and outcomes',async()=>{
- const result=await verifyContent({kind:'accidents',entry:{id:'one',accidentDate:null,outcome:'injured'},sources:[source],extractor:async()=>({status:'supported',issues:[],evidence:['facts','outcomes'].map(topic=>({path:'/facts',topic,sourceIndex:0,paragraphIds:[0],personId:null,sourcePerson:null,section:'report'}))}),decider:async()=>{throw Error('must not bypass missing date evidence');}});
+ const result=await verifyContent({kind:'accidents',entry:{id:'one',accidentDate:'2026-11-06',outcome:'injured'},sources:[source],extractor:async()=>({status:'supported',issues:[],evidence:['facts','outcomes'].map(topic=>({path:'/facts',topic,sourceIndex:0,paragraphIds:[0],personId:null,sourcePerson:null,section:'report'}))}),decider:async()=>{throw Error('must not bypass missing date evidence');}});
  assert.equal(result.state,'held');assert.ok(result.issues.includes('missing dates evidence'));
 });
 
@@ -127,4 +127,24 @@ test('resolved proceedings do not imply an established final judgment',()=>{
 test('concrete independent-review issues hold even if all dimension flags say supported',async()=>{
  const result=await verifyContent({kind:'accidents',entry:{id:'one',accidentDate:null,outcome:'injured'},sources:[source],extractor:async()=>({status:'supported',issues:[],evidence:['facts','outcomes','dates'].map(topic=>({path:'/facts',topic,sourceIndex:0,paragraphIds:[0],personId:null,sourcePerson:null,section:'report'}))}),decider:async()=>({...Object.fromEntries(['facts','outcomes','dates','legal','sanctions','lessons'].map(k=>[k,{choice:'supported'}])),issues:[{path:'/facts/what',reason:'unsupported claim'}]})});
  assert.equal(result.state,'held');assert.ok(result.issues.some(i=>i.includes('unsupported claim')));
+});
+
+test('native confirmed release metadata does not become a fabricated court quote',async()=>{
+ const entry={...structuredClone(base),published:'2026-07-15',publishedSource:'bger.ch Neue Entscheide'};
+ const native={status:'confirmed',published:entry.published,publishedSource:entry.publishedSource,sourceUrl:'https://www.bger.ch/release-list'};
+ const result=await verifyContent({kind:'rulings',entry,sources:[source],publicationEvidence:native,
+  extractor:async()=>({status:'supported',issues:[],evidence:[...evidence.map((e,j)=>({path:e.path,topic:'legal',sourceIndex:0,paragraphIds:[0],personId:'d1',sourcePerson:'A (trainer)',section:'Facts A/B'})),...['facts','outcomes'].map(topic=>({path:'/facts',topic,sourceIndex:0,paragraphIds:[0],personId:null,sourcePerson:null,section:'Facts'})),{path:'/published',topic:'dates',sourceIndex:0,paragraphIds:[],personId:null,sourcePerson:null,section:'native metadata'}]}),
+  decider:async()=>Object.fromEntries(['facts','outcomes','dates','legal','sanctions','lessons'].map(k=>[k,{choice:'supported'}]))});
+ assert.equal(result.state,'verified');assert.deepEqual(result.publicationEvidence,native);assert.ok(result.evidence.every(e=>e.quotes.length));
+});
+test('publication metadata mismatch fails before any semantic approval',async()=>{
+ const result=await verifyContent({kind:'rulings',entry:{...base,published:'2026-07-15',publishedSource:'bger.ch Neue Entscheide'},sources:[source],publicationEvidence:{status:'confirmed',published:'2026-07-16',publishedSource:'bger.ch Neue Entscheide'},extractor:async()=>{throw Error('must not run');}});
+ assert.equal(result.state,'held');assert.match(result.issues.join(' '),/not independently confirmed/);
+});
+
+test('internal evidence cannot leak through public data, including nested accidental spreads',()=>{
+ const entry={id:'safe',accidentDate:null,facts:{what:L('The worker was injured.'),sourceHash:'private'}};
+ assert.deepEqual(internalFieldPaths(entry),['/facts/sourceHash']);
+ assert.ok(structuralErrors(entry,'accidents').some(i=>i.includes('must not be public')));
+ assert.deepEqual(internalFieldPaths({facts:{what:L('A quote in prose is not an internal field.')}}),[]);
 });

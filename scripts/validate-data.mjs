@@ -3,7 +3,7 @@
 // and the house rules in docs/EDITORIAL.md that can be checked mechanically. Exit 1 on errors; warnings don't fail.
 // Usage: node scripts/validate-data.mjs [dataDir]   (default: ./data)
 import fs from 'node:fs';
-import { ledgerErrors, validDate } from './lib/content-integrity.mjs';
+import { ledgerErrors, validDate, internalFieldPaths } from './lib/content-integrity.mjs';
 import path from 'node:path';
 import { lessonErrors } from './lib/lesson-refs.mjs';
 
@@ -42,6 +42,7 @@ function load(f) {
 }
 function common(f, e, seen) {
   const id = e.id;
+  for(const p of internalFieldPaths(e))err(f,id,'internal verification field must not be public: '+p);
   if (typeof id !== 'string' || !/^[a-z0-9][a-z0-9-]*$/.test(id)) err(f, id, 'id must be a lowercase slug');
   if (seen.has(id)) err(f, id, 'duplicate id'); seen.add(id);
   noDraftKeys(f, id, e);

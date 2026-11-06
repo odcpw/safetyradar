@@ -20,8 +20,13 @@ export function validDate(value) {
   const [y, m, d] = value.split('-').map(Number);
   return y >= 1900 && (m == null || m >= 1 && m <= 12) && (d == null || d >= 1 && d <= new Date(Date.UTC(y, m, 0)).getUTCDate());
 }
+const INTERNAL_KEYS = new Set(['evidence','sourceHash','sourcePerson','legacySnapshot','publicationEvidence','semanticReview','decisions','paragraphIds','quotes']);
+export function internalFieldPaths(value, prefix='') {
+ if(!value || typeof value!=='object')return [];
+ return Object.entries(value).flatMap(([k,v])=>[...(INTERNAL_KEYS.has(k)?[prefix+'/'+k]:[]),...internalFieldPaths(v,prefix+'/'+k)]);
+}
 export function structuralErrors(entry, kind) {
-  const errors = [];
+  const errors = internalFieldPaths(entry).map(p=>'internal verification field must not be public: '+p);
   if (entry.outcome !== 'fatal' && /\belectrocut(?:ed|ion)\b/i.test([entry.title?.en, ...Object.values(entry.facts || {}).map(v => v?.en)].join(' '))) errors.push('nonfatal electric shock translated as fatal electrocution');
   if (!Object.hasOwn(entry,'accidentDate')) errors.push('explicit accidentDate or null required; never infer from record date');
   if (entry.judgmentDate != null && !validDate(entry.judgmentDate)) errors.push('invalid judgment date');
@@ -79,6 +84,7 @@ export function ledgerErrors(root, itemsByKind, ledger = readLedger(root)) {
     const r = ledger[reviewKey(kind, e.id)];
     if (!r || r.hash !== fingerprint(e)) { errors.push(`${kind}/${e.id}: missing or stale review; hold changes before publication`); continue; }
     if (!['verified', 'legacy_unreviewed'].includes(r.state)) errors.push(`${kind}/${e.id}: review state cannot be published`);
+    if (r.state === 'verified' && kind === 'rulings' && e.published && (r.publicationEvidence?.status !== 'confirmed' || r.publicationEvidence.published !== e.published || r.publicationEvidence.publishedSource !== e.publishedSource)) errors.push(`${e.id}: native publication metadata proof missing or mismatched`);
     if (r.state === 'verified') errors.push(...structuralErrors(e, kind).map(s => `${e.id}: ${s}`), ...evidenceErrors(e, kind, r.evidence).map(s => `${e.id}: ${s}`));
   }
   return errors;

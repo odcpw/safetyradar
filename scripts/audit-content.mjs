@@ -26,7 +26,7 @@ const ledger = readLedger(root);
 const catalog = applicabilityCatalog(JSON.parse(fs.readFileSync(path.join(root,'data/lesson-refs.json'),'utf8')));
 const str = { type:'string' };
 const counts = obj({ fatal:nul({type:'integer'}), injured:nul({type:'integer'}), checked:nul({type:'integer'}) });
-const fields = { title:L, place:nul(str), accidentDate:nul(str), hazard:{type:'string',enum:['fall','struck','crane','machinery','vehicle','hazmat','explosion']}, outcome:{type:'string',enum:['fatal','life_threatening','serious','injured','property']}, facts:obj({activity:nul(L),what:L,injuries:nul(L),equipment:nul(L),emergency:nul(L),investigation:nul(L)}), casualties:nul(counts) };
+const fields = { title:L, place:nul(str), accidentDate:nul(str), hazard:{type:'string',enum:['fall','struck','crane','machinery','vehicle','hazmat','explosion']}, outcome:nul({type:'string',enum:['fatal','life_threatening','serious','injured','property']}), facts:obj({activity:nul(L),what:L,injuries:nul(L),equipment:nul(L),emergency:nul(L),investigation:nul(L)}), casualties:nul(counts) };
 const schema = obj(kind === 'rulings' ? {...fields, defendants:{type:'array',items:DEFENDANT},caseStatus:CASE_STATUS,final:nul({type:'boolean'}),judgmentDate:nul(str),appeal:nul(L),why:nul(L),employerRole:nul(L)} : {...fields, published:nul(str), lessonIds:{type:'array',items:str}});
 const out = path.join(root, 'editorial/audits');fs.mkdirSync(out,{recursive:true});
 const report = {kind,apply,repair,verified:[],held:[],unchanged:[]};
