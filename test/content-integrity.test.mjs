@@ -164,3 +164,10 @@ test('Luna-only transport durably journals responses and errors without content;
 });
 
 test('historical sanction stage has a provider-compatible JSON schema',async()=>{const {HISTORY}=await import('../scripts/lib/legal-model.mjs');assert.deepEqual(Object.keys(HISTORY.properties.stage).sort(),['enum','type']);});
+
+test('narrow source-reviewed correction does not promote an uncertain legacy record',async()=>{
+ const {applyReviewedFields}=await import('../scripts/lib/content-integrity.mjs');const before={id:'x',why:{de:'Wrong'},accidentDate:null};const source={url:'https://court.example/decision',text:'Accepted reason. Chronology unresolved.'};const proof={path:'/why',topic:'legal',sourceUrl:source.url,sourceHash:fingerprint(source.text),section:'E3.4.9',quotes:['Accepted reason.']};
+ const r=applyReviewedFields({before,review:{state:'legacy_unreviewed',hash:fingerprint(before)},patch:{'/why':{de:'Accepted reason.'}},evidence:[proof],sources:[source],unresolved:['date conflict']});assert.equal(r.review.state,'legacy_unreviewed');assert.equal(r.entry.accidentDate,null);assert.equal(r.review.fieldReviews[0].unresolved[0],'date conflict');assert.equal(ledgerErrors('.', {rulings:[r.entry]}, {'rulings/x':r.review}).length,0);
+ r.entry.accidentDate='2024';r.review.hash=fingerprint(r.entry);assert.ok(ledgerErrors('.', {rulings:[r.entry]}, {'rulings/x':r.review}).some(x=>x.includes('scope/hash')));
+ assert.throws(()=>applyReviewedFields({before,review:{hash:fingerprint(before)},patch:{'/why':{}},evidence:[{...proof,quotes:['Invented quote']}],sources:[source]}),/exact source/);
+});

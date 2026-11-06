@@ -16,6 +16,22 @@ export function writeLedger(root, ledger) {
   fs.mkdirSync(path.dirname(ledgerPath(root)), { recursive: true });
   fs.writeFileSync(ledgerPath(root), JSON.stringify(ledger, null, 1) + '\n');
 }
+
+// Operator-only narrow source corrections; preserve the record's existing audit state.
+export function applyReviewedFields({before,review,patch,evidence,sources,unresolved=[]}) {
+ if (!review || review.hash!==fingerprint(before)) throw Error('stale manual review baseline');
+ const after=structuredClone(before);
+ for(const [pointer,value] of Object.entries(patch)) {
+  const parts=pointer.split('/').slice(1);
+  if(!pointer.startsWith('/') || !parts.length || parts.some(p=>['__proto__','prototype','constructor'].includes(p)) || ['id','caseId','source'].includes(parts[0]))throw Error('invalid manual field scope');
+  const proof=evidence.filter(e=>e.path===pointer);
+  if(!proof.length || proof.some(e=>!e.section || !e.quotes?.length || !sources.some(s=>s.url===e.sourceUrl && e.sourceHash===fingerprint(s.text) && e.quotes.every(q=>q.trim() && s.text.includes(q)))))throw Error('exact source evidence required for '+pointer);
+  let target=after;for(const part of parts.slice(0,-1)){if(!target || !Object.hasOwn(target,part))throw Error('unknown manual field parent');target=target[part];}target[parts.at(-1)]=structuredClone(value);
+ }
+ const fieldReview={at:new Date().toISOString(),method:'manual-source-field-review',before,beforeHash:fingerprint(before),afterHash:fingerprint(after),patch,evidence,unresolved};
+ return {entry:after,review:{...review,hash:fingerprint(after),fieldReviews:[...(review.fieldReviews||[]),fieldReview]}};
+}
+
 export function validDate(value) {
   if (typeof value !== 'string' || !/^\d{4}(?:-\d{2}(?:-\d{2})?)?$/.test(value)) return false;
   const [y, m, d] = value.split('-').map(Number);
@@ -86,6 +102,11 @@ export function ledgerErrors(root, itemsByKind, ledger = readLedger(root)) {
   for (const [kind, entries] of Object.entries(itemsByKind)) for (const e of entries) {
     const r = ledger[reviewKey(kind, e.id)];
     if (!r || r.hash !== fingerprint(e)) { errors.push(`${kind}/${e.id}: missing or stale review; hold changes before publication`); continue; }
+    const manual=r.fieldReviews?.at(-1);
+    if(manual){
+    const replay=structuredClone(manual.before);for(const [pointer,value]of Object.entries(manual.patch)){let t=replay;const p=pointer.split('/').slice(1);for(const k of p.slice(0,-1))t=t[k];t[p.at(-1)]=value;}
+    if(manual.beforeHash!==fingerprint(manual.before)||manual.afterHash!==fingerprint(e)||fingerprint(replay)!==fingerprint(e))errors.push(`${e.id}: manual correction scope/hash mismatch`);
+    }
     if (!['verified', 'legacy_unreviewed'].includes(r.state)) errors.push(`${kind}/${e.id}: review state cannot be published`);
     if (r.state === 'verified' && kind === 'rulings' && e.published && (r.publicationEvidence?.status !== 'confirmed' || r.publicationEvidence.published !== e.published || r.publicationEvidence.publishedSource !== e.publishedSource)) errors.push(`${e.id}: native publication metadata proof missing or mismatched`);
     if (r.state === 'verified') errors.push(...structuralErrors(e, kind).map(s => `${e.id}: ${s}`), ...evidenceErrors(e, kind, r.evidence).map(s => `${e.id}: ${s}`));
