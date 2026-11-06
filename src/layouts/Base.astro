@@ -57,7 +57,7 @@ const nav = [['', 'nav.home'], ['accidents', 'nav.accidents'], ['rulings', 'nav.
   </div></header>
   <main><div class="wrap"><slot /></div></main>
   <footer class="site"><div class="wrap">
-    <div><strong>Safety Radar</strong> · safetyradar.ch<br/>{t(lang, 'footer.note')}<br/><a href="mailto:info@safetyradar.ch">info@safetyradar.ch</a></div>
+    <div><strong>Safety Radar</strong> · safetyradar.ch<br/><a href="mailto:info@safetyradar.ch">info@safetyradar.ch</a></div>
     {!Astro.props.hideFooterNl && <div class="footer-nl"><strong>{t(lang, 'nl.title')}</strong><NewsletterForm lang={lang} compact /></div>}
     <div><a href={`/${lang}/privacy/`}>{t(lang, 'nav.privacy')}</a> · <a href={`/${lang}/jobs/post/`}>{t(lang, 'nav.postjob')}</a></div>
   </div></footer>
