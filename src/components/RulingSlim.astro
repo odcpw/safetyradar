@@ -19,6 +19,7 @@ const line = (d: any) => {
 <div class="slim">
   <p class="mline">{meta.join(' · ')}{item.caseNumber && <> · {item.caseNumber}</>}</p>
   {pk(item.facts?.what) && <p><span class="lbl">{tt('r.what')}</span> {pk(item.facts.what)}</p>}
+  {pk(item.facts?.injuries) && <p><span class="lbl">{tt('r.injuries')}</span> {pk(item.facts.injuries)}</p>}
   {pk(item.appeal) && <p><span class="lbl">{tt('r.decided')}</span> {pk(item.appeal)}</p>}
   {why && <p><span class="lbl">{tt('r.why')}</span> {why}</p>}
   {item.defendants?.length > 0 && <ul class="people">{item.defendants.map((d: any) => { const l = line(d); return <li class={`v-${d.verdict}`}><b>{l.role}:</b> {l.parts.map(p => p.type === 'link' ? <a href={p.href} target="_blank" rel="noopener noreferrer">{p.value}</a> : p.value)} {l.reason && <span class="why">{l.reason}</span>}</li>; })}</ul>}

@@ -17,6 +17,7 @@ const S: Record<string, T4> = {
   'chip.year': { de: 'Jahr', fr: 'Année', it: 'Anno', en: 'Year' },
   'chip.month': { de: 'Monat', fr: 'Mois', it: 'Mese', en: 'Month' },
   'chip.all': { de: 'Alle', fr: 'Tous', it: 'Tutti', en: 'All' },
+  'r.injuries': { de: 'Verletzungen', fr: 'Blessures', it: 'Ferite', en: 'Injuries' },
   'r.what': { de: 'Was geschah', fr: 'Ce qui s’est passé', it: 'Cosa è successo', en: 'What happened' },
   'r.decided': { de: 'Entscheid', fr: 'Décision', it: 'Decisione', en: 'What the court decided' },
   'r.why': { de: 'Warum', fr: 'Pourquoi', it: 'Perché', en: 'Why' },

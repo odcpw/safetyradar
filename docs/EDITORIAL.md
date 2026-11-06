@@ -18,6 +18,7 @@ The pipeline only proposes; **nothing reaches `accidents.json` / `rulings.json` 
    - title/facts briefly describe what happened (and the court outcome for rulings), never the prevention lesson;
    - accidents only: lesson has no heading and must follow the curated-corpus contract below; rulings always use `lesson: null` and put the court’s provisions in `defendants[].charge` (Art./art. as named in the judgment);
    - day-fines stored as count and rate (`dailyUnits`, `dailyAmount`);
+   - rulings show court-stated injuries succinctly in `facts.injuries` (body part and injury/severity or fatal, DE/FR/IT/EN); null only when absent, never infer a diagnosis;
    - rulings = what happened, what the court decided and why, short per-person outcomes;
    - leave uncertain facts out;
    - **when in doubt, drop the item** (don't publish, don't hedge);

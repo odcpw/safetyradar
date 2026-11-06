@@ -53,6 +53,13 @@ fi
 log "e-mail intake"
 node scripts/email-intake.mjs || { log "WARNING: e-mail intake failed – reviewer continues without new mail"; }
 
+# Enrich existing rulings before review, so the reviewer validates and commits the changes.
+# Skip on publish-only runs (the manual backfill can be reviewed before deploying).
+if [[ -z "${SKIP_STAGE1:-}" ]]; then
+  log "enrich ruling injuries"
+  node scripts/enrich-ruling-injuries.mjs || { log "WARNING: ruling injuries incomplete"; status=1; }
+fi
+
 if [[ -z "${SKIP_REVIEW:-}" ]]; then
   log "stage 2: reviewer ${REVIEW_ARGS:-}"
   # shellcheck disable=SC2086
