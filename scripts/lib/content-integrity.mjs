@@ -5,6 +5,7 @@ import path from 'node:path';
 export const LANGS = ['de', 'fr', 'it', 'en'];
 export const LEGAL_STATUSES = ['convicted', 'acquitted', 'dismissed', 'open', 'alternative_charge', 'reported'];
 export const CASE_STATUSES = ['resolved', 'remanded', 'investigation', 'appeal_pending', 'unknown'];
+export const REMAND_SCOPES = ['criminal','civil','costs','mixed','unknown'];
 export const HISTORY_STAGES = ['contested_penalty_order', 'quashed_judgment', 'superseded_judgment'];
 const canonical = x => Array.isArray(x) ? x.map(canonical) : x && typeof x === 'object' ? Object.fromEntries(Object.keys(x).sort().map(k => [k, canonical(x[k])])) : x;
 export const fingerprint = x => createHash('sha256').update(JSON.stringify(canonical(x))).digest('hex');
@@ -40,6 +41,8 @@ export function structuralErrors(entry, kind) {
   if (kind !== 'rulings') return errors;
   if (entry.lesson != null) errors.push('rulings must not have prevention lessons');
   if (!CASE_STATUSES.includes(entry.caseStatus)) errors.push('caseStatus required');
+  if(entry.caseStatus==='remanded'&&!REMAND_SCOPES.includes(entry.remandScope))errors.push('remanded case requires explicit criminal/civil/costs scope');
+  if(entry.caseStatus!=='remanded'&&entry.remandScope!=null)errors.push('remandScope without a remand');
   const ids = new Set();
   for (const [i, defendant] of (entry.defendants || []).entries()) {
     if (!defendant.id || ids.has(defendant.id)) errors.push(`defendant ${i}: unique id required`);

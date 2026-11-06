@@ -12,4 +12,4 @@ export function allegationText(a, lang, label) {
 }
 
 // A disposed first-instance matter does not establish that the judgment is legally final.
-export const publicCaseStatus = entry => entry.caseStatus === 'resolved' ? (entry.final === true ? 'resolved' : null) : entry.caseStatus === 'unknown' ? null : entry.caseStatus;
+export const publicCaseStatus = entry => entry.caseStatus === 'resolved' ? (entry.final === true ? 'resolved' : null) : entry.caseStatus === 'remanded' && ['criminal','civil','costs','mixed'].includes(entry.remandScope) ? 'remanded_' + entry.remandScope : entry.caseStatus === 'unknown' ? null : entry.caseStatus;

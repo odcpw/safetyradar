@@ -25,7 +25,7 @@ test('Bern excavator: another person cannot reuse the foreman’s article eviden
  assert.ok(evidenceErrors(e,'rulings',copied).some(x=>x.includes('d2')));
 });
 test('open case cannot display a current conviction sanction; contested orders are explicitly historical',()=>{
- const e=structuredClone(base);e.caseStatus='remanded';e.defendants[0].verdict='open';e.defendants[0].allegations=[];e.defendants[0].sanction={dailyUnits:120};
+ const e=structuredClone(base);e.caseStatus='remanded';e.remandScope='criminal';e.defendants[0].verdict='open';e.defendants[0].allegations=[];e.defendants[0].sanction={dailyUnits:120};
  assert.ok(structuralErrors(e,'rulings').some(x=>x.includes('current sanction')));
  e.defendants[0].sanction=null;e.defendants[0].sanctionHistory=[{stage:'contested_penalty_order',date:null,sanction:{dailyUnits:120}}];
  assert.deepEqual(structuralErrors(e,'rulings'),[]);
@@ -147,4 +147,12 @@ test('internal evidence cannot leak through public data, including nested accide
  assert.deepEqual(internalFieldPaths(entry),['/facts/sourceHash']);
  assert.ok(structuralErrors(entry,'accidents').some(i=>i.includes('must not be public')));
  assert.deepEqual(internalFieldPaths({facts:{what:L('A quote in prose is not an internal field.')}}),[]);
+});
+
+test('civil and costs-only remands cannot imply open criminal guilt',()=>{
+ assert.equal(publicCaseStatus({caseStatus:'remanded',final:true,remandScope:'costs'}),'remanded_costs');
+ assert.equal(publicCaseStatus({caseStatus:'remanded',final:true,remandScope:'civil'}),'remanded_civil');
+ const entry={...structuredClone(base),caseStatus:'remanded'};
+ assert.ok(structuralErrors(entry,'rulings').some(e=>e.includes('scope')));
+ entry.remandScope='criminal';assert.deepEqual(structuralErrors(entry,'rulings'),[]);
 });

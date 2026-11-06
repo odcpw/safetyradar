@@ -21,7 +21,8 @@ const cases=[
  {kind:'accidents',id:'2026-09-02-vs-le-chable-grue',name:'Installation does not support maintenance reference',mutate:e=>{e.lesson=lessonFromRefs(catalog,['vuv-art43-maintenance']);}},
 ];
 const results=[];
-for(const c of cases){
+let next=0;
+async function worker(){while(next<cases.length){const c=cases[next++];
  try{
   const entry=JSON.parse(fs.readFileSync(path.join(root,'data',c.kind+'.json'))).find(e=>e.id===c.id);
   assert.ok(entry,'live record exists');assert.equal(ledger[reviewKey(c.kind,c.id)]?.state,'verified','baseline must be source-audited, not legacy');
@@ -34,7 +35,9 @@ for(const c of cases){
   assert.equal(rejected.state,'held','observed factual defect must be blocked');
   results.push({id:c.id,name:c.name,passed:true,baseline,rejected});console.log('PASS '+c.name);
  }catch(e){results.push({id:c.id,name:c.name,passed:false,issue:e.message});console.log('FAIL '+c.name+': '+e.message);}
-}
+}}
+await Promise.all(Array.from({length:3},()=>worker()));
+results.sort((a,b)=>a.id.localeCompare(b.id));
 fs.mkdirSync(path.join(root,'editorial/evals'),{recursive:true});
 fs.writeFileSync(path.join(root,'editorial/evals/observed-regressions.json'),JSON.stringify(results,null,1)+'\n');
 flush({script:'prove-content-gates',passed:results.filter(r=>r.passed).length,total:cases.length});

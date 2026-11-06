@@ -51,7 +51,7 @@ ${lessonRefs}
   Status: convicted|acquitted|dismissed|open|alternative_charge|reported. Eventualiter is NEVER a conviction.
   Never share article lists between people. No articles inside offence text. Current sanction only for convicted people;
   historical sanctions require sanctionHistory [{stage:contested_penalty_order|quashed_judgment|superseded_judgment,date,sanction}].
-  caseStatus is resolved|remanded|investigation|appeal_pending|unknown, distinct from this decision's finality.
+  caseStatus is resolved|remanded|investigation|appeal_pending|unknown, distinct from this decision's finality. Remanded cases require remandScope criminal|civil|costs|mixed|unknown (null otherwise); never present a costs/civil-only remand as open criminal guilt.
   Every proposal passes an independent host source/evidence gate. Unsupported changes are held, old data restored, not published.
   Do not repeatedly rewrite already reviewed entries. Held candidates in data/drafts/held need source clarification, not cosmetic rewording.
   facts.injuries: short source-supported injury/casualty phrase. casualties: {fatal,injured,checked}, counts only if explicit;
