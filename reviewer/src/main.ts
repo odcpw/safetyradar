@@ -6,6 +6,10 @@
 // data/jobs-queue.json) so handled items leave data/review.md. Crash-safe: the conversation lives in SQLite
 // (reviewer/state/), a restart with the same date resumes it.
 //   npm --prefix reviewer run review -- [--dry-run] [--date=YYYY-MM-DD]
+import { randomUUID } from "node:crypto";
+import type { StreamOptions, AssistantMessageEventStream } from "@earendil-works/pi-ai";
+// @ts-ignore – shared durable, content-free request accounting
+import { journal } from "../../scripts/lib/llm.mjs";
 import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
@@ -15,7 +19,7 @@ import { createModels } from "@earendil-works/pi-ai/models";
 import { openaiProvider } from "@earendil-works/pi-ai/providers/openai";
 import { AssistantEntry, createRegistry, defineExtension, Harness, hook, section, ToolTask } from "@earendil-works/pi-durable";
 import { openNodeSqliteStorage } from "@earendil-works/pi-durable/storage/sqlite/node";
-import { PRICES, totalUsd } from "./cost.ts";
+import { PRICES, totalUsd, usdFor } from "./cost.ts";
 import { systemPrompt } from "./prompt.ts";
 import { createTools, DATA_FILES, fetchPublicText } from "./tools.ts";
 import { applyFeedback } from "../../scripts/lib/review-feedback.mjs";
@@ -114,11 +118,36 @@ async function runAgent(run: any): Promise<{ answer: string; status: string; usd
 		})],
 	}));
 	const models = createModels();
-	models.setProvider(openaiProvider());
+	const provider = openaiProvider();
+ const instrument = <T extends StreamOptions>(modelId: string, options: T | undefined, start: (options: T) => AssistantMessageEventStream): AssistantMessageEventStream => {
+  if (modelId !== "gpt-6-luna") throw new Error("Unapproved reviewer model");
+  const meta = { requestId: randomUUID(), model: modelId, endpoint: "/v1/responses", attempt: 1, caller: "editorial-reviewer" };
+  const stream = start({ ...options, maxRetries: 0, transport: "sse",
+   onPayload: async (payload: unknown, model: Parameters<NonNullable<StreamOptions["onPayload"]>>[1]) => {
+    const next = await options?.onPayload?.(payload, model) ?? payload;
+    if (!next || typeof next !== "object" || !("model" in next) || next.model !== "gpt-6-luna") throw new Error("Unapproved reviewer request model");
+    journal({ ...meta, event: "started" }); return next;
+   },
+   onResponse: async (response: Parameters<NonNullable<StreamOptions["onResponse"]>>[0], model: Parameters<NonNullable<StreamOptions["onResponse"]>>[1]) => {
+    if (response.status >= 400) journal({ ...meta, event: "http_error", status: response.status, usageKnown: false });
+    await options?.onResponse?.(response, model);
+   },
+  } as T);
+  void stream.result().then(message => {
+   const u = message.usage;
+   journal({ ...meta, event: message.stopReason === "error" || message.stopReason === "aborted" ? "provider_error" : "response", usageKnown: !!u?.totalTokens,
+    usage: { input: u?.input ?? 0, output: u?.output ?? 0, cached: u?.cacheRead ?? 0, cacheWrite: u?.cacheWrite ?? 0 }, estimatedUsd: usdFor(modelId, u ?? {}) });
+  }).catch(() => { journal({ ...meta, event: "transport_error", usageKnown: false }); });
+  return stream;
+ };
+ const stream = provider.stream.bind(provider), simple = provider.streamSimple.bind(provider);
+ provider.stream = (model, context, options) => instrument(model.id, options, opts => stream(model, context, opts));
+ provider.streamSimple = (model, context, options) => instrument(model.id, options, opts => simple(model, context, opts));
+ models.setProvider(provider);
 	const storage = await openNodeSqliteStorage(path.join(STATE, `review-${TAG}.sqlite`));
 	const harness = await Harness.open(storage, {
 		models, registry,
-		settings: { retry: { maxRetries: 2 }, afterFailedRun: "withdraw" },
+		settings: { retry: { maxRetries: 0 }, afterFailedRun: "withdraw" },
 		identity: { attribution: { name: "safetyradar-reviewer", url: "https://safetyradar.ch" } },
 		onReport: (r: any) => log(`report ${r.kind}${r.reason ? " " + r.reason : ""}`),
 	}, ctx);

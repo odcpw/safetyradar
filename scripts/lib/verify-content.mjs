@@ -59,7 +59,7 @@ export async function verifyContent({ entry, kind, sources, publicationEvidence 
   if (entry.defendants?.some(d => d.sanction || d.sanctionHistory?.length)) required.push('sanctions');
   const problems = [...evidenceErrors(entry, kind, evidence), ...required.filter(t => !evidence.some(e => e.topic === t)).map(t => `missing ${t} evidence`)];
   if (problems.length) return { state: 'held', issues: problems, evidence, sourceReview: review };
-  // Second, separately requested semantic decision; an absent answer never counts as approval.
+  // All semantic dimensions must pass; the optional decider is an offline-test seam.
   const answers = decider ? await decider({ publicRecord: reviewEntry, evidence, publicationEvidence, documents, catalog: catalog.filter(r=>entry.lesson?.refs?.some(x=>x.id===r.id)), criteria:DIMENSIONS }) : Object.fromEntries(Object.entries(review.dimensions||{}).map(([k,choice])=>[k,{choice}]));
   const failed = Object.keys(DIMENSIONS).filter(k => answers[k]?.choice !== 'supported');
   const concreteIssues=Array.isArray(answers.issues)?answers.issues.map(i=>`${i.path}: ${i.reason}`):[];
