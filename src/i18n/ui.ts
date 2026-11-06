@@ -25,7 +25,7 @@ const S: Record<string, T4> = {
   "legal.open": { de: "Offener Vorwurf", fr: "Accusation en suspens", it: "Imputazione aperta", en: "Open allegation" },
   "legal.alternative_charge": { de: "Eventualanklage", fr: "Accusation subsidiaire", it: "Imputazione subordinata", en: "Alternative charge" },
   "legal.reported": { de: "Vorwurf laut Bericht", fr: "Accusation rapportée", it: "Imputazione riportata", en: "Reported allegation" },
-  "case.resolved": { de: "Abgeschlossen", fr: "Terminé", it: "Concluso", en: "Resolved" },
+  "case.resolved": { de: "Rechtskräftig", fr: "Définitif", it: "Definitivo", en: "Final" },
   "case.remanded": { de: "Zurückgewiesen · Ausgang offen", fr: "Renvoi · issue ouverte", it: "Rinvio · esito aperto", en: "Remanded · outcome open" },
   "case.investigation": { de: "Untersuchung offen", fr: "Enquête ouverte", it: "Inchiesta aperta", en: "Investigation open" },
   "case.appeal_pending": { de: "Weitergezogen", fr: "Recours pendant", it: "Impugnazione pendente", en: "Appeal pending" },

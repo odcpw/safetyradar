@@ -10,3 +10,6 @@ export function allegationText(a, lang, label) {
  const refs = a.articles.map(p => articleLabel(p, lang)).filter(Boolean).join('; ');
  return `${label(a.status)}: ${a.offence[lang]}${refs ? ` (${refs})` : ''}`;
 }
+
+// A disposed first-instance matter does not establish that the judgment is legally final.
+export const publicCaseStatus = entry => entry.caseStatus === 'resolved' ? (entry.final === true ? 'resolved' : null) : entry.caseStatus === 'unknown' ? null : entry.caseStatus;

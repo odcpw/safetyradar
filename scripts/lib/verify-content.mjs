@@ -69,5 +69,5 @@ export async function verifyContent({ entry, kind, sources, publicationEvidence 
   const answers = await decider({ publicRecord: reviewEntry, evidence, publicationEvidence, documents, catalog: catalog.filter(r=>entry.lesson?.refs?.some(x=>x.id===r.id)), criteria:DIMENSIONS });
   const failed = Object.keys(DIMENSIONS).filter(k => answers[k]?.choice !== 'supported');
   const concreteIssues=Array.isArray(answers.issues)?answers.issues.map(i=>`${i.path}: ${i.reason}`):[];
-  return failed.length || concreteIssues.length ? { state: 'held', issues: [...failed.map(k => `${k}: independent verifier did not approve`), ...concreteIssues], evidence, decisions: answers } : { state: 'verified', hash: fingerprint(entry), at: new Date().toISOString(), method: 'source-extract+independent-high-effort-source-review', evidence, decisions: answers, publicationEvidence };
+  return failed.length || concreteIssues.length ? { state: 'held', issues: [...failed.map(k => `${k}: independent verifier did not approve`), ...concreteIssues], evidence, semanticReview: answers } : { state: 'verified', hash: fingerprint(entry), at: new Date().toISOString(), method: 'source-extract+independent-high-effort-source-review', evidence, semanticReview: answers, publicationEvidence };
 }

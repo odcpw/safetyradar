@@ -93,7 +93,7 @@ currently unmatched cases can receive a lesson.
 
 New or changed accident/ruling records are candidates, not published facts. The host independently fetches source text,
 extracts paragraph-bound evidence, verifies each person's allegation/provision/status and checks multilingual facts,
-outcomes/counts, chronology, sanctions and lesson prerequisites. A separate Decisions call must approve every dimension.
+outcomes/counts, chronology, sanctions and lesson prerequisites. A separate high-effort structured source review must approve every dimension and report no concrete issues; input-only classification is not sufficient for this complex legal review.
 Missing source, missing answer, uncertainty, invalid evidence or API failure means **hold**: retain the previous entry,
 exclude a new entry, and keep the candidate in `data/drafts/held/`. One proposal/review per attempt; no rewrite-until-pass loop.
 A held source must not be marked published or permanently rejected by agent feedback.

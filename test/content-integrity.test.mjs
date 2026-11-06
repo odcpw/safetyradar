@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { fingerprint, structuralErrors, evidenceErrors, gateCollection, ledgerErrors, validDate } from '../scripts/lib/content-integrity.mjs';
 import { verifyContent, sourceParagraphs } from '../scripts/lib/verify-content.mjs';
-import { allegationText } from '../scripts/lib/legal-display.mjs';
+import { allegationText, publicCaseStatus } from '../scripts/lib/legal-display.mjs';
 import { applyFeedback } from '../scripts/lib/review-feedback.mjs';
 const L = s => ({de:s,fr:s,it:s,en:s});
 const article = (code, number) => ({code,article:number,paragraph:null,letter:null});
@@ -116,4 +116,15 @@ test('long minified court/news text is segmented without dropping source materia
  const source=('Art. 125 concerns the first defendant. The other person faced a separate allegation. ').repeat(100);
  const parts=sourceParagraphs(source);assert.ok(parts.length>1);
  assert.ok(parts.every(p=>p.text.length<=1200));assert.equal(parts.map(p=>p.text).join(' ').replace(/\s+/g,' ').trim(),source.replace(/\s+/g,' ').trim());
+});
+
+test('resolved proceedings do not imply an established final judgment',()=>{
+ assert.equal(publicCaseStatus({caseStatus:'resolved',final:null}),null);
+ assert.equal(publicCaseStatus({caseStatus:'resolved',final:false}),null);
+ assert.equal(publicCaseStatus({caseStatus:'resolved',final:true}),'resolved');
+ assert.equal(publicCaseStatus({caseStatus:'remanded',final:true}),'remanded');
+});
+test('concrete independent-review issues hold even if all dimension flags say supported',async()=>{
+ const result=await verifyContent({kind:'accidents',entry:{id:'one',accidentDate:null,outcome:'injured'},sources:[source],extractor:async()=>({status:'supported',issues:[],evidence:['facts','outcomes','dates'].map(topic=>({path:'/facts',topic,sourceIndex:0,paragraphIds:[0],personId:null,sourcePerson:null,section:'report'}))}),decider:async()=>({...Object.fromEntries(['facts','outcomes','dates','legal','sanctions','lessons'].map(k=>[k,{choice:'supported'}])),issues:[{path:'/facts/what',reason:'unsupported claim'}]})});
+ assert.equal(result.state,'held');assert.ok(result.issues.some(i=>i.includes('unsupported claim')));
 });

@@ -1,12 +1,13 @@
 ---
 import Lesson from './Lesson.astro';
-import { allegationText } from '../../scripts/lib/legal-display.mjs';
+import { allegationText, publicCaseStatus } from '../../scripts/lib/legal-display.mjs';
 import { fmtDate, sanctionText } from '../lib';
 import { linkifyArticles } from '../lib/fedlex';
 import { t, tax, pick, type Lang } from '../i18n/ui';
 const { item, lang, permalink = false } = Astro.props as { item: any; lang: Lang; permalink?: boolean };
 const tt = (k: string) => t(lang, k); const pk = (v: any) => pick(lang, v);
-const meta = [item.accidentDate ? `${tt('r.accidentDate')} ${fmtDate(item.accidentDate, lang)}` : null, item.judgmentDate ? `${tt('r.judgmentDate')} ${fmtDate(item.judgmentDate, lang)}` : null, item.published ? `${t(lang, 'r.published')} ${fmtDate(item.published, lang)}` : null, pk(item.court), item.place ? `${item.place} (${item.canton})` : item.canton, tax(lang, 'outcome', item.outcome), item.caseStatus && item.caseStatus !== 'unknown' ? tt('case.' + item.caseStatus) : null].filter(Boolean);
+const status = publicCaseStatus(item);
+const meta = [item.accidentDate ? `${tt('r.accidentDate')} ${fmtDate(item.accidentDate, lang)}` : null, item.judgmentDate ? `${tt('r.judgmentDate')} ${fmtDate(item.judgmentDate, lang)}` : null, item.published ? `${t(lang, 'r.published')} ${fmtDate(item.published, lang)}` : null, pk(item.court), item.place ? `${item.place} (${item.canton})` : item.canton, tax(lang, 'outcome', item.outcome), status ? tt('case.' + status) : null].filter(Boolean);
 const why = pk(item.why) ?? (item.defendants?.length === 1 ? null : null);
 const line = (d: any) => {
   const head = d.allegations?.length ? d.allegations.map((a: any) => allegationText(a, lang, (status: string) => tt('legal.' + status))).join('; ') : tt('legal.' + d.verdict);
