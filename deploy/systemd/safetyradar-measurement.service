@@ -1,0 +1,17 @@
+[Unit]
+Description=Safety Radar cookieless aggregate measurement (no reader identifiers)
+After=network.target
+[Service]
+User=safetyradar
+Group=safetyradar
+WorkingDirectory=/srv/safetyradar/app
+ExecStart=/usr/bin/node /srv/safetyradar/app/deploy/analytics/server.mjs
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/srv/safetyradar/stats
+[Install]
+WantedBy=multi-user.target

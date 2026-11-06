@@ -1,12 +1,18 @@
-	# IP-free page log (inside the safetyradar.ch block). Keeps: time, method, host, URI incl. query, status, size,
-	# duration, Referer and a crude bot flag. Drops: client/remote IP and port, all request headers (cookies,
-	# Authorization, User-Agent, ...), TLS details and response headers. Rolled weekly, rolled files kept 56 days.
+	# IP-free page log. Only an existing public HTML path is retained: no raw URI, query or referring URL.
+	# Rolled weekly, retained for 56 days. Campaign cohorts are measured separately, without reader IDs.
 	@sr_bot header_regexp User-Agent (?i)(bot|crawl|spider|slurp|curl|wget|python|httpx|go-http|java/|headless|monitor|preview|scan|fetch|feed)
 	vars @sr_bot sr_bot 1
-	log_append referer {http.request.header.Referer}
+	@sr_test query sr_test=1
+	vars @sr_test sr_bot 1
+	@sr_page {
+		path_regexp sr_page ^/(de|fr|it|en)/([a-z0-9/-]*)$
+		file {path}index.html
+	}
+	vars @sr_page sr_page {http.request.uri.path}
+	log_append page {http.vars.sr_page}
 	log_append bot {http.vars.sr_bot}
 	log {
-		output file /var/log/caddy/safetyradar-access.log {
+		output file /var/log/caddy/safetyradar-pages.log {
 			roll_size 50MiB
 			roll_interval 168h
 			roll_keep_for 1344h
@@ -14,6 +20,7 @@
 		format filter {
 			wrap json
 			fields {
+				request>uri delete
 				request>remote_ip delete
 				request>remote_port delete
 				request>client_ip delete
@@ -21,6 +28,7 @@
 				request>tls delete
 				resp_headers delete
 				user_id delete
+				referer delete
 			}
 		}
 	}

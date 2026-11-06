@@ -54,9 +54,11 @@ Still to add for SES and ImprovMX (values come from the SES and ImprovMX console
 - Helper: `scripts/lib/utm.mjs` – `issueId(date)`, `tagUrl(url, {campaign, content})`, `tagHtml(html, {campaign, content})`; CLI `node scripts/lib/utm.mjs issue.html 2026-w45 a > tagged.html`. Only safetyradar.ch links are changed. Tests: `test/utm.test.mjs`.
 - A/B: send variant A with `content: 'a'` and B with `content: 'b'` (e.g. two campaigns to split lists); the weekly stats break clicks down by campaign and content. No test is set up yet.
 
-## Weekly visit count
-- Caddy writes an IP-free page log for safetyradar.ch only (`deploy/caddy/access-log.snippet`, inside the `safetyradar.ch` block): `/var/log/caddy/safetyradar-access.log`, rolled weekly, rolled files kept 56 days. No IPs, no request headers except Referer, user agent reduced to a `bot` flag.
-- `deploy/stats/weekly-stats.mjs` + `deploy/systemd/safetyradar-stats.{service,timer}` (Mondays 06:30) write `/srv/safetyradar/stats/YYYY-Www.json` and `.txt` for the previous ISO week: page views (no bots/assets), top 20 pages, newsletter clicks by `utm_campaign` × `utm_content`. Manual run for a week: `node deploy/stats/weekly-stats.mjs 2026-W45`.
+## Aggregate website/newsletter measurement
+- See `deploy/analytics/README.md`: cookieless first-party cohorts, no email/reader linkage, active-reading samples and separate submission/accepted/confirmed response counts.
+- Caddy now writes `safetyradar-pages.log`: known public HTML paths only, no raw query/referrer/IP. Closed historical logs are sanitized and expire after the existing 56-day policy (weekly cleanup).
+- `/srv/safetyradar/stats/analytics-latest.{json,txt}` is refreshed every minute; existing weekly request summaries remain separate. Neither metric is a unique-reader or unique-click count.
+- Internal browser checks use `sr_test=1`; event checks use `test:true`. No measurement endpoint submits an email or sends a campaign.
 
 ## Weekly issue (drafts only) and sending
 - `deploy/newsletter/weekly-issue.mjs` builds one issue per language from the VPS data: everything added since the previous Thursday 08:30 Europe/Zurich (git diff of `data/*.json` against the last data commit before then). Rulings, accidents (title + first sentence of the lesson, linked to the site page) and a "new jobs" count with the top 5. "Quiet week" text when there are no new accidents/rulings. No LLM; links tagged via `scripts/lib/utm.mjs` (`utm_campaign=<yyyy>-w<nn>`).

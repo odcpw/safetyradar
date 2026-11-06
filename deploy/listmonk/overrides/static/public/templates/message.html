@@ -1,0 +1,12 @@
+{{ define "message" }}
+ {{ template "header" .}}
+ <section class="section message"><h2>{{ .Data.Title }}</h2><div>{{ .Data.Message }}</div></section>
+ {{ if eq .Data.Title (L.T "public.subConfirmedTitle") }}
+ <span hidden data-sr-event="signup_confirmation"></span>
+ <script type="module" src="/measurement-listmonk.mjs"></script>
+ {{ else if eq .Data.Title (L.T "public.subTitle") }}
+ <span hidden data-sr-event="signup_request_accepted"></span>
+ <script type="module" src="/measurement-listmonk.mjs"></script>
+ {{ end }}
+ {{ template "footer" .}}
+{{ end }}
