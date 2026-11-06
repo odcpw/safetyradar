@@ -41,9 +41,9 @@ export const htmlToText = h => h.replace(/<(script|style)[\s\S]*?<\/\1>/gi, ' ')
 
 const CACHE = new URL('../../data/cache/text/', import.meta.url);
 /** Fetch a public document as plain text (robots-respecting, cached on disk). Returns null if disallowed/failed. */
-export async function getText(url) {
+export async function getText(url, { fresh = false } = {}) {
   const f = new URL(createHash('sha1').update(url).digest('hex').slice(0, 16) + '.txt', CACHE);
-  if (fs.existsSync(f)) return fs.readFileSync(f, 'utf8');
+  if (!fresh && fs.existsSync(f)) return fs.readFileSync(f, 'utf8');
   if (!(await allowedByRobots(url))) return null;
   try {
     const r = await fetch(url, { headers: { 'User-Agent': UA }, redirect: 'follow', signal: AbortSignal.timeout(30000) });

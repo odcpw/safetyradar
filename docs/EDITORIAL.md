@@ -16,7 +16,10 @@ The pipeline only proposes; **nothing reaches `accidents.json` / `rulings.json` 
    - omit unknown fields (`null`);
    - hazard tags hidden (keep severity, industry);
    - title/facts briefly describe what happened (and the court outcome for rulings), never the prevention lesson;
-   - accidents only: lesson has no heading and must follow the curated-corpus contract below; rulings always use `lesson: null` and put the court’s provisions in `defendants[].charge` (Art./art. as named in the judgment);
+   - accidents only: lesson has no heading and must follow the curated-corpus contract below; rulings always use `lesson: null` and put the court’s provisions in `defendants[].allegations[]` (Art./art. as named in the judgment);
+   - provisions are person- and allegation-bound: distinguish conviction, acquittal, dismissal, open allegation and eventualiter charge; never distribute case-level articles to all people;
+   - current sanctions only for current convictions; historical sanctions require an explicit contested/superseded/quashed stage;
+   - casualty counts distinguish dead, surviving injured and checked-only people; electric shock does not imply death;
    - day-fines stored as count and rate (`dailyUnits`, `dailyAmount`);
    - rulings show court-stated injuries succinctly in `facts.injuries` (body part and injury/severity or fatal, DE/FR/IT/EN); null only when absent, never infer a diagnosis;
    - rulings = what happened, what the court decided and why, short per-person outcomes;
@@ -38,7 +41,7 @@ The pipeline only proposes; **nothing reaches `accidents.json` / `rulings.json` 
 
 `data/lesson-refs.json` is the only source of **accident** lesson text and links. Rulings
 must keep `lesson: null`; cite the provisions the court actually applied in
-`defendants[].charge` (and `why` when needed), with Art./art. numbers only when the
+`defendants[].allegations[]` (and `why` when needed), with Art./art. numbers only when the
 judgment or official source names them — never a guessed BauAV/Suva checklist.
 
 For accidents, a lesson is either `null` or `{de,fr,it,en,refs:[{id,label,url}]}`.
@@ -85,3 +88,21 @@ French checklist pages are intentional verified references, not invented German 
 See `docs/lesson-migration.md` for the per-entry migration choices. Forestry, utilities,
 rail operations and crane structural failure need more specific reviewed sources before
 currently unmatched cases can receive a lesson.
+
+## Publication integrity boundary
+
+New or changed accident/ruling records are candidates, not published facts. The host independently fetches source text,
+extracts paragraph-bound evidence, verifies each person's allegation/provision/status and checks multilingual facts,
+outcomes/counts, chronology, sanctions and lesson prerequisites. A separate Decisions call must approve every dimension.
+Missing source, missing answer, uncertainty, invalid evidence or API failure means **hold**: retain the previous entry,
+exclude a new entry, and keep the candidate in `data/drafts/held/`. One proposal/review per attempt; no rewrite-until-pass loop.
+A held source must not be marked published or permanently rejected by agent feedback.
+
+`editorial/review-ledger.json` is host-only, not a public endpoint: content hashes, source hashes, sections, exact excerpts
+and person bindings. `legacy_unreviewed` is an explicit audit backlog, NOT source approval. Its hash allows only the unchanged
+legacy record. Changed/new records need a matching verified ledger entry before build/deploy. Historical source contradictions
+stay unresolved; no fabricated precision. Existing publication-date provenance is preserved separately, not silently re-audited.
+
+Only accidents may carry a curated prevention reference. Check the actual activity and prerequisites against the source,
+not just a shared hazard. Installing a crane alone does not establish maintenance. No match -> null. A reference does not
+assert that a legal duty was breached in that event.

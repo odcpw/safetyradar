@@ -10,9 +10,9 @@ export const CODES = {
   BauAV:{ eli: 'cc/2021/384', de: 'BauAV', fr: 'OTConst', it: 'OLCostr', en: 'BauAV' },
   OTConst:{ eli: 'cc/2021/384', de: 'BauAV', fr: 'OTConst', it: 'OLCostr', en: 'BauAV' },
   OLCostr:{ eli: 'cc/2021/384', de: 'BauAV', fr: 'OTConst', it: 'OLCostr', en: 'BauAV' },
-  VuV:  { eli: 'cc/1983/1968_1968_1968', de: 'VuV', fr: 'OPA', it: 'OPL', en: 'VuV' },
-  VUV:  { eli: 'cc/1983/1968_1968_1968', de: 'VuV', fr: 'OPA', it: 'OPL', en: 'VuV' },
-  OPA:  { eli: 'cc/1983/1968_1968_1968', de: 'VuV', fr: 'OPA', it: 'OPL', en: 'VuV' },
+  VuV:  { eli: 'cc/1983/1968_1968_1968', de: 'VUV', fr: 'OPA', it: 'OPI', en: 'VUV' },
+  VUV:  { eli: 'cc/1983/1968_1968_1968', de: 'VUV', fr: 'OPA', it: 'OPI', en: 'VUV' },
+  OPA:  { eli: 'cc/1983/1968_1968_1968', de: 'VUV', fr: 'OPA', it: 'OPI', en: 'VUV' },
   ArG:  { eli: 'cc/1966/57_57_57', de: 'ArG', fr: 'LTr', it: 'LL', en: 'ArG' },
   LTr:  { eli: 'cc/1966/57_57_57', de: 'ArG', fr: 'LTr', it: 'LL', en: 'ArG' },
 };
@@ -50,15 +50,3 @@ export function linkifyArticles(text, lang = 'de') {
   if (last < text.length) out.push({ type: 'text', value: text.slice(last) });
   return out.length ? out : [{ type: 'text', value: text }];
 }
-
-/** Workplace-criminal / duty catalog for Decisions enrichment (charge basis). */
-export const CHARGE_CATALOG = [
-  { id: 'stgb-117', art: '117', code: 'StGB', label: 'Art. 117 StGB', hint: 'fahrlässige Tötung / homicide par négligence' },
-  { id: 'stgb-122', art: '122', code: 'StGB', label: 'Art. 122 StGB', hint: 'schwere Körperverletzung (vorsätzlich)' },
-  { id: 'stgb-123', art: '123', code: 'StGB', label: 'Art. 123 StGB', hint: 'einfache Körperverletzung' },
-  { id: 'stgb-125', art: '125', code: 'StGB', label: 'Art. 125 StGB', hint: 'fahrlässige Körperverletzung' },
-  { id: 'stgb-129', art: '129', code: 'StGB', label: 'Art. 129 StGB', hint: 'Gefährdung des Lebens' },
-  { id: 'stgb-229', art: '229', code: 'StGB', label: 'Art. 229 StGB', hint: 'Verletzung der Regeln der Baukunde' },
-  { id: 'stgb-230', art: '230', code: 'StGB', label: 'Art. 230 StGB', hint: 'Unterlassung von Sicherheitsmassnahmen' },
-  { id: 'uvg-112', art: '112', code: 'UVG', label: 'Art. 112 UVG', hint: 'Strafbestimmung UVG / Vergehen gegen das UVG' },
-];

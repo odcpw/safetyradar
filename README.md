@@ -45,7 +45,7 @@ Content lives in `data/*.json` – no CMS, no database. Hosted on GitHub Pages (
 ## Data model
 - `data/accidents.json` – per item: `id` (= URL slug), `date` (event), `canton`, `place`, `industry`/`hazard`/`outcome` (keys, translated in `src/i18n/ui.ts`),
   `source {name,url,lang}` (original source language), optional `extraSources`, `title`, `facts {activity, what, equipment, injuries, emergency, investigation}` and `lesson`. Text fields use `{de,fr,it,en}`; `lesson` is null (omitted) or `{de,fr,it,en,refs:[{id,label,url}]}` with exact text and links from `data/lesson-refs.json` (1–2 refs). See `docs/EDITORIAL.md`.
-- `data/rulings.json` – same plus `court`, `caseNumber`, `charge`, `verdict`, `sanction`, `final` (true/false/null).
+- `data/rulings.json` – same plus `court`, `caseNumber`, `defendants[].allegations`, `verdict`, staged sanctions, `caseStatus`, `final` (true/false/null).
 - `data/jobs.json` – link + title/employer/location/date as published; `role` key.
 - Seed generators with the reviewed texts: `scripts/seed/accidents.py`, `scripts/seed/rulings.py`.
 - Detail pages: `/{lang}/accidents/{id}/`, `/{lang}/rulings/{id}/`.
@@ -98,7 +98,7 @@ Owner details (red TODO markers in imprint/privacy/about/post-a-job, all 4 langu
 
 ## v3 notes
 - Hazard categories are hidden in the UI (cards, filters, detail pages); `hazard` stays in the JSON for later use. Severity (`outcome`), industry and canton remain.
-- Rulings: `accidentDate`, `date` (decision), `published` (release date the source shows: bger.ch "Neue Entscheide" day, or the news article's publication date; `null` if the source shows none – never guessed), `publishedSource`, `firstSeen` (day Safety Radar first fetched it – fallback only, not a release date), `final`, `appeal`, `employerRole`, `defendants[]` (role, charge, verdict `convicted|acquitted`, reasoning, `sanction{dailyUnits, dailyAmount, suspended, probationYears, fineCHF, custodial, costs, compensation, bail, other}`). `null` = "not reported".
+- Rulings: `accidentDate`, `date` (decision), `published` (release date the source shows: bger.ch "Neue Entscheide" day, or the news article's publication date; `null` if the source shows none – never guessed), `publishedSource`, `firstSeen` (day Safety Radar first fetched it – fallback only, not a release date), `final`, `appeal`, `employerRole`, `defendants[]` (stable id, role, person-scoped allegations `{status,offence,articles}`, verdict `convicted|acquitted`, reasoning, `sanction{dailyUnits, dailyAmount, suspended, probationYears, fineCHF, custodial, costs, compensation, bail, other}`). `null` = "not reported".
 - Every accident and ruling has a stable `caseId`; rulings have `linkedAccidentId` (id of a published accident when it is the same event; otherwise null). No UI for following cases yet.
 - Seeds: `scripts/seed/accidents.py` then `scripts/seed/accidents_v3.py`; `scripts/seed/rulings.py`.
 
@@ -115,3 +115,5 @@ Live site: https://safetyradar.ch is served by Caddy on the VPS (see docs/DEPLOY
 - Homepage order: rulings, accidents, jobs.
 - Data seeds: `scripts/seed/rulings.py` → `rulings_v4.py` (2023–2026 backfill from entscheidsuche.ch, Téléverbier removed); `accidents.py` → `accidents_v3.py` → `accidents_v4.py` (polizeinews.ch archive back to 2024).
 - `scripts/fetch-sources.mjs`: new RSS sources from `docs/source-audit.md` (RSI, laRegione, Tio, Stadt Zürich, Stapo Winterthur, Uri, Tamedia, SRF, RTS, 20 Minuten, Blick, Watson; Atom supported). General-media feeds need an incident word in the title; the same event from several outlets is merged into one candidate (`alsoReportedBy`). `--since=2023-01-01` widens the entscheidsuche window; `--only=id1,id2` runs a subset.
+
+Publication boundary: see [editorial integrity](docs/EDITORIAL.md#publication-integrity-boundary). Internal `editorial/` evidence is never emitted by public JSON routes. Unsafe case-level article enrichment has been removed. Injury enrichment emits proposals only.

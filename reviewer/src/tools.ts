@@ -146,6 +146,10 @@ export function createTools(roots: Roots) {
 			const out: string[] = [];
 			const rv = path.join(roots.input, "data/review.md");
 			out.push(fs.existsSync(rv) ? `data/review.md: ${fs.statSync(rv).size} bytes, ${fs.readFileSync(rv, "utf8").split("\n").length} lines` : "data/review.md: missing");
+			for (const folder of ["held", "corrections"]) {
+				const dir = path.join(roots.input, "data/drafts", folder);
+				if (fs.existsSync(dir)) for (const file of fs.readdirSync(dir).filter(f => f.endsWith(".json"))) out.push(`pending source review: data/drafts/${folder}/${file}`);
+			}
 			const dd = path.join(roots.input, "data/drafts/rulings");
 			const drafts = fs.existsSync(dd) ? fs.readdirSync(dd).filter((f) => f.endsWith(".json")) : [];
 			out.push(`drafts (${drafts.length}):`, ...drafts.map((f) => `  data/drafts/rulings/${f}`));
@@ -247,17 +251,15 @@ export function createTools(roots: Roots) {
 
 	const runChecks = defineTool({
 		name: "run_checks",
-		description: "Run the data validation (scripts/validate-data.mjs) and the site build (npm run build) in the review checkout. Returns errors, or OK.",
+		description: "Run the data validation (scripts/validate-data.mjs) and the site build (npm run build) in the review checkout. Returns errors, or OK. Candidate changes still require the separate host source gate.",
 		parameters: Type.Object({}),
 		replay: "safe",
 		execute: async () => {
 			const env = { ...process.env, NOINDEX: "1", OPENAI_API_KEY: "", AGENTMAIL_API_KEY: "", GH_TOKEN: "", GITHUB_TOKEN: "" };
 			// The validator comes from the reviewer's own checkout (it may not exist on the base branch yet).
-			try { await run("node", [path.join(roots.input, "scripts/validate-data.mjs"), path.join(roots.work, "data")], { cwd: roots.work, env, maxBuffer: 8e6 }); }
+			try { await run("node", [path.join(roots.input, "scripts/validate-data.mjs"), path.join(roots.work, "data"), "--candidate-shape"], { cwd: roots.work, env, maxBuffer: 8e6 }); }
 			catch (e: any) { return text(`validation FAILED:\n${String(e.stdout ?? "").slice(-4000)}\n${String(e.stderr ?? "").slice(-4000)}`, true); }
-			try { await run("npm", ["run", "build", "--silent"], { cwd: roots.work, env, maxBuffer: 32e6, timeout: 600_000 }); }
-			catch (e: any) { return text(`build FAILED:\n${String(e.stderr ?? "").slice(-4000)}\n${String(e.stdout ?? "").slice(-2000)}`, true); }
-			return text("OK: validation passed, build compiled");
+			return text("Candidate shape checks passed. NOT approved for publication: the host will independently verify source evidence, hold failures, and build only accepted data.");
 		},
 	});
 

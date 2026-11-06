@@ -53,13 +53,6 @@ fi
 log "e-mail intake"
 node scripts/email-intake.mjs || { log "WARNING: e-mail intake failed – reviewer continues without new mail"; }
 
-# Enrich existing rulings before review, so the reviewer validates and commits the changes.
-# Skip on publish-only runs (the manual backfill can be reviewed before deploying).
-if [[ -z "${SKIP_STAGE1:-}" ]]; then
-  log "enrich ruling injuries"
-  node scripts/enrich-ruling-injuries.mjs || { log "WARNING: ruling injuries incomplete"; status=1; }
-fi
-
 if [[ -z "${SKIP_REVIEW:-}" ]]; then
   log "stage 2: reviewer ${REVIEW_ARGS:-}"
   # shellcheck disable=SC2086
@@ -82,6 +75,7 @@ publish() {
 if [[ -n "${PUBLISH_DIR:-}" ]]; then
   if [[ "$GIT_PUSH" == 1 && -z "${SKIP_PULL:-}" ]]; then git pull --ff-only --quiet || { log "WARNING: pull after review failed"; status=1; }; fi
   rm -rf dist
+  node scripts/validate-data.mjs || { log "ERROR: publication gate failed – not publishing"; exit 1; }
   npm run --silent build || { log "ERROR: build failed – not publishing"; exit 1; }
   [[ -f dist/index.html ]] || { log "ERROR: dist/index.html missing – not publishing"; exit 1; }
   publish

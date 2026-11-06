@@ -7,6 +7,7 @@
 // 08:30 Europe/Zurich. Text comes from the published data (title + first sentence of the lesson); no LLM.
 // Env: LISTMONK_URL (default http://127.0.0.1:9100), LISTMONK_ENV (default /srv/listmonk/.env, admin login),
 //      APP_DIR (default /srv/safetyradar/app), OUT_DIR (default /srv/safetyradar/newsletter).
+import { ledgerErrors, readLedger, reviewKey } from '../../scripts/lib/content-integrity.mjs';
 import fs from 'node:fs'; import path from 'node:path'; import { execFileSync } from 'node:child_process';
 import { tagUrl, issueId } from '../../scripts/lib/utm.mjs';
 
@@ -52,7 +53,10 @@ const read = f => JSON.parse(fs.readFileSync(path.join(APP, 'data', f), 'utf8'))
 const baseline = git('log', '--format=%H %at', '--', 'data/accidents.json', 'data/rulings.json', 'data/jobs.json')
   .trim().split('\n').map(l => l.split(' ')).find(([, at]) => +at < since)?.[0];
 const old = f => { if (!baseline) return []; try { return JSON.parse(git('show', `${baseline}:data/${f}`)); } catch { return []; } };
-const fresh = f => { const before = new Set(old(f).map(x => x.id)); return read(f).filter(x => !before.has(x.id)); };
+const ledger = readLedger(APP);
+const integrityErrors = ledgerErrors(APP, { accidents: read('accidents.json'), rulings: read('rulings.json') }, ledger);
+if (integrityErrors.length) throw new Error(integrityErrors.join('\n'));
+const fresh = f => { const before = new Set(old(f).map(x => x.id)); return read(f).filter(x => !before.has(x.id) && (f === 'jobs.json' || ledger[reviewKey(f.replace('.json',''), x.id)]?.state === 'verified')); };
 const byDate = k => (a, b) => String(b[k] || '').localeCompare(String(a[k] || ''));
 const relDate = x => x.published || x.firstSeen || null;
 const sev = { fatal: 0, life_threatening: 1, serious: 2, injured: 3 };

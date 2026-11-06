@@ -1,18 +1,19 @@
 ---
 import Lesson from './Lesson.astro';
+import { allegationText } from '../../scripts/lib/legal-display.mjs';
 import { fmtDate, sanctionText } from '../lib';
 import { linkifyArticles } from '../lib/fedlex';
 import { t, tax, pick, type Lang } from '../i18n/ui';
 const { item, lang, permalink = false } = Astro.props as { item: any; lang: Lang; permalink?: boolean };
 const tt = (k: string) => t(lang, k); const pk = (v: any) => pick(lang, v);
-const meta = [fmtDate(item.date, lang), item.published ? `${t(lang, 'r.published')} ${fmtDate(item.published, lang)}` : null, pk(item.court), item.place ? `${item.place} (${item.canton})` : item.canton, tax(lang, 'outcome', item.outcome)].filter(Boolean);
+const meta = [item.accidentDate ? `${tt('r.accidentDate')} ${fmtDate(item.accidentDate, lang)}` : null, `${tt('r.judgmentDate')} ${fmtDate(item.date, lang)}`, item.published ? `${t(lang, 'r.published')} ${fmtDate(item.published, lang)}` : null, pk(item.court), item.place ? `${item.place} (${item.canton})` : item.canton, tax(lang, 'outcome', item.outcome), item.caseStatus && item.caseStatus !== 'unknown' ? tt('case.' + item.caseStatus) : null].filter(Boolean);
 const why = pk(item.why) ?? (item.defendants?.length === 1 ? null : null);
 const line = (d: any) => {
-  const charge = (pk(d.charge) || '');
-  const head = d.verdict === 'convicted' ? `${tt('w.convicted')} ${charge.charAt(0).toLowerCase() + charge.slice(1)}` : d.verdict === 'acquitted' ? `${tt('w.acquitted')} ${charge.charAt(0).toLowerCase() + charge.slice(1)}` : d.verdict === 'dismissed' ? `${tt('w.dismissed')} ${charge}` : `${tt('w.open')} ${charge}`;
-  const sanc = d.verdict === 'convicted' ? (sanctionText(d.sanction, lang, tt, pk) || '') : d.priorSanction ? `${tt('w.prior')}: ${sanctionText(d.priorSanction, lang, tt, pk)}` : '';
+  const head = d.allegations?.length ? d.allegations.map((a: any) => allegationText(a, lang, (status: string) => tt('legal.' + status))).join('; ') : tt('legal.' + d.verdict);
+  const sanc = d.verdict === 'convicted' ? (sanctionText(d.sanction, lang, tt, pk) || '') : '';
+  const history = (d.sanctionHistory || []).map((h: any) => `${tt('history.' + h.stage)}${h.date ? ' (' + fmtDate(h.date, lang) + ')' : ''}: ${sanctionText(h.sanction, lang, tt, pk)}`).join('; ');
   const reason = pk(d.short) ?? pk(d.reasoning);
-  const text = `${head}${sanc ? ', ' + sanc : ''}.`;
+  const text = `${head}${sanc ? ' — ' + sanc : ''}.${history ? ' ' + history + '.' : ''}`;
   return { role: pk(d.role), parts: linkifyArticles(text, lang), reason };
 };
 ---

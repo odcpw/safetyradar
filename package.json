@@ -1,7 +1,7 @@
 {
   "name": "safetyradar",
   "version": "1.0.0",
-  "description": "Safety Radar – Swiss workplace accidents, court rulings and safety jobs (static Astro site + Node fetch pipeline)",
+  "description": "Safety Radar \u2013 Swiss workplace accidents, court rulings and safety jobs (static Astro site + Node fetch pipeline)",
   "main": "index.js",
   "scripts": {
     "dev": "astro dev",
@@ -18,7 +18,8 @@
     "intake": "node scripts/email-intake.mjs",
     "review": "npm --prefix reviewer run review --",
     "daily": "deploy/run-daily.sh",
-    "test": "node --test test/*.test.mjs"
+    "test": "node --test test/*.test.mjs",
+    "prebuild": "node scripts/validate-data.mjs"
   },
   "keywords": [],
   "author": "",

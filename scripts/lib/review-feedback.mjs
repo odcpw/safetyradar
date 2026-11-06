@@ -29,7 +29,13 @@ export function applyFeedback(dataDir, summary, changes, date, opts = {}) {
     const ids = new Set([...(c.added || []), ...(c.changed || [])]);
     for (const e of entries) if (ids.has(e.id)) for (const u of urlsOfEntry(e)) published.set(normUrl(u), e.id);
   }
-  for (const x of [...(summary?.added || []), ...(summary?.merged || [])]) if (x?.source && normUrl(x.source)) published.set(normUrl(x.source), x.id ?? null);
+  // Agent summaries cannot mark an uncommitted/held record as published.
+  for (const x of [...(summary?.added || []), ...(summary?.merged || [])]) {
+    const entries = readJson(path.join(dataDir, x.file || ''), []);
+    const entry = Array.isArray(entries) && entries.find(e => e.id === x.id);
+    if (entry && urlsOfEntry(entry).some(u => normUrl(u) === normUrl(x.source))) published.set(normUrl(x.source), x.id);
+  }
+  const held = new Set((opts.heldUrls || []).filter(Boolean).map(normUrl));
   const rejected = new Map(), rejectedTitles = new Map();
   for (const s of summary?.skipped || []) {
     const reason = String(s?.reason ?? 'skipped by reviewer');
@@ -45,6 +51,7 @@ export function applyFeedback(dataDir, summary, changes, date, opts = {}) {
     let pub = 0, rej = 0;
     for (const item of q) {
       const us = urlsOfQueueItem(item);
+      if (us.some(u => held.has(u))) { if (!opts.dry) { item.status = 'held'; item.review = { date, decision: 'held', reason: 'source integrity gate; see data/drafts/held' }; } continue; }
       const hit = us.find((u) => published.has(u));
       if (hit) { if (item.status !== 'published') pub++; item.status = 'published'; item.review = { date, decision: 'published', id: published.get(hit) }; continue; }
       if (item.status === 'published') continue;
@@ -53,7 +60,7 @@ export function applyFeedback(dataDir, summary, changes, date, opts = {}) {
       if (reason) { if (item.status !== 'rejected') rej++; item.status = 'rejected'; item.review = { date, decision: 'rejected', reason }; }
     }
     stats[file] = { published: pub, rejected: rej };
-    if (!opts.dry && (pub || rej)) fs.writeFileSync(f, JSON.stringify(q, null, 2));
+    if (!opts.dry && (pub || rej || held.size)) fs.writeFileSync(f, JSON.stringify(q, null, 2));
   }
   return stats;
 }

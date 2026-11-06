@@ -17,8 +17,17 @@ import { AssistantEntry, createRegistry, defineExtension, Harness, hook, section
 import { openNodeSqliteStorage } from "@earendil-works/pi-durable/storage/sqlite/node";
 import { PRICES, totalUsd } from "./cost.ts";
 import { systemPrompt } from "./prompt.ts";
-import { createTools, DATA_FILES } from "./tools.ts";
+import { createTools, DATA_FILES, fetchPublicText } from "./tools.ts";
 import { applyFeedback } from "../../scripts/lib/review-feedback.mjs";
+
+// @ts-ignore – shared host-only publication boundary
+import { gateCollection, readLedger, writeLedger, reviewKey } from "../../scripts/lib/content-integrity.mjs";
+// @ts-ignore – independent source verifier, never exposed as an agent write tool
+import { verifyContent } from "../../scripts/lib/verify-content.mjs";
+// @ts-ignore – fresh source retrieval, no cached fallback on access failure
+import { sourceDocuments } from "../../scripts/lib/source-documents.mjs";
+// @ts-ignore – same publication selector used by drafting
+import { findPublished } from "../../scripts/lib/published.mjs";
 
 const ctx = BACKGROUND_CONTEXT;
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
@@ -217,6 +226,40 @@ async function main() {
 		fs.appendFileSync(path.join(ROOT, "data/llm-usage.jsonl"), JSON.stringify({ script: "reviewer", session: TAG, model: MODEL, date: DATE, usd: +r.usd.toFixed(5), status: r.status }) + "\n");
 	}
 	const summary = parseSummary(run.answer);
+	const heldUrls: string[] = [];
+	const ledger = readLedger(WT);
+	const catalog = readJson(path.join(ROOT, "data/lesson-refs.json"), []);
+	for (const kind of ["accidents", "rulings"]) {
+		const file = `${kind}.json`;
+		const before = JSON.parse(git(WT, "show", `HEAD:data/${file}`));
+		const candidates = readJson(path.join(WT, "data", file), []);
+		const gated = await gateCollection({ kind, before, candidates,
+			verify: async (entry: any) => {
+				const { sources, failures } = await sourceDocuments(entry, fetchPublicText);
+				if (!sources.length) return { state: "held", issues: ["source unavailable; previous data retained"] };
+				const old = before.find((e: any) => e.id === entry.id);
+				let provenance = null;
+				if (kind === "rulings" && old && old.published === entry.published && old.publishedSource === entry.publishedSource) provenance = { published: old.published, publishedSource: old.publishedSource, status: "preserved-existing-provenance-not-reaudited" };
+				else if (kind === "rulings" && entry.published) {
+					const found = await findPublished(entry);
+					if (found.published !== entry.published) return { state: "held", issues: ["publication date not independently confirmed"] };
+					provenance = found;
+				}
+				const result = await verifyContent({ entry, kind, sources, publicationEvidence: provenance, catalog });
+				if (result.state === "verified") ledger[reviewKey(kind, entry.id)] = { ...result, publicationEvidence: provenance, sourceFailures: failures };
+				return result;
+			},
+			onHold: async (hold: any) => {
+				const entry = hold.candidate ?? hold.previous;
+				const dir = path.join(ROOT, "data/drafts/held"); fs.mkdirSync(dir, { recursive: true });
+				writeJson(path.join(dir, `${kind}-${entry.id}.json`), hold);
+				heldUrls.push(entry.source?.url, ...(entry.extraSources ?? []).map((s: any) => s.url));
+				log(`HELD ${kind}/${entry.id}: ${hold.issues.join("; ")}`);
+			},
+		});
+		writeJson(path.join(WT, "data", file), gated.accepted);
+	}
+	writeLedger(WT, ledger);
 	log(`agent ${run.status}, USD ${Number(run.usd).toFixed(4)}`);
 	const ch = changes();
 	const diff = git(WT, "diff", "--", ...DATA_FILES.map((f) => `data/${f}`));
@@ -239,15 +282,16 @@ async function main() {
 	} else {
 		const title = `Daily review ${DATE}: +${n("accidents.json", "added")} accidents, +${n("rulings.json", "added")} rulings, +${n("jobs.json", "added")} jobs (-${n("jobs.json", "removed")} gone)`;
 		git(WT, "add", ...DATA_FILES.map((f) => `data/${f}`));
+		git(WT, "add", "-f", "editorial/review-ledger.json");
 		git(WT, "-c", `user.name=${AUTHOR}`, "-c", `user.email=${EMAIL}`, "commit", "--quiet", "-m", title, "-m", body);
 		run.result = PUSH ? pushToMain() : commitToLocalMain();
 	}
 	if (!DRY && run.status === "done" && (!any || run.result.startsWith("pushed") || run.result.startsWith("committed"))) {
 		// Feed decisions back to stage 1 only when they reached main (or there was nothing to change), so review.md stops repeating them.
-		const fb = applyFeedback(path.join(ROOT, "data"), summary, ch, DATE);
+		const fb = applyFeedback(path.join(ROOT, "data"), summary, ch, DATE, { heldUrls });
 		log(`feedback to stage 1: ${JSON.stringify(fb)}`);
 	} else if (DRY && summary) {
-		log(`dry-run: feedback to stage 1 would mark ${JSON.stringify(applyFeedback(path.join(ROOT, "data"), summary, ch, DATE, { dry: true }))}`);
+		log(`dry-run: feedback to stage 1 would mark ${JSON.stringify(applyFeedback(path.join(ROOT, "data"), summary, ch, DATE, { dry: true, heldUrls }))}`);
 	}
 	run.phase = "done"; writeJson(RUN_FILE, run);
 	git(ROOT, "worktree", "remove", "--force", WT);

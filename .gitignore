@@ -21,3 +21,6 @@ data/inbox/
 reviewer/state/
 deploy/ssh/
 reviewer/*.log
+
+# Internal source excerpts, audits and host attestations are never pushed with public code.
+editorial/

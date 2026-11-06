@@ -47,9 +47,17 @@ ${lessonRefs}
   Never use generic rules as filler. Do not infer a violation from an accident.
   Day-fines: sanction.dailyUnits (count) and sanction.dailyAmount (CHF per unit), never a combined text.
   Rulings: lesson must be null. facts.what = what happened; "why"/defendant reasoning = what the court decided and why;
-  defendants[].charge must include the Art./art. numbers the judgment names (StGB/CP, BauAV, VUV, UVG, ArG, …) and omit
-  any article not stated in the source — never guess BauAV/Suva from the facts. defendants[].short = one short outcome
-  line per person. Start rulings from the draft (data/drafts/rulings/<id>.json) when one exists, check every fact against
+  defendants require stable ids and per-person allegations [{status,offence:{de,fr,it,en},articles:[{code,article,paragraph,letter}]}.
+  Status: convicted|acquitted|dismissed|open|alternative_charge|reported. Eventualiter is NEVER a conviction.
+  Never share article lists between people. No articles inside offence text. Current sanction only for convicted people;
+  historical sanctions require sanctionHistory [{stage:contested_penalty_order|quashed_judgment|superseded_judgment,date,sanction}].
+  caseStatus is resolved|remanded|investigation|appeal_pending|unknown, distinct from this decision's finality.
+  Every proposal passes an independent host source/evidence gate. Unsupported changes are held, old data restored, not published.
+  Do not repeatedly rewrite already reviewed entries. Held candidates in data/drafts/held need source clarification, not cosmetic rewording.
+  facts.injuries: short source-supported injury/casualty phrase. casualties: {fatal,injured,checked}, counts only if explicit;
+  checked-only people are not injuries, and the same person is not counted twice. Nonfatal shock in EN is "electric shock", never "electrocuted".
+  Match lesson activity AND prerequisites to the source, never just a hazard. Installation does not imply maintenance.
+  defendants[].short = one short outcome line per person. Start rulings from the draft (data/drafts/rulings/<id>.json) when one exists, check every fact against
   the ruling text and remove "_draft". Keep the draft's "published", "publishedSource" and "firstSeen" as they are:
   "published" is the release date the source shows (bger.ch list, article date) – never set it to the decision date or
   guess it; leave null when unknown ("firstSeen" is filled automatically).
@@ -65,6 +73,7 @@ ${lessonRefs}
 - Be economical: you have a hard budget; do not fetch the same URL twice, do not read whole JSON data files (use
   find_entries/get_entry), and stop when the list is done. Doing nothing is a correct outcome when everything is
   already published or unverifiable.
+- Source-unavailable or uncertain candidates must remain held, not be permanently rejected as noise.
 - List EVERY review.md / inbox candidate you did not publish under "skipped" with its url: skipped items are marked
   rejected and are not offered again, so the list must be complete.
 - Final answer: ONLY a JSON object, no prose around it:

@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// Proposal-only: never writes published rulings; corrections pass the host gate.
 // Usage: node scripts/enrich-ruling-injuries.mjs [--dry-run] [--only=<id-substring>]
 import fs from 'node:fs';
 import { pathToFileURL } from 'node:url';
@@ -70,7 +71,11 @@ async function main() {
       if (error instanceof LlmCapReached || error instanceof LlmUnavailable) { process.exitCode = 1; break; }
     }
   }
-  if (!dry && report.updated) fs.writeFileSync(path, JSON.stringify(rulings, null, 1) + '\n');
+  if (!dry && report.updated) {
+    const out = new URL('../data/drafts/corrections/', import.meta.url);
+    fs.mkdirSync(out, { recursive: true });
+    for (const change of report.changes) fs.writeFileSync(new URL(change.id + '.json', out), JSON.stringify({ kind: 'rulings', candidate: rulings.find(e => e.id === change.id), evidence: change.evidence, sourceUrl: change.sourceUrl }, null, 1) + '\n');
+  }
   flush({ script: 'enrich-ruling-injuries', dry, updated: report.updated, skipped: report.skipped });
   console.log(JSON.stringify(report, null, 2));
   if (report.failed.length) process.exitCode = 1;

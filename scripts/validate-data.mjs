@@ -3,6 +3,7 @@
 // and the house rules in docs/EDITORIAL.md that can be checked mechanically. Exit 1 on errors; warnings don't fail.
 // Usage: node scripts/validate-data.mjs [dataDir]   (default: ./data)
 import fs from 'node:fs';
+import { ledgerErrors, validDate } from './lib/content-integrity.mjs';
 import path from 'node:path';
 import { lessonErrors } from './lib/lesson-refs.mjs';
 
@@ -19,7 +20,7 @@ const JOB_MAX_AGE_DAYS = 60;
 const errors = [], warnings = [];
 const err = (f, id, m) => errors.push(`${f} ${id}: ${m}`);
 const warn = (f, id, m) => warnings.push(`${f} ${id}: ${m}`);
-const isDate = v => typeof v === 'string' && /^\d{4}-\d{2}(-\d{2})?$/.test(v);
+const isDate = validDate;
 const isUrl = v => { try { return ['https:', 'http:'].includes(new URL(v).protocol); } catch { return false; } };
 const t4 = (f, id, key, v, { required = false } = {}) => {
   if (v == null) { if (required) err(f, id, `${key} is required`); return; }
@@ -94,7 +95,7 @@ for (const e of rulings) {
   if (!Array.isArray(e.defendants)) { err(f, id, 'defendants must be an array'); continue; }
   e.defendants.forEach((d, i) => {
     if (d.verdict != null && !['convicted', 'acquitted', 'dismissed', 'open'].includes(d.verdict)) err(f, id, `defendants[${i}].verdict must be convicted|acquitted|dismissed|open`);
-    for (const k of ['role', 'charge', 'reasoning', 'short']) t4(f, id, `defendants[${i}].${k}`, d[k]);
+    for (const k of ['role', 'reasoning', 'short']) t4(f, id, `defendants[${i}].${k}`, d[k]);
     const s = d.sanction;
     if (s) for (const k of ['dailyUnits', 'dailyAmount', 'fineCHF', 'probationYears']) if (s[k] != null && typeof s[k] !== 'number') err(f, id, `defendants[${i}].sanction.${k} must be a number or null (day-fines as count+rate)`);
   });
@@ -111,6 +112,7 @@ for (const j of jobs) {
 }
 const jobUrls = jobs.map(j => j.url); if (new Set(jobUrls).size !== jobUrls.length) err('jobs.json', '-', 'duplicate job URL');
 
+if (!process.argv.includes('--candidate-shape')) errors.push(...ledgerErrors(path.dirname(dir), { accidents, rulings }));
 for (const w of warnings) console.warn('WARN  ' + w);
 for (const e of errors) console.error('ERROR ' + e);
 console.log(`validate-data: ${accidents.length} accidents, ${rulings.length} rulings, ${jobs.length} jobs – ${errors.length} errors, ${warnings.length} warnings`);

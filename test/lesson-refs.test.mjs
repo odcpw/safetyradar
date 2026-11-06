@@ -42,7 +42,7 @@ test('invalid ids, duplicates, missing references and malformed lessons fail clo
   assert.ok(lessonErrors({ ...lesson, refs: [lesson.refs[0], lesson.refs[0]] }, catalog).length);
 });
 
-test('published validator accepts null and rejects unreferenced, forged and altered lessons', () => {
+test('candidate lesson shape validator accepts null and rejects unreferenced, forged and altered lessons', () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'sr-lesson-test-'));
   try {
     for (const file of ['lesson-refs.json', 'accidents.json', 'rulings.json', 'jobs.json']) fs.copyFileSync(new URL(`../data/${file}`, import.meta.url), path.join(dir, file));
@@ -50,7 +50,7 @@ test('published validator accepts null and rejects unreferenced, forged and alte
     const validate = lesson => {
       accidents[0].lesson = lesson;
       fs.writeFileSync(path.join(dir, 'accidents.json'), JSON.stringify(accidents));
-      return spawnSync(process.execPath, ['scripts/validate-data.mjs', dir], { encoding: 'utf8' });
+      return spawnSync(process.execPath, ['scripts/validate-data.mjs', dir, '--candidate-shape'], { encoding: 'utf8' });
     };
     assert.equal(validate(null).status, 0);
     const valid = lessonFromRefs(catalog, ids);
