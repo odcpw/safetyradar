@@ -243,10 +243,10 @@ async function main() {
 				else if (kind === "rulings" && entry.published) {
 					const found = await findPublished(entry);
 					if (found.published !== entry.published) return { state: "held", issues: ["publication date not independently confirmed"] };
-					provenance = found;
+					provenance = { ...found, status: "confirmed", method: "findPublished authoritative selection" };
 				}
 				const result = await verifyContent({ entry, kind, sources, publicationEvidence: provenance, catalog });
-				if (result.state === "verified") ledger[reviewKey(kind, entry.id)] = { ...result, publicationEvidence: provenance, sourceFailures: failures };
+				if (result.state === "verified") ledger[reviewKey(kind, entry.id)] = { ...result, sourceFailures: failures };
 				return result;
 			},
 			onHold: async (hold: any) => {

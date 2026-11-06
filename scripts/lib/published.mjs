@@ -57,3 +57,19 @@ export async function findPublished(e) {
   const p = await fetchArticlePublished(url);
   return p ? { published: p, publishedSource: 'article datePublished' } : { published: null, publishedSource: null };
 }
+
+/** Confirm an unchanged release date without changing the selection algorithm or guessing precision. */
+export async function publishedEvidence(e) {
+  if (!e.published) return { status: 'no-release-date-claimed', published: null };
+  const url = e.source?.url || '';
+  const num = String(e.caseNumber || '').match(/\d[A-Z]_\d+\/\d{4}/)?.[0];
+  const fed = num && /bger|bundesgericht|tribunal fédéral/i.test(`${url} ${e.court?.de || ''} ${e.court?.fr || ''}`);
+  if (fed) {
+    const d = new Date(e.published + 'T00:00:00Z');
+    if (isNaN(d)) return { status: 'hold', reason: 'invalid release date' };
+    const list = await bgerDay(d).catch(() => null);
+    return list?.has(num) ? { status: 'confirmed', published: e.published, publishedSource: 'bger.ch Neue Entscheide', caseNumber: num, sourceUrl: `https://www.bger.ch/ext/eurospider/live/de/php/aza/http/index_aza.php?date=${e.published.replace(/-/g,'')}&lang=de&mode=news`, method: 'exact dated release-list membership; original selection unchanged' } : { status: 'hold', reason: 'claimed release-list membership unavailable or unconfirmed' };
+  }
+  const date = await fetchArticlePublished(url);
+  return date === e.published ? { status: 'confirmed', published: date, publishedSource: 'article datePublished', sourceUrl: url, method: 'fresh article metadata' } : { status: 'hold', reason: 'claimed article publication date unavailable or contradicted', observed: date };
+}

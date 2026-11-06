@@ -58,6 +58,9 @@ export function evidenceErrors(entry, kind, evidence) {
     const found = evidence.filter(e => e.path === `/defendants/${i}/allegations/${j}` && e.personId === d.id && e.sourcePerson && e.section && e.quotes?.length);
     if (!found.length) errors.push(`missing person-bound evidence for ${d.id} allegation ${j}`);
   }
+  if (kind === 'accidents') for (const [i] of (entry.lesson?.refs || []).entries()) {
+    for (const part of ['activity', 'prerequisites']) if (!evidence.some(e => e.topic === 'lessons' && e.path === `/lesson/refs/${i}/${part}` && e.quotes?.length && e.section)) errors.push(`lesson ${i}: missing source-bound ${part} evidence`);
+  }
   const bindings = new Map();
   for (const e of evidence.filter(e => e.personId && e.sourcePerson)) {
     const key = e.sourceUrl + ':' + e.sourcePerson.trim().toLowerCase();

@@ -97,3 +97,17 @@ test('source evidence must explicitly cover dates, not merely facts and outcomes
  const result=await verifyContent({kind:'accidents',entry:{id:'one',outcome:'injured'},sources:[source],extractor:async()=>({status:'supported',issues:[],evidence:['facts','outcomes'].map(topic=>({path:'/facts',topic,sourceIndex:0,paragraphIds:[0],personId:null,sourcePerson:null,section:'report'}))}),decider:async()=>{throw Error('must not bypass missing date evidence');}});
  assert.equal(result.state,'held');assert.ok(result.issues.includes('missing dates evidence'));
 });
+
+test('every attached lesson needs separate source-bound activity and prerequisites, not just a hazard match',()=>{
+ const entry={lesson:{refs:[{id:'vuv-art43-maintenance'}]}};
+ const generic=[{...evidence[0],personId:null,sourcePerson:null,topic:'lessons',path:'/lesson'}];
+ assert.equal(evidenceErrors(entry,'accidents',generic).length,2);
+ const specific=['activity','prerequisites'].map(part=>({...generic[0],path:'/lesson/refs/0/'+part}));
+ assert.deepEqual(evidenceErrors(entry,'accidents',specific),[]);
+});
+
+test('all curated references have explicit activity/prerequisite thresholds',async()=>{
+ const {LESSON_REQUIREMENTS}=await import('../scripts/lib/lesson-applicability.mjs');
+ const catalog=JSON.parse(fs.readFileSync(new URL('../data/lesson-refs.json',import.meta.url)));
+ for(const r of catalog)assert.ok(LESSON_REQUIREMENTS[r.id],r.id);
+});
