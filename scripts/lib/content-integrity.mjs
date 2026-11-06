@@ -70,7 +70,7 @@ export function evidenceErrors(entry, kind, evidence) {
     if (bindings.has(key) && bindings.get(key) !== e.personId) errors.push('one source person mapped to different defendants');
     bindings.set(key, e.personId);
   }
-  for (const e of evidence) if (!e.sourceUrl || !e.sourceHash || !e.quotes?.length || e.quotes.some(q => !q.trim())) errors.push('incomplete source evidence');
+  for (const e of evidence) if (!e.sourceUrl || !e.sourceHash || !e.quotes?.length || e.quotes.some(q => !q.trim())) errors.push(`incomplete source evidence at ${e.path}: url=${!!e.sourceUrl}, hash=${!!e.sourceHash}, quotes=${e.quotes?.length ?? 0}, emptyQuote=${e.quotes?.some(q=>!q.trim()) ?? true}`);
   return errors;
 }
 export function ledgerErrors(root, itemsByKind, ledger = readLedger(root)) {

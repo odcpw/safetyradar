@@ -17,7 +17,7 @@ const cases=[
  {kind:'rulings',id:'2026-05-26-be-og-bk-25-485-bagger',name:'Bern article cannot transfer from foreman to injured worker',mutate:e=>{const d=e.defendants.find(d=>/arbeiter|arbeitnehmer/i.test(d.role.de)&&!/polier/i.test(d.role.de));assert.ok(d?.allegations?.length,'source-audited worker required');d.allegations[0].articles.push({code:'StGB',article:'125',paragraph:'2',letter:null});}},
  {kind:'rulings',id:'2026-08-19-bger-6b-784-2025-ag-dachplatte',name:'Rejected indictment argument is not remand rationale',mutate:e=>{e.why={de:'Das Bundesgericht hob den Freispruch wegen Verletzung des Anklageprinzips auf.',fr:"Le Tribunal fédéral a annulé l’acquittement en raison d’une violation du principe de l’accusation.",it:"Il Tribunale federale ha annullato l’assoluzione per violazione del principio accusatorio.",en:'The Federal Supreme Court overturned the acquittal because the indictment principle was violated.'};}},
  {kind:'accidents',id:'2026-09-24-bl-reinach-labor',name:'Fourth examined person is not fourth injured',mutate:e=>{e.casualties={fatal:0,injured:4,checked:0};}},
- {kind:'accidents',id:'2026-03-16-fr-le-mouret-poteau',name:'Nonfatal English electrocution fails deterministically',mutate:e=>{e.title.en='Worker electrocuted while unloading a pole';}},
+ {kind:'accidents',id:'2026-03-16-fr-le-mouret-poteau',name:'Nonfatal English electrocution fails deterministically',mutate:e=>{e.title.en='Worker electrocuted during power-line maintenance';}},
  {kind:'accidents',id:'2026-09-02-vs-le-chable-grue',name:'Installation does not support maintenance reference',mutate:e=>{e.lesson=lessonFromRefs(catalog,['vuv-art43-maintenance']);}},
 ];
 const results=[];
