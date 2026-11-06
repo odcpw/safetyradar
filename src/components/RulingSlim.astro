@@ -1,6 +1,7 @@
 ---
 import Lesson from './Lesson.astro';
 import { fmtDate, sanctionText } from '../lib';
+import { linkifyArticles } from '../lib/fedlex';
 import { t, tax, pick, type Lang } from '../i18n/ui';
 const { item, lang, permalink = false } = Astro.props as { item: any; lang: Lang; permalink?: boolean };
 const tt = (k: string) => t(lang, k); const pk = (v: any) => pick(lang, v);
@@ -11,7 +12,8 @@ const line = (d: any) => {
   const head = d.verdict === 'convicted' ? `${tt('w.convicted')} ${charge.charAt(0).toLowerCase() + charge.slice(1)}` : d.verdict === 'acquitted' ? `${tt('w.acquitted')} ${charge.charAt(0).toLowerCase() + charge.slice(1)}` : d.verdict === 'dismissed' ? `${tt('w.dismissed')} ${charge}` : `${tt('w.open')} ${charge}`;
   const sanc = d.verdict === 'convicted' ? (sanctionText(d.sanction, lang, tt, pk) || '') : d.priorSanction ? `${tt('w.prior')}: ${sanctionText(d.priorSanction, lang, tt, pk)}` : '';
   const reason = pk(d.short) ?? pk(d.reasoning);
-  return { role: pk(d.role), text: `${head}${sanc ? ', ' + sanc : ''}.`, reason };
+  const text = `${head}${sanc ? ', ' + sanc : ''}.`;
+  return { role: pk(d.role), parts: linkifyArticles(text, lang), reason };
 };
 ---
 <div class="slim">
@@ -19,7 +21,7 @@ const line = (d: any) => {
   {pk(item.facts?.what) && <p><span class="lbl">{tt('r.what')}</span> {pk(item.facts.what)}</p>}
   {pk(item.appeal) && <p><span class="lbl">{tt('r.decided')}</span> {pk(item.appeal)}</p>}
   {why && <p><span class="lbl">{tt('r.why')}</span> {why}</p>}
-  {item.defendants?.length > 0 && <ul class="people">{item.defendants.map((d: any) => { const l = line(d); return <li class={`v-${d.verdict}`}><b>{l.role}:</b> {l.text} {l.reason && <span class="why">{l.reason}</span>}</li>; })}</ul>}
+  {item.defendants?.length > 0 && <ul class="people">{item.defendants.map((d: any) => { const l = line(d); return <li class={`v-${d.verdict}`}><b>{l.role}:</b> {l.parts.map(p => p.type === 'link' ? <a href={p.href} target="_blank" rel="noopener noreferrer">{p.value}</a> : p.value)} {l.reason && <span class="why">{l.reason}</span>}</li>; })}</ul>}
   <Lesson lesson={item.lesson} lang={lang} />
   <p class="srcline">{tt('source')}: <a href={item.source.url} target="_blank" rel="noopener">{item.source.name}</a> ({item.source.lang.toUpperCase()}){item.extraSources?.map((s: any) => <> · <a href={s.url} target="_blank" rel="noopener">{s.name}</a> ({s.lang.toUpperCase()})</>)}
   </p>
