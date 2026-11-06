@@ -45,11 +45,11 @@ test('source unavailable, uncertainty and API errors preserve old data and exclu
  }
 });
 test('missing independent answers cannot approve a record, even when extractor approves',async()=>{
- const result=await verifyContent({kind:'accidents',entry:{id:'one',outcome:'injured'},sources:[source],extractor:async()=>({status:'supported',issues:[],evidence:['facts','outcomes'].map(topic=>({path:'/facts',topic,sourceIndex:0,paragraphIds:[0],personId:null,sourcePerson:null,section:'report'}))}),decider:async()=>({facts:{choice:'supported'}})});
+ const result=await verifyContent({kind:'accidents',entry:{id:'one',outcome:'injured'},sources:[source],extractor:async()=>({status:'supported',issues:[],evidence:['facts','outcomes','dates'].map(topic=>({path:'/facts',topic,sourceIndex:0,paragraphIds:[0],personId:null,sourcePerson:null,section:'report'}))}),decider:async()=>({facts:{choice:'supported'}})});
  assert.equal(result.state,'held');assert.ok(result.issues.some(x=>x.includes('outcomes')));
 });
 test('forged or out-of-range paragraph IDs cannot become verified evidence',async()=>{
- const result=await verifyContent({kind:'accidents',entry:{id:'one',outcome:'injured'},sources:[source],extractor:async()=>({status:'supported',issues:[],evidence:['facts','outcomes'].map(topic=>({path:'/facts',topic,sourceIndex:0,paragraphIds:[999],personId:null,sourcePerson:null,section:'report'}))}),decider:async()=>{throw Error('must not reach semantic approval');}});
+ const result=await verifyContent({kind:'accidents',entry:{id:'one',outcome:'injured'},sources:[source],extractor:async()=>({status:'supported',issues:[],evidence:['facts','outcomes','dates'].map(topic=>({path:'/facts',topic,sourceIndex:0,paragraphIds:[999],personId:null,sourcePerson:null,section:'report'}))}),decider:async()=>{throw Error('must not reach semantic approval');}});
  assert.equal(result.state,'held');assert.ok(result.issues.some(x=>x.includes('evidence')));
 });
 test('changed/new unreviewed records block publication; unchanged legacy is explicitly not verified',()=>{
@@ -91,4 +91,9 @@ test('real published-data validator exits nonzero for an ungated edit',async()=>
   const file=path.join(root,'data/accidents.json'),items=JSON.parse(fs.readFileSync(file));items[0].title.en='An unsupported edit';fs.writeFileSync(file,JSON.stringify(items));
   const result=run();assert.equal(result.status,1);assert.match(result.stderr,/missing or stale review/);
  }finally{fs.rmSync(root,{recursive:true,force:true});}
+});
+
+test('source evidence must explicitly cover dates, not merely facts and outcomes',async()=>{
+ const result=await verifyContent({kind:'accidents',entry:{id:'one',outcome:'injured'},sources:[source],extractor:async()=>({status:'supported',issues:[],evidence:['facts','outcomes'].map(topic=>({path:'/facts',topic,sourceIndex:0,paragraphIds:[0],personId:null,sourcePerson:null,section:'report'}))}),decider:async()=>{throw Error('must not bypass missing date evidence');}});
+ assert.equal(result.state,'held');assert.ok(result.issues.includes('missing dates evidence'));
 });

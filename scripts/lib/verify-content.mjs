@@ -28,7 +28,7 @@ export async function verifyContent({ entry, kind, sources, publicationEvidence 
       sourceUrl: source?.url ?? '', sourceHash: source ? fingerprint(source.text) : '',
       quotes: e.paragraphIds.map(id => doc?.paragraphs[id]?.text ?? '') };
   });
-  const required = ['facts', 'outcomes'];
+  const required = ['facts', 'outcomes', 'dates'];
   if (kind === 'rulings') required.push('legal');
   if (entry.lesson) required.push('lessons');
   if (entry.defendants?.some(d => d.sanction || d.sanctionHistory?.length)) required.push('sanctions');

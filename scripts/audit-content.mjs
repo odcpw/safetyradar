@@ -15,6 +15,8 @@ if (!['accidents','rulings'].includes(kind)) throw new Error('kind must be accid
 const only = process.argv.find(a => a.startsWith('--only='))?.slice(7);
 const apply = process.argv.includes('--apply');
 const repair = process.argv.includes('--repair');
+const concurrency = Number(process.argv.find(a => a.startsWith('--concurrency='))?.split('=')[1] || 1);
+if (!Number.isInteger(concurrency) || concurrency < 1 || concurrency > 4) throw new Error('concurrency must be 1..4');
 const file = path.join(root, 'data', kind + '.json');
 const entries = JSON.parse(fs.readFileSync(file, 'utf8'));
 const ledger = readLedger(root);
@@ -26,9 +28,17 @@ const schema = obj(kind === 'rulings' ? {...fields, defendants:{type:'array',ite
 const out = path.join(root, 'editorial/audits');fs.mkdirSync(out,{recursive:true});
 const report = {kind,apply,repair,verified:[],held:[],unchanged:[]};
 if (!available()) throw new Error('source audit requires OPENAI_API_KEY; no data changed');
-for (let i=0;i<entries.length;i++) {
+// Workers share the same in-memory collections; synchronous writes below have no await between mutation and persistence.
+// Unlike separate audit processes, they cannot overwrite another worker's ledger or collection snapshot.
+let next=0, stopped=false;
+const attempted=new Set();
+async function worker() {
+while (!stopped) {
+ const i=next++;
+ if(i>=entries.length) return;
  const entry=entries[i],key=reviewKey(kind,entry.id);
  if (only && !entry.id.includes(only)) continue;
+ attempted.add(entry.id);
  try {
   const {sources,failures}=await sourceDocuments(entry);
   if (!sources.length) {report.held.push({id:entry.id,issues:['source unavailable'],failures});console.log(`HELD ${entry.id}: source unavailable`);continue;}
@@ -49,8 +59,11 @@ for (let i=0;i<entries.length;i++) {
   if(fingerprint(entry)===fingerprint(candidate))report.unchanged.push(entry.id);
   if(apply){entries[i]=candidate;ledger[key]={...result,publicationEvidence,sourceFailures:failures};fs.writeFileSync(file,JSON.stringify(entries,null,1)+'\n');writeLedger(root,ledger);}
   console.log(`VERIFIED ${entry.id}${fingerprint(entry)===fingerprint(candidate)?' (unchanged)':''}`);
- }catch(e){report.held.push({id:entry.id,issues:[e.message]});console.log(`HELD ${entry.id}: ${e.message}`);if(e instanceof LlmCapReached || e instanceof LlmUnavailable)break;}
+ }catch(e){report.held.push({id:entry.id,issues:[e.message]});console.log(`HELD ${entry.id}: ${e.message}`);if(e instanceof LlmCapReached || e instanceof LlmUnavailable)stopped=true;}
 }
+}
+await Promise.all(Array.from({length:concurrency},()=>worker()));
+report.unattempted=entries.filter(e=>(!only||e.id.includes(only))&&!attempted.has(e.id)).map(e=>e.id);
 fs.writeFileSync(path.join(out,`${kind}-summary.json`),JSON.stringify(report,null,1)+'\n');
 flush({script:'audit-content',kind,verified:report.verified.length,held:report.held.length});
 console.log(JSON.stringify(report,null,2));
