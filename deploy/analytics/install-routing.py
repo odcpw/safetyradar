@@ -41,7 +41,9 @@ def news_site(block):
 updated=replace_site(updated,'safetyradar.ch',main_site);updated=replace_site(updated,'news.safetyradar.ch',news_site)
 st=CONFIG.stat();tmp=CONFIG.with_name('.safetyradar-analytics-check.Caddyfile');tmp.write_text(updated);os.chmod(tmp,stat.S_IMODE(st.st_mode));os.chown(tmp,st.st_uid,st.st_gid)
 try:
- check=subprocess.run(['caddy','validate','--adapter','caddyfile','--config',str(tmp)],capture_output=True,text=True)
+ service_user=subprocess.check_output(['systemctl','show','caddy','--property=User','--value'],text=True).strip()
+ validate=(['runuser','-u',service_user,'--'] if service_user and service_user!='root' else [])+['caddy','validate','--adapter','caddyfile','--config',str(tmp)]
+ check=subprocess.run(validate,capture_output=True,text=True)
  if check.returncode:raise RuntimeError('Caddy validation failed: '+check.stderr)
  if updated!=old:
   backup=CONFIG.with_name('Caddyfile.before-sr-aggregate');backup.write_text(old);os.chmod(backup,0o600)
