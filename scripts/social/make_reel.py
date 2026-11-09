@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 """Safety Radar IG Reels v4: accumulating paragraphs + slow overflow scroll."""
-import json, math, re, shutil, subprocess, tempfile
+import argparse, json, math, os, re, shutil, subprocess, tempfile
+from datetime import date
+from html import escape
 from pathlib import Path
-
-from playwright.sync_api import sync_playwright
 
 FPS = 30
 CSS_W, CSS_H = 540, 960
-FONT_REG = "/tmp/inter-fonts/static/Inter-Regular.ttf"
-FONT_BOLD = "/tmp/inter-fonts/static/Inter-Bold.ttf"
+FONT_DIR = Path(os.environ.get("SAFETYRADAR_FONT_DIR", "/srv/safetyradar/fonts"))
+FONT_REG = str(FONT_DIR / "Inter-Regular.ttf")
+FONT_BOLD = str(FONT_DIR / "Inter-Bold.ttf")
 OUT = Path(__file__).resolve().parent
 META_COLOR = ["-color_range", "tv", "-colorspace", "bt709",
               "-color_primaries", "bt709", "-color_trc", "bt709"]
@@ -161,22 +162,23 @@ def ease(t):
 
 
 def render(reel):
+    from playwright.sync_api import sync_playwright
     tmp = Path(tempfile.mkdtemp(prefix="reel_"))
     fdir = tmp / "frames"
     fdir.mkdir()
 
     paras = reel["paragraphs"]
     paras_html = "\n".join(
-        f'<p class="para enter" id="el_p{i}">{p}</p>' for i, p in enumerate(paras)
+        f'<p class="para enter" id="el_p{i}">{escape(p)}</p>' for i, p in enumerate(paras)
     )
     box = reel.get("box")
-    box_html = f'<div class="box enter" id="el_box">{box}</div>' if box else ""
+    box_html = f'<div class="box enter" id="el_box">{escape(box)}</div>' if box else ""
     html = HTML.format(
         font_reg=FONT_REG, font_bold=FONT_BOLD,
         css_w=CSS_W, css_h=CSS_H,
         header_h=HEADER_H, content_top=CONTENT_TOP,
-        type_label=reel["type_label"], sublabel=reel["sublabel"],
-        headline=reel["headline"],
+        type_label=escape(reel["type_label"]), sublabel=escape(reel["sublabel"]),
+        headline=escape(reel["headline"]),
         paras_html=paras_html, box_html=box_html,
     )
     (tmp / "card.html").write_text(html, encoding="utf-8")
@@ -354,7 +356,9 @@ def render(reel):
     run([
         "ffmpeg", "-y", "-framerate", str(FPS), "-i", str(fdir / "f%05d.jpg"),
         "-f", "lavfi", "-t", f"{total:.2f}", "-i", "anullsrc=r=48000:cl=stereo",
-        "-vf", "scale=1080:1920,format=yuv420p",
+        "-vf", "scale=1080:1920:out_color_matrix=bt709:out_range=tv,format=yuv420p,"
+        "sidedata=mode=delete:type=ICC_PROFILE,"
+        "setparams=range=limited:color_primaries=bt709:color_trc=bt709:colorspace=bt709",
         "-c:v", "libx264", "-crf", "18", "-pix_fmt", "yuv420p", "-r", str(FPS),
         *META_COLOR,
         "-c:a", "aac", "-b:a", "128k",
@@ -437,16 +441,64 @@ REELS = [
 ]
 
 
-if __name__ == "__main__":
-    assert 180 * 30 == 5400
+def main():
+    global OUT, FONT_REG, FONT_BOLD
+    parser = argparse.ArgumentParser(description=__doc__)
+    selection = parser.add_mutually_exclusive_group()
+    selection.add_argument("--example", choices=("accident", "urteil", "all"), default="all")
+    selection.add_argument("--case-file", type=Path, help="Reviewed JSON case object or list, using the REELS schema")
+    parser.add_argument("--output-dir", type=Path,
+                        default=Path("/srv/safetyradar/social") / (date.today().isoformat() + "-reels"))
+    parser.add_argument("--font-dir", type=Path, default=FONT_DIR)
+    parser.add_argument("--dry-run", action="store_true", help="Validate copy and report holds without rendering or writes")
+    args = parser.parse_args()
+    reels = REELS if args.example == "all" else [REELS[0 if args.example == "accident" else 1]]
+    if args.case_file:
+        try:
+            data = json.loads(args.case_file.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            parser.error("Cannot read the case JSON.")
+        reels = data if isinstance(data, list) else [data]
+    if not reels:
+        parser.error("Case list is empty.")
+    names = set()
+    for reel in reels:
+        if not isinstance(reel, dict):
+            parser.error("Each case must be an object.")
+        for key in ("outfile", "cover", "caption_file", "type_label", "sublabel", "headline", "caption"):
+            if not isinstance(reel.get(key), str) or not reel[key].strip():
+                parser.error("Each case needs non-empty text fields from the REELS schema.")
+        for key, suffix in (("outfile", ".mp4"), ("cover", ".png"), ("caption_file", ".txt")):
+            name = reel[key]
+            if Path(name).name != name or not name.endswith(suffix) or name in names:
+                parser.error("Output filenames must be distinct basenames with the expected extensions.")
+            names.add(name)
+        if (not isinstance(reel.get("paragraphs"), list) or not reel["paragraphs"]
+                or not all(isinstance(p, str) and p.strip() for p in reel["paragraphs"])
+                or (reel.get("box") is not None and not isinstance(reel["box"], str))
+                or len(reel["caption"]) > 2200):
+            parser.error("Invalid paragraphs, sanction box, or caption length.")
+    if args.dry_run:
+        print(json.dumps({"dry_run": True, "wpm": WPM, "reels": [
+            {"outfile": r["outfile"], "paragraph_holds": [round(reading_hold(p), 2) for p in r["paragraphs"]],
+             "sanction_hold": round(reading_hold(r["box"], sanction=True), 2) if r.get("box") else None}
+            for r in reels]}, ensure_ascii=False, indent=2))
+        return
+    FONT_REG, FONT_BOLD = (str(args.font_dir / n) for n in ("Inter-Regular.ttf", "Inter-Bold.ttf"))
+    if not all(Path(p).is_file() for p in (FONT_REG, FONT_BOLD)):
+        parser.error("Inter TTFs are missing; supply --font-dir.")
+    OUT = args.output_dir.resolve()
+    OUT.mkdir(parents=True, exist_ok=True)
     all_info = []
-    for r in REELS:
-        print("rendering", r["outfile"], "...", flush=True)
-        info = render(r)
+    for reel in reels:
+        print("rendering", reel["outfile"], "...", flush=True)
+        info = render(reel)
         all_info.append(info)
         print(json.dumps(info, ensure_ascii=False, indent=2), flush=True)
     (OUT / "timing_report.json").write_text(
-        json.dumps({"version": 4, "sanction_text": SANCTION, "reels": all_info},
-                   ensure_ascii=False, indent=2),
-        encoding="utf-8",
+        json.dumps({"version": 4, "reels": all_info}, ensure_ascii=False, indent=2), encoding="utf-8"
     )
+
+
+if __name__ == "__main__":
+    main()

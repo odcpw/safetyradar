@@ -26,3 +26,10 @@ reviewer/*.log
 editorial/
 
 data/llm-requests.jsonl
+
+# Local credentials, Python bytecode, and social operation journals.
+.secrets/
+__pycache__/
+*.py[cod]
+.venv-social/
+social-state/

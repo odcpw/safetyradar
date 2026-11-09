@@ -1,5 +1,7 @@
 # Safety Radar (safetyradar.ch)
 
+VPS operations, social publishing, ads, and takeover: [handover runbook](docs/RUNBOOK-handover.md).
+
 Swiss workplace accidents, criminal court rulings on occupational safety, and occupational-safety jobs – as short fact sheets with a
 lesson, in DE/FR/IT/EN. Static Astro 5 site; content in `data/*.json`; a Node pipeline fetches candidates, a cheap LLM pre-sorts them,
 and a reviewer (human or assistant, see [docs/EDITORIAL.md](docs/EDITORIAL.md)) publishes.

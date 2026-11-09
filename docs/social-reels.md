@@ -1,5 +1,7 @@
 # Instagram Reels (Safety Radar)
 
+Operations and takeover: [VPS handover runbook](RUNBOOK-handover.md). It covers the renderer CLI, safe publisher, ads helpers, and approval boundaries.
+
 IG Reels are the **news feed**; [safetyradar.ch](https://safetyradar.ch) is the **newspaper**; the e-mail newsletter is the **Monday roundup** (see also `deploy/listmonk/docs/NEWSLETTER.md`: drafts at Monday 08:00 Europe/Zurich; send Monday 09:00 via external job (VPS send timer disabled)).
 
 Approved layout: **v4** (2026-11-09). Renderer: `scripts/social/make_reel.py`.
@@ -127,21 +129,27 @@ Working directory example: `/workspace/safetyradar-social/YYYY-MM-DD-reels/`
 
 ## Instagram publishing (Graph API)
 
-- API: Meta Graph (e.g. v21.0) from the box — **no browser** for publish.
+- API: Meta Graph v21.0 from cx43. Use `scripts/social/publish_reel.py`, not a browser.
 - IG user id (Page-backed): `17841429970165089`
-- Token file (box only, mode 600): `/home/box/.secrets/meta_token`  
+- VPS token file (root-only, mode 600): `/srv/safetyradar/.secrets/meta_token`. The box backup remains `/home/box/.secrets/meta_token`
   **Never commit or paste the token.** App must be Live; scopes include `instagram_content_publish` (and related IG scopes as granted).
+- Known preflight limitation on 2026-11-09: Instagram recent-media reads return Meta code 10 despite granted scopes. The new publisher stops before publishing. Resolve official Meta app/asset access, then repeat `--dry-run --check-remote`. Do not bypass duplicate checks.
 - Typical flow (after approval): create media container → publish container → optional cover. Do not leave temporary media world-readable on the public site longer than needed.
 - FB Page posting may require `pages_manage_posts` (often missing); IG content publish is separate.
 
 ## Renderer usage
 
 ```bash
-# Needs Playwright Chromium, ffmpeg, Inter TTF (see make_reel.py FONT_* paths).
-python scripts/social/make_reel.py
+# On cx43. Rendering does not publish.
+/srv/safetyradar/venv-social/bin/python scripts/social/make_reel.py \
+  --example accident --output-dir /srv/safetyradar/social/reviewed-accident
+
+# New source-checked copy without editing Python:
+/srv/safetyradar/venv-social/bin/python scripts/social/make_reel.py \
+  --case-file /srv/safetyradar/social/case.json --dry-run
 ```
 
-Outputs under the script’s `OUT` directory (default: same folder as the script when customized; production runs usually write to `safetyradar-social/…-reels/`).
+Outputs go to `--output-dir`, defaulting to `/srv/safetyradar/social/YYYY-MM-DD-reels`. Fonts default to `/srv/safetyradar/fonts`, overridable with `--font-dir`. See the runbook for the JSON schema, dry-run publishing, and crash recovery. ffmpeg strips inherited ICC profiles and sets explicit BT.709 frame and encoder metadata.
 
 ## Changelog
 
