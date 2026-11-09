@@ -4,7 +4,7 @@
 // week's drafts (matched by campaign name "safetyradar-<issue>-<lang>").
 //   node deploy/newsletter/weekly-issue.mjs [--dry-run] [--preview=a@b.ch,...] [--week=2026-w45]
 // "New" = ids present in data/*.json now but not in the last data commit authored before the previous Monday
-// 08:00 Europe/Zurich. Text comes from the published data (title + first sentence of the lesson); no LLM.
+// 08:00 Europe/Zurich. Text comes from the published data (title + first sentence of lesson, else facts.what / injuries); no LLM.
 // Optional: --since=YYYY-MM-DDTHH:MM (Europe/Zurich wall clock) overrides the previous-Monday baseline
 // (used once when migrating from Thursday cadence so a never-sent prior week is not skipped).
 // Env: LISTMONK_URL (default http://127.0.0.1:9100), LISTMONK_ENV (default /srv/listmonk/.env, admin login),
@@ -29,7 +29,7 @@ const L = {
   accidents: { de: 'Unfälle', fr: 'Accidents', it: 'Infortuni', en: 'Accidents' },
   rulings: { de: 'Urteile', fr: 'Jugements', it: 'Sentenze', en: 'Rulings' },
   jobs: { de: 'Neue Stellen', fr: 'Nouvelles offres', it: 'Nuove offerte', en: 'New jobs' },
-  jobsCount: { de: n => `${n} neue Stellen in Arbeitssicherheit und HSE.`, fr: n => `${n} nouvelles offres en sécurité au travail et HSE.`, it: n => `${n} nuove offerte in sicurezza sul lavoro e HSE.`, en: n => `${n} new jobs in occupational safety and HSE.` },
+  jobsCount: { de: n => `${n} neue Stellen in AS/GS.`, fr: n => `${n} nouvelles offres en AS/GS.`, it: n => `${n} nuove offerte in AS/GS.`, en: n => `${n} new jobs in AS/GS.` },
   allJobs: { de: 'Alle Stellen', fr: 'Toutes les offres', it: 'Tutte le offerte', en: 'All jobs' },
   quiet: { de: 'Ruhige Woche: keine neuen Unfälle oder Urteile seit letztem Montag.', fr: 'Semaine calme: aucun nouvel accident ni jugement depuis lundi dernier.', it: 'Settimana tranquilla: nessun nuovo infortunio o sentenza da lunedì scorso.', en: 'Quiet week: no new accidents or rulings since last Monday.' },
   quietSubj: { de: 'ruhige Woche', fr: 'semaine calme', it: 'settimana tranquilla', en: 'quiet week' },
@@ -97,8 +97,17 @@ const DL = { pub: { de: 'publiziert', fr: 'publié le', it: 'pubblicata il', en:
   dec: { de: 'Entscheid', fr: 'décision du', it: 'decisione del', en: 'decided' } };
 const rulDates = (x, lang) => `${x.published ? DL.pub[lang] : DL.seen[lang]} ${fmtDate(relDate(x), lang)}`
   + (x.judgmentDate && x.judgmentDate !== relDate(x) ? ` · ${DL.dec[lang]} ${fmtDate(x.judgmentDate, lang)}` : '');
+function itemSummary(x, lang) {
+  // Prefer curated prevention lesson (w45 style). Most verified accidents now have lesson:null —
+  // fall back to short factual copy from facts.what, then injuries, so the email is never title-only.
+  const lesson = firstSentence(pick(x.lesson, lang));
+  if (lesson) return lesson;
+  const what = firstSentence(pick(x.facts?.what, lang));
+  if (what) return what;
+  return String(pick(x.facts?.injuries, lang) || '').trim();
+}
 function item(x, kind, lang) {
-  const title = pick(x.title, lang); const line = firstSentence(pick(x.lesson, lang));
+  const title = pick(x.title, lang); const line = itemSummary(x, lang);
   if (!title) return '';
   return `<p style="margin:0 0 14px"><a href="${link(`/${lang}/${kind}/${x.id}/`)}" style="font-weight:600">${esc(title)}</a>`
     + ` <span style="color:#888">· ${esc(kind === 'rulings' ? rulDates(x, lang) : fmtDate(x.accidentDate, lang))}${x.canton ? ` · ${esc(x.canton)}` : ''}</span><br/>${esc(line)}</p>`;
