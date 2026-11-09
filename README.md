@@ -102,6 +102,8 @@ Owner details (red TODO markers in imprint/privacy/about/post-a-job, all 4 langu
 - Every accident and ruling has a stable `caseId`; rulings have `linkedAccidentId` (id of a published accident when it is the same event; otherwise null). No UI for following cases yet.
 - Seeds: `scripts/seed/accidents.py` then `scripts/seed/accidents_v3.py`; `scripts/seed/rulings.py`.
 
+Instagram Reels format and posting rhythm: [docs/social-reels.md](docs/social-reels.md).
+
 ## Preview deployment (GitHub Pages)
 Live site: https://safetyradar.ch is served by Caddy on the VPS (see docs/DEPLOY-VPS.md); indexing is allowed (robots.txt allow-all + sitemap.xml). The GitHub Pages workflow below is the old preview path.
 `.github/workflows/pages.yml` builds on push to `main` with `SITE=https://safetyradar.ch BASE=/`;
