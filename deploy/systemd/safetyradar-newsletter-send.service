@@ -1,11 +1,11 @@
 [Unit]
-Description=Safety Radar weekly newsletter: send current ISO-week Listmonk drafts (auto Mondays 09:00)
+Description=DISABLED — do not enable; Monday 09:00 send is external (sanity-check + send-week.sh). Reference only.
 After=network-online.target safetyradar-newsletter.service
 
 [Service]
 Type=oneshot
 WorkingDirectory=/srv/safetyradar/app
-# --now: wall-clock Monday 09:00 of the current week is the intended send; timer fires then.
+# Reference only — do not enable. External Monday 09:00 job runs send-week.sh after checks.
 ExecStart=/bin/bash -c 'issue=$(date +%%G-w%%V | tr "[:upper:]" "[:lower:]"); /srv/safetyradar/app/deploy/newsletter/send-week.sh "$issue" --now'
 NoNewPrivileges=yes
 PrivateTmp=yes

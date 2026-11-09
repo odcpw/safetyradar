@@ -1,5 +1,8 @@
 [Unit]
-Description=Safety Radar newsletter send (Mondays 09:00 Europe/Zurich)
+Description=DISABLED — Safety Radar newsletter send (do not enable; Monday 09:00 send is external)
+# Kept for reference only. Enabling this on cx43 would double-send with the external
+# Monday 09:00 job that already sanity-checks and runs send-week.sh.
+# OnCalendar was: Mon *-*-* 09:00:00 Europe/Zurich
 
 [Timer]
 OnCalendar=Mon *-*-* 09:00:00 Europe/Zurich
