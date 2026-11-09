@@ -3,8 +3,10 @@
 // Listmonk campaign DRAFTS (never sends or schedules). Idempotent: re-running in the same ISO week updates the
 // week's drafts (matched by campaign name "safetyradar-<issue>-<lang>").
 //   node deploy/newsletter/weekly-issue.mjs [--dry-run] [--preview=a@b.ch,...] [--week=2026-w45]
-// "New" = ids present in data/*.json now but not in the last data commit authored before the previous Thursday
-// 08:30 Europe/Zurich. Text comes from the published data (title + first sentence of the lesson); no LLM.
+// "New" = ids present in data/*.json now but not in the last data commit authored before the previous Monday
+// 08:00 Europe/Zurich. Text comes from the published data (title + first sentence of the lesson); no LLM.
+// Optional: --since=YYYY-MM-DDTHH:MM (Europe/Zurich wall clock) overrides the previous-Monday baseline
+// (used once when migrating from Thursday cadence so a never-sent prior week is not skipped).
 // Env: LISTMONK_URL (default http://127.0.0.1:9100), LISTMONK_ENV (default /srv/listmonk/.env, admin login),
 //      APP_DIR (default /srv/safetyradar/app), OUT_DIR (default /srv/safetyradar/newsletter).
 import { ledgerErrors, readLedger, reviewKey } from '../../scripts/lib/content-integrity.mjs';
@@ -23,13 +25,13 @@ const MAX = { accidents: 6, rulings: 4, jobs: 5 };
 
 const L = {
   week: { de: 'KW', fr: 'semaine', it: 'settimana', en: 'week' },
-  intro: { de: 'Neu auf Safety Radar seit letztem Donnerstag.', fr: 'Nouveau sur Safety Radar depuis jeudi dernier.', it: 'Novità su Safety Radar da giovedì scorso.', en: 'New on Safety Radar since last Thursday.' },
+  intro: { de: 'Neu auf Safety Radar seit letztem Montag.', fr: 'Nouveau sur Safety Radar depuis lundi dernier.', it: 'Novità su Safety Radar da lunedì scorso.', en: 'New on Safety Radar since last Monday.' },
   accidents: { de: 'Unfälle', fr: 'Accidents', it: 'Infortuni', en: 'Accidents' },
   rulings: { de: 'Urteile', fr: 'Jugements', it: 'Sentenze', en: 'Rulings' },
   jobs: { de: 'Neue Stellen', fr: 'Nouvelles offres', it: 'Nuove offerte', en: 'New jobs' },
   jobsCount: { de: n => `${n} neue Stellen in Arbeitssicherheit und HSE.`, fr: n => `${n} nouvelles offres en sécurité au travail et HSE.`, it: n => `${n} nuove offerte in sicurezza sul lavoro e HSE.`, en: n => `${n} new jobs in occupational safety and HSE.` },
   allJobs: { de: 'Alle Stellen', fr: 'Toutes les offres', it: 'Tutte le offerte', en: 'All jobs' },
-  quiet: { de: 'Ruhige Woche: keine neuen Unfälle oder Urteile seit letztem Donnerstag.', fr: 'Semaine calme: aucun nouvel accident ni jugement depuis jeudi dernier.', it: 'Settimana tranquilla: nessun nuovo infortunio o sentenza da giovedì scorso.', en: 'Quiet week: no new accidents or rulings since last Thursday.' },
+  quiet: { de: 'Ruhige Woche: keine neuen Unfälle oder Urteile seit letztem Montag.', fr: 'Semaine calme: aucun nouvel accident ni jugement depuis lundi dernier.', it: 'Settimana tranquilla: nessun nuovo infortunio o sentenza da lunedì scorso.', en: 'Quiet week: no new accidents or rulings since last Monday.' },
   quietSubj: { de: 'ruhige Woche', fr: 'semaine calme', it: 'settimana tranquilla', en: 'quiet week' },
   more: { de: 'Alles auf safetyradar.ch', fr: 'Tout sur safetyradar.ch', it: 'Tutto su safetyradar.ch', en: 'Everything on safetyradar.ch' },
 };
@@ -43,9 +45,14 @@ function zurichTs(y, m, d, hh, mm) { // epoch seconds of a Europe/Zurich wall-cl
   return guess - off;
 }
 const jan4 = new Date(Date.UTC(wy, 0, 4));
-const thu = new Date(jan4); thu.setUTCDate(jan4.getUTCDate() - ((jan4.getUTCDay() || 7) - 1) + (wn - 1) * 7 + 3); // Thursday of the issue week
-const prevThu = new Date(thu); prevThu.setUTCDate(thu.getUTCDate() - 7);
-const since = zurichTs(prevThu.getUTCFullYear(), prevThu.getUTCMonth() + 1, prevThu.getUTCDate(), 8, 30);
+const mon = new Date(jan4); mon.setUTCDate(jan4.getUTCDate() - ((jan4.getUTCDay() || 7) - 1) + (wn - 1) * 7); // Monday of the issue week
+const prevMon = new Date(mon); prevMon.setUTCDate(mon.getUTCDate() - 7);
+let since = zurichTs(prevMon.getUTCFullYear(), prevMon.getUTCMonth() + 1, prevMon.getUTCDate(), 8, 0);
+if (args.since) { // Europe/Zurich wall clock override: YYYY-MM-DD or YYYY-MM-DDTHH:MM
+  const m = String(args.since).match(/^(\d{4})-(\d{2})-(\d{2})(?:[T ](\d{2}):(\d{2}))?$/);
+  if (!m) throw new Error('--since must be YYYY-MM-DD or YYYY-MM-DDTHH:MM (Europe/Zurich)');
+  since = zurichTs(+m[1], +m[2], +m[3], +(m[4] || 8), +(m[5] || 0));
+}
 
 // ---- data: now vs. baseline commit
 const git = (...a) => execFileSync('git', ['-c', `safe.directory=${APP}`, '-C', APP, ...a], { encoding: 'utf8', maxBuffer: 64 << 20 });
@@ -62,11 +69,11 @@ const relDate = x => x.published || x.firstSeen || null;
 const sev = { fatal: 0, life_threatening: 1, serious: 2, injured: 3 };
 // Date rules (Oliver: items must be recent by when they HAPPENED, not when the pipeline added them).
 // An item must be new since the previous issue (not in the baseline data) AND pass its date rule; no valid date -> dropped.
-//   accidents: source-confirmed event date (`accidentDate`; partial/unknown dates excluded) within [previous Thursday - 7 days grace, now]  (~14 days)
+//   accidents: source-confirmed event date (`accidentDate`; partial/unknown dates excluded) within [previous Monday - 7 days grace, now]  (~14 days)
 //   rulings:   by RELEASE, never by decision date: `published` (date the source shows: bger.ch "Neue Entscheide" day,
 //              news article date), else the separate fallback `firstSeen` (day we first fetched it), within
-//              [previous Thursday - 23 days grace, now] (~30 days). Neither -> dropped.
-//   jobs:      `datePosted` within [previous Thursday, now] (jobs.json only holds live postings; expired ones are removed
+//              [previous Monday - 23 days grace, now] (~30 days). Neither -> dropped.
+//   jobs:      `datePosted` within [previous Monday, now] (jobs.json only holds live postings; expired ones are removed
 //              by the pipeline). Without a posting date the item is dropped.
 const ymd = ts => new Date(ts * 1000).toLocaleDateString('sv-SE', { timeZone: 'Europe/Zurich' });
 const today = ymd(Date.now() / 1000);

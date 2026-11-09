@@ -16,12 +16,12 @@ const jar = new Map(); const keep = r => (r.headers.getSetCookie?.() || []).forE
 const r0 = await fetch(LM + '/admin/login'); keep(r0); const nonce = ((await r0.text()).match(/name="nonce" value="([^"]*)"/) || [])[1] || '';
 const r1 = await fetch(LM + '/admin/login', { method: 'POST', redirect: 'manual', body: new URLSearchParams({ username: env.LISTMONK_ADMIN_USER, password: env.LISTMONK_ADMIN_PASSWORD, nonce }), headers: { cookie: [...jar].map(([k, v]) => `${k}=${v}`).join('; ') } });
 keep(r1); cookie = [...jar].map(([k, v]) => `${k}=${v}`).join('; ');
-// Thursday 15:00 Europe/Zurich of the issue week
-const jan4 = new Date(Date.UTC(wy, 0, 4)); const thu = new Date(jan4); thu.setUTCDate(jan4.getUTCDate() - ((jan4.getUTCDay() || 7) - 1) + (wn - 1) * 7 + 3);
-const g = Date.UTC(thu.getUTCFullYear(), thu.getUTCMonth(), thu.getUTCDate(), 15, 0);
+// Monday 09:00 Europe/Zurich of the issue week
+const jan4 = new Date(Date.UTC(wy, 0, 4)); const mon = new Date(jan4); mon.setUTCDate(jan4.getUTCDate() - ((jan4.getUTCDay() || 7) - 1) + (wn - 1) * 7);
+const g = Date.UTC(mon.getUTCFullYear(), mon.getUTCMonth(), mon.getUTCDate(), 9, 0);
 const off = new Date(new Date(g).toLocaleString('sv-SE', { timeZone: 'Europe/Zurich' }) + 'Z') - g;
 const sendAt = new Date(g - off);
-if (!now && sendAt < new Date()) throw new Error(`Thursday 15:00 of ${issue} is in the past – use --now`);
+if (!now && sendAt < new Date()) throw new Error(`Monday 09:00 of ${issue} is in the past – use --now`);
 for (const lang of ['de', 'fr', 'it', 'en']) {
   const name = `safetyradar-${issue}-${lang}`;
   const c = (await api('GET', `/api/campaigns?per_page=50&query=${encodeURIComponent(name)}`)).results.find(x => x.name === name);

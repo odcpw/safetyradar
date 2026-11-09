@@ -61,18 +61,18 @@ Still to add for SES and ImprovMX (values come from the SES and ImprovMX console
 - Internal browser checks use `sr_test=1`; event checks use `test:true`. No measurement endpoint submits an email or sends a campaign.
 
 ## Weekly issue (drafts only) and sending
-- `deploy/newsletter/weekly-issue.mjs` builds one issue per language from the VPS data: everything added since the previous Thursday 08:30 Europe/Zurich (git diff of `data/*.json` against the last data commit before then). Rulings, accidents (title + first sentence of the lesson, linked to the site page) and a "new jobs" count with the top 5. "Quiet week" text when there are no new accidents/rulings. No LLM; links tagged via `scripts/lib/utm.mjs` (`utm_campaign=<yyyy>-w<nn>`).
+- `deploy/newsletter/weekly-issue.mjs` builds one issue per language from the VPS data: everything added since the previous Monday 08:00 Europe/Zurich (git diff of `data/*.json` against the last data commit before then). Rulings, accidents (title + first sentence of the lesson, linked to the site page) and a "new jobs" count with the top 5. "Quiet week" text when there are no new accidents/rulings. No LLM; links tagged via `scripts/lib/utm.mjs` (`utm_campaign=<yyyy>-w<nn>`).
 - Saves Listmonk campaign DRAFTS named `safetyradar-<issue>-<lang>` on lists 3 DE / 4 FR / 5 IT / 6 EN, template 1 (no tracking pixel). Re-running in the same week updates those drafts (only while status is draft). Never sends or schedules.
 - Subject: short factual counts only, zero counts skipped, never an item title (no fatal/death wording, no names), e.g. DE "Safety Radar KW 45: 4 Arbeitsunfälle, 18 neue Stellen", FR "Safety Radar semaine 45 : 4 accidents, 18 offres d’emploi"; "ruhige Woche" etc. only if everything is 0.
 - `--preview=oliver@decaro.ch` test-sends the DE and EN drafts (Listmonk test-send; the address is kept as a Listmonk subscriber with no lists so it never gets real campaigns). Summary: `/srv/safetyradar/newsletter/<issue>.json`.
-- Timer: `safetyradar-newsletter.timer`, Thursdays 08:30 Europe/Zurich (runs with `--preview=oliver@decaro.ch`). Dry run: `node deploy/newsletter/weekly-issue.mjs --dry-run --html=/tmp/issue.html`.
-- Send after approval (on cx43, as root): `/srv/safetyradar/app/deploy/newsletter/send-week.sh [2026-w45]` schedules the 4 drafts for Thursday 15:00 Europe/Zurich of that week; add `--now` to start sending immediately. Drafts that are not in status draft are skipped.
-- The site copy names no send day ("weekly"), so the day can be A/B tested later.
+- Timer: `safetyradar-newsletter.timer`, Mondays **08:00** Europe/Zurich — builds DE/FR/IT/EN Listmonk drafts and test-sends DE+EN previews to oliver@decaro.ch (never the list). Dry run: `node deploy/newsletter/weekly-issue.mjs --dry-run --html=/tmp/issue.html`.
+- Send: `safetyradar-newsletter-send.timer`, Mondays **09:00** Europe/Zurich — runs `deploy/newsletter/send-week.sh` with `--now` for the current ISO week (skips non-draft campaigns). Manual: `/srv/safetyradar/app/deploy/newsletter/send-week.sh [2026-w46] [--now]`.
+- Optional override when migrating cadence: `--since=YYYY-MM-DDTHH:MM` (Europe/Zurich) on weekly-issue.
 
 ### Date rules (2026-11-04)
 Items must be new since the previous issue AND recent by when they happened; items without a valid date are dropped.
-- Accidents: event date within the previous Thursday minus 7 days grace up to today (~14 days).
-- Rulings: by release, never by decision date. `published` (the date the source shows: bger.ch "Neue Entscheide" day list, or the news article's publication date) within the previous Thursday minus 23 days up to today (~30 days). If `published` is null, the separate fallback `firstSeen` (day the pipeline first fetched the ruling) is used. Neither -> dropped. The email shows "publiziert dd.mm.yyyy" (or "erfasst" for the fallback) plus the decision date.
+- Accidents: event date within the previous Monday minus 7 days grace up to today (~14 days).
+- Rulings: by release, never by decision date. `published` (the date the source shows: bger.ch "Neue Entscheide" day list, or the news article's publication date) within the previous Monday minus 23 days up to today (~30 days). If `published` is null, the separate fallback `firstSeen` (day the pipeline first fetched the ruling) is used. Neither -> dropped. The email shows "publiziert dd.mm.yyyy" (or "erfasst" for the fallback) plus the decision date.
 - How `published` is filled: `scripts/lib/published.mjs` (used by `draft-rulings.mjs`; news items also carry the feed pubDate from `fetch-sources.mjs`). Court portals (entscheidsuche, cantonal portals) show no release date -> null. The reviewer keeps these fields; `firstSeen` is set once on first publish.
-- Jobs: `datePosted` since the previous Thursday (jobs.json only holds live postings).
+- Jobs: `datePosted` since the previous Monday (jobs.json only holds live postings).
 - Accidents and rulings show their date (dd.mm.yyyy) in the email. Dropped items are listed in the summary JSON (`dropped`).

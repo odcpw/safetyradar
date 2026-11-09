@@ -1,8 +1,8 @@
 [Unit]
-Description=Safety Radar newsletter drafts (Thursdays 08:30 Europe/Zurich)
+Description=Safety Radar newsletter drafts (Mondays 08:00 Europe/Zurich)
 
 [Timer]
-OnCalendar=Thu *-*-* 08:30:00 Europe/Zurich
+OnCalendar=Mon *-*-* 08:00:00 Europe/Zurich
 Persistent=true
 
 [Install]

@@ -1,6 +1,6 @@
 # Instagram Reels (Safety Radar)
 
-IG Reels are the **news feed**; [safetyradar.ch](https://safetyradar.ch) is the **newspaper**; the e-mail newsletter is the **Monday roundup** (see also `deploy/listmonk/docs/NEWSLETTER.md` for Listmonk ops — drafts currently build/send on Thursdays until a Monday A/B is chosen).
+IG Reels are the **news feed**; [safetyradar.ch](https://safetyradar.ch) is the **newspaper**; the e-mail newsletter is the **Monday roundup** (see also `deploy/listmonk/docs/NEWSLETTER.md`: drafts at Monday 08:00, send Monday 09:00 Europe/Zurich).
 
 Approved layout: **v4** (2026-11-09). Renderer: `scripts/social/make_reel.py`.
 

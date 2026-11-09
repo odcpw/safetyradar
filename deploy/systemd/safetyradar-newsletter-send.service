@@ -1,0 +1,14 @@
+[Unit]
+Description=Safety Radar weekly newsletter: send current ISO-week Listmonk drafts (auto Mondays 09:00)
+After=network-online.target safetyradar-newsletter.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/srv/safetyradar/app
+# --now: wall-clock Monday 09:00 of the current week is the intended send; timer fires then.
+ExecStart=/bin/bash -c 'issue=$(date +%%G-w%%V | tr "[:upper:]" "[:lower:]"); /srv/safetyradar/app/deploy/newsletter/send-week.sh "$issue" --now'
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/srv/safetyradar/newsletter
