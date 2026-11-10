@@ -211,6 +211,8 @@ class ToolsTest(unittest.TestCase):
                           "--name", "Test", "--variant", "a", "--dry-run", "--state-dir", str(self.state)])
         result = json.loads(out.getvalue())
         self.assertEqual(result["ad"]["status"], "PAUSED")
+        self.assertEqual(result["object_story_spec"]["video_data"]["call_to_action"]["value"]["link"],
+                         "https://safetyradar.ch/de/")
         self.assertFalse(result["activation_supported"])
         self.assertIn("utm_content=a", result["url_tags"])
         self.assertFalse(self.state.exists())

@@ -1,6 +1,6 @@
 # Operate Safety Radar from cx43
 
-Checked on 9 November 2026, Europe/Zurich. This is the repository handover for the cx43 VPS. Run all production commands on cx43, not on the bot box.
+Checked on 10 November 2026, Europe/Zurich. This is the repository handover for the cx43 VPS. Run all production commands on cx43, not on the bot box.
 
 ## Start here
 
@@ -63,6 +63,16 @@ PYTHONDONTWRITEBYTECODE=1 /srv/safetyradar/venv-social/bin/python -m unittest di
 ```
 
 The fake transports test dry-run isolation, duplicate checks, uncertain-write refusal, private state, locks, token-error redaction, PAUSED-only payloads, and link metrics. They never call Meta.
+
+## Current ad landing page
+
+The three live ads now click through to `https://safetyradar.ch/de/`, the German homepage. The owner approved this landing-only change on 10 November 2026. The decision baseline was about 2 seconds active time on the signup page and no observed signups after 36 ad visits. These are aggregate browser observations, not unique people or proof that the homepage will convert better.
+
+Only the click-through destination changed. The videos, thumbnails, primary text, headline, description, SIGN_UP CTA, Page and Instagram identities, UTM tags, and creative enhancement opt-outs stayed the same. The unchanged videos still show the existing newsletter signup capture. The existing ad IDs, ACTIVE configured status, CHF 9 daily ad-set budget, audience, and campaign stayed unchanged. No new ads were created.
+
+Meta creatives are immutable. Each ad now references a new creative. A creative-pointer update can put an ACTIVE-configured ad into Meta processing or review. Do not change its status or budget to force delivery. Read `effective_status` and review feedback, and report the actual state.
+
+See [the operations journal](ops-journal.md) for the old/new creative IDs, timestamped read-backs, and the test-only preflight. The guarded `ads_create.py` helper now uses the homepage for future specifically approved PAUSED preparations. It still cannot activate ads or change budgets. The narrowly scoped one-off live replacement is archived at `/srv/safetyradar/social/retarget-homepage-2026-11-10/retarget.py`; it is not a standing authorization or a general ad-edit command.
 
 ## Locate the services
 
@@ -245,7 +255,7 @@ Review every rendered frame sequence against the current site. A changed selecto
 
 ## Keep the existing ads within the approved scope
 
-Verified read-only on 9 November 2026:
+Verified on 10 November 2026 after the approved landing-only replacement:
 
 - Account: `1873587530725467`. API account path: `act_1873587530725467`.
 - Campaign: `52544779549276`, `Safety Radar — DE Newsletter`, objective `OUTCOME_TRAFFIC`.
@@ -257,10 +267,10 @@ Verified read-only on 9 November 2026:
 - Advantage audience automation: `advantage_audience=0`.
 - Interests are in one flexible-spec group. They include Suva, risk management, emergency management, construction, building material, construction management, heavy equipment, welding, construction engineering, building, civil engineering, facility management, architecture, architecture and engineering, and construction services and organizations.
 - Ads are A `52544780253676`, B `52544780270076`, and C `52544780280676`.
-- Creative IDs are A `1133845655692149`, B `1127399856533897`, and C `1445132723682582`.
+- Current creative IDs are A `2433357704093174`, B `4359070577738674`, and C `1853119972388610`. Previous IDs remain in the operations journal for traceability.
 - Video IDs are A `1879778366366579`, B `1867572614399700`, and C `1788007852479791`.
 - Page ID: `1338804342660007`. Instagram user ID: `17841429970165089`.
-- CTA: `SIGN_UP`. Destination: `https://safetyradar.ch/de/newsletter/`.
+- CTA: `SIGN_UP`. Click-through destination: `https://safetyradar.ch/de/`.
 
 The owner rejected Adspirer and paid tools. Do not add a paid orchestration service. Do not create another campaign, widen the audience, activate a new ad, or change a budget without specific owner approval. A paused ad must stay paused until its activation is approved.
 

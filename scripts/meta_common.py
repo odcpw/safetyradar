@@ -24,7 +24,7 @@ ADSET_ID = "52544779664276"
 CAMPAIGN_ID = "52544779549276"
 IG_USER_ID = "17841429970165089"
 PAGE_ID = "1338804342660007"
-DESTINATION = "https://safetyradar.ch/de/newsletter/"
+DESTINATION = "https://safetyradar.ch/de/"
 
 
 class OperationError(Exception):
