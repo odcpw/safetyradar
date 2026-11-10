@@ -1,0 +1,11 @@
+[Unit]
+Description=Safety Radar status snapshot every 3 hours and 06:30 Europe/Zurich
+
+[Timer]
+OnCalendar=*-*-* 00/3:00:00 Europe/Zurich
+OnCalendar=*-*-* 06:30:00 Europe/Zurich
+Persistent=true
+AccuracySec=1min
+
+[Install]
+WantedBy=timers.target

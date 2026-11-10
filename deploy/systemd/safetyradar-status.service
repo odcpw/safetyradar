@@ -1,0 +1,17 @@
+[Unit]
+Description=Safety Radar read-only status snapshot (Meta ads, IG, site, Listmonk)
+After=network-online.target docker.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+# root: the Meta token and ops journal are root-only 600; Listmonk counts use docker exec.
+WorkingDirectory=/srv/safetyradar/app
+ExecStart=/srv/safetyradar/venv-social/bin/python /srv/safetyradar/app/scripts/ops/status_snapshot.py
+ExecStartPost=/bin/chown -R safetyradar:safetyradar /srv/safetyradar/stats
+Nice=10
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/srv/safetyradar/stats /srv/safetyradar/ops /var/run/docker.sock

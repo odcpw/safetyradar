@@ -10,6 +10,33 @@ The VPS renders Reels and runs the Meta helpers below. The existing ad generator
 
 No Reel, ad, budget, or campaign status was changed during this setup. The newsletter send timer remains disabled.
 
+## Meta login and API access rules
+
+Agents never log in to Facebook or Meta from the box browser. All Meta data comes from token-based scripts on the VPS only. Any Meta login, including account confirmation at developers.facebook.com, is done by the owner from his own laptop.
+
+Do not call the Graph API from the box, even with the saved token. Browser logins and API calls from changing cloud IPs on the box were the likely trigger for the 10 November 2026 "API access blocked" incident. If a snapshot or VPS script reports `meta_api_health: BLOCKED`, ask the owner to confirm the developer account from his laptop. Do not try to fix it by logging in from the box.
+
+
+## Read the current status
+
+The primary status file is written on the VPS by a read-only snapshot. It does not log in to Facebook and it makes no Meta writes. Read it there:
+
+```sh
+cat /srv/safetyradar/stats/status-latest.txt
+```
+
+The JSON form is `/srv/safetyradar/stats/status-latest.json`. A dated copy for the current Europe/Zurich day is updated on each run under `/srv/safetyradar/stats/status-archive/status-YYYY-MM-DD.txt`.
+
+`safetyradar-status.timer` runs the snapshot every three hours and also at 06:30 Europe/Zurich. To refresh it now:
+
+```sh
+/srv/safetyradar/venv-social/bin/python /srv/safetyradar/app/scripts/ops/status_snapshot.py
+```
+
+The file starts with `meta_api_health: OK`, or with `BLOCKED`, `TOKEN`, or `PERMISSION`, plus the sanitized error message and `fbtrace_id`. Those unhealthy results are also appended to `/srv/safetyradar/ops/journal.jsonl`. The snapshot includes per-ad and campaign spend, impressions, clicks, link clicks, CTR, and CPC in CHF for today, yesterday, and campaign lifetime; campaign and ad `effective_status` and review state; Instagram followers and the last five media, with plays, reach, and likes when the insights permission allows; the cookieless site analytics summary, including campaign-cohort views and signup submissions; and Listmonk subscriber counts (total, confirmed, created in the last seven days). Instagram insights are omitted cleanly when the permission is missing. It does not retry a failed Meta call in a loop.
+
+`scripts/ads/ads_report.py` remains available on the VPS for a narrower date-range check. Do not run it, or any other Meta script, from the box.
+
 
 ## Run the social and ads helpers
 
@@ -98,6 +125,7 @@ See [the operations journal](ops-journal.md) for the old/new creative IDs, times
 - Newsletter drafts and summaries: `/srv/safetyradar/newsletter`.
 - Measurement service: `safetyradar-measurement.service`, running `deploy/analytics/server.mjs`.
 - Measurement reports: `/srv/safetyradar/stats/analytics-latest.json` and `analytics-latest.txt`. Daily aggregate counters are under `/srv/safetyradar/stats/events`.
+- Status snapshot: `/srv/safetyradar/stats/status-latest.txt` and `status-latest.json`, with dated copies in `/srv/safetyradar/stats/status-archive/`. Written by `safetyradar-status.timer`.
 - Reel runtime: `/srv/safetyradar/venv-social/bin/python`.
 - Persistent approved Inter TTFs: `/srv/safetyradar/fonts/Inter-Regular.ttf` and `Inter-Bold.ttf`.
 - Private social output: `/srv/safetyradar/social`. This is not a Caddy document root.
@@ -110,6 +138,7 @@ Read `docs/DEPLOY-VPS.md`, `docs/EDITORIAL.md`, `docs/social-reels.md`, `deploy/
 
 Every time in this section is Europe/Zurich.
 
+- Every three hours, and also daily at 06:30: `safetyradar-status.timer` writes the read-only status snapshot. The 06:30 run is in addition to the three-hour cadence, not a replacement for `safetyradar-stats.timer`.
 - Monday 06:30: `safetyradar-stats.timer` refreshes weekly stats.
 - Monday through Friday 07:00: `safetyradar-update.timer` starts the data pipeline. The timer adds up to 120 seconds of random delay.
 - Monday 08:00: `safetyradar-newsletter.timer` builds Listmonk drafts and sends the configured owner previews. It does not send to the lists.
@@ -332,7 +361,7 @@ The collector stores daily aggregate counters for 56 days. It has no cookies, lo
 
 Read the token only inside the process making the API request. Use an Authorization header. Never put a token in a command argument, URL, crash trace, shell history, Git file, or report. Do not use shell tracing.
 
-On the VPS, the token is `/srv/safetyradar/.secrets/meta_token`, owned by root with mode 600. The box copy is `/home/box/.secrets/meta_token`. The app secret remains in the box environment as `META_APP_SECRET`; it was not copied or logged during this setup.
+On the VPS, the token is `/srv/safetyradar/.secrets/meta_token`, owned by root with mode 600. Its parent is mode 700. It is outside the Git tree. A box copy may exist at `/home/box/.secrets/meta_token`; do not use it. All Meta API reads go through the VPS token and the VPS scripts. The app secret remains in the box environment as `META_APP_SECRET` and must not be printed or copied into chat.
 
 The read-only permissions check succeeded from cx43. Granted scopes were `pages_show_list`, `ads_management`, `ads_read`, `instagram_basic`, `instagram_manage_comments`, `instagram_content_publish`, `instagram_manage_messages`, `pages_read_engagement`, and `public_profile`. `pages_manage_posts` is absent. Do not claim Facebook Page posting works.
 
@@ -410,6 +439,10 @@ If a font is missing, use `--font-dir /srv/safetyradar/fonts`. Do not rely on `/
 If the container remains in progress, wait with a bounded poll. Check that the temporary HTTPS video is still available. Stop on a terminal error. Do not compensate by posting a second copy.
 
 If Meta returns a permission or token error, stop writes. Verify the token file mode and read-only scope response. Do not grant new scopes, rotate credentials, or broaden access without the approved account flow.
+
+If `/srv/safetyradar/stats/status-latest.txt` starts with `meta_api_health: BLOCKED`, Meta has locked API access on the developer app, usually after "unusual activity". This is not a campaign, budget, or expired-token problem by itself. Ask the owner to confirm the account at developers.facebook.com from his own laptop. Agents must not log in to Facebook or Meta from the box browser, and must not call the Graph API from the box.
+
+On 10 November 2026, Meta flagged the owner's developer account for unusual activity. Every Graph API call returned OAuthException code 200, "API access blocked", until the owner confirmed identity with an email code and a mobile number in the browser at about 20:48 Europe/Zurich. Access then worked again. The likely trigger was browser logins and API calls from changing cloud IPs on the bot box. After this incident, all Meta reads are taken only from cx43's stable address via the token scripts, and the status snapshot records `BLOCKED`, `TOKEN`, or `PERMISSION` with the `fbtrace_id` in the status file and in `/srv/safetyradar/ops/journal.jsonl`.
 
 If a publish result is uncertain, recover from the saved container ID and recent media before retrying. If a temporary file remains, remove only the path recorded for that job after checking that Meta no longer needs it.
 

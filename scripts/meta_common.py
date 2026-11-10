@@ -33,10 +33,55 @@ class OperationError(Exception):
 
 
 class MetaAPIError(OperationError):
-    def __init__(self, message, *, code=None, status=None):
+    def __init__(self, message, *, code=None, status=None, api_message=None,
+                 fbtrace_id=None, error_type=None, subcode=None):
         super().__init__(message)
         self.code = code
         self.status = status
+        self.api_message = api_message
+        self.fbtrace_id = fbtrace_id
+        self.error_type = error_type
+        self.subcode = subcode
+
+
+
+_TOKENISH = re.compile(
+    r"(?i)(?:access_token|token|bearer)[=: ]+\S{8,}|EAA[A-Za-z0-9]+|[A-Za-z0-9_-]{40,}"
+)
+_BLOCKED = re.compile(r"api access blocked", re.I)
+_FBTRACE = re.compile(r"^[A-Za-z0-9+/=_-]{1,128}$")
+
+
+def sanitize_meta_text(text, *, token=None):
+    """Return a short, secret-safe copy of a Meta error string, or None."""
+    if not isinstance(text, str):
+        return None
+    cleaned = text.replace("\x00", "")[:500]
+    if token:
+        cleaned = cleaned.replace(token, "[redacted]")
+    cleaned = _TOKENISH.sub("[redacted]", cleaned)
+    cleaned = re.sub(r"[^\S\n]+", " ", cleaned).strip()
+    return cleaned or None
+
+
+def fbtrace_id(value):
+    if isinstance(value, str) and _FBTRACE.fullmatch(value):
+        return value
+    return None
+
+
+def classify_meta_health(exc):
+    """Map a MetaAPIError to BLOCKED, TOKEN, or PERMISSION; otherwise None."""
+    if not isinstance(exc, MetaAPIError):
+        return None
+    message = exc.api_message or ""
+    if exc.code == 190:
+        return "TOKEN"
+    if exc.code == 200 and _BLOCKED.search(message):
+        return "BLOCKED"
+    if exc.code in (10, 200):
+        return "PERMISSION"
+    return None
 
 
 class NoRedirects(urllib.request.HTTPRedirectHandler):
@@ -109,8 +154,15 @@ class MetaClient:
                 value = error.get(key)
                 if isinstance(value, int):
                     codes.append(f"{key}={value}")
-            raise MetaAPIError("Meta request failed (" + ", ".join(codes) + "). No automatic write retry.",
-                               code=error.get("code") if isinstance(error.get("code"), int) else None, status=exc.code) from None
+            raise MetaAPIError(
+                "Meta request failed (" + ", ".join(codes) + "). No automatic write retry.",
+                code=error.get("code") if isinstance(error.get("code"), int) else None,
+                status=exc.code,
+                api_message=sanitize_meta_text(error.get("message"), token=self._token),
+                fbtrace_id=fbtrace_id(error.get("fbtrace_id")),
+                error_type=error.get("type") if isinstance(error.get("type"), str) else None,
+                subcode=error.get("error_subcode") if isinstance(error.get("error_subcode"), int) else None,
+            ) from None
         except (OSError, ValueError):
             raise OperationError("Meta transport/JSON failure. A submitted write may have succeeded; reconcile its journal before retrying.") from None
         if not isinstance(result, dict) or "error" in result:
@@ -219,6 +271,35 @@ def save_json(path, data):
         os.fsync(fd)
     finally:
         os.close(fd)
+
+
+def append_jsonl(path, record):
+    """Append one JSON object to a private journal. Never store tokens or raw URLs."""
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+    with path.open("a", encoding="utf-8") as handle:
+        os.fchmod(handle.fileno(), 0o600)
+        handle.write(json.dumps(record, ensure_ascii=False) + "\n")
+        handle.flush()
+        os.fsync(handle.fileno())
+
+
+def save_text(path, text, *, mode=0o644):
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True, mode=0o755)
+    with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=path.parent, delete=False) as handle:
+        temp = Path(handle.name)
+        try:
+            os.fchmod(handle.fileno(), mode)
+            handle.write(text)
+            if not text.endswith("\n"):
+                handle.write("\n")
+            handle.flush()
+            os.fsync(handle.fileno())
+        except BaseException:
+            temp.unlink(missing_ok=True)
+            raise
+    os.replace(temp, path)
 
 
 def load_json(path):

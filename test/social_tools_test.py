@@ -27,6 +27,7 @@ publisher = module("publisher", "scripts/social/publish_reel.py")
 report = module("report", "scripts/ads/ads_report.py")
 creator = module("creator", "scripts/ads/ads_create.py")
 renderer = module("renderer", "scripts/social/make_reel.py")
+status = module("status_snapshot", "scripts/ops/status_snapshot.py")
 
 
 class ToolsTest(unittest.TestCase):
@@ -449,6 +450,223 @@ class ToolsTest(unittest.TestCase):
         self.assertGreater(renderer.reading_hold(renderer.SANCTION, sanction=True),
                            renderer.reading_hold(renderer.SANCTION))
         self.assertGreaterEqual(renderer.reading_hold(""), 1.5)
+
+
+
+class StatusSnapshotTest(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        self.root = Path(self.temp.name)
+        self.stats = self.root / "stats"
+        self.stats.mkdir()
+        self.archive = self.stats / "status-archive"
+        self.journal = self.root / "ops" / "journal.jsonl"
+        self.token = self.root / "token"
+        self.token.write_text("DO-NOT-PRINT-THIS-SECRET")
+        self.token.chmod(0o600)
+
+    def write_analytics(self):
+        payload = {
+            "from": "2026-09-16", "through": "2026-11-10",
+            "metrics": {"pageviews": 10, "signupSubmissions": 1, "signupAcceptedResponses": 0,
+                        "signupConfirmedResponses": 0, "engagementSamples": 8, "activeSeconds": 40},
+            "byCampaign": [{"source": "fb", "medium": "paid_social", "campaign": "de-2026-w46",
+                            "variant": "a", "pageviews": 7, "signupSubmissions": 1,
+                            "signupAcceptedResponses": 0, "signupConfirmedResponses": 0}],
+        }
+        (self.stats / "analytics-latest.json").write_text(json.dumps(payload), encoding="utf-8")
+        (self.stats / "analytics-latest.txt").write_text(
+            "Safety Radar aggregate measurement: 2026-09-16–2026-11-10 (Europe/Zurich)\n"
+            "pageviews: 10\n\n"
+            "Campaign cohorts (views / submissions / accepted / confirmed):\n"
+            "fb de-2026-w46 a: 7 / 1 / 0 / 0\n",
+            encoding="utf-8",
+        )
+
+    def test_health_classification(self):
+        blocked = common.MetaAPIError("safe", code=200, status=403,
+                                      api_message="API access blocked", fbtrace_id="Trace123")
+        token = common.MetaAPIError("safe", code=190, status=400, api_message="Invalid OAuth access token")
+        permission = common.MetaAPIError("safe", code=10, status=400, api_message="Application does not have permission")
+        permission200 = common.MetaAPIError("safe", code=200, status=403,
+                                            api_message="Requires permission ads_read")
+        other = common.MetaAPIError("safe", code=1, status=500, api_message="unknown")
+        self.assertEqual(common.classify_meta_health(blocked), "BLOCKED")
+        self.assertEqual(common.classify_meta_health(token), "TOKEN")
+        self.assertEqual(common.classify_meta_health(permission), "PERMISSION")
+        self.assertEqual(common.classify_meta_health(permission200), "PERMISSION")
+        self.assertIsNone(common.classify_meta_health(other))
+        self.assertIsNone(common.classify_meta_health(common.OperationError("no")))
+
+    def test_sanitize_keeps_blocked_text_and_redacts_token(self):
+        secret = "DO-NOT-PRINT-THIS-SECRET"
+        self.assertEqual(common.sanitize_meta_text("API access blocked"), "API access blocked")
+        self.assertNotIn(secret, common.sanitize_meta_text("token=" + secret, token=secret) or "")
+        self.assertIn("[redacted]", common.sanitize_meta_text("token=" + secret, token=secret))
+        self.assertNotIn(secret, common.sanitize_meta_text("EAA1234567890abcdefTOKENVALUEISH"))
+        self.assertEqual(common.fbtrace_id("AbCdEf123"), "AbCdEf123")
+        self.assertIsNone(common.fbtrace_id("has a space"))
+
+    def test_client_captures_sanitized_message_and_trace(self):
+        client = common.MetaClient(self.token)
+        payload = json.dumps({"error": {"message": self.token.read_text(), "code": 190,
+                                        "fbtrace_id": "TraceXYZ", "type": "OAuthException"}}).encode()
+        error = urllib.error.HTTPError("https://example.invalid/?access_token=" + self.token.read_text(), 400,
+                                       "secret " + self.token.read_text(), {}, io.BytesIO(payload))
+        with patch.object(client._opener, "open", side_effect=error):
+            with self.assertRaises(common.MetaAPIError) as caught:
+                client.get("me")
+        exc = caught.exception
+        self.assertNotIn(self.token.read_text(), str(exc))
+        self.assertNotIn(self.token.read_text(), exc.api_message or "")
+        self.assertEqual(exc.api_message, "[redacted]")
+        self.assertEqual(exc.fbtrace_id, "TraceXYZ")
+        self.assertEqual(exc.code, 190)
+        self.assertEqual(common.classify_meta_health(exc), "TOKEN")
+
+    def test_health_line_is_first_status_fields_and_journal_on_block(self):
+        self.write_analytics()
+        calls = []
+
+        class Fake:
+            def get(self, path, params=None):
+                calls.append(path)
+                raise common.MetaAPIError("safe", code=200, status=403,
+                                          api_message="API access blocked", fbtrace_id="TraceBlock")
+
+            def pages(self, *args, **kwargs):
+                raise AssertionError("Must not page after a blocked get")
+
+        now = __import__("datetime").datetime(2026, 11, 10, 21, 0, tzinfo=status.ZURICH)
+        snapshot = status.build_snapshot(
+            Fake(), now=now, stats_dir=self.stats,
+            listmonk_fn=lambda: {"total": 2, "confirmed": 0, "created_last_7_days": 2},
+            generated_on="vps",
+        )
+        self.assertEqual(snapshot["meta_api_health"], "BLOCKED")
+        self.assertEqual(snapshot["meta_api_error"]["fbtrace_id"], "TraceBlock")
+        self.assertEqual(snapshot["analytics"]["metrics"]["pageviews"], 10)
+        self.assertEqual(snapshot["listmonk"]["total"], 2)
+        self.assertEqual(snapshot["ads"], None)
+        self.assertEqual(len(calls), 1)
+        text = status.format_status_text(snapshot)
+        first_fields = [line for line in text.splitlines() if line.startswith("meta_api_health") or line.startswith("generated_at") or line.startswith("Safety Radar") or line.startswith("meta_api_error") or line.startswith("fbtrace_id")]
+        self.assertEqual(first_fields[0], "Safety Radar status snapshot")
+        self.assertIn("meta_api_health: BLOCKED", text.splitlines()[:6])
+        self.assertTrue(text.index("meta_api_health: BLOCKED") < text.index("== Ads"))
+        self.assertIn("meta_api_error: API access blocked", text)
+        self.assertIn("fbtrace_id: TraceBlock", text)
+        self.assertIn("unavailable because Meta API is BLOCKED", text)
+        self.assertIn("fb de-2026-w46 a: 7 / 1 / 0 / 0", text)
+        self.assertIn("total: 2", text)
+        paths = status.write_snapshot(snapshot, stats_dir=self.stats, archive_dir=self.archive,
+                                      ops_journal=self.journal, now=now)
+        self.assertTrue(Path(paths["txt"]).is_file())
+        self.assertTrue((self.archive / "status-2026-11-10.txt").is_file())
+        events = [json.loads(line) for line in self.journal.read_text(encoding="utf-8").splitlines()]
+        self.assertEqual(events[0]["health"], "BLOCKED")
+        self.assertEqual(events[0]["fbtrace_id"], "TraceBlock")
+        self.assertNotIn(self.token.read_text(), self.journal.read_text())
+
+    def test_ok_snapshot_does_not_journal_and_skips_ig_insights(self):
+        self.write_analytics()
+        calls = []
+
+        class Fake:
+            def get(self, path, params=None):
+                calls.append(path)
+                if path == f"act_{common.ACCOUNT_ID}":
+                    return {"currency": "CHF", "timezone_name": "Europe/Zurich"}
+                if path == common.CAMPAIGN_ID:
+                    return {"id": common.CAMPAIGN_ID, "name": "Safety Radar — DE Newsletter",
+                            "status": "ACTIVE", "effective_status": "ACTIVE", "objective": "OUTCOME_TRAFFIC"}
+                if path == common.IG_USER_ID:
+                    if "followers_count" not in (params or {}).get("fields", ""):
+                        raise AssertionError("expected followers_count request")
+                    return {"username": "safetyradarch", "followers_count": 12, "media_count": 1}
+                if path.endswith("/media"):
+                    return {"data": [{"id": "media1", "timestamp": "2026-11-10T07:23:40+0100",
+                                      "permalink": "https://www.instagram.com/reel/example/",
+                                      "media_type": "REELS", "like_count": 3}]}
+                if path.endswith("/insights"):
+                    raise common.MetaAPIError("safe", code=10, status=400,
+                                              api_message="Application does not have permission")
+                raise AssertionError("unexpected get " + path)
+
+            def pages(self, path, params=None, **kwargs):
+                calls.append(path)
+                if path.endswith("/ads"):
+                    return iter([{"id": "52544780253676", "name": "A", "status": "ACTIVE",
+                                  "effective_status": "ACTIVE", "creative": {"id": "1", "status": "ACTIVE"},
+                                  "ad_review_feedback": {}, "issues_info": []}])
+                if path.endswith("/insights") and params["level"] == "ad":
+                    return iter([{"ad_id": "52544780253676", "ad_name": "A", "spend": "1.00",
+                                  "impressions": "100", "reach": "80", "clicks": "4",
+                                  "actions": [{"action_type": "link_click", "value": "2"},
+                                              {"action_type": "post_engagement", "value": "50"}]}])
+                if path.endswith("/insights") and params["level"] == "campaign":
+                    return iter([{"campaign_id": common.CAMPAIGN_ID, "spend": "1.00", "impressions": "100",
+                                  "reach": "80", "clicks": "4",
+                                  "actions": [{"action_type": "link_click", "value": "2"}]}])
+                return iter([])
+
+        now = __import__("datetime").datetime(2026, 11, 10, 21, 0, tzinfo=status.ZURICH)
+        snapshot = status.build_snapshot(
+            Fake(), now=now, stats_dir=self.stats,
+            listmonk_fn=lambda: {"total": 2, "confirmed": 0, "created_last_7_days": 2},
+            generated_on="vps",
+        )
+        self.assertEqual(snapshot["meta_api_health"], "OK")
+        self.assertIsNone(snapshot["meta_api_error"])
+        self.assertEqual(snapshot["instagram"]["followers"], 12)
+        self.assertTrue(any("insights skipped" in note for note in snapshot["instagram"]["notes"]))
+        self.assertIsNone(snapshot["instagram"]["recent_media"][0]["plays"])
+        ad = snapshot["ads"]["periods"]["today"]["ads"][0]
+        self.assertEqual(ad["link_cpc"], 0.5)
+        self.assertEqual(ad["link_ctr_pct"], 2.0)
+        self.assertEqual(ad["clicks"], 4)
+        self.assertEqual(ad["cpc"], 0.25)
+        # A later insights permission must not flip the whole snapshot to PERMISSION,
+        # and must not trigger more insight calls.
+        self.assertEqual(calls.count("media1/insights"), 1)
+        paths = status.write_snapshot(snapshot, stats_dir=self.stats, archive_dir=self.archive,
+                                      ops_journal=self.journal, now=now)
+        self.assertFalse(self.journal.exists())
+        text = Path(paths["txt"]).read_text(encoding="utf-8")
+        self.assertIn("meta_api_health: OK", text.splitlines()[:6])
+        self.assertIn("link_clicks 2", text)
+        self.assertIn("followers: 12", text)
+        self.assertIn("https://www.instagram.com/reel/example/", text)
+
+    def test_link_metrics_match_ads_report(self):
+        row = {"ad_id": "1", "spend": "1.00", "impressions": "100", "reach": "80", "clicks": "10",
+               "actions": [{"action_type": "link_click", "value": "2"}, {"action_type": "post_engagement", "value": "50"}]}
+        snapshot_row = status.metric_block(row)
+        report_row = report.summarise(row)
+        self.assertEqual(snapshot_row["link_cpc"], report_row["link_cpc"])
+        self.assertEqual(snapshot_row["link_ctr_pct"], report_row["link_ctr_pct"])
+        self.assertEqual(snapshot_row["link_clicks"], report_row["link_clicks"])
+        self.assertEqual(snapshot_row["spend"], report_row["spend"])
+        self.assertEqual(snapshot_row["impressions"], report_row["impressions"])
+
+    def test_dry_run_and_non_vps_guard(self):
+        class Fake:
+            def __init__(self, *args, **kwargs):
+                raise AssertionError("Dry-run must not construct a Meta client")
+
+        with patch.object(status, "MetaClient", Fake), contextlib.redirect_stdout(io.StringIO()) as out:
+            status.main(["--dry-run", "--stats-dir", str(self.stats), "--archive-dir", str(self.archive),
+                         "--ops-journal", str(self.journal)])
+        result = json.loads(out.getvalue())
+        self.assertTrue(result["dry_run"])
+        self.assertTrue(result["read_only"])
+        self.assertFalse(self.journal.exists())
+        self.assertEqual(list(self.stats.iterdir()), [])
+        with self.assertRaises(common.OperationError) as caught:
+            status.main(["--stats-dir", str(self.stats), "--archive-dir", str(self.archive),
+                         "--ops-journal", str(self.journal), "--token-file", str(self.token)])
+        self.assertIn("VPS", str(caught.exception))
 
 
 if __name__ == "__main__":
