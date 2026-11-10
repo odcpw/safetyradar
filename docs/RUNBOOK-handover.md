@@ -53,7 +53,13 @@ All external write paths remain untested against live Meta during setup. Only of
 
 Verification on 9 November 2026 passed 28 offline tests on cx43. Both publisher dry-runs passed input and metadata validation. The read-only ads report returned the three existing ads in CHF. Ad preparation with `--dry-run --check-remote` confirmed the existing account/ad set and literal PAUSED payload. No production journal or public MP4 was created.
 
-The real Instagram recent-media GET returns HTTP 400, Meta code 10, despite the listed scopes being granted. Normal publishing still stops on that error. For an individually approved agent-only post, the owner accepted marker/journal duplicate protection on 9 November: add `--allow-marker-guard --approval-ref <specific-approval>` only when that exception applies. The exception handles code 10 from the recent-media GET only; other API errors still stop. Under the global publish lock the helper checks `/srv/safetyradar/social/published/*.json`, all `state/reel-*.json` journals and `/srv/safetyradar/ops/journal.jsonl`. A published record stops another publication, including a different render with the same approval or caption hash. Unknown writes remain blocked; saved containers are read before any uncertain publish is considered. Restore recent-media access through the official Meta setup when possible. Ads reporting and account/ad-set reads work with the same token.
+The code-10 diagnosis was resolved on 10 November 2026: `17841429970165089` was the Page-backed ad identity, not the real organic publishing user. The first approved attempt reached `POST /17841429970165089/media` and failed with HTTP 400/code 10; its durable state has `phase=failed`, no container ID and no media ID. It did not reach `media_publish`. Keep that failed record; do not delete it or clear it to force a retry.
+
+The correct organic user is `17841441257076577`: `GET /<id>?fields=username` returns `safetyradarch`, its recent-media read works, and `content_publishing_limit` returns a valid quota (100 posts per rolling 86,400 seconds). Token introspection confirms `instagram_content_publish`, `instagram_basic`, `pages_read_engagement` and `pages_show_list`. Granular scopes returned no target IDs; do not invent an asset list from that omission. `/me/accounts` currently returns an empty list. These do not negate the successful direct business-user reads. No missing permission was demonstrated for the real organic account. The token's data-access expiry is 7 February 2027 at 14:53:59 Europe/Zurich; `expires_at=0` does not remove that separate access expiry.
+
+Normal publishing still fails closed on recent-media errors. Only when the owner has accepted agent-only marker/journal protection for the specific post may `--allow-marker-guard --approval-ref <specific-approval>` handle code 10 from that GET. Other API errors never fall back. Under the global publishing lock the helper checks `/srv/safetyradar/social/published/*.json`, all `state/reel-*.json` journals and `/srv/safetyradar/ops/journal.jsonl`. A published record blocks another publication even across account-ID corrections or a different render with the same approval or caption hash. Unknown writes remain blocked. A definitive failed container-creation request with no container/media ID is preserved and is not a published marker.
+
+The Thursday 12 November approved Urteil routine must call the updated VPS publisher and therefore target `17841441257076577`. Remove any hard-coded organic target of `17841429970165089` from its instructions. Do not change the live ads: their Page-backed identity is intentionally kept separate in `AD_IG_USER_ID`.
 
 Run the offline behavior tests on cx43:
 
@@ -214,17 +220,17 @@ Add another blank line and a few relevant hashtags. The existing set includes `#
 
 ## Publish only an approved Reel
 
-The API is Meta Graph v21.0. Instagram user `17841429970165089` is `@safetyradarch`. No Facebook Page posting is available because `pages_manage_posts` is absent.
+The API is Meta Graph v21.0. The verified organic Instagram business user for `@safetyradarch` is `17841441257076577`. The different Page-backed ad identity `17841429970165089` is not an organic publishing target. No Facebook Page posting is available because `pages_manage_posts` is absent.
 
 The helper implements the following flow. This describes an approved publish, not permission to execute it now:
 
 1. Take an exclusive publish lock. Bind the job to the approved MP4 checksum, normalized caption checksum, case URL, and posting slot.
-2. Read recent media from `GET /17841429970165089/media` with `id,caption,timestamp,permalink,media_type`. Follow paging. Compare normalized full captions and any local recorded case identity. Stop on a match. A recent-caption check alone is not a complete idempotency guarantee.
+2. Read recent media from `GET /17841441257076577/media` with `id,caption,timestamp,permalink,media_type`. Follow paging. Compare normalized full captions and any local recorded case identity. Stop on a match. A recent-caption check alone is not a complete idempotency guarantee.
 3. Save a durable pending record outside Git before the first write. Record the container ID as soon as Meta returns it.
 4. Copy the MP4 to an unguessable temporary path under the currently served document root. Never copy the token, environment, caption state, or private directory there. Use HTTPS and check that the public file can be fetched.
-5. Create a container with `POST /17841429970165089/media`, `media_type=REELS`, `video_url=<temporary HTTPS URL>`, and the approved caption. Use the documented optional cover parameters only when verified for the selected API version.
+5. Create a container with `POST /17841441257076577/media`, `media_type=REELS`, `video_url=<temporary HTTPS URL>`, and the approved caption. Use the documented optional cover parameters only when verified for the selected API version.
 6. Poll `GET /<container-id>?fields=status_code,status` with a bounded timeout. Publish only after `FINISHED`. Stop on `ERROR` or `EXPIRED`.
-7. Recheck duplicate media, then call `POST /17841429970165089/media_publish` with `creation_id=<container-id>` once. Do not repeat that POST if its response is lost.
+7. Recheck duplicate media, then call `POST /17841441257076577/media_publish` with `creation_id=<container-id>` once. Do not repeat that POST if its response is lost.
 8. Read the returned media ID and permalink. Save both in the durable record before reporting success.
 9. Remove only the temporary file created by this job. Keep private source assets and the durable publication record.
 
@@ -269,7 +275,7 @@ Verified on 10 November 2026 after the approved landing-only replacement:
 - Ads are A `52544780253676`, B `52544780270076`, and C `52544780280676`.
 - Current creative IDs are A `2433357704093174`, B `4359070577738674`, and C `1853119972388610`. Previous IDs remain in the operations journal for traceability.
 - Video IDs are A `1879778366366579`, B `1867572614399700`, and C `1788007852479791`.
-- Page ID: `1338804342660007`. Instagram user ID: `17841429970165089`.
+- Page ID: `1338804342660007`. Existing ads use Page-backed Instagram identity `17841429970165089` (`AD_IG_USER_ID`); keep that approved ad identity unchanged. Organic Reels use the real business user `17841441257076577` (`IG_USER_ID`).
 - CTA: `SIGN_UP`. Click-through destination: `https://safetyradar.ch/de/`.
 
 The owner rejected Adspirer and paid tools. Do not add a paid orchestration service. Do not create another campaign, widen the audience, activate a new ad, or change a budget without specific owner approval. A paused ad must stay paused until its activation is approved.

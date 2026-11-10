@@ -8,7 +8,7 @@ import re
 import sys
 import time
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from meta_common import (ACCOUNT_ID, ADSET_ID, CAMPAIGN_ID, DESTINATION, IG_USER_ID, PAGE_ID,
+from meta_common import (ACCOUNT_ID, ADSET_ID, CAMPAIGN_ID, DESTINATION, AD_IG_USER_ID as IG_USER_ID, PAGE_ID,
                          STATE_DIR, TOKEN_PATH, MetaClient, OperationError, digest_file,
                          fingerprint, load_json, operation_lock, print_result, probe_video,
                          read_text, run_cli, save_json)

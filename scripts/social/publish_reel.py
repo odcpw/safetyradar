@@ -144,7 +144,7 @@ def publish(client, args, caption, identity):
                 raise OperationError("Temporary public directory must not be a symlink.")
             name = "sr-" + uuid.uuid4().hex + ".mp4"
             state = {"identity": identity, "approval_ref": args.approval_ref,
-                     "phase": "prepared", "marker_key": args.marker_key,
+                     "phase": "prepared", "ig_user_id": IG_USER_ID, "marker_key": args.marker_key,
                      "marker_guard_authorized": args.allow_marker_guard, "public_root": str(root), "temp_name": name,
                      "video_sha256": digest_file(args.mp4), "caption_sha256": digest_file(args.caption_file)}
             if args.cover_file:
@@ -188,7 +188,8 @@ def publish(client, args, caption, identity):
                 created = client.post(f"{IG_USER_ID}/media", payload)
             except MetaAPIError as exc:
                 if exc.status and 400 <= exc.status < 500:
-                    state.update({"phase": "failed", "error_code": exc.code})
+                    state.update({"phase": "failed", "error_code": exc.code,
+                                  "error_endpoint": f"{IG_USER_ID}/media", "error_method": "POST"})
                     save_json(journal, state)
                     cleanup_temp(state)
                 raise

@@ -130,10 +130,10 @@ Working directory example: `/workspace/safetyradar-social/YYYY-MM-DD-reels/`
 ## Instagram publishing (Graph API)
 
 - API: Meta Graph v21.0 from cx43. Use `scripts/social/publish_reel.py`, not a browser.
-- IG user id (Page-backed): `17841429970165089`
+- Organic IG business user: `17841441257076577` (`@safetyradarch`, verified by username, recent-media and publishing-quota reads on 2026-11-10). Do not use the Page-backed ad identity `17841429970165089` for Reels.
 - VPS token file (root-only, mode 600): `/srv/safetyradar/.secrets/meta_token`. The box backup remains `/home/box/.secrets/meta_token`
   **Never commit or paste the token.** App must be Live; scopes include `instagram_content_publish` (and related IG scopes as granted).
-- Recent-media reads return Meta code 10. Publishing stops by default. The individually approved agent-only exception uses `--allow-marker-guard --approval-ref <specific-approval>` and checks the VPS markers, state journals and ops journal under the publishing lock instead. Other errors never fall back. See the runbook before using this exception.
+- The old Page-backed target caused code 10 on both recent-media reads and container creation. The correct organic ID above passes read-only checks. The approved-only `--allow-marker-guard --approval-ref <specific-approval>` exception remains available for code 10 on recent-media reads only; it never suppresses a container-creation error. See the runbook. The Thursday 12 November routine must use the updated publisher, not a hard-coded old ad identity.
 - After approval: supply the approved `--cover-file`, create the REELS container with `cover_url` and `share_to_feed=true`, poll FINISHED, recheck duplicates, publish once, save the marker, and remove temporary video and cover. The cover must be supplied when creating the container, not after publication.
 - FB Page posting may require `pages_manage_posts` (often missing); IG content publish is separate.
 

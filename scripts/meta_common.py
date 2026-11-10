@@ -22,7 +22,8 @@ STATE_DIR = "/srv/safetyradar/social/state"
 ACCOUNT_ID = "1873587530725467"
 ADSET_ID = "52544779664276"
 CAMPAIGN_ID = "52544779549276"
-IG_USER_ID = "17841429970165089"
+IG_USER_ID = "17841441257076577"
+AD_IG_USER_ID = "17841429970165089"  # Existing ads use this Page-backed identity, not the organic IG account.
 PAGE_ID = "1338804342660007"
 DESTINATION = "https://safetyradar.ch/de/"
 
@@ -101,6 +102,8 @@ class MetaClient:
                 error = json.loads(exc.read()).get("error", {})
             except (ValueError, AttributeError):
                 error = {}
+            finally:
+                exc.close()
             codes = [f"HTTP {exc.code}"]
             for key in ("code", "error_subcode"):
                 value = error.get(key)

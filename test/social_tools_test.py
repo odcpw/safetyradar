@@ -55,6 +55,10 @@ class ToolsTest(unittest.TestCase):
                                   published_dir=str(self.root / "published"), ops_journal=str(self.root / "ops.jsonl"),
                                   allow_marker_guard=False)
 
+    def test_organic_account_is_distinct_from_existing_ad_identity(self):
+        self.assertEqual(publisher.IG_USER_ID, "17841441257076577")
+        self.assertEqual(creator.IG_USER_ID, "17841429970165089")
+
     def test_read_only_transport_blocks_posts_before_network(self):
         client = common.MetaClient(self.token)
         with patch.object(client._opener, "open") as network:
@@ -72,6 +76,7 @@ class ToolsTest(unittest.TestCase):
                 client.get("me")
         self.assertNotIn(self.token.read_text(), str(caught.exception))
         self.assertIn("code=190", str(caught.exception))
+        self.assertTrue(error.closed)
 
     def test_token_permissions_rejected(self):
         self.token.chmod(0o644)
@@ -313,6 +318,7 @@ class ToolsTest(unittest.TestCase):
                           "--name", "Test", "--variant", "a", "--dry-run", "--state-dir", str(self.state)])
         result = json.loads(out.getvalue())
         self.assertEqual(result["ad"]["status"], "PAUSED")
+        self.assertEqual(result["object_story_spec"]["instagram_user_id"], "17841429970165089")
         self.assertEqual(result["object_story_spec"]["video_data"]["call_to_action"]["value"]["link"],
                          "https://safetyradar.ch/de/")
         self.assertFalse(result["activation_supported"])
