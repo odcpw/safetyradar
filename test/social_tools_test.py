@@ -586,10 +586,19 @@ class StatusSnapshotTest(unittest.TestCase):
                         raise AssertionError("expected followers_count request")
                     return {"username": "safetyradarch", "followers_count": 12, "media_count": 1}
                 if path.endswith("/media"):
-                    return {"data": [{"id": "media1", "timestamp": "2026-11-10T07:23:40+0100",
+                    return {"data": [{"id": "media1", "timestamp": "2026-11-10T06:23:40+0000",
                                       "permalink": "https://www.instagram.com/reel/example/",
                                       "media_type": "REELS", "like_count": 3}]}
-                if path.endswith("/insights"):
+                if path == "me/accounts":
+                    return {"data": []}
+                if path.startswith(f"act_{common.ACCOUNT_ID}/ads"):
+                    return {"data": [{"creative": {"object_story_spec": {"page_id": common.PAGE_ID}}}]}
+                if path == common.PAGE_ID:
+                    return {"id": common.PAGE_ID, "name": "Safety Radar", "fan_count": 0, "followers_count": 0}
+                if path == f"{common.PAGE_ID}/insights":
+                    raise common.MetaAPIError("safe", code=10, status=400,
+                                              api_message="Application does not have permission")
+                if path == "media1/insights":
                     raise common.MetaAPIError("safe", code=10, status=400,
                                               api_message="Application does not have permission")
                 raise AssertionError("unexpected get " + path)
@@ -638,6 +647,13 @@ class StatusSnapshotTest(unittest.TestCase):
         self.assertIn("link_clicks 2", text)
         self.assertIn("followers: 12", text)
         self.assertIn("https://www.instagram.com/reel/example/", text)
+        self.assertIn("Lifetime through 2026-11-10", text)
+        self.assertNotIn("Lifetime lifetime", text)
+        self.assertIn("2026-11-10 07:23 Europe/Zurich", text)
+        self.assertIn("== Facebook Page ==", text)
+        self.assertIn("resolved_from: ad creative object_story_spec", text)
+        self.assertTrue(any("Page insights" in note or "unavailable" in note for note in snapshot["page"]["notes"]) or "unavailable" in text)
+        self.assertEqual(snapshot["meta_api_health"], "OK")
 
     def test_link_metrics_match_ads_report(self):
         row = {"ad_id": "1", "spend": "1.00", "impressions": "100", "reach": "80", "clicks": "10",
@@ -668,6 +684,104 @@ class StatusSnapshotTest(unittest.TestCase):
                 status.main(["--stats-dir", str(self.stats), "--archive-dir", str(self.archive),
                              "--ops-journal", str(self.journal), "--token-file", str(self.token)])
         self.assertIn("VPS", str(caught.exception))
+
+
+    def write_events(self):
+        events = self.stats / "events"
+        events.mkdir()
+        def row(page, source, variant, views, samples, active, d50, d100, signups, campaign="de-2026-w46", medium="paid_social"):
+            if source == "unattributed":
+                medium, campaign, variant_name = "none", "none", "none"
+            else:
+                variant_name = variant
+            return {"page": page, "language": "de", "category": "home", "article": None,
+                    "source": source, "medium": medium, "campaign": campaign, "variant": variant_name,
+                    "pageviews": views, "engagementSamples": samples, "activeSeconds": active,
+                    "depth25": d50, "depth50": d50, "depth75": d100, "depth100": d100,
+                    "signupSubmissions": signups, "signupAcceptedResponses": 0, "signupConfirmedResponses": 0}
+        (events / "2026-11-10.json").write_text(json.dumps({"day": "2026-11-10", "rows": {
+            "1": row("/de/", "fb", "a", 10, 8, 40, 6, 2, 1),
+            "2": row("/de/", "fb", "b", 4, 4, 8, 2, 1, 0),
+            "3": row("/de/", "unattributed", None, 5, 5, 10, 3, 1, 0),
+            "4": row("/de/newsletter/", "fb", "a", 3, 3, 6, 1, 0, 0),
+        }}), encoding="utf-8")
+        (events / "2026-11-09.json").write_text(json.dumps({"day": "2026-11-09", "rows": {
+            "1": row("/de/", "fb", "a", 2, 2, 10, 1, 1, 0),
+        }}), encoding="utf-8")
+        (events / "2026-11-10.test.json").write_text(json.dumps({"day": "2026-11-10", "rows": {
+            "1": row("/de/", "fb", "a", 999, 1, 1, 1, 1, 9),
+        }}), encoding="utf-8")
+
+    def test_page_analytics_tables_and_retarget_split(self):
+        self.write_events()
+        report = status.build_page_analytics(self.stats / "events", __import__("datetime").date(2026, 11, 10))
+        today = {row["page"]: row for row in report["windows"]["today"]["pages"]}
+        self.assertEqual(today["/de/"]["pageviews"], 19)
+        self.assertEqual(today["/de/"]["avg_active_seconds"], 3.4)  # 58/17
+        self.assertEqual(today["/de/"]["signup_submissions"], 1)
+        cohorts = {item["cohort"]: item for item in today["/de/"]["cohorts"]}
+        self.assertEqual(cohorts["fb a"]["pageviews"], 10)
+        self.assertNotIn(999, [today["/de/"]["pageviews"]])
+        last_7 = {row["page"]: row for row in report["windows"]["last_7"]["pages"]}
+        self.assertEqual(last_7["/de/"]["pageviews"], 21)
+        all_time = {row["page"]: row for row in report["windows"]["all_time"]["pages"]}
+        self.assertEqual(all_time["/de/"]["pageviews"], 21)
+        home = report["homepage_since_retarget"]["page"]
+        self.assertEqual(home["pageviews"], 19)  # only 2026-11-10 onward
+        text = status.format_status_text({
+            "generated_at": "2026-11-10T21:00:00+01:00", "generated_on": "vps",
+            "meta_api_health": "OK", "ads": None, "instagram": None, "page": None,
+            "analytics": {}, "page_analytics": report, "listmonk": {"available": False},
+        })
+        self.assertIn("Homepage /de/ since retarget", text)
+        self.assertIn("fb a: views 10", text)
+        self.assertNotIn("views 999", text)
+        self.assertIn("cannot be split out", text)
+
+    def test_page_insights_skips_deprecated_metric(self):
+        calls = []
+
+        class Fake:
+            def get(self, path, params=None):
+                calls.append((path, (params or {}).get("metric")))
+                if path == "me/accounts":
+                    return {"data": [{"id": common.PAGE_ID, "name": "Safety Radar", "fan_count": 3, "followers_count": 3}]}
+                if path == common.PAGE_ID:
+                    return {"id": common.PAGE_ID, "name": "Safety Radar", "fan_count": 3, "followers_count": 3}
+                if path == f"{common.PAGE_ID}/insights":
+                    metric = (params or {}).get("metric", "")
+                    if "," in metric:
+                        raise common.MetaAPIError("safe", code=100, status=400,
+                                                  api_message="The metric page_follows is not available")
+                    name = metric
+                    return {"data": [{"name": name, "period": "day", "values": [
+                        {"value": 4 if name == "page_views_total" else 7,
+                         "end_time": "2026-11-11T08:00:00+0000"},
+                    ]}]}
+                raise AssertionError("unexpected " + path)
+
+        page = status.collect_page(Fake(), __import__("datetime").date(2026, 11, 10))
+        self.assertEqual(page["resolved_from"], "me/accounts")
+        self.assertEqual(page["followers"], 3)
+        self.assertEqual(page["metrics"]["page_views_total"]["today"], 4)
+        self.assertEqual(page["metrics"]["page_views_total"]["last_7"], 4)
+        self.assertEqual(page["metrics"]["page_post_engagements"]["today"], 7)
+        self.assertNotIn("page_follows", page["metrics"])
+        self.assertTrue(any("page_follows" in note for note in page["notes"]))
+        self.assertGreaterEqual(len([c for c in calls if c[0].endswith("/insights")]), 2)
+        text = status.format_status_text({
+            "generated_at": "2026-11-10T21:00:00+01:00", "generated_on": "vps",
+            "meta_api_health": "OK", "ads": None, "instagram": None, "page": page,
+            "analytics": {}, "page_analytics": {"available": False},
+            "listmonk": {"available": False},
+        })
+        self.assertIn("page views (page_views_total): 4", text)
+        self.assertIn("post engagements (page_post_engagements): 7", text)
+        self.assertIn("page_follows unavailable", text)
+
+    def test_insight_day_and_zurich_format(self):
+        self.assertEqual(status.insight_day("2026-11-11T08:00:00+0000"), "2026-11-10")
+        self.assertEqual(status.format_zurich("2026-11-10T06:23:33+0000"), "2026-11-10 07:23 Europe/Zurich")
 
 
 if __name__ == "__main__":

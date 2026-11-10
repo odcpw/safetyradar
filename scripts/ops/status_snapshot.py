@@ -6,6 +6,7 @@ import argparse
 from datetime import date, datetime, timedelta
 from decimal import Decimal, InvalidOperation
 import json
+import re
 from pathlib import Path
 import subprocess
 import sys
@@ -16,6 +17,7 @@ from meta_common import (
     ACCOUNT_ID,
     CAMPAIGN_ID,
     IG_USER_ID,
+    PAGE_ID,
     TOKEN_PATH,
     MetaAPIError,
     MetaClient,
@@ -223,6 +225,400 @@ def load_analytics(stats_dir):
     return summary
 
 
+RETARGET_DAY = date(2026, 11, 10)
+PAGE_INSIGHT_METRICS = (
+    "page_views_total",
+    "page_media_view",
+    "page_total_media_view_unique",
+    "page_post_engagements",
+    "page_follows",
+    "page_daily_follows",
+)
+PAGE_INSIGHT_LABELS = {
+    "page_views_total": "page views",
+    "page_media_view": "media views",
+    "page_total_media_view_unique": "unique media views",
+    "page_post_engagements": "post engagements",
+    "page_follows": "follows",
+    "page_daily_follows": "daily follows",
+    "page_impressions": "impressions",
+    "page_impressions_unique": "unique impressions",
+}
+PAGE_ANALYTIC_FIELDS = (
+    "pageviews", "engagementSamples", "activeSeconds", "depth25", "depth50",
+    "depth75", "depth100", "signupSubmissions", "signupAcceptedResponses",
+    "signupConfirmedResponses",
+)
+
+
+def parse_meta_datetime(value):
+    if not isinstance(value, str) or not value.strip():
+        return None
+    text = value.strip()
+    if re.search(r"[+-]\d{4}$", text):
+        text = text[:-2] + ":" + text[-2:]
+    if text.endswith("Z"):
+        text = text[:-1] + "+00:00"
+    try:
+        parsed = datetime.fromisoformat(text)
+    except ValueError:
+        return None
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=ZoneInfo("UTC"))
+    return parsed.astimezone(ZURICH)
+
+
+def format_zurich(value):
+    parsed = parse_meta_datetime(value) if not isinstance(value, datetime) else value.astimezone(ZURICH)
+    if parsed is None:
+        return value or "—"
+    return parsed.strftime("%Y-%m-%d %H:%M ") + "Europe/Zurich"
+
+
+def insight_day(end_time):
+    parsed = parse_meta_datetime(end_time)
+    if parsed is None:
+        return None
+    # Page insights end_time is an exclusive period end, usually midnight
+    # Pacific or the Page timezone. One second earlier in Pacific yields the
+    # included calendar day for both Pacific and Europe/Zurich midnights.
+    local = parsed.astimezone(ZoneInfo("America/Los_Angeles"))
+    return (local - timedelta(seconds=1)).date().isoformat()
+
+
+def metric_number(value):
+    if value is None:
+        return None
+    if isinstance(value, dict):
+        if "total" in value:
+            return as_int(value.get("total"), default=None)
+        total = 0
+        found = False
+        for item in value.values():
+            if isinstance(item, (int, float, str, Decimal)):
+                total += as_int(item)
+                found = True
+        return total if found else None
+    return as_int(value, default=None)
+
+
+def optional_meta_failure(exc):
+    if not isinstance(exc, MetaAPIError):
+        return False
+    health = classify_meta_health(exc)
+    if health in {"BLOCKED", "TOKEN"}:
+        return False
+    return health == "PERMISSION" or exc.code in (10, 100, 200, 803)
+
+
+def invalid_metric_name(exc):
+    message = (exc.api_message or "") if isinstance(exc, MetaAPIError) else ""
+    match = re.search(r"(page_[a-z0-9_]+)", message, re.I)
+    return match.group(1) if match else None
+
+
+def resolve_page(collector):
+    notes = []
+    try:
+        result = collector.get("me/accounts", {"fields": "id,name,fan_count,followers_count"})
+        rows = result.get("data") if isinstance(result, dict) else None
+        if rows:
+            chosen = next((row for row in rows if str(row.get("id")) == PAGE_ID), rows[0])
+            if chosen.get("id"):
+                return str(chosen["id"]), "me/accounts", notes
+        notes.append("/me/accounts returned no Pages.")
+    except MetaAPIError as exc:
+        if not optional_meta_failure(exc):
+            raise
+        notes.append(f"/me/accounts unavailable (code {exc.code}).")
+    try:
+        ads = collector.get(f"act_{ACCOUNT_ID}/ads", {
+            "fields": "creative{object_story_spec}",
+            "filtering": [{"field": "campaign.id", "operator": "IN", "value": [CAMPAIGN_ID]}],
+            "limit": 1,
+        })
+        data = ads.get("data") if isinstance(ads, dict) else None
+        if data:
+            spec = ((data[0].get("creative") or {}).get("object_story_spec") or {})
+            page_id = spec.get("page_id")
+            if page_id:
+                return str(page_id), "ad creative object_story_spec", notes
+        notes.append("No page id was present on the first ad creative.")
+    except MetaAPIError as exc:
+        if not optional_meta_failure(exc):
+            raise
+        notes.append(f"Ad creative page id unavailable (code {exc.code}).")
+    notes.append(f"Using configured PAGE_ID {PAGE_ID}.")
+    return PAGE_ID, "configured PAGE_ID", notes
+
+
+def fetch_page_insights(collector, page_id, since, until, remaining):
+    notes = []
+    rows = []
+    pending = list(remaining)
+    while pending:
+        try:
+            result = collector.get(f"{page_id}/insights", {
+                "metric": ",".join(pending),
+                "period": "day",
+                "since": since,
+                "until": until,
+            })
+            data = result.get("data") if isinstance(result, dict) else None
+            if isinstance(data, list):
+                rows.extend(data)
+            return rows, notes, [row.get("name") for row in rows if isinstance(row, dict)]
+        except MetaAPIError as exc:
+            if not optional_meta_failure(exc) and exc.code not in (100, 10):
+                raise
+            name = invalid_metric_name(exc)
+            if name and name in pending:
+                pending.remove(name)
+                notes.append(f"{name} unavailable ({exc.api_message or f'code {exc.code}'}).")
+                continue
+            if len(pending) == 1:
+                notes.append(
+                    f"Page insights metric {pending[0]} unavailable "
+                    f"({exc.api_message or f'code {exc.code}'})."
+                )
+                return rows, notes, []
+            # Could not tell which metric failed; try one at a time.
+            individual = []
+            for metric in list(pending):
+                part, part_notes, ok = fetch_page_insights(collector, page_id, since, until, [metric])
+                rows.extend(part)
+                notes.extend(part_notes)
+                individual.extend(ok)
+                pending = [item for item in pending if item != metric]
+            return rows, notes, individual
+    return rows, notes, []
+
+
+def collect_window_values(series, today):
+    yesterday = (today - timedelta(days=1)).isoformat()
+    last_7_start = (today - timedelta(days=6)).isoformat()
+    last_28_start = (today - timedelta(days=27)).isoformat()
+    today_s = today.isoformat()
+
+    def total(start, end):
+        values = [value for day, value in series if value is not None and start <= day <= end]
+        return sum(values) if values else None
+
+    return {
+        "today": total(today_s, today_s),
+        "yesterday": total(yesterday, yesterday),
+        "last_7": total(last_7_start, today_s),
+        "last_28": total(last_28_start, today_s),
+    }
+
+
+def collect_page(collector, today):
+    notes = []
+    page_id, resolved_from, resolve_notes = resolve_page(collector)
+    notes.extend(resolve_notes)
+    profile = {"id": page_id}
+    try:
+        profile = collector.get(page_id, {"fields": "id,name,fan_count,followers_count"})
+    except MetaAPIError as exc:
+        if not optional_meta_failure(exc):
+            raise
+        notes.append(f"Page profile unavailable (code {exc.code}).")
+    until = (today + timedelta(days=1)).isoformat()
+    since = (today - timedelta(days=27)).isoformat()
+    rows, insight_notes, available = fetch_page_insights(
+        collector, page_id, since, until, list(PAGE_INSIGHT_METRICS),
+    )
+    notes.extend(insight_notes)
+    if not available and not insight_notes:
+        notes.append("No Page insights rows were returned.")
+    metrics = {}
+    for row in rows:
+        if not isinstance(row, dict) or not row.get("name"):
+            continue
+        series = []
+        for item in row.get("values") or []:
+            if not isinstance(item, dict):
+                continue
+            day = insight_day(item.get("end_time"))
+            if not day:
+                continue
+            series.append((day, metric_number(item.get("value"))))
+        metrics[row["name"]] = collect_window_values(series, today)
+    missing = [name for name in PAGE_INSIGHT_METRICS if name not in metrics]
+    if missing and available:
+        notes.append("No data returned for: " + ", ".join(missing) + ".")
+    return {
+        "available": True,
+        "id": str(profile.get("id") or page_id),
+        "name": profile.get("name"),
+        "resolved_from": resolved_from,
+        "fan_count": profile.get("fan_count"),
+        "followers": profile.get("followers_count") if profile.get("followers_count") is not None else profile.get("fan_count"),
+        "metrics": metrics,
+        "windows": {
+            "today": today.isoformat(),
+            "yesterday": (today - timedelta(days=1)).isoformat(),
+            "last_7_since": (today - timedelta(days=6)).isoformat(),
+            "last_28_since": (today - timedelta(days=27)).isoformat(),
+        },
+        "notes": notes,
+    }
+
+
+def cohort_label(row):
+    source = row.get("source") or "unattributed"
+    variant = row.get("variant")
+    campaign = row.get("campaign")
+    if source in ("fb", "ig") and variant in ("a", "b", "c"):
+        return f"{source} {variant}"
+    if source in ("unattributed", "none", "", None) and campaign in ("none", "", None):
+        return "unattributed"
+    parts = [str(source)]
+    if campaign not in ("none", "", None):
+        parts.append(str(campaign))
+    if variant not in ("none", "", None):
+        parts.append(str(variant))
+    return " ".join(parts)
+
+
+def empty_page_row():
+    return {key: 0 for key in PAGE_ANALYTIC_FIELDS}
+
+
+def add_page_row(target, row):
+    for key in PAGE_ANALYTIC_FIELDS:
+        target[key] += as_int(row.get(key))
+    return target
+
+
+def summarise_page_row(row):
+    samples = as_int(row.get("engagementSamples"))
+    active = as_int(row.get("activeSeconds"))
+    views = as_int(row.get("pageviews"))
+    depth50 = as_int(row.get("depth50"))
+    depth100 = as_int(row.get("depth100"))
+    return {
+        "pageviews": views,
+        "active_seconds": active,
+        "engagement_samples": samples,
+        "avg_active_seconds": round(active / samples, 1) if samples else None,
+        "depth50": depth50,
+        "depth100": depth100,
+        "depth50_pct": round(depth50 / samples * 100, 1) if samples else None,
+        "depth100_pct": round(depth100 / samples * 100, 1) if samples else None,
+        "signup_submissions": as_int(row.get("signupSubmissions")),
+    }
+
+
+def read_event_days(events_dir):
+    events_dir = Path(events_dir)
+    days = {}
+    if not events_dir.is_dir():
+        return days
+    for path in events_dir.iterdir():
+        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}\.json", path.name):
+            continue
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, UnicodeError, ValueError):
+            continue
+        rows = data.get("rows") if isinstance(data, dict) else None
+        if not isinstance(rows, dict):
+            continue
+        days[path.name[:10]] = [row for row in rows.values() if isinstance(row, dict)]
+    return days
+
+
+def select_days(days, today, kind):
+    keys = sorted(days)
+    today_s = today.isoformat()
+    if kind == "today":
+        chosen = [today_s] if today_s in days else []
+        return chosen, today_s, today_s
+    if kind == "last_7":
+        start = (today - timedelta(days=6)).isoformat()
+        chosen = [key for key in keys if start <= key <= today_s]
+        return chosen, start, today_s
+    if kind == "since_retarget":
+        start = RETARGET_DAY.isoformat()
+        chosen = [key for key in keys if key >= start and key <= today_s]
+        return chosen, start, today_s
+    chosen = keys
+    return chosen, keys[0] if keys else None, keys[-1] if keys else None
+
+
+def aggregate_pages(day_map, chosen):
+    pages = {}
+    for day in chosen:
+        for row in day_map.get(day, []):
+            page = row.get("page") or "(unknown)"
+            bucket = pages.setdefault(page, {"total": empty_page_row(), "cohorts": {}})
+            add_page_row(bucket["total"], row)
+            label = cohort_label(row)
+            add_page_row(bucket["cohorts"].setdefault(label, empty_page_row()), row)
+    result = []
+    for page, bucket in pages.items():
+        entry = {"page": page, **summarise_page_row(bucket["total"]), "cohorts": []}
+        for label, row in bucket["cohorts"].items():
+            entry["cohorts"].append({"cohort": label, **summarise_page_row(row)})
+        paid_order = {"fb a": 0, "fb b": 1, "fb c": 2, "ig a": 3, "ig b": 4, "ig c": 5, "unattributed": 6}
+        entry["cohorts"].sort(key=lambda item: (paid_order.get(item["cohort"], 50), item["cohort"]))
+        result.append(entry)
+    result.sort(key=lambda item: (-item["pageviews"], item["page"]))
+    return result
+
+
+def build_page_analytics(events_dir, today):
+    days = read_event_days(events_dir)
+    if not days:
+        return {"available": False, "error": "No retained cookieless event files were found.",
+                "events_dir": str(events_dir)}
+    windows = {}
+    for kind, title in (("today", "Today"), ("last_7", "Last 7 days"), ("all_time", "All-time")):
+        chosen, start, until = select_days(days, today, kind)
+        windows[kind] = {
+            "title": title,
+            "since": start,
+            "until": until,
+            "day_count": len(chosen),
+            "pages": aggregate_pages(days, chosen),
+        }
+    chosen, start, until = select_days(days, today, "since_retarget")
+    homepage = next((page for page in aggregate_pages(days, chosen) if page["page"] == "/de/"), None)
+    if homepage is None:
+        homepage = {"page": "/de/", **summarise_page_row(empty_page_row()), "cohorts": []}
+    return {
+        "available": True,
+        "events_dir": str(events_dir),
+        "retained_days": len(days),
+        "retained_from": sorted(days)[0],
+        "retained_through": sorted(days)[-1],
+        "windows": windows,
+        "homepage_since_retarget": {
+            "since": start,
+            "until": until,
+            "day_count": len(chosen),
+            "page": homepage,
+            "note": ("Daily counters for 2026-11-10 include the whole Europe/Zurich day; "
+                     "traffic before the homepage retarget at about 06:55 Europe/Zurich cannot be split out."),
+        },
+    }
+
+
+def fmt_depth(count, pct):
+    if pct is None:
+        return f"{count} (—)"
+    return f"{count} ({pct:.1f}%)"
+
+
+def format_page_metric_line(prefix, row):
+    avg = "—" if row.get("avg_active_seconds") is None else f"{row['avg_active_seconds']:.1f}s"
+    return (f"{prefix}views {row['pageviews']}  active {row['active_seconds']}s  avg {avg}  "
+            f"d50 {fmt_depth(row['depth50'], row.get('depth50_pct'))}  "
+            f"d100 {fmt_depth(row['depth100'], row.get('depth100_pct'))}  "
+            f"signups {row['signup_submissions']}")
+
+
 def health_record(exc, *, generated_at):
     health = classify_meta_health(exc) or "ERROR"
     return {
@@ -359,6 +755,7 @@ def collect_instagram(collector):
         item = {
             "id": row.get("id"),
             "timestamp": row.get("timestamp"),
+            "timestamp_zurich": format_zurich(row.get("timestamp")) if row.get("timestamp") else None,
             "permalink": row.get("permalink"),
             "media_type": row.get("media_type"),
             "like_count": as_int(row.get("like_count"), default=None) if row.get("like_count") is not None else None,
@@ -426,9 +823,11 @@ def format_status_text(snapshot):
         lines.append("")
         for key, title in (("today", "Today"), ("yesterday", "Yesterday"), ("lifetime", "Lifetime")):
             period = ads["periods"][key]
-            lines.append(f"{title} {period['since']} through {period['until']}")
+            if key == "lifetime":
+                lines.append(f"Lifetime through {period['until']}")
+            else:
+                lines.append(f"{title} {period['since']} through {period['until']}")
             campaign_block = period["campaign"]
-            extra = ""
             extra = ""
             if campaign_block.get("reach") is None:
                 extra = "  (campaign reach not summed from ads)"
@@ -468,7 +867,7 @@ def format_status_text(snapshot):
         for item in ig.get("recent_media") or []:
             likes = item.get("likes") if item.get("likes") is not None else item.get("like_count")
             lines.append(
-                f"  {item.get('timestamp') or '—'} {item.get('permalink') or '—'}  "
+                f"  {item.get('timestamp_zurich') or format_zurich(item.get('timestamp'))} {item.get('permalink') or '—'}  "
                 f"plays={item.get('plays') if item.get('plays') is not None else '—'} "
                 f"reach={item.get('reach') if item.get('reach') is not None else '—'} "
                 f"likes={likes if likes is not None else '—'}"
@@ -477,27 +876,107 @@ def format_status_text(snapshot):
             lines.append(f"  note: {note}")
         lines.append("")
 
+    page = snapshot.get("page")
+    lines.append("== Facebook Page ==")
+    if not page:
+        reason = "unavailable"
+        if health != "OK":
+            reason = f"unavailable because Meta API is {health}"
+        lines.extend([reason, ""])
+    else:
+        lines.append(f"Page {page.get('id')} {page.get('name') or ''}".rstrip())
+        if page.get("resolved_from"):
+            lines.append(f"resolved_from: {page['resolved_from']}")
+        fans = page.get("followers")
+        fan_count = page.get("fan_count")
+        if fans is not None and fan_count is not None and fans != fan_count:
+            lines.append(f"followers: {fans}  fan_count: {fan_count}")
+        elif fans is not None:
+            lines.append(f"followers/fan_count: {fans}")
+        elif fan_count is not None:
+            lines.append(f"followers/fan_count: {fan_count}")
+        else:
+            lines.append("followers/fan_count: unavailable")
+        windows = page.get("windows") or {}
+        labels = (("today", "Today", windows.get("today")),
+                  ("yesterday", "Yesterday", windows.get("yesterday")),
+                  ("last_7", "Last 7 days", f"{windows.get('last_7_since')} through {windows.get('today')}"),
+                  ("last_28", "Last 28 days", f"{windows.get('last_28_since')} through {windows.get('today')}"))
+        metrics = page.get("metrics") or {}
+        if metrics:
+            for key, title, span in labels:
+                lines.append(f"{title} {span or ''}".rstrip())
+                for name, label in PAGE_INSIGHT_LABELS.items():
+                    if name not in metrics:
+                        continue
+                    value = metrics[name].get(key)
+                    shown = "—" if value is None else value
+                    lines.append(f"  {label} ({name}): {shown}")
+        else:
+            lines.append("Page insights metrics unavailable.")
+        for note in page.get("notes") or []:
+            lines.append(f"  note: {note}")
+        lines.append("")
+
     analytics = snapshot.get("analytics") or {}
-    lines.append("== Website analytics ==")
-    if analytics.get("text"):
+    pages = snapshot.get("page_analytics") or {}
+    lines.append("== Website page analytics ==")
+    if pages.get("available"):
+        lines.append(
+            "Windows are Europe/Zurich days from cookieless event files. "
+            f"All-time covers {pages.get('retained_days', 0)} retained days"
+            + (f" ({pages.get('retained_from')} through {pages.get('retained_through')})"
+               if pages.get("retained_from") else "")
+            + ". The collector keeps 56 days. Test files are excluded."
+        )
+        lines.append("avg is active seconds / engagement samples. d50/d100 are scroll-depth counts and % of engagement samples.")
+        lines.append("")
+        for kind in ("today", "last_7", "all_time"):
+            window = pages["windows"][kind]
+            if kind == "today":
+                lines.append(f"{window['title']} {window.get('until') or window.get('since') or '—'}")
+            else:
+                lines.append(f"{window['title']} {window.get('since') or '—'} through {window.get('until') or '—'}")
+            if not window["pages"]:
+                lines.append("  (no observed pages)")
+            for row in window["pages"]:
+                lines.append(format_page_metric_line(f"  {row['page']}: ", row))
+                if row["page"] == "/de/" or len(row.get("cohorts") or []) > 1:
+                    for cohort in row["cohorts"]:
+                        lines.append(format_page_metric_line(f"    {cohort['cohort']}: ", cohort))
+            lines.append("")
+        home = pages.get("homepage_since_retarget") or {}
+        lines.append("Homepage /de/ since retarget 2026-11-10 ~06:55 Europe/Zurich")
+        if home.get("note"):
+            lines.append(f"  {home['note']}")
+        page = home.get("page") or {"pageviews": 0, "active_seconds": 0, "avg_active_seconds": None,
+                                    "depth50": 0, "depth100": 0, "depth50_pct": None, "depth100_pct": None,
+                                    "signup_submissions": 0, "cohorts": []}
+        lines.append(format_page_metric_line("  total: ", page))
+        wanted = ["fb a", "fb b", "fb c", "ig a", "ig b", "ig c", "unattributed"]
+        present = {item["cohort"]: item for item in page.get("cohorts") or []}
+        for label in wanted:
+            if label in present:
+                lines.append(format_page_metric_line(f"  {label}: ", present[label]))
+            else:
+                lines.append(f"  {label}: views 0  active 0s  avg —  d50 0 (—)  d100 0 (—)  signups 0")
+        for item in page.get("cohorts") or []:
+            if item["cohort"] not in wanted:
+                lines.append(format_page_metric_line(f"  {item['cohort']}: ", item))
+        lines.append("")
+        lines.append("Browser observations, not unique people, sessions or Meta clicks. JS/bot blockers and early exits cause losses.")
+        lines.append("Active visible time stops after 60 seconds idle and is sampled once at first hide/leave; rounded to 5 seconds, capped at 30 minutes. Scroll depth is viewport reach, not proof of reading.")
+        lines.append("Submissions are a separate funnel stage from accepted or confirmed responses and are not ad-attributed people.")
+    elif analytics.get("text"):
         lines.append(analytics["text"].rstrip())
     elif analytics.get("available"):
         metrics = analytics.get("metrics") or {}
         lines.append(
             f"pageviews {metrics.get('pageviews', 0)}  "
-            f"signupSubmissions {metrics.get('signupSubmissions', 0)}  "
-            f"signupAcceptedResponses {metrics.get('signupAcceptedResponses', 0)}  "
-            f"signupConfirmedResponses {metrics.get('signupConfirmedResponses', 0)}"
+            f"signupSubmissions {metrics.get('signupSubmissions', 0)}"
         )
-        lines.append("Campaign cohorts (views / submissions / accepted / confirmed):")
-        for row in analytics.get("byCampaign") or []:
-            lines.append(
-                f"{row.get('source')} {row.get('campaign')} {row.get('variant')}: "
-                f"{row.get('pageviews')} / {row.get('signupSubmissions')} / "
-                f"{row.get('signupAcceptedResponses')} / {row.get('signupConfirmedResponses')}"
-            )
     else:
-        lines.append(analytics.get("error") or "unavailable")
+        lines.append(pages.get("error") or analytics.get("error") or "unavailable")
     lines.append("")
 
     listmonk = snapshot.get("listmonk") or {}
@@ -538,9 +1017,11 @@ def build_snapshot(client, *, now, stats_dir, listmonk_fn, generated_on):
     collector = SnapshotCollector(client)
     snapshot["ads"] = None
     snapshot["instagram"] = None
+    snapshot["page"] = None
     try:
         snapshot["ads"] = collect_ads(collector, windows_for(today))
         snapshot["instagram"] = collect_instagram(collector)
+        snapshot["page"] = collect_page(collector, today)
     except MetaAPIError as exc:
         # One attempt: a blocked/token/permission (or other) Meta error stops further Meta calls.
         info = health_record(exc, generated_at=generated_at)
@@ -554,6 +1035,8 @@ def build_snapshot(client, *, now, stats_dir, listmonk_fn, generated_on):
     snapshot["meta_calls"] = collector.calls
 
     snapshot["analytics"] = load_analytics(stats_dir)
+    events_dir = Path(stats_dir) / "events"
+    snapshot["page_analytics"] = build_page_analytics(events_dir, today)
     try:
         counts = listmonk_fn()
         snapshot["listmonk"] = {"available": True, **counts}

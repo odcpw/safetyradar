@@ -27,13 +27,13 @@ cat /srv/safetyradar/stats/status-latest.txt
 
 The JSON form is `/srv/safetyradar/stats/status-latest.json`. A dated copy for the current Europe/Zurich day is updated on each run under `/srv/safetyradar/stats/status-archive/status-YYYY-MM-DD.txt`.
 
-`safetyradar-status.timer` runs the snapshot every three hours and also at 06:30 Europe/Zurich. To refresh it now:
+`safetyradar-status.timer` runs the snapshot every six hours at 00:00, 06:00, 12:00 and 18:00 Europe/Zurich. To refresh it now:
 
 ```sh
 /srv/safetyradar/venv-social/bin/python /srv/safetyradar/app/scripts/ops/status_snapshot.py
 ```
 
-The file starts with `meta_api_health: OK`, or with `BLOCKED`, `TOKEN`, or `PERMISSION`, plus the sanitized error message and `fbtrace_id`. Those unhealthy results are also appended to `/srv/safetyradar/ops/journal.jsonl`. The snapshot includes per-ad and campaign spend, impressions, clicks, link clicks, CTR, and CPC in CHF for today, yesterday, and campaign lifetime; campaign and ad `effective_status` and review state; Instagram followers and the last five media, with plays, reach, and likes when the insights permission allows; the cookieless site analytics summary, including campaign-cohort views and signup submissions; and Listmonk subscriber counts (total, confirmed, created in the last seven days). Instagram insights are omitted cleanly when the permission is missing. It does not retry a failed Meta call in a loop.
+The file starts with `meta_api_health: OK`, or with `BLOCKED`, `TOKEN`, or `PERMISSION`, plus the sanitized error message and `fbtrace_id`. Those unhealthy results are also appended to `/srv/safetyradar/ops/journal.jsonl`. The snapshot includes per-ad and campaign spend, impressions, clicks, link clicks, CTR, and CPC in CHF for today, yesterday, and campaign lifetime; campaign and ad `effective_status` and review state; Instagram followers and the last five media, with plays, reach, and likes when the insights permission allows; Facebook Page followers/fan count and Page insights (page views, media views, unique media views, post engagements) for today, yesterday, last 7 days and last 28 days, using v21.0 metrics that `pages_read_engagement` can read; cookieless per-page website analytics for today, last 7 days and retained all-time, split by campaign cohort, with a dedicated `/de/` homepage view since the 10 November 2026 retarget; and Listmonk subscriber counts (total, confirmed, created in the last seven days). Instagram insights and unsupported or deprecated Page metrics are omitted cleanly when the permission or metric is missing. It does not retry a failed Meta call in a loop. Instagram timestamps are shown in Europe/Zurich.
 
 `scripts/ads/ads_report.py` remains available on the VPS for a narrower date-range check. Do not run it, or any other Meta script, from the box.
 
@@ -138,7 +138,7 @@ Read `docs/DEPLOY-VPS.md`, `docs/EDITORIAL.md`, `docs/social-reels.md`, `deploy/
 
 Every time in this section is Europe/Zurich.
 
-- Every three hours, and also daily at 06:30: `safetyradar-status.timer` writes the read-only status snapshot. The 06:30 run is in addition to the three-hour cadence, not a replacement for `safetyradar-stats.timer`.
+- 00:00, 06:00, 12:00 and 18:00: `safetyradar-status.timer` writes the read-only status snapshot. This is not a replacement for Monday 06:30 `safetyradar-stats.timer`.
 - Monday 06:30: `safetyradar-stats.timer` refreshes weekly stats.
 - Monday through Friday 07:00: `safetyradar-update.timer` starts the data pipeline. The timer adds up to 120 seconds of random delay.
 - Monday 08:00: `safetyradar-newsletter.timer` builds Listmonk drafts and sends the configured owner previews. It does not send to the lists.
