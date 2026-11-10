@@ -302,9 +302,17 @@ def metric_number(value):
     return as_int(value, default=None)
 
 
+def page_token_required(exc):
+    if not isinstance(exc, MetaAPIError) or exc.code != 190:
+        return False
+    return bool(re.search(r"page access token", exc.api_message or "", re.I))
+
+
 def optional_meta_failure(exc):
     if not isinstance(exc, MetaAPIError):
         return False
+    if page_token_required(exc):
+        return True
     health = classify_meta_health(exc)
     if health in {"BLOCKED", "TOKEN"}:
         return False
@@ -422,7 +430,10 @@ def collect_page(collector, today):
     except MetaAPIError as exc:
         if not optional_meta_failure(exc):
             raise
-        notes.append(f"Page profile unavailable (code {exc.code}).")
+        if page_token_required(exc):
+            notes.append("Page profile and insights need a Page access token. /me/accounts returned no Pages, so the user token cannot read them.")
+        else:
+            notes.append(f"Page profile unavailable (code {exc.code}).")
     until = (today + timedelta(days=1)).isoformat()
     since = (today - timedelta(days=27)).isoformat()
     rows, insight_notes, available = fetch_page_insights(

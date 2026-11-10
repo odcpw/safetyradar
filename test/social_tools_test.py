@@ -784,5 +784,48 @@ class StatusSnapshotTest(unittest.TestCase):
         self.assertEqual(status.format_zurich("2026-11-10T06:23:33+0000"), "2026-11-10 07:23 Europe/Zurich")
 
 
+    def test_page_access_token_error_does_not_mark_snapshot_token(self):
+        self.write_analytics()
+        class Fake:
+            def get(self, path, params=None):
+                if path == f"act_{common.ACCOUNT_ID}":
+                    return {"currency": "CHF", "timezone_name": "Europe/Zurich"}
+                if path == common.CAMPAIGN_ID:
+                    return {"id": common.CAMPAIGN_ID, "name": "Campaign", "status": "ACTIVE",
+                            "effective_status": "ACTIVE"}
+                if path == common.IG_USER_ID:
+                    return {"username": "safetyradarch", "followers_count": 0, "media_count": 0}
+                if path.endswith("/media"):
+                    return {"data": []}
+                if path == "me/accounts":
+                    return {"data": []}
+                if path.startswith(f"act_{common.ACCOUNT_ID}/ads"):
+                    return {"data": [{"creative": {"object_story_spec": {"page_id": common.PAGE_ID}}}]}
+                if path == common.PAGE_ID or path.startswith(common.PAGE_ID + "/"):
+                    raise common.MetaAPIError("safe", code=190, status=400,
+                                              api_message="(#190) This method must be called with a Page Access Token")
+                raise AssertionError("unexpected " + path)
+
+            def pages(self, path, params=None, **kwargs):
+                if path.endswith("/ads"):
+                    return iter([])
+                if path.endswith("/insights"):
+                    return iter([])
+                return iter([])
+
+        snapshot = status.build_snapshot(
+            Fake(), now=__import__("datetime").datetime(2026, 11, 10, 21, 0, tzinfo=status.ZURICH),
+            stats_dir=self.stats, listmonk_fn=lambda: {"total": 0, "confirmed": 0, "created_last_7_days": 0},
+            generated_on="vps",
+        )
+        self.assertEqual(snapshot["meta_api_health"], "OK")
+        self.assertIsNotNone(snapshot["ads"])
+        self.assertTrue(any("Page access token" in note or "Page access token" in note.lower() or "page access token" in note.lower() for note in snapshot["page"]["notes"]))
+        text = status.format_status_text(snapshot)
+        self.assertIn("meta_api_health: OK", text)
+        self.assertIn("== Facebook Page ==", text)
+        self.assertNotIn("unavailable because Meta API is TOKEN", text)
+
+
 if __name__ == "__main__":
     unittest.main()
