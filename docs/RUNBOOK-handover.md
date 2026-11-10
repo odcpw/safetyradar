@@ -32,7 +32,7 @@ Validate an approved Reel without publishing or exposing its file:
     --dry-run --check-remote
 ```
 
-`--check-remote` adds GET-only recent-caption checks. Without it, dry-run is offline. Dry-run creates no locks, journals, or public files. The publisher enforces 1080 by 1920 H.264 yuv420p and explicit limited-range BT.709 metadata. After specific approval, replace `--dry-run` with `--execute --approval-ref <owner-message-id>`. Keep the same inputs and the default state directory on every retry. It saves and prints the published permalink, or returns the existing matching media rather than republishing.
+`--check-remote` adds GET-only recent-caption checks. Without it, dry-run is offline. Dry-run creates no locks, journals, or public files. The publisher enforces 1080 by 1920 H.264 yuv420p and explicit limited-range BT.709 metadata by default. The narrowly scoped `--approved-video-sha256 <64-hex-hash>` option pins an already approved original byte-for-byte and permits only missing primaries/transfer tags; it does not allow incorrect tags, dimensions, range, matrix or codec. Never substitute a re-render for an approved original unless that substitution was approved. After specific approval, replace `--dry-run` with `--execute --approval-ref <owner-message-id>`. Keep the same inputs and the default state directory on every retry. It saves and prints the published permalink, or returns the existing matching media rather than republishing.
 
 Prepare the payload for a PAUSED ad, without uploading or creating anything:
 
@@ -53,7 +53,7 @@ All external write paths remain untested against live Meta during setup. Only of
 
 Verification on 9 November 2026 passed 28 offline tests on cx43. Both publisher dry-runs passed input and metadata validation. The read-only ads report returned the three existing ads in CHF. Ad preparation with `--dry-run --check-remote` confirmed the existing account/ad set and literal PAUSED payload. No production journal or public MP4 was created.
 
-One access problem remains. The real Instagram recent-media GET returns HTTP 400, Meta code 10, `Application does not have permission for this action`, despite the listed scopes being granted. Therefore `publish_reel.py --dry-run --check-remote` fails, and the real publisher will stop before exposing or publishing a file. Do not bypass the duplicate check. Resolve Instagram asset/app access through the official Meta setup, then repeat the read-only check before using this publisher for an approved slot. Ads reporting and account/ad-set reads work with the same token.
+The real Instagram recent-media GET returns HTTP 400, Meta code 10, despite the listed scopes being granted. Normal publishing still stops on that error. For an individually approved agent-only post, the owner accepted marker/journal duplicate protection on 9 November: add `--allow-marker-guard --approval-ref <specific-approval>` only when that exception applies. The exception handles code 10 from the recent-media GET only; other API errors still stop. Under the global publish lock the helper checks `/srv/safetyradar/social/published/*.json`, all `state/reel-*.json` journals and `/srv/safetyradar/ops/journal.jsonl`. A published record stops another publication, including a different render with the same approval or caption hash. Unknown writes remain blocked; saved containers are read before any uncertain publish is considered. Restore recent-media access through the official Meta setup when possible. Ads reporting and account/ad-set reads work with the same token.
 
 Run the offline behavior tests on cx43:
 
@@ -224,13 +224,13 @@ The helper implements the following flow. This describes an approved publish, no
 4. Copy the MP4 to an unguessable temporary path under the currently served document root. Never copy the token, environment, caption state, or private directory there. Use HTTPS and check that the public file can be fetched.
 5. Create a container with `POST /17841429970165089/media`, `media_type=REELS`, `video_url=<temporary HTTPS URL>`, and the approved caption. Use the documented optional cover parameters only when verified for the selected API version.
 6. Poll `GET /<container-id>?fields=status_code,status` with a bounded timeout. Publish only after `FINISHED`. Stop on `ERROR` or `EXPIRED`.
-7. Recheck duplicate media, then call `POST /17841429970165089/media_publish` with `creation_id=<container-id>` once.
+7. Recheck duplicate media, then call `POST /17841429970165089/media_publish` with `creation_id=<container-id>` once. Do not repeat that POST if its response is lost.
 8. Read the returned media ID and permalink. Save both in the durable record before reporting success.
 9. Remove only the temporary file created by this job. Keep private source assets and the durable publication record.
 
 If the publish request times out, its result is unknown. Read recent media and recover the existing result before any retry. Never create another container just because the client lost the response. Keep temporary video available while Meta still needs to fetch it. If a job fails, inspect its container and state before cleanup or retry.
 
-`--dry-run` validates input and shows planned actions without copying anything into the public root or making any Meta write. Add `--check-remote` for read-only duplicate checks. The duplicate scan covers up to 1,000 recent media and fails closed if that pagination bound is exceeded. The helper publishes no custom cover. It generates a private cover for review and lets Instagram select the video cover.
+`--dry-run` validates input and shows planned actions without copying anything into the public root or making any Meta write. Add `--check-remote` for read-only duplicate checks. The duplicate scan covers up to 1,000 recent media and fails closed if that pagination bound is exceeded. Pass `--cover-file <approved-cover.png>` to supply the approved cover. The helper converts PNG to JPEG without resizing or redesign, because Meta documents JPEG for `cover_url`; the source cover hash is recorded. JPEG inputs are copied unchanged. It sends `share_to_feed=true`, verifies public video and cover bytes, and removes both temporary assets after publishing or a terminal container error. The caption is read verbatim from its UTF-8 file, including its final newline. Successful publication immediately writes `/srv/safetyradar/social/published/<marker-key>.json` and an ops-journal entry before attempting permalink lookup. Use a stable `--marker-key` such as `reel1_accident`; copy that marker to the box after verification. Never write a published marker before Meta returns a media ID.
 
 ## Rebuild the existing ad creatives
 

@@ -31,6 +31,13 @@ class OperationError(Exception):
     """A safe-to-print operational error, never a raw HTTP exception."""
 
 
+class MetaAPIError(OperationError):
+    def __init__(self, message, *, code=None, status=None):
+        super().__init__(message)
+        self.code = code
+        self.status = status
+
+
 class NoRedirects(urllib.request.HTTPRedirectHandler):
     def redirect_request(self, req, fp, code, msg, headers, newurl):
         # Never forward a bearer token to a redirect destination.
@@ -99,7 +106,8 @@ class MetaClient:
                 value = error.get(key)
                 if isinstance(value, int):
                     codes.append(f"{key}={value}")
-            raise OperationError("Meta request failed (" + ", ".join(codes) + "). No automatic write retry.") from None
+            raise MetaAPIError("Meta request failed (" + ", ".join(codes) + "). No automatic write retry.",
+                               code=error.get("code") if isinstance(error.get("code"), int) else None, status=exc.code) from None
         except (OSError, ValueError):
             raise OperationError("Meta transport/JSON failure. A submitted write may have succeeded; reconcile its journal before retrying.") from None
         if not isinstance(result, dict) or "error" in result:
@@ -149,17 +157,19 @@ def fingerprint(payload):
     return hashlib.sha256(json.dumps(payload, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
 
 
-def read_text(path, *, max_chars=2200):
+def read_text(path, *, max_chars=2200, strip=True):
     try:
-        text = Path(path).read_text(encoding="utf-8").strip()
+        text = Path(path).read_text(encoding="utf-8")
+        if strip:
+            text = text.strip()
     except (OSError, UnicodeError):
         raise OperationError("Cannot read the UTF-8 copy file.") from None
-    if not text or len(text) > max_chars:
+    if not text.strip() or len(text) > max_chars:
         raise OperationError(f"Copy must contain 1 through {max_chars} characters.")
     return text
 
 
-def probe_video(path, *, reel=False):
+def probe_video(path, *, reel=False, allow_missing_color_tags=False):
     path = Path(path)
     if not path.is_file() or path.suffix.lower() != ".mp4":
         raise OperationError("An existing MP4 input is required.")
@@ -176,7 +186,9 @@ def probe_video(path, *, reel=False):
     if not 3 <= duration <= 900:
         raise OperationError("Video duration must be between 3 and 900 seconds.")
     if reel and ((video.get("width"), video.get("height")) != (1080, 1920)
-                 or any(video.get(k) != "bt709" for k in ("color_space", "color_primaries", "color_transfer"))
+                 or video.get("color_space") != "bt709"
+                 or any(video.get(k) not in (("bt709", None) if allow_missing_color_tags else ("bt709",))
+                        for k in ("color_primaries", "color_transfer"))
                  or video.get("color_range") != "tv"):
         raise OperationError("Reel must be 1080x1920, limited-range BT.709 including primaries and transfer. Re-render with current make_reel.py.")
     return {"duration": duration, "width": video["width"], "height": video["height"],

@@ -133,8 +133,8 @@ Working directory example: `/workspace/safetyradar-social/YYYY-MM-DD-reels/`
 - IG user id (Page-backed): `17841429970165089`
 - VPS token file (root-only, mode 600): `/srv/safetyradar/.secrets/meta_token`. The box backup remains `/home/box/.secrets/meta_token`
   **Never commit or paste the token.** App must be Live; scopes include `instagram_content_publish` (and related IG scopes as granted).
-- Known preflight limitation on 2026-11-09: Instagram recent-media reads return Meta code 10 despite granted scopes. The new publisher stops before publishing. Resolve official Meta app/asset access, then repeat `--dry-run --check-remote`. Do not bypass duplicate checks.
-- Typical flow (after approval): create media container → publish container → optional cover. Do not leave temporary media world-readable on the public site longer than needed.
+- Recent-media reads return Meta code 10. Publishing stops by default. The individually approved agent-only exception uses `--allow-marker-guard --approval-ref <specific-approval>` and checks the VPS markers, state journals and ops journal under the publishing lock instead. Other errors never fall back. See the runbook before using this exception.
+- After approval: supply the approved `--cover-file`, create the REELS container with `cover_url` and `share_to_feed=true`, poll FINISHED, recheck duplicates, publish once, save the marker, and remove temporary video and cover. The cover must be supplied when creating the container, not after publication.
 - FB Page posting may require `pages_manage_posts` (often missing); IG content publish is separate.
 
 ## Renderer usage

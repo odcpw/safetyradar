@@ -50,7 +50,10 @@ class ToolsTest(unittest.TestCase):
     def args(self):
         return argparse.Namespace(state_dir=str(self.state), mp4=str(self.video),
                                   public_root=str(self.public), public_base="https://safetyradar.ch",
-                                  approval_ref="offline-test", timeout=60, poll_seconds=15)
+                                  approval_ref="offline-test", timeout=60, poll_seconds=15,
+                                  caption_file=str(self.caption), cover_file=None, marker_key="reel1_accident",
+                                  published_dir=str(self.root / "published"), ops_journal=str(self.root / "ops.jsonl"),
+                                  allow_marker_guard=False)
 
     def test_read_only_transport_blocks_posts_before_network(self):
         client = common.MetaClient(self.token)
@@ -114,6 +117,7 @@ class ToolsTest(unittest.TestCase):
                 return iter([])
             def post(self, *args, **kwargs):
                 raise AssertionError("Must not POST")
+        Fake.get = lambda *args, **kwargs: {"status_code": "FINISHED"}
         common.save_json(self.state / "reel-x.json", {"phase": "publish_pending", "container_id": "1"})
         with self.assertRaisesRegex(common.OperationError, "uncertain"):
             publisher.publish(Fake(), self.args(), "Ein Fall.", "x")
@@ -192,6 +196,104 @@ class ToolsTest(unittest.TestCase):
         with contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit) as caught:
             publisher.main([str(self.video), str(self.caption), "--execute"])
         self.assertEqual(caught.exception.code, 2)
+
+    def test_marker_fallback_only_accepts_explicit_code_10(self):
+        class Fake:
+            code = 10
+            def pages(self, *args, **kwargs):
+                raise common.MetaAPIError("safe numeric error", code=self.code, status=400)
+        args = self.args()
+        with self.assertRaises(common.MetaAPIError):
+            publisher.duplicate_check(Fake(), args, "caption", "x")
+        args.allow_marker_guard = True
+        self.assertIsNone(publisher.duplicate_check(Fake(), args, "caption", "x"))
+        Fake.code = 190
+        with self.assertRaises(common.MetaAPIError):
+            publisher.duplicate_check(Fake(), args, "caption", "x")
+
+    def test_published_marker_stops_before_any_network(self):
+        args = self.args()
+        common.save_json(publisher.marker_path(args), {"media_id": "existing", "permalink": "https://instagram.com/reel/existing"})
+        class Fake:
+            def __getattr__(self, key):
+                raise AssertionError("Published marker must stop all API calls")
+        result = publisher.publish(Fake(), args, "caption", "different-video")
+        self.assertTrue(result["duplicate"])
+        self.assertEqual(result["media_id"], "existing")
+
+    def test_ops_journal_publication_stops_different_render_identity(self):
+        args = self.args()
+        Path(args.ops_journal).write_text(json.dumps({"approval_ref": args.approval_ref, "media_id": "existing"}) + "\n")
+        self.assertEqual(publisher.check_markers(object(), args, "new-hash")["media_id"], "existing")
+
+    def test_other_uncertain_job_is_read_before_no_new_write(self):
+        args = self.args()
+        common.save_json(self.state / "reel-old.json", {"approval_ref": args.approval_ref, "container_id": "old", "phase": "publish_pending"})
+        class Fake:
+            def get(self, path, params):
+                self.asserted = path
+                return {"status_code": "PUBLISHED"}
+        fake = Fake()
+        with self.assertRaisesRegex(common.OperationError, "PUBLISHED"):
+            publisher.publish(fake, args, "caption", "new")
+        self.assertEqual(fake.asserted, "old")
+
+    def test_publisher_passes_exact_caption_and_explicit_feed_and_cover(self):
+        args = self.args()
+        args.cover_file = str(self.root / "cover.jpg")
+        Path(args.cover_file).write_bytes(b"jpeg-fixture")
+        calls = []
+        class Fake:
+            def pages(self, *args, **kwargs):
+                return iter([])
+            def get(self, path, params):
+                return {"status_code": "FINISHED"} if path == "container" else {"id": "media", "permalink": "https://instagram.com/reel/test"}
+            def post(self, path, params):
+                calls.append((path, params))
+                return {"id": "container" if path.endswith("/media") else "media"}
+        def serve(url, **kwargs):
+            return io.BytesIO((self.public / "media-tmp" / url.rsplit("/", 1)[1]).read_bytes())
+        caption = self.caption.read_text()
+        with patch.object(publisher.urllib.request, "urlopen", side_effect=serve):
+            result = publisher.publish(Fake(), args, caption, "x")
+        self.assertEqual(calls[0][1]["caption"], caption)
+        self.assertEqual(calls[0][1]["share_to_feed"], "true")
+        self.assertTrue(calls[0][1]["cover_url"].endswith(".jpg"))
+        self.assertEqual(result["media_id"], "media")
+        self.assertEqual(list((self.public / "media-tmp").iterdir()), [])
+        self.assertEqual(common.load_json(publisher.marker_path(args))["cover_source_sha256"], common.digest_file(args.cover_file))
+        self.assertIn("reel_published", Path(args.ops_journal).read_text())
+
+    def test_permalink_read_failure_keeps_success_marker_and_cannot_republish(self):
+        args = self.args()
+        common.save_json(self.state / "reel-x.json", {"phase": "processing", "container_id": "container"})
+        calls = []
+        class Fake:
+            def pages(self, *args, **kwargs):
+                return iter([])
+            def get(self, path, params):
+                if path == "container":
+                    return {"status_code": "FINISHED"}
+                raise common.MetaAPIError("read unavailable", code=10, status=400)
+            def post(self, path, params):
+                calls.append(path)
+                return {"id": "media"}
+        with self.assertRaises(common.MetaAPIError):
+            publisher.publish(Fake(), args, "caption", "x")
+        self.assertEqual(common.load_json(publisher.marker_path(args))["media_id"], "media")
+        self.assertTrue(publisher.publish(Fake(), args, "caption", "x")["duplicate"])
+        self.assertEqual(len(calls), 1)
+
+    def test_missing_color_tags_require_explicit_hash_and_wrong_hash_refused(self):
+        info = {"streams": [{"codec_type": "video", "codec_name": "h264", "pix_fmt": "yuv420p", "width": 1080,
+                            "height": 1920, "color_space": "bt709", "color_range": "tv"}], "format": {"duration": "25"}}
+        with patch.object(common.subprocess, "run", return_value=argparse.Namespace(stdout=json.dumps(info))):
+            with self.assertRaises(common.OperationError):
+                common.probe_video(self.video, reel=True)
+            self.assertIsNone(common.probe_video(self.video, reel=True, allow_missing_color_tags=True)["color_transfer"])
+        with contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit):
+            publisher.main([str(self.video), str(self.caption), "--dry-run", "--approved-video-sha256", "0" * 64])
+        self.assertEqual(common.read_text(self.caption, strip=False), self.caption.read_text())
 
     def test_ad_payload_cannot_activate_or_set_budget(self):
         payload = creator.ad_payload("name", "creative")
