@@ -663,9 +663,10 @@ class StatusSnapshotTest(unittest.TestCase):
         self.assertTrue(result["read_only"])
         self.assertFalse(self.journal.exists())
         self.assertEqual(list(self.stats.iterdir()), [])
-        with self.assertRaises(common.OperationError) as caught:
-            status.main(["--stats-dir", str(self.stats), "--archive-dir", str(self.archive),
-                         "--ops-journal", str(self.journal), "--token-file", str(self.token)])
+        with patch.object(status, "on_vps", return_value=False):
+            with self.assertRaises(common.OperationError) as caught:
+                status.main(["--stats-dir", str(self.stats), "--archive-dir", str(self.archive),
+                             "--ops-journal", str(self.journal), "--token-file", str(self.token)])
         self.assertIn("VPS", str(caught.exception))
 
 
