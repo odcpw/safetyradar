@@ -377,6 +377,9 @@ def fetch_page_insights(collector, page_id, since, until, remaining):
                 rows.extend(data)
             return rows, notes, [row.get("name") for row in rows if isinstance(row, dict)]
         except MetaAPIError as exc:
+            if page_token_required(exc):
+                notes.append("Page insights need a Page access token. /me/accounts returned no Pages, so the user token cannot read them.")
+                return rows, notes, [row.get("name") for row in rows if isinstance(row, dict)]
             if not optional_meta_failure(exc) and exc.code not in (100, 10):
                 raise
             name = invalid_metric_name(exc)
