@@ -804,10 +804,74 @@ def collect_instagram(collector):
     }
 
 
+UPDATE_UNIT = "safetyradar-update.service"
+LIVE_LINK = Path("/srv/safetyradar/www")
+RELEASE_STAMP = re.compile(r"^(\d{8}-\d{6})-")
+STALE_AFTER_HOURS = 80  # weekday runs; covers Friday -> Monday
+
+
+def _systemctl_show(unit):
+    out = subprocess.run(
+        ["systemctl", "show", unit, "--timestamp=unix", "-p", "Result", "-p", "ExecMainStatus",
+         "-p", "ActiveState", "-p", "ExecMainStartTimestamp", "-p", "ExecMainExitTimestamp"],
+        capture_output=True, text=True, timeout=20, check=True,
+    ).stdout
+    return dict(line.split("=", 1) for line in out.splitlines() if "=" in line)
+
+
+def _unix(value):
+    value = (value or "").strip().lstrip("@")
+    return datetime.fromtimestamp(int(value), ZURICH) if value.isdigit() and int(value) > 0 else None
+
+
+def collect_pipeline(now, *, show=_systemctl_show, live_link=LIVE_LINK):
+    """Daily update result and live release age. FAILED = last run did not succeed; STALE = live site not rebuilt since."""
+    info = {"available": True, "flags": []}
+    try:
+        props = show(UPDATE_UNIT)
+    except (OSError, subprocess.SubprocessError) as exc:
+        return {"available": False, "error": type(exc).__name__, "flags": ["UNKNOWN"]}
+    started, ended = _unix(props.get("ExecMainStartTimestamp")), _unix(props.get("ExecMainExitTimestamp"))
+    info.update({
+        "result": props.get("Result"), "exit_status": props.get("ExecMainStatus"), "active_state": props.get("ActiveState"),
+        "last_run_started": started.isoformat() if started else None, "last_run_ended": ended.isoformat() if ended else None,
+    })
+    running = props.get("ActiveState") in ("activating", "reloading")
+    if not running and (props.get("Result") != "success" or props.get("ExecMainStatus") not in ("0", None)):
+        info["flags"].append("FAILED")
+    release, released = None, None
+    try:
+        release = Path(live_link).resolve().name
+        m = RELEASE_STAMP.match(release)
+        released = datetime.strptime(m.group(1), "%Y%m%d-%H%M%S").replace(tzinfo=ZURICH) if m else None
+    except OSError:
+        pass
+    info["live_release"] = release
+    info["live_release_at"] = released.isoformat() if released else None
+    info["live_release_age_hours"] = round((now - released).total_seconds() / 3600, 1) if released else None
+    if released is None or (now - released).total_seconds() > STALE_AFTER_HOURS * 3600 or (
+            started and not running and released < started and "FAILED" in info["flags"]):
+        info["flags"].append("STALE")
+    return info
+
+
+def format_pipeline_line(pipeline):
+    if not pipeline:
+        return "pipeline: unknown"
+    if not pipeline.get("available"):
+        return f"pipeline: UNKNOWN (systemctl unavailable: {pipeline.get('error')})"
+    flag = "/".join(pipeline["flags"]) or "OK"
+    run = format_zurich(datetime.fromisoformat(pipeline["last_run_started"])) if pipeline.get("last_run_started") else "never"
+    age = pipeline.get("live_release_age_hours")
+    return (f"pipeline: {flag} – last daily update {run}: {pipeline.get('result')} (exit {pipeline.get('exit_status')}); "
+            f"live release {pipeline.get('live_release')} ({'?' if age is None else age} h old)")
+
+
 def format_status_text(snapshot):
     health = snapshot["meta_api_health"]
     lines = [
         "Safety Radar status snapshot",
+        format_pipeline_line(snapshot.get("pipeline")),
         f"generated_at: {snapshot['generated_at']}",
         f"generated_on: {snapshot.get('generated_on', 'unknown')}",
         f"meta_api_health: {health}",
@@ -1020,7 +1084,7 @@ def windows_for(today: date):
     }
 
 
-def build_snapshot(client, *, now, stats_dir, listmonk_fn, generated_on):
+def build_snapshot(client, *, now, stats_dir, listmonk_fn, generated_on, pipeline_fn=None):
     generated_at = now.isoformat()
     today = now.date() if isinstance(now, datetime) else now
     snapshot = {
@@ -1030,6 +1094,7 @@ def build_snapshot(client, *, now, stats_dir, listmonk_fn, generated_on):
         "meta_api_error": None,
         "read_only": True,
         "currency": "CHF",
+        "pipeline": pipeline_fn(now) if pipeline_fn else None,
     }
     collector = SnapshotCollector(client)
     snapshot["ads"] = None
@@ -1216,6 +1281,7 @@ def main(argv=None):
     client = MetaClient(args.token_file, read_only=True)
     snapshot = build_snapshot(
         client, now=now, stats_dir=args.stats_dir, listmonk_fn=listmonk_counts, generated_on=generated_on,
+        pipeline_fn=collect_pipeline,
     )
     paths = write_snapshot(
         snapshot, stats_dir=args.stats_dir, archive_dir=args.archive_dir,

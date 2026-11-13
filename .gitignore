@@ -24,6 +24,8 @@ reviewer/*.log
 
 # Internal source excerpts, audits and host attestations are never pushed with public code.
 editorial/
+# On the VPS editorial is a symlink to /srv/safetyradar/editorial (a symlink is not matched by "editorial/").
+/editorial
 
 data/llm-requests.jsonl
 

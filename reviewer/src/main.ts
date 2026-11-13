@@ -25,7 +25,7 @@ import { createTools, DATA_FILES, fetchPublicText } from "./tools.ts";
 import { applyFeedback } from "../../scripts/lib/review-feedback.mjs";
 
 // @ts-ignore – shared host-only publication boundary
-import { gateCollection, readLedger, writeLedger, reviewKey } from "../../scripts/lib/content-integrity.mjs";
+import { gateCollection, ledgerPath, readLedger, writeLedger, reviewKey } from "../../scripts/lib/content-integrity.mjs";
 // @ts-ignore – independent source verifier, never exposed as an agent write tool
 import { verifyContent } from "../../scripts/lib/verify-content.mjs";
 // @ts-ignore – fresh source retrieval, no cached fallback on access failure
@@ -72,9 +72,21 @@ function spentToday(exceptThis: boolean): number {
 function prepareWorktree() {
 	if (fs.existsSync(WT)) { log(`reusing worktree ${path.relative(ROOT, WT)}`); return; }
 	if (PUSH) git(ROOT, "fetch", "--quiet", "origin", "main");
+	// The review ledger is host-only and never tracked in git (a code sync must not be able to delete it). The worktree
+	// works on a private copy; it goes back to the host only after the review commit reached main (syncLedgerBack).
+	if (!fs.existsSync(ledgerPath(ROOT))) throw new Error(`review ledger missing: ${ledgerPath(ROOT)} – restore it; do not re-review`);
 	git(ROOT, "worktree", "add", "--detach", WT, BASE);
 	fs.symlinkSync(path.join(ROOT, "node_modules"), path.join(WT, "node_modules"));
+	fs.mkdirSync(path.dirname(ledgerPath(WT)), { recursive: true });
+	fs.copyFileSync(ledgerPath(ROOT), ledgerPath(WT));
 	log(`worktree ${path.relative(ROOT, WT)} at ${BASE} (${git(WT, "rev-parse", "--short", "HEAD")})`);
+}
+
+/** After the review commit is on main: replace the host ledger with the worktree's (atomic rename). */
+function syncLedgerBack() {
+	const tmp = `${ledgerPath(ROOT)}.tmp-${process.pid}`;
+	fs.copyFileSync(ledgerPath(WT), tmp);
+	fs.renameSync(tmp, ledgerPath(ROOT));
 }
 
 function idsOf(dir: string, file: string): Map<string, string> {
@@ -312,9 +324,9 @@ async function main() {
 	} else {
 		const title = `Daily review ${DATE}: +${n("accidents.json", "added")} accidents, +${n("rulings.json", "added")} rulings, +${n("jobs.json", "added")} jobs (-${n("jobs.json", "removed")} gone)`;
 		git(WT, "add", ...DATA_FILES.map((f) => `data/${f}`));
-		git(WT, "add", "-f", "editorial/review-ledger.json");
 		git(WT, "-c", `user.name=${AUTHOR}`, "-c", `user.email=${EMAIL}`, "commit", "--quiet", "-m", title, "-m", body);
 		run.result = PUSH ? pushToMain() : commitToLocalMain();
+		if (run.result.startsWith("pushed") || run.result.startsWith("committed")) syncLedgerBack();
 	}
 	if (!DRY && run.status === "done" && (!any || run.result.startsWith("pushed") || run.result.startsWith("committed"))) {
 		// Feed decisions back to stage 1 only when they reached main (or there was nothing to change), so review.md stops repeating them.

@@ -408,6 +408,16 @@ For a code-only site deployment, the existing documented route uses `SKIP_STAGE1
 
 The tooling change is a code-only commit on GitHub main. No production data is part of that commit. For the initial tooling deployment, merge that code commit into the clean VPS checkout rather than replaying the local data commit. A local merge keeps `653d37a` intact and reachable and keeps all editorial data on the VPS. Verify that its data-file hashes are unchanged. Do not push the resulting VPS merge. Normal future daily deployments retain the established local-data workflow.
 
+**Never run `git reset --hard` (or `git clean`, `git checkout -- .`, `git stash -u`) in `/srv/safetyradar/app`.** On 9 November 2026 a `git reset --hard origin/main` during a manual code sync deleted the force-tracked `editorial/review-ledger.json`. Every later daily run then failed the publication gate with 69 "missing or stale review" errors (10 to 12 November) while the site kept serving the 9 November build. To sync code, merge `origin/main` into the VPS `main` or let `run-daily.sh` do its rebase.
+
+## Keep the review ledger and watch the daily pipeline
+
+- The ledger (`editorial/review-ledger.json`) holds the content hash and source evidence of every reviewed accident and ruling. It is host-only and never tracked in git. On the VPS the real folder is `/srv/safetyradar/editorial`; `app/editorial` is a symlink to it, so no git operation in the app can delete it. A copy is kept on the box at `/workspace/safetyradar/editorial/review-ledger.json` (from 13 November 2026).
+- The reviewer copies the ledger into its worktree and copies it back only after its commit reached `main`. Unchanged records are never sent to the LLM; only new or changed records are verified.
+- If the ledger is missing, `run-daily.sh` stops immediately with `ERROR: review ledger missing`. Restore the file (from the box copy, or `git show <old commit>:editorial/review-ledger.json`); do **not** regenerate it by re-reviewing every record (cost, and it discards the source-verified evidence).
+- A failed `safetyradar-update.service` run triggers `safetyradar-pipeline-failed@.service`, which appends `{"event":"pipeline_failed", ...}` with the run's ERROR/WARNING lines to `/srv/safetyradar/ops/journal.jsonl`.
+- The second line of `stats/status-latest.txt` is `pipeline: OK|FAILED|STALE ...` with the last update result and the live release age. STALE means the live release is older than 80 hours or the last run failed without publishing. Check it first in every status report.
+
 ## Preserve the owner's editorial and product decisions
 
 - German-speaking ads only, with the existing Switzerland, age, and interest scope.

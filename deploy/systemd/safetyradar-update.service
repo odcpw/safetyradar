@@ -2,6 +2,8 @@
 Description=Safety Radar daily run (code pull, stage 1, e-mail intake, LLM reviewer -> local commit, atomic publish to /srv/safetyradar/www)
 After=network-online.target
 Wants=network-online.target
+# A failed run (validation gate, reviewer, build) writes a pipeline_failed entry to the ops journal.
+OnFailure=safetyradar-pipeline-failed@%n.service
 
 [Service]
 Type=oneshot

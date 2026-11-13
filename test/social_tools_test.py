@@ -596,6 +596,30 @@ class StatusSnapshotTest(unittest.TestCase):
         self.assertEqual(events[0]["fbtrace_id"], "TraceBlock")
         self.assertNotIn(self.token.read_text(), self.journal.read_text())
 
+    def test_pipeline_flags_failed_and_stale_release_at_top(self):
+        dt = __import__("datetime").datetime
+        now = dt(2026, 11, 13, 4, 0, tzinfo=status.ZURICH)
+        started = int(dt(2026, 11, 12, 7, 1, tzinfo=status.ZURICH).timestamp())
+        with tempfile.TemporaryDirectory() as tmp:
+            rel = Path(tmp) / "www.releases" / "20261109-070851-e6c3d33"
+            rel.mkdir(parents=True)
+            link = Path(tmp) / "www"
+            link.symlink_to(rel)
+            show = lambda unit: {"Result": "exit-code", "ExecMainStatus": "1", "ActiveState": "failed",
+                                 "ExecMainStartTimestamp": f"@{started}", "ExecMainExitTimestamp": f"@{started + 300}"}
+            failed = status.collect_pipeline(now, show=show, live_link=link)
+            ok = status.collect_pipeline(now, show=lambda unit: {**show(unit), "Result": "success", "ExecMainStatus": "0"},
+                                         live_link=link)
+        self.assertEqual(failed["flags"], ["FAILED", "STALE"])
+        self.assertEqual(failed["live_release_age_hours"], 92.9)
+        self.assertEqual(ok["flags"], ["STALE"])  # > 80 h without a rebuild
+        line = status.format_pipeline_line(failed)
+        self.assertTrue(line.startswith("pipeline: FAILED/STALE – last daily update 2026-11-12 07:01 Europe/Zurich: exit-code (exit 1)"))
+        text = status.format_status_text({"generated_at": now.isoformat(), "meta_api_health": "OK", "pipeline": failed,
+                                          "ads": None, "instagram": None, "page": None, "analytics": None,
+                                          "page_analytics": None, "capi": None, "listmonk": {"available": False, "error": "x"}})
+        self.assertEqual(text.splitlines()[1], line)
+
     def test_ok_snapshot_does_not_journal_and_skips_ig_insights(self):
         self.write_analytics()
         calls = []

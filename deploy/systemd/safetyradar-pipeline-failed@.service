@@ -1,0 +1,12 @@
+[Unit]
+Description=Journal a failed Safety Radar pipeline run (%i) to /srv/safetyradar/ops/journal.jsonl
+
+[Service]
+Type=oneshot
+# root: the ops journal is root-only 600. Reads unit state and that run's journal lines only.
+ExecStart=/usr/bin/python3 /srv/safetyradar/app/scripts/ops/pipeline_failed.py %i
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/srv/safetyradar/ops

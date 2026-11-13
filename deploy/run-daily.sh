@@ -24,6 +24,13 @@ export TZ=Europe/Zurich GIT_PUSH="${GIT_PUSH:-0}"
 node -e 'const [a,b]=process.versions.node.split(".").map(Number); process.exit(a>22||(a===22&&b>=19)?0:1)' \
   || { log "Node >= 22.19 required (have $(node -v))"; exit 1; }
 
+# The review ledger (content hashes of every reviewed record) is host-only and untracked; on the VPS editorial/ is a symlink
+# to /srv/safetyradar/editorial so no git operation can delete it. Without it every record looks unreviewed: stop loudly.
+if [[ ! -s editorial/review-ledger.json ]]; then
+  log "ERROR: review ledger missing ($REPO/editorial/review-ledger.json) – restore it (box copy: /workspace/safetyradar/editorial/); do NOT re-review all records"
+  exit 1
+fi
+
 if [[ -z "${SKIP_PULL:-}" ]]; then
   git checkout --quiet main
   if [[ "$GIT_PUSH" == 1 ]]; then
