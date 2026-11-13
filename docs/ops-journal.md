@@ -27,3 +27,10 @@ At 06:03, each ad still had configured `status=ACTIVE` and the homepage link. A 
 Private VPS evidence is under `/srv/safetyradar/social/retarget-homepage-2026-11-10/`, including `before.json`, `after.json`, `preflight.json`, the mobile screenshot, `operation.json`, `result.json`, and `review-readback.json`. Durable operational events are appended to `/srv/safetyradar/ops/journal.jsonl`. Neither location contains the Meta token. Old creatives were retained.
 
 The PAUSED-only creation helper's default destination was changed to the homepage so a future approved preparation cannot silently restore the old landing page. Its offline behavior test checks the destination. No Reel or newsletter was sent during this operation.
+
+## 2026-11-13 ~03:30 Europe/Zurich: server-side Meta CAPI deployed
+
+- Token check from cx43: `GET /1455663602556769` returned the dataset "safetyradar.ch"; a probe POST to `/events` with a test code returned `events_received: 1`. No new token was needed.
+- Code `02769cb` merged into the VPS checkout (local data history incl. `653d37a` kept, data hashes unchanged; VPS merge not pushed). The checkout had root-owned files from earlier root merges, which blocked a merge as `safetyradar`; ownership of `/srv/safetyradar/app` was reset to `safetyradar`.
+- Measurement unit installed with `CAPI_DATASET_ID` and `LoadCredential=meta_token`. End-to-end test with a temporary `CAPI_TEST_EVENT_CODE` drop-in: Meta accepted one `EngagedVisit` and one `Lead` (`events_received`). Drop-in removed, service restarted; test visits no longer reach Meta.
+- Site: the normal publish path is blocked by the publication gate (`validate-data`: 69 "missing or stale review" errors on rulings) and has not published since release `20261109-070851-e6c3d33`. To avoid publishing unreviewed editorial data, release `20261113-023005-e6c3d33-capi02769cb` is a copy of that live release with only the new `measurement.js` and the one-sentence Meta addition on the four privacy pages. The next successful daily run replaces it with a full build.
