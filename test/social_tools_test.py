@@ -525,6 +525,33 @@ class StatusSnapshotTest(unittest.TestCase):
         self.assertEqual(exc.code, 190)
         self.assertEqual(common.classify_meta_health(exc), "TOKEN")
 
+    def test_capi_counts_last_error_and_journal_mirror(self):
+        import datetime as dt
+        capi = Path(self.stats) / "capi"
+        capi.mkdir(parents=True, exist_ok=True)
+        (capi / "2026-11-13.json").write_text(json.dumps({
+            "day": "2026-11-13", "sent": {"EngagedVisit": 3, "Lead": 1}, "failed": {"EngagedVisit": 1}, "test": {"Lead": 1},
+            "errors": [{"at": "2026-11-13T09:00:00.000Z", "event": "EngagedVisit", "test": False, "status": 400,
+                        "code": 100, "message": "Invalid parameter", "fbtrace_id": "TraceCapi"}]}))
+        (capi / "2026-11-10.json").write_text(json.dumps({"day": "2026-11-10", "sent": {"EngagedVisit": 2}, "failed": {}, "test": {}, "errors": []}))
+        (capi / "2026-10-01.json").write_text(json.dumps({"day": "2026-10-01", "sent": {"EngagedVisit": 99}, "failed": {}, "test": {}, "errors": []}))
+        result = status.load_capi(capi, dt.date(2026, 11, 13))
+        self.assertEqual(result["today"]["sent"], {"EngagedVisit": 3, "Lead": 1})
+        self.assertEqual(result["last_7_days"]["sent"], {"EngagedVisit": 5, "Lead": 1})
+        self.assertEqual(result["today"]["failed"]["EngagedVisit"], 1)
+        self.assertEqual(result["test_today"]["Lead"], 1)
+        self.assertEqual(result["last_error"]["fbtrace_id"], "TraceCapi")
+        text = "\n".join(status.format_capi_lines(result))
+        self.assertIn("today: EngagedVisit sent 3 failed 1  Lead sent 1 failed 0", text)
+        self.assertIn("TraceCapi", text)
+        journal = Path(self.temp.name) / "journal.jsonl"
+        marker = capi / ".journaled-through"
+        self.assertEqual(status.journal_capi_errors(result, journal, marker), 1)
+        self.assertEqual(status.journal_capi_errors(result, journal, marker), 0)
+        record = json.loads(journal.read_text().splitlines()[0])
+        self.assertEqual(record["event"], "capi_error")
+        self.assertEqual(record["code"], 100)
+
     def test_health_line_is_first_status_fields_and_journal_on_block(self):
         self.write_analytics()
         calls = []

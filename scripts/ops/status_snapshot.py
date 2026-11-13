@@ -993,6 +993,9 @@ def format_status_text(snapshot):
         lines.append(pages.get("error") or analytics.get("error") or "unavailable")
     lines.append("")
 
+    lines.extend(format_capi_lines(snapshot.get("capi")))
+    lines.append("")
+
     listmonk = snapshot.get("listmonk") or {}
     lines.append("== Listmonk ==")
     if listmonk.get("available"):
@@ -1051,12 +1054,98 @@ def build_snapshot(client, *, now, stats_dir, listmonk_fn, generated_on):
     snapshot["analytics"] = load_analytics(stats_dir)
     events_dir = Path(stats_dir) / "events"
     snapshot["page_analytics"] = build_page_analytics(events_dir, today)
+    snapshot["capi"] = load_capi(Path(stats_dir) / "capi", today)
     try:
         counts = listmonk_fn()
         snapshot["listmonk"] = {"available": True, **counts}
     except OperationError as exc:
         snapshot["listmonk"] = {"available": False, "error": str(exc)}
     return snapshot
+
+
+CAPI_EVENTS = ("EngagedVisit", "Lead")
+
+
+def load_capi(capi_dir, today):
+    """Server-side Meta CAPI counters written by the measurement service (no fbc, IP or UA)."""
+    capi_dir = Path(capi_dir)
+    result = {"available": capi_dir.is_dir(), "today": {}, "last_7_days": {}, "test_today": {},
+              "errors_7_days": 0, "last_error": None, "errors": []}
+    zero = lambda: {name: 0 for name in CAPI_EVENTS}
+    result["today"] = {"sent": zero(), "failed": zero()}
+    result["last_7_days"] = {"sent": zero(), "failed": zero()}
+    result["test_today"] = zero()
+    if not capi_dir.is_dir():
+        return result
+    start = today - timedelta(days=6)
+    for path in sorted(capi_dir.glob("????-??-??.json")):
+        try:
+            day_value = date.fromisoformat(path.stem)
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except (ValueError, OSError, UnicodeError):
+            continue
+        if not isinstance(data, dict) or day_value < start or day_value > today:
+            continue
+        for bucket in ("sent", "failed"):
+            counts = data.get(bucket) if isinstance(data.get(bucket), dict) else {}
+            for name in CAPI_EVENTS:
+                value = as_int(counts.get(name))
+                result["last_7_days"][bucket][name] += value
+                if day_value == today:
+                    result["today"][bucket][name] += value
+        if day_value == today:
+            tests = data.get("test") if isinstance(data.get("test"), dict) else {}
+            for name in CAPI_EVENTS:
+                result["test_today"][name] += as_int(tests.get(name))
+        for err in data.get("errors") or []:
+            if isinstance(err, dict):
+                result["errors"].append({k: err.get(k) for k in ("at", "event", "test", "status", "code", "message", "fbtrace_id")})
+    result["errors"].sort(key=lambda e: str(e.get("at") or ""))
+    result["errors_7_days"] = len(result["errors"])
+    result["last_error"] = result["errors"][-1] if result["errors"] else None
+    result["errors"] = result["errors"][-20:]
+    return result
+
+
+def format_capi_lines(capi):
+    lines = ["== Meta Conversions API (server-side, ad-click visits only) =="]
+    if not capi or not capi.get("available"):
+        lines.append("no CAPI events recorded yet")
+        return lines
+    for label, key in (("today", "today"), ("last 7 days", "last_7_days")):
+        block = capi[key]
+        lines.append(f"{label}: " + "  ".join(
+            f"{name} sent {block['sent'][name]} failed {block['failed'][name]}" for name in CAPI_EVENTS))
+    tests = capi.get("test_today") or {}
+    if any(tests.values()):
+        lines.append("test events today: " + "  ".join(f"{name} {tests[name]}" for name in CAPI_EVENTS))
+    err = capi.get("last_error")
+    if err:
+        lines.append(f"last error: {format_zurich(err.get('at')) if err.get('at') else '?'} {err.get('event')} "
+                     f"status {err.get('status')} code {err.get('code')} {err.get('message')} fbtrace_id {err.get('fbtrace_id')}")
+    else:
+        lines.append("last error: none in 7 days")
+    return lines
+
+
+def journal_capi_errors(capi, ops_journal, marker):
+    """Mirror new CAPI errors into the root-only ops journal (the service user cannot write it)."""
+    if not capi or not ops_journal:
+        return 0
+    marker = Path(marker)
+    try:
+        last = marker.read_text(encoding="utf-8").strip()
+    except OSError:
+        last = ""
+    fresh = [e for e in capi.get("errors") or [] if str(e.get("at") or "") > last]
+    for err in fresh:
+        append_jsonl(ops_journal, {"at": err.get("at"), "operation": "capi_send", "event": "capi_error",
+                                   "capi_event": err.get("event"), "test": err.get("test"), "status": err.get("status"),
+                                   "code": err.get("code"), "message": err.get("message"), "fbtrace_id": err.get("fbtrace_id")})
+    if fresh:
+        marker.parent.mkdir(parents=True, exist_ok=True)
+        marker.write_text(str(fresh[-1].get("at")) + "\n", encoding="utf-8")
+    return len(fresh)
 
 
 def write_snapshot(snapshot, *, stats_dir, archive_dir, ops_journal, now):
@@ -1074,6 +1163,7 @@ def write_snapshot(snapshot, *, stats_dir, archive_dir, ops_journal, now):
     save_json(archive_dir / f"status-{day}.json", snapshot)
     (archive_dir / f"status-{day}.json").chmod(0o644)
     save_text(archive_dir / f"status-{day}.txt", text, mode=0o644)
+    journal_capi_errors(snapshot.get("capi"), ops_journal, stats_dir / "capi" / ".journaled-through")
     if snapshot["meta_api_health"] != "OK" and ops_journal:
         error = snapshot.get("meta_api_error") or {}
         append_jsonl(ops_journal, {

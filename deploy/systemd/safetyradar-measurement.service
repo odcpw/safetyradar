@@ -1,10 +1,14 @@
 [Unit]
-Description=Safety Radar cookieless aggregate measurement (no reader identifiers)
+Description=Safety Radar cookieless aggregate measurement and server-side Meta CAPI for ad clicks
 After=network.target
 [Service]
 User=safetyradar
 Group=safetyradar
 WorkingDirectory=/srv/safetyradar/app
+# Meta Conversions API: dataset id is public; the root-only token is passed as a systemd credential.
+# A temporary CAPI_TEST_EVENT_CODE may only live in a drop-in during a test and must be removed after.
+Environment=CAPI_DATASET_ID=1455663602556769
+LoadCredential=meta_token:/srv/safetyradar/.secrets/meta_token
 ExecStart=/usr/bin/node /srv/safetyradar/app/deploy/analytics/server.mjs
 Restart=on-failure
 RestartSec=3

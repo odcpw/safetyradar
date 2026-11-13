@@ -355,7 +355,7 @@ Website pageviews and Meta link clicks are different counters. Never call either
 
 Read `/srv/safetyradar/stats/analytics-latest.txt` for cookieless website cohorts. Newsletter links use `utm_source=newsletter`, `utm_medium=email`, and ISO-week `utm_campaign=2026-w46`. Do not confuse this with the ads' `de-2026-w46` campaign.
 
-The collector stores daily aggregate counters for 56 days. It has no cookies, local storage, fingerprint, reader ID, IP address, email field, Meta Pixel, CAPI, or email-open tracking. It honours GPC and DNT. Submissions, accepted responses, and confirmed responses are separate funnel stages, not additive conversions. Confirmed responses are intentionally not joined to the original ad cohort. Use `sr_test=1` for internal browser tests and `test:true` for test events.
+The collector stores daily aggregate counters for 56 days. It has no cookies, local storage, fingerprint, reader ID, IP address, email field, Meta Pixel, or email-open tracking. The one exception is the server-side Meta Conversions API for ad-click visits, described in the CAPI section below. It honours GPC and DNT. Submissions, accepted responses, and confirmed responses are separate funnel stages, not additive conversions. Confirmed responses are intentionally not joined to the original ad cohort. Use `sr_test=1` for internal browser tests and `test:true` for test events.
 
 ## Handle the Meta token
 
@@ -419,7 +419,7 @@ The tooling change is a code-only commit on GitHub main. No production data is p
 - Keep curated lessons tied to an approved corpus and the specific case.
 - Use Swiss spelling and AS/GS terminology.
 - Prefer pragmatic accuracy over extra machinery.
-- Keep measurement cookieless. Do not add an intrusive cookie banner, Meta Pixel, CAPI, or personal tracking.
+- Keep measurement cookieless. Do not add an intrusive cookie banner, a browser Meta Pixel (`fbq`/`fbevents.js`), or personal tracking. Server-side CAPI for ad-click visits only was owner-approved on 13 November 2026; do not widen it.
 - Keep the newsletter simple.
 
 ## Get approval for external changes
@@ -453,3 +453,15 @@ If newsletter build or link checks fail, hold the send and report the concrete p
 If a data rebase conflicts, preserve the local data history and stop the sync. Do not push it or discard it to make a code deploy pass.
 
 Read relevant service logs with `journalctl -u <service>`. Never dump environment files, credential files, subscriber records, or full HTTP request headers into logs or chat.
+
+## Meta Conversions API (server-side, ad-click visits only)
+
+Approved by the owner on 13 November 2026. The owner created dataset `1455663602556769` ("safetyradar.ch") in Events Manager. The browser pixel snippet Meta shows for that dataset must **not** be installed.
+
+- What is sent: `EngagedVisit` (homepage or a single accident/ruling page, at least 20 s active or scrolled to the bottom) and `Lead` (newsletter form submitted). Only for visits whose URL carried Meta's `fbclid`. Payload: `fbc`, client IP, user agent, page URL without query, `event_id` hash of event + click ID. No email or hashed email.
+- Where: `deploy/analytics/capi.mjs`, called fire-and-forget from `safetyradar-measurement.service`. The service gets the existing root-only token through `LoadCredential=meta_token:...`; `CAPI_DATASET_ID` is set in the unit. Calls go from cx43 only.
+- Counters: `/srv/safetyradar/stats/capi/YYYY-MM-DD.json` (sent/failed/test per event, last 20 sanitised errors). The status snapshot shows "Meta Conversions API" totals for today and 7 days and the last error, and mirrors new errors into `ops/journal.jsonl` as `capi_error`.
+- Privacy: each language's privacy page says that for visitors from a Meta ad the server sends Meta the click ID, IP address, browser type, and whether they read for a while or signed up, and that we do not store these details.
+- Test: create `/etc/systemd/system/safetyradar-measurement.service.d/capi-test.conf` with `[Service]` and `Environment=CAPI_TEST_EVENT_CODE=<code from Events Manager > Test events>`, `systemctl daemon-reload && systemctl restart safetyradar-measurement`, send `test:true` beacons (or open a page with `?sr_test=1&fbclid=...`), check Test events, then delete the drop-in, reload, and restart. Real visits never carry the test code, and test visits never reach Meta without it.
+- Not changed: campaign optimization goal, budget, targeting, creatives. Switching the ad set to optimize for `EngagedVisit` needs owner approval and resets learning; wait for a few dozen events first.
+- Troubleshooting: `failed` counts with code 190/200 mean the token or account is blocked (same as the status snapshot health). If Meta rejects the dataset for this token, the owner can generate a dataset-specific CAPI token in Events Manager > dataset Settings > Conversions API; it is collected through a secure secret field, never chat.
