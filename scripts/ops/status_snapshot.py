@@ -855,6 +855,46 @@ def collect_pipeline(now, *, show=_systemctl_show, live_link=LIVE_LINK):
     return info
 
 
+REVIEWER_STATE = VPS_APP / "reviewer" / "state"
+REVIEW_FILE = re.compile(r"^review-(\d{4}-\d{2}-\d{2})\.md$")
+
+
+def _review_run(path):
+    text = path.read_text(encoding="utf-8", errors="replace")
+    changes = text.split("### Changes", 1)[1].split("\n### ", 1)[0] if "### Changes" in text else ""
+    added = len(re.findall(r"^- added (?:accidents|rulings)\.json:", changes, re.M))
+    held = 0
+    answer = text.split("Agent answer:", 1)[1] if "Agent answer:" in text else ""
+    match = re.search(r"\{[\s\S]*\}", answer)
+    if match:
+        try:
+            held = len(json.loads(match.group(0)).get("held") or [])
+        except (ValueError, AttributeError):
+            held = 0
+    return {"date": REVIEW_FILE.match(path.name).group(1), "added_records": added, "held": held}
+
+
+def collect_reviewer(state_dir=REVIEWER_STATE, runs=2):
+    """WARN when the last `runs` reviews added no accident/ruling while the agent held candidates (no LLM, files only)."""
+    try:
+        files = sorted(p for p in Path(state_dir).iterdir() if REVIEW_FILE.match(p.name))[-runs:]
+    except OSError as exc:
+        return {"available": False, "error": type(exc).__name__}
+    recent = [_review_run(p) for p in files]
+    warn = len(recent) == runs and all(r["added_records"] == 0 and r["held"] > 0 for r in recent)
+    return {"available": True, "recent": recent, "warn": warn}
+
+
+def format_reviewer_line(reviewer):
+    if not reviewer or not reviewer.get("available"):
+        return None
+    if not reviewer["warn"]:
+        return None
+    runs = ", ".join(f"{r['date']} held {r['held']}" for r in reviewer["recent"])
+    return (f"reviewer: WARN – no new accident/ruling added in the last {len(reviewer['recent'])} runs while candidates were held "
+            f"({runs}); read the held reasons in reviewer/state/review-<date>.md")
+
+
 def format_pipeline_line(pipeline):
     if not pipeline:
         return "pipeline: unknown"
@@ -872,6 +912,7 @@ def format_status_text(snapshot):
     lines = [
         "Safety Radar status snapshot",
         format_pipeline_line(snapshot.get("pipeline")),
+        *([line] if (line := format_reviewer_line(snapshot.get("reviewer"))) else []),
         f"generated_at: {snapshot['generated_at']}",
         f"generated_on: {snapshot.get('generated_on', 'unknown')}",
         f"meta_api_health: {health}",
@@ -1084,7 +1125,7 @@ def windows_for(today: date):
     }
 
 
-def build_snapshot(client, *, now, stats_dir, listmonk_fn, generated_on, pipeline_fn=None):
+def build_snapshot(client, *, now, stats_dir, listmonk_fn, generated_on, pipeline_fn=None, reviewer_fn=None):
     generated_at = now.isoformat()
     today = now.date() if isinstance(now, datetime) else now
     snapshot = {
@@ -1095,6 +1136,7 @@ def build_snapshot(client, *, now, stats_dir, listmonk_fn, generated_on, pipelin
         "read_only": True,
         "currency": "CHF",
         "pipeline": pipeline_fn(now) if pipeline_fn else None,
+        "reviewer": reviewer_fn() if reviewer_fn else None,
     }
     collector = SnapshotCollector(client)
     snapshot["ads"] = None
@@ -1281,7 +1323,7 @@ def main(argv=None):
     client = MetaClient(args.token_file, read_only=True)
     snapshot = build_snapshot(
         client, now=now, stats_dir=args.stats_dir, listmonk_fn=listmonk_counts, generated_on=generated_on,
-        pipeline_fn=collect_pipeline,
+        pipeline_fn=collect_pipeline, reviewer_fn=collect_reviewer,
     )
     paths = write_snapshot(
         snapshot, stats_dir=args.stats_dir, archive_dir=args.archive_dir,

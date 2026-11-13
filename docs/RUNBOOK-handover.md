@@ -417,6 +417,7 @@ The tooling change is a code-only commit on GitHub main. No production data is p
 - If the ledger is missing, `run-daily.sh` stops immediately with `ERROR: review ledger missing`. Restore the file (from the box copy, or `git show <old commit>:editorial/review-ledger.json`); do **not** regenerate it by re-reviewing every record (cost, and it discards the source-verified evidence).
 - A failed `safetyradar-update.service` run triggers `safetyradar-pipeline-failed@.service`, which appends `{"event":"pipeline_failed", ...}` with the run's ERROR/WARNING lines to `/srv/safetyradar/ops/journal.jsonl`.
 - The second line of `stats/status-latest.txt` is `pipeline: OK|FAILED|STALE ...` with the last update result and the live release age. STALE means the live release is older than 80 hours or the last run failed without publishing. Check it first in every status report.
+- A third line `reviewer: WARN …` appears when the last two daily reviews added no new accident/ruling while the agent held candidates. Read the held reasons in `reviewer/state/review-<date>.md`. "Host review unavailable" is never a valid reason (fixed 13 November 2026: the agent proposes, the host source gate decides).
 
 ## Preserve the owner's editorial and product decisions
 

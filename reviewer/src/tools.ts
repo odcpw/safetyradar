@@ -13,8 +13,11 @@ import { defineTool, type ToolExecutionResult } from "@earendil-works/pi-durable
 import { allowedByRobots, htmlToText, UA } from "../../scripts/lib/fetch-text.mjs";
 // @ts-ignore – shared deterministic lesson validation
 import { lessonErrors } from "../../scripts/lib/lesson-refs.mjs";
+// @ts-ignore – plain JS module, unit-tested in test/redirect-cookies.test.mjs
+import { RedirectCookies } from "../../scripts/lib/redirect-cookies.mjs";
 
 const run = promisify(execFile);
+export const RUN_CHECKS_OK = "Shape checks passed. After your final answer the host automatically verifies every accident/ruling you upserted against its source and publishes only what passes; nothing for you to wait for. Continue with the remaining candidates.";
 export const DATA_FILES = ["accidents.json", "rulings.json", "jobs.json"] as const;
 type DataFile = (typeof DATA_FILES)[number];
 const INPUT_PREFIXES = ["data/review.md", "data/drafts/", "data/inbox/", "data/jobs-queue-summary.md", "data/queue-report.md", "docs/"];
@@ -75,10 +78,15 @@ async function assertPublic(u: URL) {
 }
 export async function fetchPublicText(url: string): Promise<{ status: number; finalUrl: string; text: string }> {
 	let u = new URL(url);
+	const cookies = new RedirectCookies();
 	for (let hop = 0; hop < 5; hop++) {
 		await assertPublic(u);
 		if (!(await allowedByRobots(u.href))) throw new Error(`robots.txt disallows ${u.href}`);
-		const r = await fetch(u, { headers: { "User-Agent": UA, Accept: "text/html,application/pdf,text/plain;q=0.9,*/*;q=0.1" }, redirect: "manual", signal: AbortSignal.timeout(30_000) });
+		const headers: Record<string, string> = { "User-Agent": UA, Accept: "text/html,application/pdf,text/plain;q=0.9,*/*;q=0.1" };
+		const cookie = cookies.header(u.href);
+		if (cookie) headers.Cookie = cookie;
+		const r = await fetch(u, { headers, redirect: "manual", signal: AbortSignal.timeout(30_000) });
+		cookies.absorb(u.href, r.headers);
 		if (r.status >= 300 && r.status < 400 && r.headers.get("location")) { u = new URL(r.headers.get("location")!, u); continue; }
 		if (!r.ok) return { status: r.status, finalUrl: u.href, text: "" };
 		const len = Number(r.headers.get("content-length") || 0);
@@ -251,7 +259,7 @@ export function createTools(roots: Roots) {
 
 	const runChecks = defineTool({
 		name: "run_checks",
-		description: "Run the data validation (scripts/validate-data.mjs) and the site build (npm run build) in the review checkout. Returns errors, or OK. Candidate changes still require the separate host source gate.",
+		description: "Run the data validation (scripts/validate-data.mjs) and the site build (npm run build) in the review checkout. Returns errors, or OK. After you finish, the host automatically source-checks every accident/ruling you upserted.",
 		parameters: Type.Object({}),
 		replay: "safe",
 		execute: async () => {
@@ -259,7 +267,7 @@ export function createTools(roots: Roots) {
 			// The validator comes from the reviewer's own checkout (it may not exist on the base branch yet).
 			try { await run("node", [path.join(roots.input, "scripts/validate-data.mjs"), path.join(roots.work, "data"), "--candidate-shape"], { cwd: roots.work, env, maxBuffer: 8e6 }); }
 			catch (e: any) { return text(`validation FAILED:\n${String(e.stdout ?? "").slice(-4000)}\n${String(e.stderr ?? "").slice(-4000)}`, true); }
-			return text("Candidate shape checks passed. NOT approved for publication: the host will independently verify source evidence, hold failures, and build only accepted data.");
+			return text(RUN_CHECKS_OK);
 		},
 	});
 

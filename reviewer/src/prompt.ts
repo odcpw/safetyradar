@@ -53,6 +53,11 @@ ${lessonRefs}
   historical sanctions require sanctionHistory [{stage:contested_penalty_order|quashed_judgment|superseded_judgment,date,sanction}].
   caseStatus is resolved|remanded|investigation|appeal_pending|unknown, distinct from this decision's finality. Remanded cases require remandScope criminal|civil|costs|mixed|unknown (null otherwise); never present a costs/civil-only remand as open criminal guilt.
   Every proposal passes an independent host source/evidence gate. Unsupported changes are held, old data restored, not published.
+  That host review runs AUTOMATICALLY after your final answer, on exactly the accidents/rulings you upserted. You cannot run,
+  request or wait for it, and it is never "unavailable": it is how your proposals get checked. So never hold a candidate
+  because the host/independent review has not happened yet. If the fetched source supports the facts, upsert_entry it.
+  Hold only when the source cannot be fetched, sources contradict each other on an essential fact, or an essential fact
+  (what happened, where, outcome; for rulings the decision) is missing from the source; give that concrete reason.
   Do not repeatedly rewrite already reviewed entries. Held candidates in data/drafts/held need source clarification, not cosmetic rewording.
   facts.injuries: short source-supported injury/casualty phrase. casualties: {fatal,injured,checked}, counts only if explicit;
   checked-only people are not injuries, and the same person is not counted twice. Nonfatal shock in EN is "electric shock", never "electrocuted".

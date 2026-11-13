@@ -620,6 +620,30 @@ class StatusSnapshotTest(unittest.TestCase):
                                           "page_analytics": None, "capi": None, "listmonk": {"available": False, "error": "x"}})
         self.assertEqual(text.splitlines()[1], line)
 
+    def test_reviewer_warns_after_two_runs_without_new_records_but_with_holds(self):
+        def review(added, held):
+            changes = "".join(f"- added accidents.json: `a{i}`\n" for i in range(added)) + "- added jobs.json: `j`\n"
+            answer = json.dumps({"added": [], "held": [{"url": f"https://x/{i}", "reason": "r"} for i in range(held)]})
+            return f"Automated daily review\n\n### Changes (from the data diff)\n{changes}\n### Notes\nn\n\nChecks: passed\n\nAgent answer:\n\n{answer}\n"
+        with tempfile.TemporaryDirectory() as tmp:
+            state = Path(tmp)
+            (state / "review-2026-11-09.md").write_text(review(3, 1), encoding="utf-8")
+            (state / "review-2026-11-12.md").write_text(review(0, 5), encoding="utf-8")
+            (state / "review-2026-11-13-dry.md").write_text(review(4, 0), encoding="utf-8")  # dry runs ignored
+            (state / "review-2026-11-13.md").write_text(review(0, 7), encoding="utf-8")
+            warn = status.collect_reviewer(state)
+            (state / "review-2026-11-13.md").write_text(review(2, 7), encoding="utf-8")
+            ok = status.collect_reviewer(state)
+        self.assertTrue(warn["warn"])
+        self.assertEqual([r["date"] for r in warn["recent"]], ["2026-11-12", "2026-11-13"])
+        self.assertTrue(status.format_reviewer_line(warn).startswith("reviewer: WARN – no new accident/ruling added in the last 2 runs"))
+        self.assertFalse(ok["warn"])
+        self.assertIsNone(status.format_reviewer_line(ok))
+        text = status.format_status_text({"generated_at": "2026-11-13T04:00:00+01:00", "meta_api_health": "OK", "pipeline": None,
+                                          "reviewer": warn, "ads": None, "instagram": None, "page": None, "analytics": None,
+                                          "page_analytics": None, "capi": None, "listmonk": {"available": False, "error": "x"}})
+        self.assertTrue(text.splitlines()[2].startswith("reviewer: WARN"))
+
     def test_ok_snapshot_does_not_journal_and_skips_ig_insights(self):
         self.write_analytics()
         calls = []

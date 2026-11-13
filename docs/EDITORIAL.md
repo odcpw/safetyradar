@@ -96,6 +96,9 @@ extracts paragraph-bound evidence, verifies each person's allegation/provision/s
 outcomes/counts, chronology, sanctions and lesson prerequisites. A separate high-effort structured source review must approve every dimension and report no concrete issues; input-only classification is not sufficient for this complex legal review.
 Missing source, missing answer, uncertainty, invalid evidence or API failure means **hold**: retain the previous entry,
 exclude a new entry, and keep the candidate in `data/drafts/held/`. One proposal/review per attempt; no rewrite-until-pass loop.
+This host review runs automatically on every record the reviewer agent proposes (upserts), after the agent finishes. The agent
+must not hold a source-supported candidate because that review "has not happened" or "is unavailable"; it proposes the record
+and the host decides. The agent holds only for a concrete source problem (not fetchable, contradictory, essential fact missing).
 A held source must not be marked published or permanently rejected by agent feedback.
 
 `editorial/review-ledger.json` is host-only, not a public endpoint: content hashes, source hashes, sections, exact excerpts
