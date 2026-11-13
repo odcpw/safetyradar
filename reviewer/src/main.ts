@@ -23,6 +23,8 @@ import { PRICES, totalUsd, usdFor } from "./cost.ts";
 import { systemPrompt } from "./prompt.ts";
 import { createTools, DATA_FILES, fetchPublicText } from "./tools.ts";
 import { applyFeedback } from "../../scripts/lib/review-feedback.mjs";
+// @ts-ignore – plain JS module, unit-tested in test/review-session.test.mjs
+import { reviewSession } from "../../scripts/lib/review-session.mjs";
 
 // @ts-ignore – shared host-only publication boundary
 import { gateCollection, ledgerPath, readLedger, writeLedger, reviewKey } from "../../scripts/lib/content-integrity.mjs";
@@ -52,7 +54,9 @@ const AUTHOR = env("GIT_AUTHOR_NAME", "odcpw"), EMAIL = env("GIT_AUTHOR_EMAIL", 
 const TAG = `${DATE}${DRY ? "-dry" : ""}`;
 const WT = path.join(STATE, `worktree-${TAG}`);
 const RUN_FILE = path.join(STATE, `run-${TAG}.json`);
-const USAGE_FILE = path.join(STATE, `usage-${TAG}.json`);
+// The usage file is per stored conversation (session), so a fresh session on the same day still counts the earlier spend.
+const usageFile = (session: string) => path.join(STATE, `usage-${session}.json`);
+let SESSION = TAG;
 
 const log = (...a: unknown[]) => console.log(`[reviewer ${new Date().toLocaleTimeString("de-CH", { timeZone: "Europe/Zurich" })}]`, ...a);
 const git = (cwd: string, ...a: string[]) => execFileSync("git", a, { cwd, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }).trim();
@@ -65,7 +69,7 @@ fs.mkdirSync(STATE, { recursive: true });
 
 /** Spend of all reviewer sessions today (dry and real), from their usage files – the daily/test budget. */
 function spentToday(exceptThis: boolean): number {
-	return fs.readdirSync(STATE).filter((f) => f.startsWith(`usage-${DATE}`) && (!exceptThis || f !== path.basename(USAGE_FILE)))
+	return fs.readdirSync(STATE).filter((f) => f.startsWith(`usage-${DATE}`) && (!exceptThis || f !== path.basename(usageFile(SESSION))))
 		.reduce((s, f) => s + (readJson(path.join(STATE, f), { usd: 0 }).usd ?? 0), 0);
 }
 
@@ -108,6 +112,10 @@ function changes() {
 }
 
 async function runAgent(run: any): Promise<{ answer: string; status: string; usd: number }> {
+	const resumed = run.started === true;
+	SESSION = run.session = reviewSession(run, TAG);
+	writeJson(RUN_FILE, run);
+	log(`${resumed ? "resuming" : "new"} reviewer session ${SESSION}`);
 	const otherSpend = spentToday(true);
 	const cap = Math.min(MAX_USD, DAILY_MAX_USD - otherSpend);
 	if (cap <= 0.05) throw new Error(`daily reviewer budget exhausted (spent ${otherSpend.toFixed(3)} of ${DAILY_MAX_USD})`);
@@ -156,7 +164,7 @@ async function runAgent(run: any): Promise<{ answer: string; status: string; usd
  provider.stream = (model, context, options) => instrument(model.id, options, opts => stream(model, context, opts));
  provider.streamSimple = (model, context, options) => instrument(model.id, options, opts => simple(model, context, opts));
  models.setProvider(provider);
-	const storage = await openNodeSqliteStorage(path.join(STATE, `review-${TAG}.sqlite`));
+	const storage = await openNodeSqliteStorage(path.join(STATE, `review-${SESSION}.sqlite`));
 	const harness = await Harness.open(storage, {
 		models, registry,
 		settings: { retry: { maxRetries: 0 }, afterFailedRun: "withdraw" },
@@ -164,7 +172,6 @@ async function runAgent(run: any): Promise<{ answer: string; status: string; usd
 		onReport: (r: any) => log(`report ${r.kind}${r.reason ? " " + r.reason : ""}`),
 	}, ctx);
 	const root = await harness.root(ctx, { agent: { model: { provider: "openai", modelId: MODEL }, thinkingLevel: THINKING } });
-	const resumed = run.started === true;
 	harness.resume(); // continues a run the previous (crashed) process left unfinished
 	if (resumed) log("resuming the stored conversation after a restart");
 
@@ -172,7 +179,7 @@ async function runAgent(run: any): Promise<{ answer: string; status: string; usd
 	const tick = async () => {
 		usd = totalUsd((await harness.usage(ctx)) as any);
 		maxStep = Math.max(maxStep, usd - lastUsd); lastUsd = usd;
-		writeJson(USAGE_FILE, { date: DATE, session: TAG, model: MODEL, usd: +usd.toFixed(5), updated: new Date().toISOString() });
+		writeJson(usageFile(SESSION), { date: DATE, session: SESSION, model: MODEL, usd: +usd.toFixed(5), updated: new Date().toISOString() });
 		// Stop before the next request could cross the cap: keep 1.5x the largest single step as margin.
 		if (!overBudget && usd + 1.5 * maxStep >= cap) {
 			overBudget = true;
@@ -185,7 +192,7 @@ async function runAgent(run: any): Promise<{ answer: string; status: string; usd
 
 	run.started = true; writeJson(RUN_FILE, run);
 	const content = `Today is ${DATE}. Do the daily review of Safety Radar per the house rules: list_inputs, read data/review.md and the inbox items, dedupe against the published files, verify against sources, edit the data files, run_checks, then give the JSON summary.`;
-	const sub = await root.submit({ type: "input", content, requestId: `review-${TAG}` }, ctx);
+	const sub = await root.submit({ type: "input", content, requestId: `review-${SESSION}` }, ctx);
 	const settled = await sub.wait(ctx);
 	clearInterval(timer);
 	await tick();
@@ -265,7 +272,7 @@ async function main() {
 		const r = await runAgent(run);
 		Object.assign(run, { phase: "finalize", answer: r.answer, status: r.status, usd: r.usd });
 		writeJson(RUN_FILE, run);
-		fs.appendFileSync(path.join(ROOT, "data/llm-usage.jsonl"), JSON.stringify({ script: "reviewer", session: TAG, model: MODEL, date: DATE, usd: +r.usd.toFixed(5), status: r.status }) + "\n");
+		fs.appendFileSync(path.join(ROOT, "data/llm-usage.jsonl"), JSON.stringify({ script: "reviewer", session: run.session ?? TAG, model: MODEL, date: DATE, usd: +r.usd.toFixed(5), status: r.status }) + "\n");
 	}
 	const summary = parseSummary(run.answer);
 	const heldUrls: string[] = [];
