@@ -585,7 +585,7 @@ def aggregate_pages(day_map, chosen):
 def build_page_analytics(events_dir, today):
     days = read_event_days(events_dir)
     if not days:
-        return {"available": False, "error": "No retained cookieless event files were found.",
+        return {"available": False, "error": "No retained aggregate event files were found.",
                 "events_dir": str(events_dir)}
     windows = {}
     for kind, title in (("today", "Today"), ("last_7", "Last 7 days"), ("all_time", "All-time")):
@@ -1042,7 +1042,7 @@ def format_status_text(snapshot):
     lines.append("== Website page analytics ==")
     if pages.get("available"):
         lines.append(
-            "Windows are Europe/Zurich days from cookieless event files. "
+            "Windows are Europe/Zurich days from aggregate event files. "
             f"All-time covers {pages.get('retained_days', 0)} retained days"
             + (f" ({pages.get('retained_from')} through {pages.get('retained_through')})"
                if pages.get("retained_from") else "")

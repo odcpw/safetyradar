@@ -70,16 +70,16 @@ test('test events go to Meta only with test_event_code; failures are counted wit
   const j=JSON.parse(raw);assert.equal(j.failed.EngagedVisit,1);assert.equal(j.errors[0].code,100);assert.equal(j.errors[0].fbtrace_id,'Ftrace');
  }finally{fs.rmSync(dir,{recursive:true,force:true});}
 });
-test('website client sends fbc only when fbclid is present and never stores it',()=>{
+test('website client sends fbc only when fbclid is present and never stores it (the only cookie is the random sr_vid)',()=>{
  const run=(href)=>{const events=[],listeners={},formListeners={},links=[{href:'https://safetyradar.ch/de/newsletter/'}];let now=0,tick;
   const form={action:'https://news.safetyradar.ch/subscription/form',addEventListener:(n,f)=>formListeners[n]=f};
-  const document={documentElement:{lang:'de'},visibilityState:'visible',querySelectorAll:q=>q==='a[href]'?links:[form],querySelector:()=>({getBoundingClientRect:()=>({top:0,height:1000})}),addEventListener:(n,f)=>listeners[n]=f};
-  const sandbox={navigator:{},location:new URL(href),URL,URLSearchParams,campaignFromParams,campaignQuery,document,performance:{now:()=>now},innerHeight:800,setInterval:f=>{tick=f;return 1;},clearInterval(){},addEventListener:(n,f)=>listeners[n]=f,fetch:(u,o)=>{events.push(JSON.parse(o.body));return Promise.resolve();}};
+  const document={cookie:'',documentElement:{lang:'de'},visibilityState:'visible',querySelectorAll:q=>q==='a[href]'?links:[form],querySelector:()=>({getBoundingClientRect:()=>({top:0,height:1000})}),addEventListener:(n,f)=>listeners[n]=f};
+  const sandbox={crypto:globalThis.crypto,Uint8Array,navigator:{},location:new URL(href),URL,URLSearchParams,campaignFromParams,campaignQuery,document,performance:{now:()=>now},innerHeight:800,setInterval:f=>{tick=f;return 1;},clearInterval(){},addEventListener:(n,f)=>listeners[n]=f,fetch:(u,o)=>{events.push(JSON.parse(o.body));return Promise.resolve();}};
   vm.runInNewContext(fs.readFileSync('public/measurement.js','utf8').replace(/^import .*\n/,''),sandbox);
-  formListeners.submit();for(let i=0;i<25;i++){now+=1000;tick();}listeners.pagehide();return {events,links,form};};
+  formListeners.submit();for(let i=0;i<25;i++){now+=1000;tick();}listeners.pagehide();return {events,links,form,cookie:document.cookie};};
  const ad=run('https://safetyradar.ch/de/?utm_source=fb&utm_medium=paid_social&utm_campaign=de-2026-w46&utm_content=b&fbclid=IwAR0abcDEF_ghi-123');
  assert.equal(ad.events[0].fbc,undefined);assert.match(ad.events[1].fbc,/^fb\.1\.\d{13}\.IwAR0abcDEF_ghi-123$/);assert.match(ad.events[2].fbc,/^fb\.1\.\d{13}\.IwAR0abcDEF_ghi-123$/);
  assert.ok(ad.links[0].href.includes('fbclid=IwAR0abcDEF_ghi-123'));assert.ok(!ad.form.action.includes('fbclid'));
  const plain=run('https://safetyradar.ch/de/');assert.ok(plain.events.every(e=>!('fbc' in e)));assert.ok(!plain.links[0].href.includes('fbclid'));
- const src=fs.readFileSync('public/measurement.js','utf8');assert.ok(!/localStorage|sessionStorage|document\.cookie/.test(src));
+ const src=fs.readFileSync('public/measurement.js','utf8');assert.ok(!/localStorage|sessionStorage/.test(src));assert.match(ad.cookie,/^sr_vid=[a-f0-9]{32};/);assert.ok(!ad.cookie.includes('IwAR'));
 });

@@ -55,7 +55,7 @@ Still to add for SES and ImprovMX (values come from the SES and ImprovMX console
 - A/B: send variant A with `content: 'a'` and B with `content: 'b'` (e.g. two campaigns to split lists); the weekly stats break clicks down by campaign and content. No test is set up yet.
 
 ## Aggregate website/newsletter measurement
-- See `deploy/analytics/README.md`: cookieless first-party cohorts, no email/reader linkage, active-reading samples and separate submission/accepted/confirmed response counts.
+- See `deploy/analytics/README.md`: first-party cohorts plus per-visitor journeys from one random-ID cookie (sr_vid), no email linkage, active-reading samples and separate submission/accepted/confirmed response counts.
 - Caddy now writes `safetyradar-pages.log`: known public HTML paths only, no raw query/referrer/IP. Closed historical logs are sanitized and expire after the existing 56-day policy (weekly cleanup).
 - `/srv/safetyradar/stats/analytics-latest.{json,txt}` is refreshed every minute; existing weekly request summaries remain separate. Neither metric is a unique-reader or unique-click count.
 - Internal browser checks use `sr_test=1`; event checks use `test:true`. No measurement endpoint submits an email or sends a campaign.

@@ -2,7 +2,11 @@ import {campaignFromParams,campaignQuery} from './measurement-core.mjs';
 function start(){
  if(navigator.doNotTrack==='1'||navigator.globalPrivacyControl)return;
  const url=new URL(location.href),cohort=campaignFromParams(url.searchParams),test=url.searchParams.get('sr_test')==='1';
- const context={page:location.pathname,...cohort,test};
+ // One first-party analytics cookie: a random visitor ID (no personal data), 90 days, not renewed.
+ const hex=n=>Array.from(crypto.getRandomValues(new Uint8Array(n)),b=>b.toString(16).padStart(2,'0')).join('');
+ let vid=(/(?:^|;\s*)sr_vid=([a-f0-9]{32})(?:;|$)/.exec(document.cookie||'')||[])[1];
+ if(!vid){vid=hex(16);document.cookie='sr_vid='+vid+'; Max-Age=7776000; Path=/; SameSite=Lax; Secure';}
+ const context={page:location.pathname,...cohort,test,vid,pv:hex(8)};
  // Meta ad click ID: read from the URL, kept in memory for this page view only, never stored.
  const fbclid=url.searchParams.get('fbclid'),fbc=fbclid&&/^[A-Za-z0-9_-]{8,500}$/.test(fbclid)?'fb.1.'+Date.now()+'.'+fbclid:null;
  const ad=fbc?{fbc}:{};

@@ -124,7 +124,7 @@ See [the operations journal](ops-journal.md) for the old/new creative IDs, times
 - Newsletter delivery: Amazon SES, eu-central-1. Double opt-in is required.
 - Newsletter drafts and summaries: `/srv/safetyradar/newsletter`.
 - Measurement service: `safetyradar-measurement.service`, running `deploy/analytics/server.mjs`.
-- Measurement reports: `/srv/safetyradar/stats/analytics-latest.json` and `analytics-latest.txt`. Daily aggregate counters are under `/srv/safetyradar/stats/events`.
+- Measurement reports: `/srv/safetyradar/stats/analytics-latest.json` and `analytics-latest.txt`. Daily aggregate counters are under `/srv/safetyradar/stats/events`. Per-visitor journeys: `/srv/safetyradar/stats/journeys-latest.txt` (today) or `sudo -u safetyradar node deploy/analytics/report-journeys.mjs yesterday --paid` in `/srv/safetyradar/app`; raw rows in `/srv/safetyradar/stats/visits` (90 days).
 - Status snapshot: `/srv/safetyradar/stats/status-latest.txt` and `status-latest.json`, with dated copies in `/srv/safetyradar/stats/status-archive/`. Written by `safetyradar-status.timer`.
 - Reel runtime: `/srv/safetyradar/venv-social/bin/python`.
 - Persistent approved Inter TTFs: `/srv/safetyradar/fonts/Inter-Regular.ttf` and `Inter-Bold.ttf`.
@@ -430,7 +430,7 @@ The tooling change is a code-only commit on GitHub main. No production data is p
 - Keep curated lessons tied to an approved corpus and the specific case.
 - Use Swiss spelling and AS/GS terminology.
 - Prefer pragmatic accuracy over extra machinery.
-- Keep measurement cookieless. Do not add an intrusive cookie banner, a browser Meta Pixel (`fbq`/`fbevents.js`), or personal tracking. Server-side CAPI for ad-click visits only was owner-approved on 13 November 2026; do not widen it.
+- Measurement uses exactly one first-party cookie, `sr_vid` (random ID, 90 days, owner-approved 16 November 2026, for per-visitor journeys; see `deploy/analytics/README.md`). Do not add more cookies, an intrusive cookie banner, a browser Meta Pixel (`fbq`/`fbevents.js`), or send the visitor ID to Meta. Server-side CAPI for ad-click visits only was owner-approved on 13 November 2026; do not widen it.
 - Keep the newsletter simple.
 
 ## Get approval for external changes

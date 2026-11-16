@@ -1,6 +1,6 @@
 # Aggregate measurement
 
-No SaaS, cookies/localStorage/sessionStorage, reader/session IDs, fingerprint, email address, IP address or raw referring URL. No Meta pixel or email-open tracking. The only exception is the server-side Meta Conversions API for visits that arrived from a Meta ad (see below). GPC/DNT honoured. The collector never receives form fields. It stores daily **aggregate counters**, not event logs, for 56 days in `/srv/safetyradar/stats/events`. `.test.json` files are excluded from reports. The service updates `analytics-latest.json` and `analytics-latest.txt` every minute in `/srv/safetyradar/stats`; the existing weekly stats command also refreshes these files. These are private server files, not a new public dashboard.
+No SaaS, localStorage/sessionStorage, fingerprint, email address, IP address or raw referring URL. No Meta pixel or email-open tracking. The only exception is the server-side Meta Conversions API for visits that arrived from a Meta ad (see below). GPC/DNT honoured. The collector never receives form fields. It stores daily **aggregate counters**, not event logs, for 56 days in `/srv/safetyradar/stats/events`. `.test.json` files are excluded from reports. The service updates `analytics-latest.json` and `analytics-latest.txt` every minute in `/srv/safetyradar/stats`; the existing weekly stats command also refreshes these files. These are private server files, not a new public dashboard.
 
 ## Campaign convention
 
@@ -35,9 +35,18 @@ Install the measurement systemd unit (Node only, no `.env`/API keys), create `/s
 
 Use `?sr_test=1` for internal browser tests, or JSON `test:true`. Caddy flags the former as a bot; measurement writes test counters separately. Endpoint tests do not submit an email. Test/error bodies are never logged. Global in-memory request cap and bounded cohorts limit spam; spoofing/bots cannot be completely eliminated without identifying readers.
 
+## Per-visitor journeys (sr_vid cookie)
+
+Owner-approved on 16 November 2026 to see which pages one visitor opens, in what order and for how long (especially Meta ad visitors).
+
+- `public/measurement.js` sets one first-party cookie, `sr_vid` = 32 hex chars from `crypto.getRandomValues` (no personal data), `Max-Age` 90 days, `Path=/; SameSite=Lax; Secure`, never renewed. Each page load also gets a random page-view id `pv`. Both go in the beacon body (`credentials:'omit'` stays). Not set for DNT/GPC. Never added to the Listmonk form or sent to Meta.
+- `deploy/analytics/visits.mjs` appends one row per beacon to `/srv/safetyradar/stats/visits/YYYY-MM-DD.jsonl` (`.test.jsonl` for `sr_test=1`): `ts, vid, sid, pv, event, page, lang, category, article, source/medium/campaign/variant, device (mobile/tablet/desktop), activeSeconds/depth (engagement), ft (visitor's first-touch cohort), returning`. No IP, user agent, referrer or query. Sessions are assigned on the server: a new `sid` after 30 min without a beacon; engagement/signup beacons join the session of their page view. State is rebuilt from the retained files on restart. Rows older than 90 days are deleted every minute; 50,000 rows/day cap.
+- Report: `node deploy/analytics/report-journeys.mjs [YYYY-MM-DD|today|yesterday] [--paid] [--test] [--json]` (run as safetyradar in `/srv/safetyradar/app`). The service also writes today's report to `/srv/safetyradar/stats/journeys-latest.txt` every minute.
+- The existing aggregate counters below are unchanged.
+
 ## Server-side Meta Conversions API (ad clicks only)
 
-Owner-approved on 13 November 2026 to let Meta learn from engaged visits and signups instead of clicks. Still no browser pixel, cookies, localStorage or sessionStorage.
+Owner-approved on 13 November 2026 to let Meta learn from engaged visits and signups instead of clicks. Still no browser pixel, localStorage or sessionStorage; the sr_vid cookie is never sent to Meta.
 
 - `public/measurement.js` reads `fbclid` from the landing URL, keeps it in memory for the page view, and carries it on internal links like the campaign cohort (never into the Listmonk form). It adds `fbc` (`fb.1.<ms>.<fbclid>`) only to the `engagement` and `signup_submission` beacons, and only when `fbclid` is present.
 - `deploy/analytics/capi.mjs` sends `EngagedVisit` (custom) when an engagement sample on the homepage or a single accident/ruling page has at least 20 s active or reached d100, and `Lead` on a signup submission. Visits without `fbc` are never sent. `user_data` is `fbc`, `client_ip_address` (Caddy's `X-Forwarded-For`) and `client_user_agent`. No email or hashed email is sent: the privacy policy promises the address is never shared.

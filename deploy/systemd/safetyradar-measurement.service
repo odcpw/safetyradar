@@ -1,5 +1,5 @@
 [Unit]
-Description=Safety Radar cookieless aggregate measurement and server-side Meta CAPI for ad clicks
+Description=Safety Radar aggregate measurement, per-visitor journeys (sr_vid cookie) and server-side Meta CAPI for ad clicks
 After=network.target
 [Service]
 User=safetyradar

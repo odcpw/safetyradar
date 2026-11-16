@@ -2,17 +2,20 @@ import http from 'node:http';import fs from 'node:fs';import path from 'node:pat
 import {campaignFromParams,pageDimensions} from '../../public/measurement-core.mjs';
 import {day,cutoff,empty,writeReport} from './report.mjs';
 import {FBC_RE,loadCapiConfig,createCapiSender,pruneCapi} from './capi.mjs';
+import {VID_RE,PV_RE,createVisitLog,pruneVisits} from './visits.mjs';
+import {writeJourneyReport} from './report-journeys.mjs';
 const ROOT=fileURLToPath(new URL('../../',import.meta.url));
 export function knownPages(root=ROOT){const pages=new Set(['/newsletter/confirmed/','/newsletter/requested/']);for(const lang of ['de','fr','it','en']){for(const suffix of ['','accidents/','rulings/','jobs/','newsletter/','newsletter/confirmed/','privacy/','jobs/post/'])pages.add(`/${lang}/${suffix}`);for(const kind of ['accidents','rulings','jobs'])for(const e of JSON.parse(fs.readFileSync(path.join(root,'data',kind+'.json'))))pages.add(`/${lang}/${kind}/${e.id}/`);}return pages;}
 export function parseEvent(input,pages){
- if(!input||typeof input!=='object'||Array.isArray(input)||Object.keys(input).some(k=>!['event','page','source','medium','campaign','variant','activeSeconds','depth','test','fbc'].includes(k)))throw Error('invalid fields');
+ if(!input||typeof input!=='object'||Array.isArray(input)||Object.keys(input).some(k=>!['event','page','source','medium','campaign','variant','activeSeconds','depth','test','fbc','vid','pv'].includes(k)))throw Error('invalid fields');
  if(!['pageview','engagement','signup_submission','signup_request_accepted','signup_confirmation'].includes(input.event)||!pages.has(input.page)||typeof input.test!=='boolean')throw Error('invalid event');
  const confirm=input.event==='signup_confirmation',confirmationPage=/^\/(?:(de|fr|it|en)\/)?newsletter\/confirmed\/$/.test(input.page);if(confirm&&!confirmationPage||!confirm&&confirmationPage)throw Error('invalid confirmation page');
  if(input.event==='engagement'&&(!Number.isInteger(input.activeSeconds)||input.activeSeconds<0||input.activeSeconds>1800||input.activeSeconds%5||![0,25,50,75,100].includes(input.depth)))throw Error('invalid engagement');
  if(input.fbc!==undefined&&(typeof input.fbc!=='string'||!FBC_RE.test(input.fbc)||!['engagement','signup_submission'].includes(input.event)))throw Error('invalid fbc');
+ if(input.vid!==undefined&&(typeof input.vid!=='string'||!VID_RE.test(input.vid))||input.pv!==undefined&&(typeof input.pv!=='string'||!PV_RE.test(input.pv)))throw Error('invalid visitor id');
  const q=new URLSearchParams({utm_source:input.source,utm_medium:input.medium,utm_campaign:input.campaign,utm_content:input.variant});const cohort=campaignFromParams(q);
  if(confirm&&cohort.source!=='unattributed')throw Error('confirmations cannot be joined to campaigns');
- return {event:input.event,page:input.page,...cohort,...pageDimensions(input.page),test:input.test,activeSeconds:input.event==='engagement'?input.activeSeconds:0,depth:input.event==='engagement'?input.depth:0,...(input.fbc?{fbc:input.fbc}:{})};
+ return {event:input.event,page:input.page,...cohort,...pageDimensions(input.page),test:input.test,activeSeconds:input.event==='engagement'?input.activeSeconds:0,depth:input.event==='engagement'?input.depth:0,...(input.fbc?{fbc:input.fbc}:{}),...(input.vid?{vid:input.vid}:{}),...(input.pv?{pv:input.pv}:{})};
 }
 export function recordEvent(event,dir,now=new Date()){
  fs.mkdirSync(dir,{recursive:true});const file=path.join(dir,day(now)+(event.test?'.test':'')+'.json');const data=fs.existsSync(file)?JSON.parse(fs.readFileSync(file)):{day:day(now),rows:{}};
@@ -23,7 +26,7 @@ export function recordEvent(event,dir,now=new Date()){
  const temp=file+'.tmp';fs.writeFileSync(temp,JSON.stringify(data)+'\n');fs.renameSync(temp,file);
 }
 export function prune(dir,now=new Date()){if(!fs.existsSync(dir))return;for(const f of fs.readdirSync(dir))if(/^\d{4}-\d{2}-\d{2}(\.test)?\.json(?:\.tmp)?$/.test(f)&&f.slice(0,10)<cutoff(now))fs.unlinkSync(path.join(dir,f));}
-export function createMeasurementServer({dir,root=ROOT,capi=null}={}){
+export function createMeasurementServer({dir,root=ROOT,capi=null,visits=null}={}){
  let pages=knownPages(root),refreshed=Date.now(),minute=0,requests=0;
  return http.createServer(async(req,res)=>{res.setHeader('Cache-Control','no-store');
   if(req.url==='/_measure/health'&&req.method==='GET'){res.writeHead(200,{'Content-Type':'application/json'});res.end('{"ok":true}');return;}
@@ -36,7 +39,7 @@ export function createMeasurementServer({dir,root=ROOT,capi=null}={}){
    const e=parseEvent(JSON.parse(body),pages);
    const site=req.headers.origin==='https://safetyradar.ch';if(site&&['signup_confirmation','signup_request_accepted'].includes(e.event)||!site&&!['signup_confirmation','signup_request_accepted'].includes(e.event))throw Error('wrong event origin');
    if(!e.test&&/bot|crawl|spider|slurp|curl|wget|python|httpx|go-http|headless|preview|monitor/i.test(req.headers['user-agent']||'')){res.writeHead(204);res.end();return;}
-   recordEvent(e,dir);res.writeHead(204);res.end();
+   recordEvent(e,dir);if(visits){try{visits(e,{ua:req.headers['user-agent']});}catch{}}res.writeHead(204);res.end();
    // Fire-and-forget: the reader never waits for Meta.
    if(capi)capi(e,req);
   }catch{res.writeHead(400);res.end();}
@@ -45,6 +48,7 @@ export function createMeasurementServer({dir,root=ROOT,capi=null}={}){
 if(process.argv[1]===fileURLToPath(import.meta.url)){
  const dir=process.env.MEASUREMENT_DIR||'/srv/safetyradar/stats/events',out=path.dirname(dir);fs.mkdirSync(dir,{recursive:true});
  const capiDir=process.env.CAPI_DIR||path.join(out,'capi'),config=loadCapiConfig();
- const refresh=()=>{prune(dir);pruneCapi(capiDir);writeReport(dir,out);};refresh();setInterval(refresh,60000).unref();
- createMeasurementServer({dir,capi:config?createCapiSender({config,dir:capiDir}):null}).listen(Number(process.env.MEASUREMENT_PORT||9112),'127.0.0.1');
+ const visitsDir=process.env.VISITS_DIR||path.join(out,'visits');pruneVisits(visitsDir);const visits=createVisitLog(visitsDir);
+ const refresh=()=>{prune(dir);pruneCapi(capiDir);writeReport(dir,out);try{pruneVisits(visitsDir);visits.forget();writeJourneyReport(visitsDir,out);}catch{}};refresh();setInterval(refresh,60000).unref();
+ createMeasurementServer({dir,visits,capi:config?createCapiSender({config,dir:capiDir}):null}).listen(Number(process.env.MEASUREMENT_PORT||9112),'127.0.0.1');
 }
